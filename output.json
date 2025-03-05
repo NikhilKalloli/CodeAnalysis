@@ -1,0 +1,619 @@
+{
+    "name": "root",
+    "children": [
+        {
+            "name": ".vscode",
+            "children": [
+                {
+                    "name": "settings.json",
+                    "structure": {
+                        "other": "LICENSE\n\nREADME.md"
+                    },
+                    "source": [],
+                    "data_model": [],
+                    "third_party_dependencies": [],
+                    "sink_details": [],
+                    "vulnerabilities": []
+                }
+            ]
+        },
+        {
+            "name": "app.js",
+            "structure": {
+                "other": "⋮...\n│async function main(){\n│    await mongoose.connect(dbUrl);\n⋮..."
+            },
+            "source": [],
+            "data_model": [],
+            "third_party_dependencies": [],
+            "sink_details": [],
+            "vulnerabilities": [
+                {
+                    "code_snippet": "68     cookie:{ 69         expires:Date.now() + 7 * 24 * 60 * 60 *1000,  // cookie gets deleted after a week. So after a week user has to login again 70         maxAge:  7 * 24 * 60 * 60 *1000, 71         httpOnly:true, 72     }",
+                    "line_number": "68",
+                    "risk_level": "MEDIUM",
+                    "ref_link": "https://docs.bearer.com/reference/rules/javascript_express_default_cookie_config",
+                    "message_to_fix": "bearer ignore add cfe858e6b20122a91e03221f745c9dcb_0"
+                },
+                {
+                    "code_snippet": "81 app.use(session(sessionOptions));",
+                    "line_number": "81",
+                    "risk_level": "MEDIUM",
+                    "ref_link": "https://docs.bearer.com/reference/rules/javascript_express_default_session_config",
+                    "message_to_fix": "bearer ignore add 03ff68c49b60ef34aa387a5058c1dc7d_0"
+                },
+                {
+                    "code_snippet": "8 const app = express();",
+                    "line_number": "8",
+                    "risk_level": "MEDIUM",
+                    "ref_link": "https://docs.bearer.com/reference/rules/javascript_express_helmet_missing",
+                    "message_to_fix": "bearer ignore add ceb9f97741f7686615f69620a8ec2025_0"
+                },
+                {
+                    "code_snippet": "8 const app = express();",
+                    "line_number": "8",
+                    "risk_level": "MEDIUM",
+                    "ref_link": "https://docs.bearer.com/reference/rules/javascript_express_reduce_fingerprint",
+                    "message_to_fix": "bearer ignore add 56b4b80441669f82df897f20ddcfb1a9_0"
+                },
+                {
+                    "code_snippet": "41     console.log(err);",
+                    "line_number": "41",
+                    "risk_level": "LOW",
+                    "ref_link": "https://docs.bearer.com/reference/rules/javascript_lang_logger_leak",
+                    "message_to_fix": "bearer ignore add 8a2339cd9ef3a0e235992b51d1a4b292_0"
+                },
+                {
+                    "code_snippet": "59     console.log(\"ERROR IN MONGO SESSION STORE\", err);",
+                    "line_number": "59",
+                    "risk_level": "LOW",
+                    "ref_link": "https://docs.bearer.com/reference/rules/javascript_lang_logger_leak",
+                    "message_to_fix": "bearer ignore add 8a2339cd9ef3a0e235992b51d1a4b292_1"
+                },
+                {
+                    "code_snippet": "121     console.log(`App is listening on PORT: http://localhost:${PORT}`);",
+                    "line_number": "121",
+                    "risk_level": "LOW",
+                    "ref_link": "https://docs.bearer.com/reference/rules/javascript_lang_logger_leak",
+                    "message_to_fix": "bearer ignore add 8a2339cd9ef3a0e235992b51d1a4b292_2"
+                }
+            ]
+        },
+        {
+            "name": "cloudConfig.js",
+            "structure": {},
+            "source": [],
+            "data_model": [],
+            "third_party_dependencies": [],
+            "sink_details": [
+                {
+                    "ai_sink_label": "API for blob/object storage",
+                    "code_summary": "The code configures the Cloudinary SDK with credentials sourced from environment variables, allowing the application to interact with Cloudinary's cloud storage services.",
+                    "code_snippet": "cloudinary.config({ \n    cloud_name: process.env.CLOUD_NAME,\n    api_key: process.env.CLOUD_API_KEY,\n    api_secret: process.env.CLOUD_API_SECRET,\n  })",
+                    "line_number": "4",
+                    "column_number": "0"
+                }
+            ],
+            "vulnerabilities": []
+        },
+        {
+            "name": "controllers",
+            "children": [
+                {
+                    "name": "listings.js",
+                    "structure": {},
+                    "source": [],
+                    "data_model": [],
+                    "third_party_dependencies": [],
+                    "sink_details": [
+                        {
+                            "ai_sink_label": "API for Geocoding Service (Mapbox)",
+                            "code_summary": "The code snippet is invoking the Mapbox Geocoding service using a method called 'mbxGeocoding', which utilizes an access token for authentication, indicating that it is requesting geographic coordinates or data based on location inputs.",
+                            "code_snippet": "mbxGeocoding({ accessToken: mapToken })",
+                            "line_number": "6",
+                            "column_number": "24"
+                        }
+                    ],
+                    "vulnerabilities": [
+                        {
+                            "code_snippet": "134     res.redirect(`/listings/${id}`);",
+                            "line_number": "134",
+                            "risk_level": "MEDIUM",
+                            "ref_link": "https://docs.bearer.com/reference/rules/javascript_express_open_redirect",
+                            "message_to_fix": "bearer ignore add 12d5ec8bdf1dc60f56a18a6fb981c823_0"
+                        },
+                        {
+                            "code_snippet": "58     const regexPattern = new RegExp(searchedCountry, 'i');",
+                            "line_number": "58",
+                            "risk_level": "MEDIUM",
+                            "ref_link": "https://docs.bearer.com/reference/rules/javascript_lang_dynamic_regex",
+                            "message_to_fix": "bearer ignore add 61700782610d6f3c145c133b2f678a05_0"
+                        },
+                        {
+                            "code_snippet": "58     const regexPattern = new RegExp(searchedCountry, 'i');",
+                            "line_number": "58",
+                            "risk_level": "MEDIUM",
+                            "ref_link": "https://docs.bearer.com/reference/rules/javascript_lang_regex_using_user_input",
+                            "message_to_fix": "bearer ignore add ccc55c37434652f73e49cfaed0b2be0a_0"
+                        }
+                    ]
+                },
+                {
+                    "name": "reviews.js",
+                    "structure": {},
+                    "source": [],
+                    "data_model": [],
+                    "third_party_dependencies": [],
+                    "sink_details": [],
+                    "vulnerabilities": [
+                        {
+                            "code_snippet": "15     res.redirect(`/listings/${listing._id}`);",
+                            "line_number": "15",
+                            "risk_level": "MEDIUM",
+                            "ref_link": "https://docs.bearer.com/reference/rules/javascript_express_open_redirect",
+                            "message_to_fix": "bearer ignore add 19d00431f5f013a1737270488ec341f6_0"
+                        },
+                        {
+                            "code_snippet": "23     res.redirect(`/listings/${id}`)",
+                            "line_number": "23",
+                            "risk_level": "MEDIUM",
+                            "ref_link": "https://docs.bearer.com/reference/rules/javascript_express_open_redirect",
+                            "message_to_fix": "bearer ignore add 19d00431f5f013a1737270488ec341f6_1"
+                        }
+                    ]
+                },
+                {
+                    "name": "users.js",
+                    "structure": {
+                        "other": "⋮...\n│module.exports.login =  async(req,res)=>{\n│    req.flash(\"success\",\"Welcome back to TravelCrafter!\");\n│    res.redirect(res.locals.redirectUrl || \"/listings\");\n⋮...\n│module.exports.logout = (req,res, next)=>{\n│    req.logout((err)=>{\n│        if(err) {\n│           return next(err);\n│        }\n│        req.flash(\"success\",\"You are logged out!\");\n│        res.redirect(\"/listings\");\n│\n│    });\n⋮..."
+                    },
+                    "source": [],
+                    "data_model": [],
+                    "third_party_dependencies": [],
+                    "sink_details": [],
+                    "vulnerabilities": []
+                }
+            ]
+        },
+        {
+            "name": "init",
+            "children": [
+                {
+                    "name": "data.js",
+                    "structure": {},
+                    "source": [],
+                    "data_model": [],
+                    "third_party_dependencies": [],
+                    "sink_details": [],
+                    "vulnerabilities": []
+                },
+                {
+                    "name": "index.js",
+                    "structure": {
+                        "other": "⋮...\n│async function main() {\n│  await mongoose.connect(dbUrl);\n⋮...\n│const initDB = async () => {\n│  await Listing.deleteMany({});\n│  initData.data = initData.data.map((obj)=>({...obj, owner: process.env.DB_ADMIN_ID}));\n│  let listings = await Listing.insertMany(initData.data);\n│  console.log(\"data was initialized\");\n⋮..."
+                    },
+                    "source": [],
+                    "data_model": [],
+                    "third_party_dependencies": [],
+                    "sink_details": [
+                        {
+                            "ai_sink_label": "Cloudinary",
+                            "code_summary": "The code configures the Cloudinary SDK by providing it with the cloud name, API key, and API secret from environment variables, allowing the application to interact with the Cloudinary service for managing and serving media assets.",
+                            "code_snippet": "cloudinary.config({ \n  cloud_name: process.env.CLOUD_NAME,\n  api_key: process.env.CLOUD_API_KEY,\n  api_secret: process.env.CLOUD_API_SECRET,\n})",
+                            "line_number": "28",
+                            "column_number": "0"
+                        }
+                    ],
+                    "vulnerabilities": [
+                        {
+                            "code_snippet": "20     console.log(err); ===================================== 87 checks, 30 findings CRITICAL: 14 (CWE-943)",
+                            "line_number": "20",
+                            "risk_level": "LOW",
+                            "ref_link": "https://docs.bearer.com/reference/rules/javascript_lang_logger_leak",
+                            "message_to_fix": "bearer ignore add abad5d8e9750b585e63063f2e9457060_0"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "middleware.js",
+            "structure": {},
+            "source": [],
+            "data_model": [],
+            "third_party_dependencies": [],
+            "sink_details": [],
+            "vulnerabilities": [
+                {
+                    "code_snippet": "29         return res.redirect(`/listings/${id}`)",
+                    "line_number": "29",
+                    "risk_level": "MEDIUM",
+                    "ref_link": "https://docs.bearer.com/reference/rules/javascript_express_open_redirect",
+                    "message_to_fix": "bearer ignore add 1b2d3887f66e779d924030647b2dc119_0"
+                },
+                {
+                    "code_snippet": "65         return res.redirect(`/listings/${id}`)",
+                    "line_number": "65",
+                    "risk_level": "MEDIUM",
+                    "ref_link": "https://docs.bearer.com/reference/rules/javascript_express_open_redirect",
+                    "message_to_fix": "bearer ignore add 1b2d3887f66e779d924030647b2dc119_1"
+                }
+            ]
+        },
+        {
+            "name": "models",
+            "children": [
+                {
+                    "name": "listing.js",
+                    "structure": {},
+                    "source": [],
+                    "data_model": [],
+                    "third_party_dependencies": [],
+                    "sink_details": [
+                        {
+                            "ai_sink_label": "MongoDB",
+                            "code_summary": "The code snippet defines a Mongoose model named 'Listing' based on the 'listingSchema', which enables the application to interact with the MongoDB database for CRUD operations related to listings.",
+                            "code_snippet": "mongoose.model(\"Listing\",listingSchema)",
+                            "line_number": "56",
+                            "column_number": "16"
+                        },
+                        {
+                            "ai_sink_label": "MongoDB",
+                            "code_summary": "The code defines a Mongoose model named 'Listing' using the specified schema, which allows for reading and writing data to and from a MongoDB database.",
+                            "code_snippet": "mongoose.model(\"Listing\",listingSchema)",
+                            "line_number": "56",
+                            "column_number": "16"
+                        }
+                    ],
+                    "vulnerabilities": []
+                },
+                {
+                    "name": "review.js",
+                    "structure": {},
+                    "source": [],
+                    "data_model": [],
+                    "third_party_dependencies": [],
+                    "sink_details": [
+                        {
+                            "ai_sink_label": "MongoDB",
+                            "code_summary": "The code defines a Mongoose model named 'Review' using the specified reviewSchema, allowing for interaction with a MongoDB database to read and write review documents.",
+                            "code_snippet": "mongoose.model(\"Review\",reviewSchema)",
+                            "line_number": "22",
+                            "column_number": "17"
+                        },
+                        {
+                            "ai_sink_label": "MongoDB",
+                            "code_summary": "The code defines a Mongoose model named 'Review' based on a predefined schema, allowing for both reading from and writing to a MongoDB database.",
+                            "code_snippet": "mongoose.model(\"Review\",reviewSchema)",
+                            "line_number": "22",
+                            "column_number": "17"
+                        }
+                    ],
+                    "vulnerabilities": []
+                },
+                {
+                    "name": "user.js",
+                    "structure": {},
+                    "source": [],
+                    "data_model": [],
+                    "third_party_dependencies": [],
+                    "sink_details": [
+                        {
+                            "ai_sink_label": "MongoDB",
+                            "code_summary": "Defines a Mongoose model named 'User' using a specified user schema for interacting with the MongoDB database.",
+                            "code_snippet": "mongoose.model(\"User\",userSchema)",
+                            "line_number": "16",
+                            "column_number": "17"
+                        },
+                        {
+                            "ai_sink_label": "database via ORM",
+                            "code_summary": "The code snippet defines a Mongoose model named 'User' based on the 'userSchema', allowing interactions with a MongoDB database for user-related data.",
+                            "code_snippet": "mongoose.model(\"User\",userSchema)",
+                            "line_number": "16",
+                            "column_number": "17"
+                        }
+                    ],
+                    "vulnerabilities": []
+                }
+            ]
+        },
+        {
+            "name": "package-lock.json",
+            "structure": {},
+            "source": [],
+            "data_model": [],
+            "third_party_dependencies": [],
+            "sink_details": [],
+            "vulnerabilities": []
+        },
+        {
+            "name": "package.json",
+            "structure": {
+                "other": "public/assets/yhQmTTq8.ico\n\npublic/css/rating.css\n\npublic/css/style.css"
+            },
+            "source": [],
+            "data_model": [],
+            "third_party_dependencies": [],
+            "sink_details": [],
+            "vulnerabilities": []
+        },
+        {
+            "name": "public",
+            "children": [
+                {
+                    "name": "js",
+                    "children": [
+                        {
+                            "name": "index.js",
+                            "structure": {},
+                            "source": [],
+                            "data_model": [],
+                            "third_party_dependencies": [],
+                            "sink_details": [],
+                            "vulnerabilities": []
+                        },
+                        {
+                            "name": "map.js",
+                            "structure": {},
+                            "source": [],
+                            "data_model": [],
+                            "third_party_dependencies": [],
+                            "sink_details": [
+                                {
+                                    "ai_sink_label": "Mapbox",
+                                    "code_summary": "The code creates a new red marker on a Mapbox map at the specified geographic coordinates from a listing.",
+                                    "code_snippet": "new mapboxgl.Marker({ color: \"red\"})\n.setLngLat(listing.geometry.coordinates)",
+                                    "line_number": "11",
+                                    "column_number": "16"
+                                }
+                            ],
+                            "vulnerabilities": [
+                                {
+                                    "code_snippet": "Security Report ===================================== Rules: https://docs.bearer.com/reference/rules [v0.47.1] Language    Default Rules  Custom Rules  Files JavaScript  87             0             21 CRITICAL: Unsanitized input in NoSQL query [CWE-943] 21     const listing = await Listing.findById(id) CRITICAL: Unsanitized input in NoSQL query [CWE-943] 43     const allListings = await Listing.find({category:selectedCategory}) CRITICAL: Unsanitized input in NoSQL query [CWE-943] 61     const allListings = await Listing.find({ country: { $regex: regexPattern } }); CRITICAL: Unsanitized input in NoSQL query [CWE-943] 93     const newListing = new Listing(listing); CRITICAL: Unsanitized input in NoSQL query [CWE-943] 108     const listing = await Listing.findById(id); CRITICAL: Unsanitized input in NoSQL query [CWE-943] 123     let listing = await Listing.findByIdAndUpdate(id, {...req.body.listing}); CRITICAL: Unsanitized input in NoSQL query [CWE-943] 140     let deletedListing = await Listing.findByIdAndDelete(id); CRITICAL: Unsanitized input in NoSQL query [CWE-943] 6     let listing = await Listing.findById(req.params.id); CRITICAL: Unsanitized input in NoSQL query [CWE-943] 7     let newReview = new Review(req.body.review); CRITICAL: Unsanitized input in NoSQL query [CWE-943] 20     await Listing.findByIdAndUpdate(id,{$pull:{reviews:reviewId}}) CRITICAL: Unsanitized input in NoSQL query [CWE-943] 21     await Review.findByIdAndDelete(reviewId); CRITICAL: Unsanitized input in NoSQL query [CWE-943] 10         const newUser = new User({email,username}); CRITICAL: Unsanitized input in NoSQL query [CWE-943] 26     let listing = await Listing.findById(id); CRITICAL: Unsanitized input in NoSQL query [CWE-943] 62     let review = await Review.findById(reviewId); 13 .setPopup(new mapboxgl.Popup({offset: 25}) 14 .setHTML( 15     `<h4>${listing.title}</h4><p>Exact location will be provided after booking</p>`))",
+                                    "line_number": "13",
+                                    "risk_level": "HIGH",
+                                    "ref_link": "https://docs.bearer.com/reference/rules/javascript_lang_dangerous_insert_html",
+                                    "message_to_fix": "bearer ignore add f598a79ddb0bc49e8356ba917ccd600b_0"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "script.js",
+                            "structure": {},
+                            "source": [],
+                            "data_model": [],
+                            "third_party_dependencies": [],
+                            "sink_details": [],
+                            "vulnerabilities": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "routes",
+            "children": [
+                {
+                    "name": "listing.js",
+                    "structure": {},
+                    "source": [],
+                    "data_model": [],
+                    "third_party_dependencies": [],
+                    "sink_details": [],
+                    "vulnerabilities": []
+                },
+                {
+                    "name": "review.js",
+                    "structure": {},
+                    "source": [],
+                    "data_model": [],
+                    "third_party_dependencies": [],
+                    "sink_details": [],
+                    "vulnerabilities": []
+                },
+                {
+                    "name": "user.js",
+                    "structure": {},
+                    "source": [],
+                    "data_model": [],
+                    "third_party_dependencies": [],
+                    "sink_details": [],
+                    "vulnerabilities": []
+                }
+            ]
+        },
+        {
+            "name": "schema.js",
+            "structure": {},
+            "source": [],
+            "data_model": [],
+            "third_party_dependencies": [],
+            "sink_details": [],
+            "vulnerabilities": []
+        },
+        {
+            "name": "test.js",
+            "structure": {
+                "other": "⋮...\n│const updateListings = async () => {\n│  // Update the sampleListings array with the geometry field\n│  sampleListings = await Promise.all(sampleListings.map(async (listing) => {\n│    // Use Mapbox Geocoding API to get coordinates for the location\n│    const response = await geocodingClient.forwardGeocode({\n│      query: `${listing.location}`,\n│      limit: 1\n│    }).send();\n│\n│    // Assuming there is at least one feature in the response\n⋮..."
+            },
+            "source": [],
+            "data_model": [],
+            "third_party_dependencies": [],
+            "sink_details": [],
+            "vulnerabilities": []
+        },
+        {
+            "name": "utils",
+            "children": [
+                {
+                    "name": "ExpressError.js",
+                    "structure": {
+                        "other": "│class ExpressError extends Error {\n⋮..."
+                    },
+                    "source": [],
+                    "data_model": [],
+                    "third_party_dependencies": [],
+                    "sink_details": [],
+                    "vulnerabilities": []
+                },
+                {
+                    "name": "wrapAsync.js",
+                    "structure": {
+                        "other": "│module.exports = (fn)=> {\n⋮..."
+                    },
+                    "source": [],
+                    "data_model": [],
+                    "third_party_dependencies": [],
+                    "sink_details": [],
+                    "vulnerabilities": []
+                }
+            ]
+        },
+        {
+            "name": "views",
+            "children": [
+                {
+                    "name": "errors",
+                    "children": [
+                        {
+                            "name": "error.ejs",
+                            "structure": {},
+                            "source": [],
+                            "data_model": [],
+                            "third_party_dependencies": [],
+                            "sink_details": [],
+                            "vulnerabilities": []
+                        }
+                    ]
+                },
+                {
+                    "name": "includes",
+                    "children": [
+                        {
+                            "name": "flash.ejs",
+                            "structure": {},
+                            "source": [],
+                            "data_model": [],
+                            "third_party_dependencies": [],
+                            "sink_details": [],
+                            "vulnerabilities": []
+                        },
+                        {
+                            "name": "footer.ejs",
+                            "structure": {},
+                            "source": [],
+                            "data_model": [],
+                            "third_party_dependencies": [],
+                            "sink_details": [],
+                            "vulnerabilities": []
+                        },
+                        {
+                            "name": "navbar.ejs",
+                            "structure": {},
+                            "source": [],
+                            "data_model": [],
+                            "third_party_dependencies": [],
+                            "sink_details": [],
+                            "vulnerabilities": []
+                        }
+                    ]
+                },
+                {
+                    "name": "layouts",
+                    "children": [
+                        {
+                            "name": "boilerplate.ejs",
+                            "structure": {},
+                            "source": [],
+                            "data_model": [],
+                            "third_party_dependencies": [],
+                            "sink_details": [],
+                            "vulnerabilities": []
+                        }
+                    ]
+                },
+                {
+                    "name": "listings",
+                    "children": [
+                        {
+                            "name": "edit.ejs",
+                            "structure": {},
+                            "source": [],
+                            "data_model": [],
+                            "third_party_dependencies": [],
+                            "sink_details": [],
+                            "vulnerabilities": []
+                        },
+                        {
+                            "name": "index.ejs",
+                            "structure": {},
+                            "source": [],
+                            "data_model": [],
+                            "third_party_dependencies": [],
+                            "sink_details": [],
+                            "vulnerabilities": []
+                        },
+                        {
+                            "name": "new.ejs",
+                            "structure": {},
+                            "source": [],
+                            "data_model": [],
+                            "third_party_dependencies": [],
+                            "sink_details": [],
+                            "vulnerabilities": []
+                        },
+                        {
+                            "name": "searchCountry.ejs",
+                            "structure": {},
+                            "source": [],
+                            "data_model": [],
+                            "third_party_dependencies": [],
+                            "sink_details": [],
+                            "vulnerabilities": []
+                        },
+                        {
+                            "name": "show.ejs",
+                            "structure": {},
+                            "source": [],
+                            "data_model": [],
+                            "third_party_dependencies": [],
+                            "sink_details": [],
+                            "vulnerabilities": []
+                        },
+                        {
+                            "name": "showCategory.ejs",
+                            "structure": {},
+                            "source": [],
+                            "data_model": [],
+                            "third_party_dependencies": [],
+                            "sink_details": [],
+                            "vulnerabilities": []
+                        }
+                    ]
+                },
+                {
+                    "name": "users",
+                    "children": [
+                        {
+                            "name": "login.ejs",
+                            "structure": {},
+                            "source": [],
+                            "data_model": [],
+                            "third_party_dependencies": [],
+                            "sink_details": [],
+                            "vulnerabilities": []
+                        },
+                        {
+                            "name": "signup.ejs",
+                            "structure": {},
+                            "source": [],
+                            "data_model": [],
+                            "third_party_dependencies": [],
+                            "sink_details": [],
+                            "vulnerabilities": []
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
