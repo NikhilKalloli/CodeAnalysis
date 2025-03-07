@@ -23,7 +23,7 @@ npm install acorn acorn-walk acorn-jsx
 
 1. Clone repository:
 ```bash
-git clone https://github.com/your-org/code-analysis-toolkit.git
+git clone https://github.com/NikhilKalloli/CodeAnalysis
 cd code-analysis-toolkit
 ```
 
