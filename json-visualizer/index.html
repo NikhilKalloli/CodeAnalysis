@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSON Structure Visualizer</title>
+    <title>Data Sinks Analysis Visualizer</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
         .node circle {
             fill: #fff;
-            stroke: steelblue;
             stroke-width: 2px;
+        }
+        .data-sink-1 {
+            stroke: #dc3545; /* Red for data sinks */
+        }
+        .data-sink-0 {
+            stroke: #0d6efd; /* Blue for non-data sinks */
         }
         .node text {
             font: 12px sans-serif;
@@ -23,21 +28,28 @@
             height: 800px;
             overflow: auto;
         }
-        .vulnerability {
-            color: #dc3545;
+        .data-sink {
             margin: 10px 0;
             padding: 10px;
-            border: 1px solid #dc3545;
             border-radius: 4px;
         }
-        .vulnerability pre {
+        .data-sink-high {
+            border: 1px solid #dc3545;
+            background-color: #ffebee;
+        }
+        .data-sink-medium {
+            border: 1px solid #fd7e14;
+            background-color: #fff3e0;
+        }
+        .data-sink-low {
+            border: 1px solid #198754;
+            background-color: #f1f8e9;
+        }
+        .data-sink pre {
             margin-top: 10px;
             background: #f8f9fa;
             padding: 10px;
         }
-        .risk-HIGH { background-color: #ffebee; }
-        .risk-MEDIUM { background-color: #fff3e0; }
-        .risk-LOW { background-color: #f1f8e9; }
         #details {
             height: 800px;
             overflow-y: auto;
@@ -64,156 +76,164 @@
         .badge {
             margin-right: 5px;
         }
+        #filter-controls {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .prediction-score {
+            font-weight: bold;
+        }
+        .score-high {
+            color: #dc3545;
+        }
+        .score-medium {
+            color: #fd7e14;
+        }
+        .score-low {
+            color: #198754;
+        }
     </style>
 </head>
 <body>
     <div class="container-fluid">
-        <h1 class="my-4">Codebase Structure & Security Analysis</h1>
-        <div class="row">
-            <div class="col-md-8">
-                <div id="tree-container"></div>
-            </div>
-            <div class="col-md-4">
-                <div id="details">
-                    <div class="alert alert-info">
-                        Click on a node to view details
-                    </div>
+        <h1 class="my-4">Data Sinks Analysis Visualizer</h1>
+        
+        <div id="filter-controls" class="row">
+            <div class="col-md-6">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="show-data-sinks" checked>
+                    <label class="form-check-label" for="show-data-sinks">Show Data Sinks (Is_data_sink = 1)</label>
                 </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="show-non-data-sinks" checked>
+                    <label class="form-check-label" for="show-non-data-sinks">Show Non-Data Sinks (Is_data_sink = 0)</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="score-threshold" class="form-label">Minimum Prediction Score: <span id="threshold-value">0.5</span></label>
+                <input type="range" class="form-range" min="0" max="1" step="0.1" value="0.5" id="score-threshold">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-info">
+                    <h4>Data Sinks Analysis</h4>
+                    <p>This visualization shows potential data sinks in the codebase. Data sinks are locations where data is written or stored.</p>
+                    <p><strong>Color Legend:</strong></p>
+                    <ul>
+                        <li><span class="badge bg-danger">Red</span> - Confirmed Data Sink (Is_data_sink = 1)</li>
+                        <li><span class="badge bg-primary">Blue</span> - Not a Data Sink (Is_data_sink = 0)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div id="predictions-container"></div>
             </div>
         </div>
     </div>
 
     <script>
-        function displayArray(arr, type) {
-            if (!arr || arr.length === 0) return '';
-            return `
-                <div class="section">
-                    <h4>${type}</h4>
-                    <ul class="list-group">
-                        ${arr.map(item => `<li class="list-group-item">${
-                            typeof item === 'object' ? 
-                            `<pre><code>${JSON.stringify(item, null, 2)}</code></pre>` :
-                            item
-                        }</li>`).join('')}
-                    </ul>
-                </div>
-            `;
-        }
-
-        function displayObject(obj, type) {
-            if (!obj || Object.keys(obj).length === 0) return '';
-            return `
-                <div class="section">
-                    <h4>${type}</h4>
-                    <pre><code>${JSON.stringify(obj, null, 2)}</code></pre>
-                </div>
-            `;
-        }
-
-        // Tree visualization
-        const width = 960;
-        const height = 800;
-        const margin = { top: 20, right: 90, bottom: 30, left: 90 };
-
-        const svg = d3.select('#tree-container')
-            .append('svg')
-            .attr('width', '100%')
-            .attr('height', '100%')
-            .append('g')
-            .attr('transform', `translate(${margin.left},${margin.top})`);
-
-        d3.json('/data.json').then(data => {
-            const tree = d3.tree()
-                .size([height - margin.top - margin.bottom, width - margin.left - margin.right]);
-
-            const root = d3.hierarchy(data);
-            const treeData = tree(root);
-
-            // Links
-            const link = svg.selectAll('.link')
-                .data(treeData.links())
-                .enter().append('path')
-                .attr('class', 'link')
-                .attr('d', d3.linkHorizontal()
-                    .x(d => d.y)
-                    .y(d => d.x));
-
-            // Nodes
-            const node = svg.selectAll('.node')
-                .data(treeData.descendants())
-                .enter().append('g')
-                .attr('class', 'node')
-                .attr('transform', d => `translate(${d.y},${d.x})`);
-
-            node.append('circle')
-                .attr('r', 5);
-
-            node.append('text')
-                .attr('dy', '.35em')
-                .attr('x', d => d.children ? -13 : 13)
-                .style('text-anchor', d => d.children ? 'end' : 'start')
-                .text(d => d.data.name);
-
-            // Click handler
-            node.on('click', (event, d) => {
-                const details = document.getElementById('details');
-                let content = `
-                    <h3 class="mb-4">${d.data.name}</h3>
-                    <div class="mb-3">
-                        ${d.data.vulnerabilities && d.data.vulnerabilities.length > 0 ? 
-                            `<span class="badge bg-danger">${d.data.vulnerabilities.length} Vulnerabilities</span>` : ''}
-                        ${d.data.source && d.data.source.length > 0 ? 
-                            `<span class="badge bg-primary">${d.data.source.length} Sources</span>` : ''}
-                        ${d.data.sink_details && d.data.sink_details.length > 0 ? 
-                            `<span class="badge bg-warning">${d.data.sink_details.length} Sinks</span>` : ''}
-                    </div>
-                `;
-
-                // Structure
-                content += displayObject(d.data.structure, 'Structure');
-
-                // Vulnerabilities
-                if (d.data.vulnerabilities && d.data.vulnerabilities.length > 0) {
-                    content += '<div class="section"><h4>Security Vulnerabilities</h4>';
-                    d.data.vulnerabilities.forEach(v => {
-                        content += `
-                            <div class="vulnerability risk-${v.risk_level}">
-                                <strong>Risk Level:</strong> ${v.risk_level}<br>
-                                <strong>Line:</strong> ${v.line_number}<br>
-                                <strong>Fix:</strong> ${v.message_to_fix}<br>
-                                <strong>Reference:</strong> <a href="${v.ref_link}" target="_blank">Documentation</a>
-                                <pre><code>${v.code_snippet}</code></pre>
-                            </div>
-                        `;
-                    });
-                    content += '</div>';
-                }
-
-                // Sources
-                content += displayArray(d.data.source, 'Sources');
-
-                // Data Model
-                content += displayArray(d.data.data_model, 'Data Models');
-
-                // Third Party Dependencies
-                content += displayArray(d.data.third_party_dependencies, 'Third Party Dependencies');
-
-                // Sink Details
-                content += displayArray(d.data.sink_details, 'Sink Details');
-
-                details.innerHTML = content;
-            });
-
-            // Add zoom behavior
-            const zoom = d3.zoom()
-                .scaleExtent([0.5, 2])
-                .on('zoom', (event) => {
-                    svg.attr('transform', event.transform);
-                });
-
-            d3.select('#tree-container svg')
-                .call(zoom);
+        // Get filter elements
+        const showDataSinks = document.getElementById('show-data-sinks');
+        const showNonDataSinks = document.getElementById('show-non-data-sinks');
+        const scoreThreshold = document.getElementById('score-threshold');
+        const thresholdValue = document.getElementById('threshold-value');
+        
+        // Update threshold value display
+        scoreThreshold.addEventListener('input', function() {
+            thresholdValue.textContent = this.value;
+            renderPredictions();
         });
+        
+        // Filter change handlers
+        showDataSinks.addEventListener('change', renderPredictions);
+        showNonDataSinks.addEventListener('change', renderPredictions);
+        
+        // Function to determine score class
+        function getScoreClass(score) {
+            if (score >= 0.7) return 'score-high';
+            if (score >= 0.5) return 'score-medium';
+            return 'score-low';
+        }
+        
+        // Function to determine sink class
+        function getSinkClass(score) {
+            if (score >= 0.7) return 'data-sink-high';
+            if (score >= 0.5) return 'data-sink-medium';
+            return 'data-sink-low';
+        }
+        
+        // Render predictions based on filters
+        function renderPredictions() {
+            const container = document.getElementById('predictions-container');
+            container.innerHTML = '';
+            
+            const threshold = parseFloat(scoreThreshold.value);
+            const showSinks = showDataSinks.checked;
+            const showNonSinks = showNonDataSinks.checked;
+            
+            // Filter predictions
+            const filteredPredictions = window.predictionsData.filter(prediction => {
+                if (prediction.Prediction_score < threshold) return false;
+                if (prediction.Is_data_sink === 1 && !showSinks) return false;
+                if (prediction.Is_data_sink === 0 && !showNonSinks) return false;
+                return true;
+            });
+            
+            // Show count
+            container.innerHTML = `<div class="alert alert-secondary">Showing ${filteredPredictions.length} results</div>`;
+            
+            // Render each prediction
+            filteredPredictions.forEach(prediction => {
+                const sinkClass = getSinkClass(prediction.Prediction_score);
+                const scoreClass = getScoreClass(prediction.Prediction_score);
+                
+                const predictionElement = document.createElement('div');
+                predictionElement.className = `data-sink ${sinkClass} mb-4`;
+                
+                predictionElement.innerHTML = `
+                    <h5>
+                        ${prediction.Full_file_path}
+                        <span class="badge ${prediction.Is_data_sink === 1 ? 'bg-danger' : 'bg-primary'}">
+                            ${prediction.Is_data_sink === 1 ? 'Data Sink' : 'Not a Data Sink'}
+                        </span>
+                    </h5>
+                    <p class="prediction-score ${scoreClass}">Prediction Score: ${prediction.Prediction_score}</p>
+                    <pre><code>${escapeHtml(prediction.Code_chunk)}</code></pre>
+                `;
+                
+                container.appendChild(predictionElement);
+            });
+        }
+        
+        // Helper function to escape HTML
+        function escapeHtml(unsafe) {
+            return unsafe
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+        
+        // Load the data
+        fetch('/data.json')
+            .then(response => response.json())
+            .then(data => {
+                window.predictionsData = data.Predictions;
+                renderPredictions();
+            })
+            .catch(error => {
+                console.error('Error loading data:', error);
+                document.getElementById('predictions-container').innerHTML = 
+                    `<div class="alert alert-danger">Error loading data: ${error.message}</div>`;
+            });
     </script>
 </body>
 </html>

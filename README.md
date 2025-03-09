@@ -98,3 +98,60 @@ node codebase-analyzer.js
 ```
 
 Output: `codebase-analysis.csv`, `output.json`
+
+
+
+1. Acorn Analyzer (acorn-analyzer.js)
+Approach: Uses Acorn, a JavaScript parser with JSX support through extensions. It uses acorn-walk for AST traversal.
+
+Pros:
+
+Fast and lightweight parser specifically designed for JavaScript
+Easy to extend with plugins (like JSX support)
+Well-established in the ecosystem with good documentation
+Simple visitor pattern via acorn-walk for traversing the AST
+Detailed context capture for reporting with line/column info and surrounding code
+Cons:
+
+Limited to JavaScript/JSX (no TypeScript support by default)
+Manual pattern matching using arrays of keywords
+Less structured query syntax compared to Tree-sitter
+Requires more boilerplate code for traversing complex AST structures
+Not as powerful for complex language constructs
+2. TypeScript ESTree Analyzer (codebase-analyzer.js)
+Approach: Uses @typescript-eslint/typescript-estree as the parser, which is designed for TypeScript compatibility.
+
+Pros:
+
+Native TypeScript support, handles both JS and TS formats
+Compatible with ESLint ecosystem
+Generally robust against syntax errors
+Custom tree traversal method that's more flexible than Acorn's walker
+Handles modern JavaScript features well
+Good for static analysis with type information
+Cons:
+
+Requires manual recursion through the AST with the traverseTree method
+Simpler reporting format (doesn't include column info or context)
+Uses simple string pattern matching for detection
+Possibly slower than Acorn for large codebases
+Less mature than Acorn but more modern
+3. Tree-sitter Analyzer (tree-sitter-analyzer.js)
+Approach: Uses Tree-sitter, a parser generator tool and incremental parsing library with a query language.
+
+Pros:
+
+Powerful query language specifically designed for code analysis
+Declarative pattern matching using specialized syntax
+Supports incremental parsing (efficient for real-time analysis)
+Can handle syntax errors gracefully
+Excellent for IDE-like features that need constant reparsing
+Potentially extensible to many languages beyond JavaScript
+Clean separation between query definitions and execution logic
+Cons:
+
+More complex setup with language-specific modules
+Higher learning curve for the query syntax
+Currently only using JavaScript language pack (would need additional modules for TypeScript)
+Less widely adopted than ESLint/Acorn in the JavaScript ecosystem
+Potentially higher memory usage
