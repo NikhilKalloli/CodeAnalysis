@@ -1,0 +1,3100 @@
+Directory structure:
+└── twenty-server/
+    ├── jest-integration.config.ts
+    ├── jest.config.ts
+    ├── lingui.config.js
+    ├── nest-cli.json
+    ├── package.json
+    ├── project.json
+    ├── tsconfig.build.json
+    ├── tsconfig.json
+    ├── tsconfig.scripts.json
+    ├── .env.example
+    ├── .env.test
+    ├── .eslintrc.cjs
+    ├── .gitignore
+    ├── .prettierignore
+    ├── .prettierrc
+    ├── .swcrc
+    ├── @types/
+    │   ├── common.d.ts
+    │   ├── express.d.ts
+    │   └── jest.d.ts
+    ├── patches/
+    │   ├── @graphql-yoga+nestjs+2.1.0.patch
+    │   ├── @nestjs+graphql+12.1.1.patch
+    │   ├── @ptc-org+nestjs-query-graphql+4.2.0.patch
+    │   ├── class-validator+0.14.0.patch
+    │   └── typeorm+0.3.20.patch
+    ├── scripts/
+    │   ├── render-run.sh
+    │   ├── render-worker.sh
+    │   ├── setup-db.ts
+    │   ├── truncate-db.ts
+    │   ├── utils.ts
+    │   └── ssl-generation/
+    │       ├── README.md
+    │       └── script.sh
+    ├── src/
+    │   ├── app.module.ts
+    │   ├── instrument.ts
+    │   ├── main.ts
+    │   ├── command/
+    │   │   ├── command-logger.ts
+    │   │   ├── command.module.ts
+    │   │   └── command.ts
+    │   ├── constants/
+    │   │   └── assets-path.ts
+    │   ├── database/
+    │   │   ├── commands/
+    │   │   │   ├── data-seed-dev-workspace.command.ts
+    │   │   │   ├── database-command.module.ts
+    │   │   │   ├── logger.ts
+    │   │   │   ├── command-runners/
+    │   │   │   │   ├── active-or-suspended-workspaces-migration.command-runner.ts
+    │   │   │   │   └── migration.command-runner.ts
+    │   │   │   ├── data-seed-demo-workspace/
+    │   │   │   │   ├── data-seed-demo-workspace.module.ts
+    │   │   │   │   └── services/
+    │   │   │   │       └── data-seed-demo-workspace.service.ts
+    │   │   │   ├── questions/
+    │   │   │   │   └── confirmation.question.ts
+    │   │   │   └── upgrade-version-command/
+    │   │   │       ├── upgrade-version-command.module.ts
+    │   │   │       ├── upgrade.command.ts
+    │   │   │       ├── 0-43/
+    │   │   │       │   ├── 0-43-add-tasks-assigned-to-me-view.command.ts
+    │   │   │       │   ├── 0-43-migrate-is-searchable-for-custom-object-metadata.command.ts
+    │   │   │       │   ├── 0-43-migrate-rich-text-content-patch.command.ts
+    │   │   │       │   ├── 0-43-migrate-search-vector-on-note-and-task-entities.command.ts
+    │   │   │       │   ├── 0-43-update-default-view-record-opening-on-workflow-objects.command.ts
+    │   │   │       │   └── 0-43-upgrade-version-command.module.ts
+    │   │   │       └── 0-44/
+    │   │   │           ├── 0-44-initialize-permissions.command.ts
+    │   │   │           ├── 0-44-migrate-relations-to-field-metadata.command.ts
+    │   │   │           └── 0-44-upgrade-version-command.module.ts
+    │   │   ├── typeorm/
+    │   │   │   ├── typeorm.module.ts
+    │   │   │   ├── typeorm.service.ts
+    │   │   │   ├── core/
+    │   │   │   │   ├── core.datasource.ts
+    │   │   │   │   └── migrations/
+    │   │   │   │       ├── billing/
+    │   │   │   │       │   ├── 1708535112230-addBillingCoreTables.ts
+    │   │   │   │       │   ├── 1709233666080-updateBillingCoreTables.ts
+    │   │   │   │       │   ├── 1709914564361-updateBillingSubscription.ts
+    │   │   │   │       │   ├── 1710926613773-addIntervalToBillingSubscription.ts
+    │   │   │   │       │   ├── 1732098580545-addBillingEntitlementTable.ts
+    │   │   │   │       │   ├── 1733397937967-addNewBillingStripeTables.ts
+    │   │   │   │       │   ├── 1733753649142-removeBillingFKWithCore.ts
+    │   │   │   │       │   ├── 1734450749954-addConstraintsOnBillingTables.ts
+    │   │   │   │       │   ├── 1737127856478-addNonNullableProductDescription.ts
+    │   │   │   │       │   └── 1739981257356-addOnUpdateInEntitlements.ts
+    │   │   │   │       └── common/
+    │   │   │   │           ├── 1700324860820-setupCoreTables.ts
+    │   │   │   │           ├── 1700654387203-addAllowImpersonationToWorkspace.ts
+    │   │   │   │           ├── 1700661180856-addCascadeDeleteOnRefreshTokenUser.ts
+    │   │   │   │           ├── 1700663611659-addWorkspaceDeleteCascadeSetNullInUser.ts
+    │   │   │   │           ├── 1701194529853-addFeatureFlags.ts
+    │   │   │   │           ├── 1702479005171-addSubscriptionStatusOnWorkspace.ts
+    │   │   │   │           ├── 1704825571702-addPasswordResetToken.ts
+    │   │   │   │           ├── 1706613419989-addDefaultAvatarUrlToUser.ts
+    │   │   │   │           ├── 1707778127558-addUserWorkspaces.ts
+    │   │   │   │           ├── 1709314035408-updateUserWorkspace.ts
+    │   │   │   │           ├── 1709680520888-updateUserWorkspaceColumnConstraints.ts
+    │   │   │   │           ├── 1711557405330-addMissingMigration.ts
+    │   │   │   │           ├── 1711624086253-updateRefreshTokenTable.ts
+    │   │   │   │           ├── 1711633823798-useTimestampWithTZ.ts
+    │   │   │   │           ├── 1715593226719-updateInconsistentUserConstraint.ts
+    │   │   │   │           ├── 1717425967770-addKeyValuePairTable.ts
+    │   │   │   │           ├── 1717688588972-addKeyValuePairTableUniqueContraints.ts
+    │   │   │   │           ├── 1717751631669-addPostgresCredentials.ts
+    │   │   │   │           ├── 1719327438923-useEnumForSubscriptionStatusInterval.ts
+    │   │   │   │           ├── 1719494707738-removeSubscriptionStatusFromCoreWorkspace.ts
+    │   │   │   │           ├── 1721139150487-addKeyValuePairType.ts
+    │   │   │   │           ├── 1721656106498-migrateKeyValueTypeToJsonb.ts
+    │   │   │   │           ├── 1721738579379-DeletePasswordResetToken.ts
+    │   │   │   │           ├── 1722256203539-addActivationStatus.ts
+    │   │   │   │           ├── 1722256203540-updateActivationStatusEnum copy.ts
+    │   │   │   │           ├── 1722256203541-updateActivationStatusEnumPendingCreation.ts
+    │   │   │   │           ├── 1724056827317-addInvitation.ts
+    │   │   │   │           ├── 1724173430043-introduceMetadataVersionAndDatasourceOnWorkspace.ts
+    │   │   │   │           ├── 1726849473832-addUniqueConstraintOnUsers.ts
+    │   │   │   │           ├── 1727181198403-addWorkspaceSSOIdentityProvider.ts
+    │   │   │   │           ├── 1728314605995-add_typeormGeneratedColumnsAndMaterializedViews.ts
+    │   │   │   │           ├── 1728986317196-addIsPublicInviteLinkEnabledOnWorkspace.ts
+    │   │   │   │           ├── 1730137590546-addSubdomainToWorkspace.ts
+    │   │   │   │           ├── 1730298416367-addAuthProvidersColumnsToWorkspace.ts
+    │   │   │   │           ├── 1733318043626-sso-missing-migration.ts
+    │   │   │   │           ├── 1733408604468-fixUserEmailUniqueConstraint.ts
+    │   │   │   │           ├── 1734355945585-add-unique-index-on-subdomain.ts
+    │   │   │   │           ├── 1734544295083-remove-default-workspace-id.ts
+    │   │   │   │           ├── 1736050161854-renameEmailVerifiedColumn.ts
+    │   │   │   │           ├── 1736861823893-updateWorkspaceStatusEnum.ts
+    │   │   │   │           ├── 1737033794408-two-factor-method.ts
+    │   │   │   │           ├── 1737630672873-workspace-entity-default-microsoft-auth-enabled.ts
+    │   │   │   │           ├── 1737996712702-remove-domainName-from-workspace.ts
+    │   │   │   │           ├── 1737997028359-add-hostname-to-workspace.ts
+    │   │   │   │           ├── 1739022118023-addLocaleToUser.ts
+    │   │   │   │           ├── 1739178177820-rename-hostname-to-custom-domain.ts
+    │   │   │   │           ├── 1739203087254-add-is-custom-domain-enable.ts
+    │   │   │   │           ├── 1740048555744-add-approved-access-domain.ts
+    │   │   │   │           ├── 1740390801418-addDefaultRoleToWorkspace.ts
+    │   │   │   │           └── 1740415309924-addAccessToFullAdminAndWorkspaceVersion.ts
+    │   │   │   ├── metadata/
+    │   │   │   │   ├── metadata.datasource.ts
+    │   │   │   │   └── migrations/
+    │   │   │   │       ├── 1700140427984-setupMetadataTables.ts
+    │   │   │   │       ├── 1700565712112-addIdentifierFieldToObjectMetadata.ts
+    │   │   │   │       ├── 1700650554672-addWorkspaceCacheVersion.ts
+    │   │   │   │       ├── 1700661538754-addCascadeDeleteOnRelationObject.ts
+    │   │   │   │       ├── 1700663879152-addEnumOptions.ts
+    │   │   │   │       ├── 1708449210922-addOnDeleteActionToRelationMetadata.ts
+    │   │   │   │       ├── 1709894431938-addStandardId.ts
+    │   │   │   │       ├── 1711374137222-addRemoteServerTable.ts
+    │   │   │   │       ├── 1711459912762-dropTargetColumnMap.ts
+    │   │   │   │       ├── 1711466822763-addIsRemoteField.ts
+    │   │   │   │       ├── 1711619086385-useTimestampWithTZ.ts
+    │   │   │   │       ├── 1712923480448-addIsAuditLogged.ts
+    │   │   │   │       ├── 1713270565699-createRemoteTable.ts
+    │   │   │   │       ├── 1713793656356-addSettingsColumnToFieldMetadata.ts
+    │   │   │   │       ├── 1714382420165-addSchemaAndAvailableTablesToServer.ts
+    │   │   │   │       ├── 1716310822694-removeAvailableTables.ts
+    │   │   │   │       ├── 1716890009820-addRemoteServerLabel.ts
+    │   │   │   │       ├── 1718985664968-addIndexMetadataTable.ts
+    │   │   │   │       ├── 1720524654925-addDateColumnsToIndexMetadata.ts
+    │   │   │   │       ├── 1721057142509-fixIdentifierTypes.ts
+    │   │   │   │       ├── 1721210534680-createServerlessFunctionTable.ts
+    │   │   │   │       ├── 1721309629608-addRuntimeColumnToServerlessFunction.ts
+    │   │   │   │       ├── 1723038077987-addSoftDelete.ts
+    │   │   │   │       ├── 1724171584314-updateServerlessFunction.ts
+    │   │   │   │       ├── 1724173061204-deprecateCacheVersion.ts
+    │   │   │   │       ├── 1724423248330-removeServerlessFunctionUniqueConstraint.ts
+    │   │   │   │       ├── 1724946099627-addServerlessFunctionLayerVersionColumn.ts
+    │   │   │   │       ├── 1725893697807-addIndexType.ts
+    │   │   │   │       ├── 1726240847733-removeServerlessSourceCodeHashColumn.ts
+    │   │   │   │       ├── 1726486735275-removeObjectMetadataIsSoftDeletable.ts
+    │   │   │   │       ├── 1726757368824-migrationDebt.ts
+    │   │   │   │       ├── 1726757368825-addIsUniqueToIndexMetadata.ts
+    │   │   │   │       ├── 1726766871572-addWhereToIndexMetadata.ts
+    │   │   │   │       ├── 1727699709905-addIsCustomColumnToIndexMetadata.ts
+    │   │   │   │       ├── 1728563893694-addIsUniqueToFields.ts
+    │   │   │   │       ├── 1728579416430-addIsLabelSyncedWithName.ts
+    │   │   │   │       ├── 1728999374151-addConstraintOnIndexMetadata.ts
+    │   │   │   │       ├── 1729162426186-updateServerlessFunctionColumns.ts
+    │   │   │   │       ├── 1729676165199-add-object-shortcut.ts
+    │   │   │   │       ├── 1730803174864-addInputSchemaToFunction.ts
+    │   │   │   │       ├── 1733153195498-addIsLabelSyncedWithNameToFieldMetadata.ts
+    │   │   │   │       ├── 1733318004066-missing-shortcut-migration.ts
+    │   │   │   │       ├── 1737047131108-addTimeoutSecondsColumnToServerless.ts
+    │   │   │   │       ├── 1737561084251-addRelationTargetFieldAndObjectToFieldMetadata.ts
+    │   │   │   │       ├── 1738233783889-addNewSyncStatusToServerless.ts
+    │   │   │   │       ├── 1738248281689-createPermissionsTable.ts
+    │   │   │   │       ├── 1738853620654-addDuplicateCriteriaColumnInObjectMetadata.ts
+    │   │   │   │       ├── 1739203246456-addIndexesOnFieldMetadataAndIndexFieldMetadata.ts
+    │   │   │   │       ├── 1739795699972-updateRoleTable.ts
+    │   │   │   │       └── 1740478150675-addIsSearchableColumnInObjectMetadataTable.ts
+    │   │   │   └── raw/
+    │   │   │       └── raw.datasource.ts
+    │   │   └── typeorm-seeds/
+    │   │       ├── core/
+    │   │       │   ├── feature-flags.ts
+    │   │       │   ├── index.ts
+    │   │       │   ├── user-workspaces.ts
+    │   │       │   ├── users.ts
+    │   │       │   ├── workspaces.ts
+    │   │       │   └── demo/
+    │   │       │       ├── feature-flags.ts
+    │   │       │       ├── index.ts
+    │   │       │       ├── user-workspaces.ts
+    │   │       │       ├── users.ts
+    │   │       │       └── workspaces.ts
+    │   │       ├── metadata/
+    │   │       │   ├── fieldsMetadata.ts
+    │   │       │   └── objectsMetadata.ts
+    │   │       └── workspace/
+    │   │           ├── calendar-channel-event-association.ts
+    │   │           ├── calendar-channel.ts
+    │   │           ├── calendar-event-participants.ts
+    │   │           ├── calendar-events.ts
+    │   │           ├── companies.ts
+    │   │           ├── connected-account.ts
+    │   │           ├── favorites.ts
+    │   │           ├── message-channel-message-associations.ts
+    │   │           ├── message-channels.ts
+    │   │           ├── message-participants.ts
+    │   │           ├── message-thread-subscribers.ts
+    │   │           ├── message-threads.ts
+    │   │           ├── messages.ts
+    │   │           ├── opportunities.ts
+    │   │           ├── seedPeople.ts
+    │   │           └── workspace-members.ts
+    │   ├── engine/
+    │   │   ├── api/
+    │   │   │   ├── __mocks__/
+    │   │   │   │   └── object-metadata-item.mock.ts
+    │   │   │   ├── graphql/
+    │   │   │   │   ├── core-graphql-api.module.ts
+    │   │   │   │   ├── metadata-graphql-api.module.ts
+    │   │   │   │   ├── metadata.module-factory.ts
+    │   │   │   │   ├── workspace-schema.factory.ts
+    │   │   │   │   ├── __tests__/
+    │   │   │   │   │   └── workspace.factory.spec.ts
+    │   │   │   │   ├── graphql-config/
+    │   │   │   │   │   ├── graphql-config.module.ts
+    │   │   │   │   │   ├── graphql-config.service.ts
+    │   │   │   │   │   ├── hooks/
+    │   │   │   │   │   │   ├── use-cached-metadata.ts
+    │   │   │   │   │   │   └── use-throttler.ts
+    │   │   │   │   │   └── interfaces/
+    │   │   │   │   │       └── graphql-context.interface.ts
+    │   │   │   │   ├── graphql-query-runner/
+    │   │   │   │   │   ├── graphql-query-runner.module.ts
+    │   │   │   │   │   ├── __mocks__/
+    │   │   │   │   │   │   ├── mockPersonObjectMetadata.ts
+    │   │   │   │   │   │   └── mockPersonRecords.ts
+    │   │   │   │   │   ├── __tests__/
+    │   │   │   │   │   │   └── graphql-query-find-duplicates-resolver.service.spec.ts
+    │   │   │   │   │   ├── constants/
+    │   │   │   │   │   │   ├── aggregate-operations.constant.ts
+    │   │   │   │   │   │   ├── connection-max-depth.constant.ts
+    │   │   │   │   │   │   ├── query-max-records.constant.ts
+    │   │   │   │   │   │   └── system-objects-permissions-requirements.constant.ts
+    │   │   │   │   │   ├── decorators/
+    │   │   │   │   │   │   ├── on-custom-batch-event.decorator.ts
+    │   │   │   │   │   │   └── on-database-batch-event.decorator.ts
+    │   │   │   │   │   ├── enums/
+    │   │   │   │   │   │   └── database-event-action.ts
+    │   │   │   │   │   ├── errors/
+    │   │   │   │   │   │   └── graphql-query-runner.exception.ts
+    │   │   │   │   │   ├── graphql-query-parsers/
+    │   │   │   │   │   │   ├── graphql-query.parser.ts
+    │   │   │   │   │   │   ├── graphql-query-filter/
+    │   │   │   │   │   │   │   ├── graphql-query-filter-condition.parser.ts
+    │   │   │   │   │   │   │   └── graphql-query-filter-field.parser.ts
+    │   │   │   │   │   │   ├── graphql-query-order/
+    │   │   │   │   │   │   │   └── graphql-query-order.parser.ts
+    │   │   │   │   │   │   └── graphql-query-selected-fields/
+    │   │   │   │   │   │       ├── graphql-selected-fields-aggregate.parser.ts
+    │   │   │   │   │   │       ├── graphql-selected-fields-relation.parser.ts
+    │   │   │   │   │   │       └── graphql-selected-fields.parser.ts
+    │   │   │   │   │   ├── helpers/
+    │   │   │   │   │   │   ├── object-records-to-graphql-connection.helper.ts
+    │   │   │   │   │   │   ├── process-aggregate.helper.ts
+    │   │   │   │   │   │   ├── process-nested-relations-v2.helper.ts
+    │   │   │   │   │   │   └── process-nested-relations.helper.ts
+    │   │   │   │   │   ├── interfaces/
+    │   │   │   │   │   │   └── base-resolver-service.ts
+    │   │   │   │   │   ├── resolvers/
+    │   │   │   │   │   │   ├── graphql-query-create-many-resolver.service.ts
+    │   │   │   │   │   │   ├── graphql-query-create-one-resolver.service.ts
+    │   │   │   │   │   │   ├── graphql-query-delete-many-resolver.service.ts
+    │   │   │   │   │   │   ├── graphql-query-delete-one-resolver.service.ts
+    │   │   │   │   │   │   ├── graphql-query-destroy-many-resolver.service.ts
+    │   │   │   │   │   │   ├── graphql-query-destroy-one-resolver.service.ts
+    │   │   │   │   │   │   ├── graphql-query-find-duplicates-resolver.service.ts
+    │   │   │   │   │   │   ├── graphql-query-find-many-resolver.service.ts
+    │   │   │   │   │   │   ├── graphql-query-find-one-resolver.service.ts
+    │   │   │   │   │   │   ├── graphql-query-restore-many-resolver.service.ts
+    │   │   │   │   │   │   ├── graphql-query-restore-one-resolver.service.ts
+    │   │   │   │   │   │   ├── graphql-query-search-resolver.service.ts
+    │   │   │   │   │   │   ├── graphql-query-update-many-resolver.service.ts
+    │   │   │   │   │   │   └── graphql-query-update-one-resolver.service.ts
+    │   │   │   │   │   ├── services/
+    │   │   │   │   │   │   └── api-event-emitter.service.ts
+    │   │   │   │   │   └── utils/
+    │   │   │   │   │       ├── check-string-is-database-event-action.ts
+    │   │   │   │   │       ├── compute-cursor-arg-filter.ts
+    │   │   │   │   │       ├── compute-where-condition-parts.ts
+    │   │   │   │   │       ├── cursors.util.ts
+    │   │   │   │   │       ├── get-relation-object-metadata.util.ts
+    │   │   │   │   │       ├── get-target-object-metadata.util.ts
+    │   │   │   │   │       └── __tests__/
+    │   │   │   │   │           └── compute-cursor-arg-filter.spec.ts
+    │   │   │   │   ├── services/
+    │   │   │   │   │   └── scalars-explorer.service.ts
+    │   │   │   │   ├── workspace-query-builder/
+    │   │   │   │   │   ├── workspace-query-builder.module.ts
+    │   │   │   │   │   ├── __mocks__/
+    │   │   │   │   │   │   └── workspace-query-builder-options.mock.ts
+    │   │   │   │   │   ├── factories/
+    │   │   │   │   │   │   ├── factories.ts
+    │   │   │   │   │   │   ├── foreign-data-wrapper-server-query.factory.ts
+    │   │   │   │   │   │   ├── record-position-query.factory.ts
+    │   │   │   │   │   │   └── __tests__/
+    │   │   │   │   │   │       └── record-position-query.factory.spec.ts
+    │   │   │   │   │   ├── interfaces/
+    │   │   │   │   │   │   ├── object-record.interface.ts
+    │   │   │   │   │   │   └── workspace-query-builder-options.interface.ts
+    │   │   │   │   │   ├── types/
+    │   │   │   │   │   │   └── workspace-entity-duplicate-criteria.type.ts
+    │   │   │   │   │   └── utils/
+    │   │   │   │   │       ├── composite-field-metadata.util.ts
+    │   │   │   │   │       ├── get-field-arguments-by-key.util.ts
+    │   │   │   │   │       ├── stringify-without-key-quote.util.ts
+    │   │   │   │   │       └── __tests__/
+    │   │   │   │   │           └── stringify-without-key-quote.spec.ts
+    │   │   │   │   ├── workspace-query-runner/
+    │   │   │   │   │   ├── workspace-query-runner.exception.ts
+    │   │   │   │   │   ├── workspace-query-runner.module.ts
+    │   │   │   │   │   ├── constants/
+    │   │   │   │   │   │   └── user-signup-event-name.constants.ts
+    │   │   │   │   │   ├── factories/
+    │   │   │   │   │   │   ├── index.ts
+    │   │   │   │   │   │   ├── query-runner-args.factory.ts
+    │   │   │   │   │   │   ├── record-position.factory.ts
+    │   │   │   │   │   │   ├── __tests__/
+    │   │   │   │   │   │   │   ├── query-runner-args.factory.spec.ts
+    │   │   │   │   │   │   │   └── record-position.factory.spec.ts
+    │   │   │   │   │   │   └── query-result-getters/
+    │   │   │   │   │   │       ├── query-result-getters.factory.ts
+    │   │   │   │   │   │       ├── guards/
+    │   │   │   │   │   │       │   ├── is-query-result-field-value-a-connection.guard.ts
+    │   │   │   │   │   │       │   ├── is-query-result-field-value-a-nested-record-array.guard.ts
+    │   │   │   │   │   │       │   ├── is-query-result-field-value-a-record-array.guard.ts
+    │   │   │   │   │   │       │   └── is-query-result-field-value-a-record.guard.ts
+    │   │   │   │   │   │       ├── handlers/
+    │   │   │   │   │   │       │   ├── activity-query-result-getter.handler.ts
+    │   │   │   │   │   │       │   ├── attachment-query-result-getter.handler.ts
+    │   │   │   │   │   │       │   ├── person-query-result-getter.handler.ts
+    │   │   │   │   │   │       │   └── workspace-member-query-result-getter.handler.ts
+    │   │   │   │   │   │       └── interfaces/
+    │   │   │   │   │   │           ├── query-result-field-value.ts
+    │   │   │   │   │   │           └── query-result-getter-handler.interface.ts
+    │   │   │   │   │   ├── interfaces/
+    │   │   │   │   │   │   ├── connection.interface.ts
+    │   │   │   │   │   │   ├── edge.interface.ts
+    │   │   │   │   │   │   ├── page-info.interface.ts
+    │   │   │   │   │   │   └── query-runner-option.interface.ts
+    │   │   │   │   │   ├── listeners/
+    │   │   │   │   │   │   ├── entity-events-to-db.listener.ts
+    │   │   │   │   │   │   └── telemetry.listener.ts
+    │   │   │   │   │   ├── services/
+    │   │   │   │   │   │   ├── record-position-backfill-module.ts
+    │   │   │   │   │   │   ├── record-position-backfill-service.ts
+    │   │   │   │   │   │   └── __tests__/
+    │   │   │   │   │   │       └── record-position-backfill-service.spec.ts
+    │   │   │   │   │   ├── utils/
+    │   │   │   │   │   │   ├── assert-is-valid-uuid.util.ts
+    │   │   │   │   │   │   ├── compute-pg-graphql-error.util.ts
+    │   │   │   │   │   │   ├── graphql-query-runner-exception-handler.util.ts
+    │   │   │   │   │   │   ├── handle-duplicate-key-error.util.ts
+    │   │   │   │   │   │   ├── parse-result.util.ts
+    │   │   │   │   │   │   ├── query-runner-links.util.ts
+    │   │   │   │   │   │   ├── with-soft-deleted.util.ts
+    │   │   │   │   │   │   ├── workspace-exception-handler.util.ts
+    │   │   │   │   │   │   ├── workspace-query-runner-graphql-api-exception-handler.util.ts
+    │   │   │   │   │   │   └── __tests__/
+    │   │   │   │   │   │       ├── parse-result.spec.ts
+    │   │   │   │   │   │       └── query-runner.util.spec.ts
+    │   │   │   │   │   └── workspace-query-hook/
+    │   │   │   │   │       ├── workspace-query-hook-metadata.accessor.ts
+    │   │   │   │   │       ├── workspace-query-hook.constants.ts
+    │   │   │   │   │       ├── workspace-query-hook.explorer.ts
+    │   │   │   │   │       ├── workspace-query-hook.module.ts
+    │   │   │   │   │       ├── workspace-query-hook.service.ts
+    │   │   │   │   │       ├── decorators/
+    │   │   │   │   │       │   └── workspace-query-hook.decorator.ts
+    │   │   │   │   │       ├── interfaces/
+    │   │   │   │   │       │   └── workspace-query-hook.interface.ts
+    │   │   │   │   │       ├── storage/
+    │   │   │   │   │       │   └── workspace-query-hook.storage.ts
+    │   │   │   │   │       └── types/
+    │   │   │   │   │           └── workspace-query-hook.type.ts
+    │   │   │   │   ├── workspace-resolver-builder/
+    │   │   │   │   │   ├── workspace-resolver-builder.module.ts
+    │   │   │   │   │   ├── workspace-resolver-builder.service.ts
+    │   │   │   │   │   ├── workspace-resolver.factory.ts
+    │   │   │   │   │   ├── constants/
+    │   │   │   │   │   │   └── resolver-method-names.ts
+    │   │   │   │   │   ├── factories/
+    │   │   │   │   │   │   ├── create-many-resolver.factory.ts
+    │   │   │   │   │   │   ├── create-one-resolver.factory.ts
+    │   │   │   │   │   │   ├── delete-many-resolver.factory.ts
+    │   │   │   │   │   │   ├── delete-one-resolver.factory.ts
+    │   │   │   │   │   │   ├── destroy-many-resolver.factory.ts
+    │   │   │   │   │   │   ├── destroy-one-resolver.factory.ts
+    │   │   │   │   │   │   ├── factories.ts
+    │   │   │   │   │   │   ├── find-duplicates-resolver.factory.ts
+    │   │   │   │   │   │   ├── find-many-resolver.factory.ts
+    │   │   │   │   │   │   ├── find-one-resolver.factory.ts
+    │   │   │   │   │   │   ├── restore-many-resolver.factory.ts
+    │   │   │   │   │   │   ├── restore-one-resolver.factory.ts
+    │   │   │   │   │   │   ├── search-resolver-factory.ts
+    │   │   │   │   │   │   ├── update-many-resolver.factory.ts
+    │   │   │   │   │   │   └── update-one-resolver.factory.ts
+    │   │   │   │   │   └── interfaces/
+    │   │   │   │   │       ├── workspace-resolver-builder-factory.interface.ts
+    │   │   │   │   │       └── workspace-resolvers-builder.interface.ts
+    │   │   │   │   └── workspace-schema-builder/
+    │   │   │   │       ├── type-definitions.generator.ts
+    │   │   │   │       ├── workspace-graphql-schema.factory.ts
+    │   │   │   │       ├── workspace-schema-builder.module.ts
+    │   │   │   │       ├── factories/
+    │   │   │   │       │   ├── aggregation-type.factory.ts
+    │   │   │   │       │   ├── args.factory.ts
+    │   │   │   │       │   ├── composite-enum-type-definition.factory.ts
+    │   │   │   │       │   ├── composite-input-type-definition.factory.ts
+    │   │   │   │       │   ├── composite-object-type-definition.factory.ts
+    │   │   │   │       │   ├── connection-type-definition.factory.ts
+    │   │   │   │       │   ├── connection-type.factory.ts
+    │   │   │   │       │   ├── edge-type-definition.factory.ts
+    │   │   │   │       │   ├── edge-type.factory.ts
+    │   │   │   │       │   ├── enum-type-definition.factory.ts
+    │   │   │   │       │   ├── extend-object-type-definition-v2.factory.ts
+    │   │   │   │       │   ├── extend-object-type-definition.factory.ts
+    │   │   │   │       │   ├── factories.ts
+    │   │   │   │       │   ├── input-type-definition.factory.ts
+    │   │   │   │       │   ├── input-type.factory.ts
+    │   │   │   │       │   ├── mutation-type.factory.ts
+    │   │   │   │       │   ├── object-type-definition.factory.ts
+    │   │   │   │       │   ├── orphaned-types.factory.ts
+    │   │   │   │       │   ├── output-type.factory.ts
+    │   │   │   │       │   ├── query-type.factory.ts
+    │   │   │   │       │   ├── relation-type-v2.factory.ts
+    │   │   │   │       │   ├── relation-type.factory.ts
+    │   │   │   │       │   └── root-type.factory.ts
+    │   │   │   │       ├── graphql-types/
+    │   │   │   │       │   ├── enum/
+    │   │   │   │       │   │   ├── index.ts
+    │   │   │   │       │   │   └── order-by-direction.enum-type.ts
+    │   │   │   │       │   ├── input/
+    │   │   │   │       │   │   ├── array-filter.input-type.ts
+    │   │   │   │       │   │   ├── big-float-filter.input-type.ts
+    │   │   │   │       │   │   ├── big-int-filter.input-type.ts
+    │   │   │   │       │   │   ├── boolean-filter.input-type.ts
+    │   │   │   │       │   │   ├── date-filter.input-type.ts
+    │   │   │   │       │   │   ├── filter-is.input-type.ts
+    │   │   │   │       │   │   ├── float-filter.input-type.ts
+    │   │   │   │       │   │   ├── id-filter.input-type.ts
+    │   │   │   │       │   │   ├── index.ts
+    │   │   │   │       │   │   ├── int-filter.input-type.ts
+    │   │   │   │       │   │   ├── multi-select-filter.input-type.ts
+    │   │   │   │       │   │   ├── raw-json-filter.input-type.ts
+    │   │   │   │       │   │   ├── rich-text.input-type.ts
+    │   │   │   │       │   │   ├── select-filter.input-type.ts
+    │   │   │   │       │   │   └── string-filter.input-type.ts
+    │   │   │   │       │   ├── object/
+    │   │   │   │       │   │   ├── index.ts
+    │   │   │   │       │   │   └── page-into.object-type.ts
+    │   │   │   │       │   └── scalars/
+    │   │   │   │       │       ├── big-float.scalar.ts
+    │   │   │   │       │       ├── big-int.scalar.ts
+    │   │   │   │       │       ├── cursor.scalar.ts
+    │   │   │   │       │       ├── date.scalar.ts
+    │   │   │   │       │       ├── index.ts
+    │   │   │   │       │       ├── position.scalar.ts
+    │   │   │   │       │       ├── raw-json.scalar.ts
+    │   │   │   │       │       ├── time.scalar.ts
+    │   │   │   │       │       └── uuid.scalar.ts
+    │   │   │   │       ├── interfaces/
+    │   │   │   │       │   ├── param-metadata.interface.ts
+    │   │   │   │       │   ├── workspace-build-schema-optionts.interface.ts
+    │   │   │   │       │   └── workspace-schema-builder-context.interface.ts
+    │   │   │   │       ├── services/
+    │   │   │   │       │   └── type-mapper.service.ts
+    │   │   │   │       ├── storages/
+    │   │   │   │       │   └── type-definitions.storage.ts
+    │   │   │   │       └── utils/
+    │   │   │   │           ├── clean-entity-name.util.ts
+    │   │   │   │           ├── compute-composite-property-target.util.ts
+    │   │   │   │           ├── generate-fields.utils.ts
+    │   │   │   │           ├── get-available-aggregations-from-object-fields.util.ts
+    │   │   │   │           ├── get-field-metadata-type.util.ts
+    │   │   │   │           ├── get-number-filter-type.util.ts
+    │   │   │   │           ├── get-number-scalar-type.util.ts
+    │   │   │   │           ├── get-resolver-args.util.ts
+    │   │   │   │           ├── object-contains-relation-field.ts
+    │   │   │   │           └── __tests__/
+    │   │   │   │               ├── clean-entity-name.spec.ts
+    │   │   │   │               ├── get-field-metadata-type.spec.ts
+    │   │   │   │               └── get-resolver-args.spec.ts
+    │   │   │   └── rest/
+    │   │   │       ├── rest-api-exception.filter.ts
+    │   │   │       ├── rest-api.module.ts
+    │   │   │       ├── rest-api.service.ts
+    │   │   │       ├── core/
+    │   │   │       │   ├── rest-api-core-v2.service.ts
+    │   │   │       │   ├── rest-api-core.service.ts
+    │   │   │       │   ├── controllers/
+    │   │   │       │   │   ├── rest-api-core-batch.controller.ts
+    │   │   │       │   │   └── rest-api-core.controller.ts
+    │   │   │       │   ├── query-builder/
+    │   │   │       │   │   ├── core-query-builder.factory.ts
+    │   │   │       │   │   ├── core-query-builder.module.ts
+    │   │   │       │   │   ├── factories/
+    │   │   │       │   │   │   ├── create-many-query.factory.ts
+    │   │   │       │   │   │   ├── create-one-query.factory.ts
+    │   │   │       │   │   │   ├── create-variables.factory.ts
+    │   │   │       │   │   │   ├── delete-query.factory.ts
+    │   │   │       │   │   │   ├── delete-variables.factory.ts
+    │   │   │       │   │   │   ├── factories.ts
+    │   │   │       │   │   │   ├── find-duplicates-query.factory.ts
+    │   │   │       │   │   │   ├── find-duplicates-variables.factory.ts
+    │   │   │       │   │   │   ├── find-many-query.factory.ts
+    │   │   │       │   │   │   ├── find-one-query.factory.ts
+    │   │   │       │   │   │   ├── get-variables.factory.ts
+    │   │   │       │   │   │   ├── update-query.factory.ts
+    │   │   │       │   │   │   └── update-variables.factory.ts
+    │   │   │       │   │   └── utils/
+    │   │   │       │   │       ├── check-fields.utils.ts
+    │   │   │       │   │       ├── check-order-by.utils.ts
+    │   │   │       │   │       ├── compute-depth.utils.ts
+    │   │   │       │   │       ├── get-field-type.utils.ts
+    │   │   │       │   │       ├── map-field-metadata-to-graphql-query.utils.ts
+    │   │   │       │   │       ├── __tests__/
+    │   │   │       │   │       │   ├── check-fields.utils.spec.ts
+    │   │   │       │   │       │   ├── compute-depth.utils.spec.ts
+    │   │   │       │   │       │   ├── get-field-type.utils.spec.ts
+    │   │   │       │   │       │   └── map-field-metadata-to-graphql-query.utils.spec.ts
+    │   │   │       │   │       ├── filter-utils/
+    │   │   │       │   │       │   ├── add-default-conjunction.utils.ts
+    │   │   │       │   │       │   ├── check-filter-enum-values.ts
+    │   │   │       │   │       │   ├── check-filter-query.utils.ts
+    │   │   │       │   │       │   ├── format-field-values.utils.ts
+    │   │   │       │   │       │   ├── parse-base-filter.utils.ts
+    │   │   │       │   │       │   ├── parse-filter-content.utils.ts
+    │   │   │       │   │       │   ├── parse-filter.utils.ts
+    │   │   │       │   │       │   └── __tests__/
+    │   │   │       │   │       │       ├── add-default-conjunction.utils.spec.ts
+    │   │   │       │   │       │       ├── check-filter-enum-values.spec.ts
+    │   │   │       │   │       │       ├── check-filter-query.utils.spec.ts
+    │   │   │       │   │       │       ├── format-field-values.utils.spec.ts
+    │   │   │       │   │       │       ├── parse-base-filter.utils.spec.ts
+    │   │   │       │   │       │       ├── parse-filter-content.utils.spec.ts
+    │   │   │       │   │       │       └── parse-filter.utils.spec.ts
+    │   │   │       │   │       └── path-parsers/
+    │   │   │       │   │           ├── parse-core-batch-path.utils.ts
+    │   │   │       │   │           ├── parse-core-path.utils.ts
+    │   │   │       │   │           └── __tests__/
+    │   │   │       │   │               ├── parse-core-batch-path.utils.spec.ts
+    │   │   │       │   │               └── parse-core-path.utils.spec.ts
+    │   │   │       │   └── types/
+    │   │   │       │       ├── field-value.type.ts
+    │   │   │       │       ├── query-variables.type.ts
+    │   │   │       │       └── query.type.ts
+    │   │   │       ├── errors/
+    │   │   │       │   └── RestApiException.ts
+    │   │   │       ├── input-factories/
+    │   │   │       │   ├── ending-before-input.factory.ts
+    │   │   │       │   ├── factories.ts
+    │   │   │       │   ├── filter-input.factory.ts
+    │   │   │       │   ├── limit-input.factory.ts
+    │   │   │       │   ├── order-by-input.factory.ts
+    │   │   │       │   ├── starting-after-input.factory.ts
+    │   │   │       │   └── __tests__/
+    │   │   │       │       ├── ending-before-input.factory.spec.ts
+    │   │   │       │       ├── filter-input.factory.spec.ts
+    │   │   │       │       ├── limit-input.factory.spec.ts
+    │   │   │       │       ├── order-by-input.factory.spec.ts
+    │   │   │       │       └── starting-before-input.factory.spec.ts
+    │   │   │       ├── metadata/
+    │   │   │       │   ├── rest-api-metadata.controller.ts
+    │   │   │       │   ├── rest-api-metadata.service.ts
+    │   │   │       │   ├── query-builder/
+    │   │   │       │   │   ├── metadata-query-builder.factory.ts
+    │   │   │       │   │   ├── metadata-query-builder.module.ts
+    │   │   │       │   │   ├── factories/
+    │   │   │       │   │   │   ├── create-metadata-query.factory.ts
+    │   │   │       │   │   │   ├── delete-metadata-query.factory.ts
+    │   │   │       │   │   │   ├── find-many-metadata-query.factory.ts
+    │   │   │       │   │   │   ├── find-one-metadata-query.factory.ts
+    │   │   │       │   │   │   ├── get-metadata-variables.factory.ts
+    │   │   │       │   │   │   ├── metadata-factories.ts
+    │   │   │       │   │   │   └── update-metadata-query.factory.ts
+    │   │   │       │   │   └── utils/
+    │   │   │       │   │       ├── fetch-metadata-fields.utils.ts
+    │   │   │       │   │       ├── parse-metadata-path.utils.ts
+    │   │   │       │   │       └── __tests__/
+    │   │   │       │   │           └── parse-metadata-path.utils.spec.ts
+    │   │   │       │   └── types/
+    │   │   │       │       ├── metadata-query-variables.type.ts
+    │   │   │       │       └── metadata-query.type.ts
+    │   │   │       └── utils/
+    │   │   │           ├── clean-graphql-response.utils.ts
+    │   │   │           └── __tests__/
+    │   │   │               └── clean-graphql-response.utils.spec.ts
+    │   │   ├── constants/
+    │   │   │   └── settings/
+    │   │   │       ├── index.ts
+    │   │   │       └── interfaces/
+    │   │   │           └── settings.interface.ts
+    │   │   ├── core-modules/
+    │   │   │   ├── core-engine.module.ts
+    │   │   │   ├── actor/
+    │   │   │   │   ├── actor.module.ts
+    │   │   │   │   ├── query-hooks/
+    │   │   │   │   │   ├── created-by.create-many.pre-query-hook.ts
+    │   │   │   │   │   └── created-by.create-one.pre-query-hook.ts
+    │   │   │   │   ├── services/
+    │   │   │   │   │   ├── created-by-from-auth-context.service.ts
+    │   │   │   │   │   └── __tests__/
+    │   │   │   │   │       └── created-by-from-auth-context.service.spec.ts
+    │   │   │   │   └── utils/
+    │   │   │   │       ├── build-created-by-from-api-key.util.ts
+    │   │   │   │       └── build-created-by-from-full-name-metadata.util.ts
+    │   │   │   ├── admin-panel/
+    │   │   │   │   ├── admin-panel-health.service.ts
+    │   │   │   │   ├── admin-panel.module.ts
+    │   │   │   │   ├── admin-panel.resolver.ts
+    │   │   │   │   ├── admin-panel.service.ts
+    │   │   │   │   ├── __tests__/
+    │   │   │   │   │   ├── admin-panel-health.service.spec.ts
+    │   │   │   │   │   └── admin-panel.service.spec.ts
+    │   │   │   │   ├── constants/
+    │   │   │   │   │   └── health-indicators.constants.ts
+    │   │   │   │   ├── dtos/
+    │   │   │   │   │   ├── admin-panel-health-indicator.input.ts
+    │   │   │   │   │   ├── admin-panel-health-service-data.dto.ts
+    │   │   │   │   │   ├── admin-panel-worker-queue-health.dto.ts
+    │   │   │   │   │   ├── environment-variable.dto.ts
+    │   │   │   │   │   ├── environment-variables-group.dto.ts
+    │   │   │   │   │   ├── environment-variables.output.ts
+    │   │   │   │   │   ├── impersonate.input.ts
+    │   │   │   │   │   ├── impersonate.output.ts
+    │   │   │   │   │   ├── queue-metrics-data-point.dto.ts
+    │   │   │   │   │   ├── queue-metrics-data.dto.ts
+    │   │   │   │   │   ├── queue-metrics-series.dto.ts
+    │   │   │   │   │   ├── system-health.dto.ts
+    │   │   │   │   │   ├── update-workspace-feature-flag.input.ts
+    │   │   │   │   │   ├── user-lookup.entity.ts
+    │   │   │   │   │   └── user-lookup.input.ts
+    │   │   │   │   └── enums/
+    │   │   │   │       ├── admin-panel-health-service-status.enum.ts
+    │   │   │   │       └── queue-metrics-time-range.enum.ts
+    │   │   │   ├── analytics/
+    │   │   │   │   ├── analytics.module.ts
+    │   │   │   │   ├── analytics.resolver.spec.ts
+    │   │   │   │   ├── analytics.resolver.ts
+    │   │   │   │   ├── analytics.service.spec.ts
+    │   │   │   │   ├── analytics.service.ts
+    │   │   │   │   ├── dtos/
+    │   │   │   │   │   └── create-analytics.input.ts
+    │   │   │   │   └── entities/
+    │   │   │   │       ├── analytics-tinybird-jwts.entity.ts
+    │   │   │   │       └── analytics.entity.ts
+    │   │   │   ├── app-token/
+    │   │   │   │   ├── app-token.auto-resolver-opts.ts
+    │   │   │   │   ├── app-token.entity.ts
+    │   │   │   │   ├── app-token.module.ts
+    │   │   │   │   ├── dtos/
+    │   │   │   │   │   └── create-app-token.input.ts
+    │   │   │   │   ├── hooks/
+    │   │   │   │   │   └── before-create-one-app-token.hook.ts
+    │   │   │   │   └── services/
+    │   │   │   │       ├── app-token.service.spec.ts
+    │   │   │   │       └── app-token.service.ts
+    │   │   │   ├── approved-access-domain/
+    │   │   │   │   ├── approved-access-domain.entity.ts
+    │   │   │   │   ├── approved-access-domain.exception.ts
+    │   │   │   │   ├── approved-access-domain.module.ts
+    │   │   │   │   ├── approved-access-domain.resolver.ts
+    │   │   │   │   ├── approved-access-domain.validate.ts
+    │   │   │   │   ├── dtos/
+    │   │   │   │   │   ├── approved-access-domain.dto.ts
+    │   │   │   │   │   ├── create-approved-access.domain.input.ts
+    │   │   │   │   │   ├── delete-approved-access-domain.input.ts
+    │   │   │   │   │   └── validate-approved-access-domain.input.ts
+    │   │   │   │   └── services/
+    │   │   │   │       ├── approved-access-domain.service.ts
+    │   │   │   │       └── approved-access-domain.spec.ts
+    │   │   │   ├── auth/
+    │   │   │   │   ├── auth.exception.ts
+    │   │   │   │   ├── auth.module.ts
+    │   │   │   │   ├── auth.resolver.spec.ts
+    │   │   │   │   ├── auth.resolver.ts
+    │   │   │   │   ├── auth.util.ts
+    │   │   │   │   ├── controllers/
+    │   │   │   │   │   ├── google-apis-auth.controller.ts
+    │   │   │   │   │   ├── google-auth.controller.ts
+    │   │   │   │   │   ├── microsoft-apis-auth.controller.ts
+    │   │   │   │   │   ├── microsoft-auth.controller.ts
+    │   │   │   │   │   └── sso-auth.controller.ts
+    │   │   │   │   ├── dto/
+    │   │   │   │   │   ├── api-key-token.input.ts
+    │   │   │   │   │   ├── app-token.input.ts
+    │   │   │   │   │   ├── authorize-app.entity.ts
+    │   │   │   │   │   ├── authorize-app.input.ts
+    │   │   │   │   │   ├── available-workspaces.output.ts
+    │   │   │   │   │   ├── email-password-reset-link.entity.ts
+    │   │   │   │   │   ├── email-password-reset-link.input.ts
+    │   │   │   │   │   ├── exchange-auth-code.entity.ts
+    │   │   │   │   │   ├── exchange-auth-code.input.ts
+    │   │   │   │   │   ├── get-auth-tokens-from-login-token.input.ts
+    │   │   │   │   │   ├── get-authorization-url-for-sso.input.ts
+    │   │   │   │   │   ├── get-authorization-url-for-sso.output.ts
+    │   │   │   │   │   ├── get-login-token-from-credentials.input.ts
+    │   │   │   │   │   ├── get-login-token-from-email-verification-token.input.ts
+    │   │   │   │   │   ├── invalidate-password.entity.ts
+    │   │   │   │   │   ├── login-token.entity.ts
+    │   │   │   │   │   ├── sign-up.input.ts
+    │   │   │   │   │   ├── sign-up.output.ts
+    │   │   │   │   │   ├── token.entity.ts
+    │   │   │   │   │   ├── transient-token.entity.ts
+    │   │   │   │   │   ├── update-password-via-reset-token.input.ts
+    │   │   │   │   │   ├── update-password.entity.ts
+    │   │   │   │   │   ├── user-exists.entity.ts
+    │   │   │   │   │   ├── user-exists.input.ts
+    │   │   │   │   │   ├── validate-password-reset-token.entity.ts
+    │   │   │   │   │   ├── validate-password-reset-token.input.ts
+    │   │   │   │   │   ├── workspace-invite-hash-valid.entity.ts
+    │   │   │   │   │   ├── workspace-invite-hash.input.ts
+    │   │   │   │   │   └── workspace-invite-token.input.ts
+    │   │   │   │   ├── filters/
+    │   │   │   │   │   ├── auth-graphql-api-exception.filter.ts
+    │   │   │   │   │   ├── auth-oauth-exception.filter.ts
+    │   │   │   │   │   └── auth-rest-api-exception.filter.ts
+    │   │   │   │   ├── guards/
+    │   │   │   │   │   ├── enterprise-features-enabled.guard.ts
+    │   │   │   │   │   ├── google-apis-oauth-exchange-code-for-token.guard.ts
+    │   │   │   │   │   ├── google-apis-oauth-request-code.guard.ts
+    │   │   │   │   │   ├── google-oauth.guard.ts
+    │   │   │   │   │   ├── google-provider-enabled.guard.ts
+    │   │   │   │   │   ├── microsoft-apis-oauth-exchange-code-for-token.guard.ts
+    │   │   │   │   │   ├── microsoft-apis-oauth-request-code.guard.ts
+    │   │   │   │   │   ├── microsoft-oauth.guard.ts
+    │   │   │   │   │   ├── microsoft-provider-enabled.guard.ts
+    │   │   │   │   │   ├── oidc-auth.guard.ts
+    │   │   │   │   │   ├── oidc-auth.spec.ts
+    │   │   │   │   │   └── saml-auth.guard.ts
+    │   │   │   │   ├── services/
+    │   │   │   │   │   ├── api-key.service.spec.ts
+    │   │   │   │   │   ├── api-key.service.ts
+    │   │   │   │   │   ├── auth-sso.service.ts
+    │   │   │   │   │   ├── auth-sso.spec.ts
+    │   │   │   │   │   ├── auth.service.spec.ts
+    │   │   │   │   │   ├── auth.service.ts
+    │   │   │   │   │   ├── google-apis.service.ts
+    │   │   │   │   │   ├── microsoft-apis.service.ts
+    │   │   │   │   │   ├── oauth.service.ts
+    │   │   │   │   │   ├── reset-password.service.spec.ts
+    │   │   │   │   │   ├── reset-password.service.ts
+    │   │   │   │   │   ├── sign-in-up.service.spec.ts
+    │   │   │   │   │   └── sign-in-up.service.ts
+    │   │   │   │   ├── strategies/
+    │   │   │   │   │   ├── google-apis-oauth-common.auth.strategy.ts
+    │   │   │   │   │   ├── google-apis-oauth-exchange-code-for-token.auth.strategy.ts
+    │   │   │   │   │   ├── google-apis-oauth-request-code.auth.strategy.ts
+    │   │   │   │   │   ├── google.auth.strategy.ts
+    │   │   │   │   │   ├── jwt.auth.strategy.spec.ts
+    │   │   │   │   │   ├── jwt.auth.strategy.ts
+    │   │   │   │   │   ├── microsoft-apis-oauth-common.auth.strategy.ts
+    │   │   │   │   │   ├── microsoft-apis-oauth-exchange-code-for-token.auth.strategy.ts
+    │   │   │   │   │   ├── microsoft-apis-oauth-request-code.auth.strategy.ts
+    │   │   │   │   │   ├── microsoft.auth.strategy.ts
+    │   │   │   │   │   ├── oidc.auth.strategy.ts
+    │   │   │   │   │   └── saml.auth.strategy.ts
+    │   │   │   │   ├── token/
+    │   │   │   │   │   ├── token.module.ts
+    │   │   │   │   │   └── services/
+    │   │   │   │   │       ├── access-token.service.spec.ts
+    │   │   │   │   │       ├── access-token.service.ts
+    │   │   │   │   │       ├── email-verification-token.service.spec.ts
+    │   │   │   │   │       ├── email-verification-token.service.ts
+    │   │   │   │   │       ├── login-token.service.spec.ts
+    │   │   │   │   │       ├── login-token.service.ts
+    │   │   │   │   │       ├── refresh-token.service.spec.ts
+    │   │   │   │   │       ├── refresh-token.service.ts
+    │   │   │   │   │       ├── renew-token.service.spec.ts
+    │   │   │   │   │       ├── renew-token.service.ts
+    │   │   │   │   │       ├── transient-token.service.spec.ts
+    │   │   │   │   │       └── transient-token.service.ts
+    │   │   │   │   ├── types/
+    │   │   │   │   │   ├── auth-context.type.ts
+    │   │   │   │   │   ├── google-api-request.type.ts
+    │   │   │   │   │   ├── microsoft-api-request.type.ts
+    │   │   │   │   │   └── signInUp.type.ts
+    │   │   │   │   └── utils/
+    │   │   │   │       ├── get-google-apis-oauth-scopes.ts
+    │   │   │   │       ├── get-microsoft-apis-oauth-scopes.ts
+    │   │   │   │       ├── google-apis-set-request-extra-params.util.ts
+    │   │   │   │       └── __tests__/
+    │   │   │   │           └── google-apis-set-request-extra-params.util.spec.ts
+    │   │   │   ├── billing/
+    │   │   │   │   ├── billing.controller.ts
+    │   │   │   │   ├── billing.exception.ts
+    │   │   │   │   ├── billing.module.ts
+    │   │   │   │   ├── billing.resolver.ts
+    │   │   │   │   ├── commands/
+    │   │   │   │   │   ├── billing-sync-customer-data.command.ts
+    │   │   │   │   │   └── billing-sync-plans-data.command.ts
+    │   │   │   │   ├── constants/
+    │   │   │   │   │   └── billing-feature-used.constant.ts
+    │   │   │   │   ├── dtos/
+    │   │   │   │   │   ├── billing-price-licensed.dto.ts
+    │   │   │   │   │   ├── billing-price-metered.dto.ts
+    │   │   │   │   │   ├── billing-price-tier.dto.ts
+    │   │   │   │   │   ├── billing-price-union.dto.ts
+    │   │   │   │   │   ├── billing-product.dto.ts
+    │   │   │   │   │   ├── billing-trial-period.dto.ts
+    │   │   │   │   │   ├── inputs/
+    │   │   │   │   │   │   ├── billing-checkout-session.input.ts
+    │   │   │   │   │   │   ├── billing-product.input.ts
+    │   │   │   │   │   │   └── billing-session.input.ts
+    │   │   │   │   │   └── outputs/
+    │   │   │   │   │       ├── billing-plan.output.ts
+    │   │   │   │   │       ├── billing-session.output.ts
+    │   │   │   │   │       └── billing-update.output.ts
+    │   │   │   │   ├── entities/
+    │   │   │   │   │   ├── billing-customer.entity.ts
+    │   │   │   │   │   ├── billing-entitlement.entity.ts
+    │   │   │   │   │   ├── billing-meter.entity.ts
+    │   │   │   │   │   ├── billing-price.entity.ts
+    │   │   │   │   │   ├── billing-product.entity.ts
+    │   │   │   │   │   ├── billing-subscription-item.entity.ts
+    │   │   │   │   │   └── billing-subscription.entity.ts
+    │   │   │   │   ├── enums/
+    │   │   │   │   │   ├── billing-available-product.enum.ts
+    │   │   │   │   │   ├── billing-entitlement-key.enum.ts
+    │   │   │   │   │   ├── billing-meter-event-names.ts
+    │   │   │   │   │   ├── billing-meter-event-time-window.enum.ts
+    │   │   │   │   │   ├── billing-meter-status.enum.ts
+    │   │   │   │   │   ├── billing-plan-key.enum.ts
+    │   │   │   │   │   ├── billing-price-billing-scheme.enum.ts
+    │   │   │   │   │   ├── billing-price-tax-behavior.enum.ts
+    │   │   │   │   │   ├── billing-price-tiers-mode.enum.ts
+    │   │   │   │   │   ├── billing-price-type.enum.ts
+    │   │   │   │   │   ├── billing-subscription-collection-method.enum.ts
+    │   │   │   │   │   ├── billing-subscription-interval.enum.ts
+    │   │   │   │   │   ├── billing-subscription-status.enum.ts
+    │   │   │   │   │   ├── billing-usage-type.enum.ts
+    │   │   │   │   │   └── billing-webhook-events.enum.ts
+    │   │   │   │   ├── filters/
+    │   │   │   │   │   └── billing-api-exception.filter.ts
+    │   │   │   │   ├── jobs/
+    │   │   │   │   │   └── update-subscription-quantity.job.ts
+    │   │   │   │   ├── listeners/
+    │   │   │   │   │   ├── billing-feature-used.listener.ts
+    │   │   │   │   │   └── billing-workspace-member.listener.ts
+    │   │   │   │   ├── services/
+    │   │   │   │   │   ├── billing-plan.service.ts
+    │   │   │   │   │   ├── billing-portal.workspace-service.ts
+    │   │   │   │   │   ├── billing-product.service.ts
+    │   │   │   │   │   ├── billing-subscription.service.ts
+    │   │   │   │   │   ├── billing-usage.service.ts
+    │   │   │   │   │   └── billing.service.ts
+    │   │   │   │   ├── stripe/
+    │   │   │   │   │   ├── stripe.module.ts
+    │   │   │   │   │   ├── services/
+    │   │   │   │   │   │   ├── stripe-billing-meter-event.service.ts
+    │   │   │   │   │   │   ├── stripe-billing-meter.service.ts
+    │   │   │   │   │   │   ├── stripe-billing-portal.service.ts
+    │   │   │   │   │   │   ├── stripe-checkout.service.ts
+    │   │   │   │   │   │   ├── stripe-customer.service.ts
+    │   │   │   │   │   │   ├── stripe-price.service.ts
+    │   │   │   │   │   │   ├── stripe-product.service.ts
+    │   │   │   │   │   │   ├── stripe-subscription-item.service.ts
+    │   │   │   │   │   │   ├── stripe-subscription.service.ts
+    │   │   │   │   │   │   └── stripe-webhook.service.ts
+    │   │   │   │   │   └── stripe-sdk/
+    │   │   │   │   │       ├── stripe-sdk.module.ts
+    │   │   │   │   │       ├── mocks/
+    │   │   │   │   │       │   ├── stripe-sdk-mock.service.ts
+    │   │   │   │   │       │   └── stripe-sdk.mock.ts
+    │   │   │   │   │       └── services/
+    │   │   │   │   │           └── stripe-sdk.service.ts
+    │   │   │   │   ├── types/
+    │   │   │   │   │   ├── billing-get-plan-result.type.ts
+    │   │   │   │   │   ├── billing-get-prices-per-plan-result.type.ts
+    │   │   │   │   │   ├── billing-portal-checkout-session-parameters.type.ts
+    │   │   │   │   │   ├── billing-product-metadata.type.ts
+    │   │   │   │   │   └── billing-usage-event.type.ts
+    │   │   │   │   ├── utils/
+    │   │   │   │   │   ├── format-database-product-to-graphql-dto.util.ts
+    │   │   │   │   │   ├── get-plan-key-from-subscription.util.ts
+    │   │   │   │   │   ├── is-stripe-valid-product-metadata.util.ts
+    │   │   │   │   │   ├── is-subscription-incomplete-onboarding-status.util.ts
+    │   │   │   │   │   ├── transform-stripe-meter-to-database-meter.util.ts
+    │   │   │   │   │   ├── transform-stripe-price-to-database-price.util.ts
+    │   │   │   │   │   ├── transform-stripe-product-to-database-product.util.ts
+    │   │   │   │   │   └── __tests__/
+    │   │   │   │   │       ├── format-database-product-to-graphql-dto.util.spec.ts
+    │   │   │   │   │       ├── is-stripe-valid-product-metadata.util.spec.ts
+    │   │   │   │   │       ├── transform-stripe-meter-to-database-meter.util.spec.ts
+    │   │   │   │   │       ├── transform-stripe-price-to-database-price.util.spec.ts
+    │   │   │   │   │       └── transform-stripe-product-to-database-product.util.spec.ts
+    │   │   │   │   └── webhooks/
+    │   │   │   │       ├── services/
+    │   │   │   │       │   ├── billing-webhook-entitlement.service.ts
+    │   │   │   │       │   ├── billing-webhook-price.service.ts
+    │   │   │   │       │   ├── billing-webhook-product.service.ts
+    │   │   │   │       │   └── billing-webhook-subscription.service.ts
+    │   │   │   │       └── utils/
+    │   │   │   │           ├── transform-stripe-entitlement-updated-event-to-database-entitlement.util.ts
+    │   │   │   │           ├── transform-stripe-price-event-to-database-price.util.ts
+    │   │   │   │           ├── transform-stripe-product-event-to-database-product.util.ts
+    │   │   │   │           ├── transform-stripe-subscription-event-to-database-customer.util.ts
+    │   │   │   │           ├── transform-stripe-subscription-event-to-database-subscription-item.util.ts
+    │   │   │   │           ├── transform-stripe-subscription-event-to-database-subscription.util.ts
+    │   │   │   │           └── __tests__/
+    │   │   │   │               ├── transform-stripe-entitlement-updated-event-to-database-entitlement.util.spec.ts
+    │   │   │   │               ├── transform-stripe-price-event-to-database-price.util.spec.ts
+    │   │   │   │               ├── transform-stripe-product-event-to-database-product.util.spec.ts
+    │   │   │   │               ├── transform-stripe-subscription-event-to-database-customer.util.spec.ts
+    │   │   │   │               └── transform-stripe-subscription-event-to-database-subscription.util.spec.ts
+    │   │   │   ├── cache-storage/
+    │   │   │   │   ├── cache-storage.module-factory.ts
+    │   │   │   │   ├── cache-storage.module.ts
+    │   │   │   │   ├── commands/
+    │   │   │   │   │   └── flush-cache.command.ts
+    │   │   │   │   ├── decorators/
+    │   │   │   │   │   └── cache-storage.decorator.ts
+    │   │   │   │   ├── services/
+    │   │   │   │   │   └── cache-storage.service.ts
+    │   │   │   │   └── types/
+    │   │   │   │       ├── cache-storage-namespace.enum.ts
+    │   │   │   │       └── cache-storage-type.enum.ts
+    │   │   │   ├── calendar/
+    │   │   │   │   ├── timeline-calendar-event.module.ts
+    │   │   │   │   ├── timeline-calendar-event.resolver.ts
+    │   │   │   │   ├── timeline-calendar-event.service.ts
+    │   │   │   │   ├── constants/
+    │   │   │   │   │   └── calendar.constants.ts
+    │   │   │   │   └── dtos/
+    │   │   │   │       ├── timeline-calendar-event-participant.dto.ts
+    │   │   │   │       ├── timeline-calendar-event.dto.ts
+    │   │   │   │       └── timeline-calendar-events-with-total.dto.ts
+    │   │   │   ├── captcha/
+    │   │   │   │   ├── captcha.guard.ts
+    │   │   │   │   ├── captcha.module-factory.ts
+    │   │   │   │   ├── captcha.module.ts
+    │   │   │   │   ├── captcha.service.ts
+    │   │   │   │   ├── constants/
+    │   │   │   │   │   └── captcha-driver.constants.ts
+    │   │   │   │   ├── drivers/
+    │   │   │   │   │   ├── google-recaptcha.driver.ts
+    │   │   │   │   │   ├── turnstile.driver.ts
+    │   │   │   │   │   └── interfaces/
+    │   │   │   │   │       ├── captcha-driver.interface.ts
+    │   │   │   │   │       └── captcha-server-response.ts
+    │   │   │   │   └── interfaces/
+    │   │   │   │       ├── captcha.interface.ts
+    │   │   │   │       └── index.ts
+    │   │   │   ├── client-config/
+    │   │   │   │   ├── client-config.entity.ts
+    │   │   │   │   ├── client-config.module.ts
+    │   │   │   │   ├── client-config.resolver.spec.ts
+    │   │   │   │   └── client-config.resolver.ts
+    │   │   │   ├── cron/
+    │   │   │   │   └── sentry-cron-monitor.decorator.ts
+    │   │   │   ├── domain-manager/
+    │   │   │   │   ├── domain-manager.exception.ts
+    │   │   │   │   ├── domain-manager.module.ts
+    │   │   │   │   ├── domain-manager.type.ts
+    │   │   │   │   ├── controllers/
+    │   │   │   │   │   ├── cloudflare.controller.ts
+    │   │   │   │   │   └── cloudflare.spec.ts
+    │   │   │   │   ├── dtos/
+    │   │   │   │   │   └── custom-domain-valid-records.ts
+    │   │   │   │   ├── guards/
+    │   │   │   │   │   ├── cloudflare-secret.guard.ts
+    │   │   │   │   │   └── cloudflare-secret.spec.ts
+    │   │   │   │   ├── services/
+    │   │   │   │   │   ├── custom-domain.service.spec.ts
+    │   │   │   │   │   ├── custom-domain.service.ts
+    │   │   │   │   │   ├── domain-manager.service.spec.ts
+    │   │   │   │   │   └── domain-manager.service.ts
+    │   │   │   │   ├── utils/
+    │   │   │   │   │   ├── generate-random-subdomain.ts
+    │   │   │   │   │   ├── get-subdomain-from-email.ts
+    │   │   │   │   │   ├── get-subdomain-name-from-display-name.ts
+    │   │   │   │   │   └── __test__/
+    │   │   │   │   │       ├── generate-random-subdomain.spec.ts
+    │   │   │   │   │       ├── get-subdomain-from-email.spec.ts
+    │   │   │   │   │       └── get-subdomain-name-from-display-name.spec.ts
+    │   │   │   │   └── validator/
+    │   │   │   │       └── cloudflare.validate.ts
+    │   │   │   ├── email/
+    │   │   │   │   ├── email-sender.job.ts
+    │   │   │   │   ├── email-sender.service.ts
+    │   │   │   │   ├── email.constants.ts
+    │   │   │   │   ├── email.module-factory.ts
+    │   │   │   │   ├── email.module.ts
+    │   │   │   │   ├── email.service.ts
+    │   │   │   │   ├── drivers/
+    │   │   │   │   │   ├── logger.driver.ts
+    │   │   │   │   │   ├── smtp.driver.ts
+    │   │   │   │   │   └── interfaces/
+    │   │   │   │   │       └── email-driver.interface.ts
+    │   │   │   │   └── interfaces/
+    │   │   │   │       └── email.interface.ts
+    │   │   │   ├── email-verification/
+    │   │   │   │   ├── email-verification.exception.ts
+    │   │   │   │   ├── email-verification.module.ts
+    │   │   │   │   ├── email-verification.resolver.ts
+    │   │   │   │   ├── dtos/
+    │   │   │   │   │   ├── resend-email-verification-token.input.ts
+    │   │   │   │   │   └── resend-email-verification-token.output.ts
+    │   │   │   │   └── services/
+    │   │   │   │       └── email-verification.service.ts
+    │   │   │   ├── environment/
+    │   │   │   │   ├── environment-variables.ts
+    │   │   │   │   ├── environment.module-definition.ts
+    │   │   │   │   ├── environment.module.ts
+    │   │   │   │   ├── environment.service.spec.ts
+    │   │   │   │   ├── environment.service.ts
+    │   │   │   │   ├── constants/
+    │   │   │   │   │   ├── environment-variables-group-metadata.ts
+    │   │   │   │   │   ├── environment-variables-masking-config.ts
+    │   │   │   │   │   ├── environment-variables-metadata-decorator-key.ts
+    │   │   │   │   │   ├── environment-variables-metadata-decorator-names-key.ts
+    │   │   │   │   │   └── __tests__/
+    │   │   │   │   │       └── environment-variables-group-metadata.spec.ts
+    │   │   │   │   ├── decorators/
+    │   │   │   │   │   ├── assert-or-warn.decorator.ts
+    │   │   │   │   │   ├── cast-to-boolean.decorator.ts
+    │   │   │   │   │   ├── cast-to-log-level-array.decorator.ts
+    │   │   │   │   │   ├── cast-to-positive-number.decorator.ts
+    │   │   │   │   │   ├── cast-to-string-array.decorator.ts
+    │   │   │   │   │   ├── environment-variables-metadata.decorator.ts
+    │   │   │   │   │   ├── is-aws-region.decorator.ts
+    │   │   │   │   │   ├── is-duration.decorator.ts
+    │   │   │   │   │   ├── is-strictly-lower-than.decorator.ts
+    │   │   │   │   │   └── __tests__/
+    │   │   │   │   │       ├── assert-or-warn.decorator.spec.ts
+    │   │   │   │   │       ├── cast-to-log-level-array.decorator.spec.ts
+    │   │   │   │   │       └── cast-to-positive-number.decorator.spec.ts
+    │   │   │   │   ├── enums/
+    │   │   │   │   │   ├── environment-variables-group.enum.ts
+    │   │   │   │   │   └── environment-variables-masking-strategies.enum.ts
+    │   │   │   │   ├── interfaces/
+    │   │   │   │   │   ├── aws-region.interface.ts
+    │   │   │   │   │   ├── node-environment.interface.ts
+    │   │   │   │   │   └── support.interface.ts
+    │   │   │   │   └── utils/
+    │   │   │   │       ├── environment-variable-mask-sensitive-data.util.ts
+    │   │   │   │       └── __tests__/
+    │   │   │   │           └── environment-variable-mask-sensitive-data.util.spec.ts
+    │   │   │   ├── event-emitter/
+    │   │   │   │   ├── types/
+    │   │   │   │   │   ├── object-record-create.event.ts
+    │   │   │   │   │   ├── object-record-delete.event.ts
+    │   │   │   │   │   ├── object-record-destroy.event.ts
+    │   │   │   │   │   ├── object-record-diff.ts
+    │   │   │   │   │   ├── object-record-event.event.ts
+    │   │   │   │   │   ├── object-record-non-destructive-event.ts
+    │   │   │   │   │   ├── object-record-restore.event.ts
+    │   │   │   │   │   ├── object-record-update.event.ts
+    │   │   │   │   │   └── object-record.base.event.ts
+    │   │   │   │   └── utils/
+    │   │   │   │       ├── object-record-changed-properties.util.ts
+    │   │   │   │       ├── object-record-changed-values.ts
+    │   │   │   │       ├── object-record-diff-merge.ts
+    │   │   │   │       └── __tests__/
+    │   │   │   │           └── object-record-changed-values.spec.ts
+    │   │   │   ├── exception-handler/
+    │   │   │   │   ├── exception-handler.constants.ts
+    │   │   │   │   ├── exception-handler.module-definition.ts
+    │   │   │   │   ├── exception-handler.module-factory.ts
+    │   │   │   │   ├── exception-handler.module.ts
+    │   │   │   │   ├── exception-handler.service.ts
+    │   │   │   │   ├── http-exception-handler.service.ts
+    │   │   │   │   ├── __tests__/
+    │   │   │   │   │   └── exception-handler.service.spec.ts
+    │   │   │   │   ├── drivers/
+    │   │   │   │   │   ├── console.driver.ts
+    │   │   │   │   │   └── sentry.driver.ts
+    │   │   │   │   ├── hooks/
+    │   │   │   │   │   └── use-sentry-tracing.ts
+    │   │   │   │   └── interfaces/
+    │   │   │   │       ├── exception-handler-driver.interface.ts
+    │   │   │   │       ├── exception-handler-options.interface.ts
+    │   │   │   │       ├── exception-handler-user.interface.ts
+    │   │   │   │       ├── exception-handler-workspace.interface.ts
+    │   │   │   │       ├── exception-handler.interface.ts
+    │   │   │   │       └── index.ts
+    │   │   │   ├── feature-flag/
+    │   │   │   │   ├── feature-flag.entity.ts
+    │   │   │   │   ├── feature-flag.exception.ts
+    │   │   │   │   ├── feature-flag.module.ts
+    │   │   │   │   ├── constants/
+    │   │   │   │   │   └── public-feature-flag.const.ts
+    │   │   │   │   ├── enums/
+    │   │   │   │   │   └── feature-flag-key.enum.ts
+    │   │   │   │   ├── interfaces/
+    │   │   │   │   │   └── feature-flag-map.interface.ts
+    │   │   │   │   ├── services/
+    │   │   │   │   │   └── feature-flag.service.ts
+    │   │   │   │   └── validates/
+    │   │   │   │       ├── feature-flag.validate.spec.ts
+    │   │   │   │       ├── feature-flag.validate.ts
+    │   │   │   │       ├── is-public-feature-flag.validate.spec.ts
+    │   │   │   │       └── is-public-feature-flag.validate.ts
+    │   │   │   ├── file/
+    │   │   │   │   ├── file.exception.ts
+    │   │   │   │   ├── file.module.ts
+    │   │   │   │   ├── file.utils.spec.ts
+    │   │   │   │   ├── file.utils.ts
+    │   │   │   │   ├── controllers/
+    │   │   │   │   │   ├── file.controller.spec.ts
+    │   │   │   │   │   └── file.controller.ts
+    │   │   │   │   ├── file-upload/
+    │   │   │   │   │   ├── file-upload.module.ts
+    │   │   │   │   │   ├── resolvers/
+    │   │   │   │   │   │   ├── file-upload.resolver.spec.ts
+    │   │   │   │   │   │   └── file-upload.resolver.ts
+    │   │   │   │   │   └── services/
+    │   │   │   │   │       └── file-upload.service.ts
+    │   │   │   │   ├── filters/
+    │   │   │   │   │   └── file-api-exception.filter.ts
+    │   │   │   │   ├── guards/
+    │   │   │   │   │   └── file-path-guard.ts
+    │   │   │   │   ├── interfaces/
+    │   │   │   │   │   └── file-folder.interface.ts
+    │   │   │   │   ├── jobs/
+    │   │   │   │   │   ├── file-deletion.job.ts
+    │   │   │   │   │   └── file-workspace-folder-deletion.job.ts
+    │   │   │   │   ├── listeners/
+    │   │   │   │   │   ├── file-attachment.listener.ts
+    │   │   │   │   │   └── file-workspace-member.listener.ts
+    │   │   │   │   └── services/
+    │   │   │   │       ├── file.service.spec.ts
+    │   │   │   │       └── file.service.ts
+    │   │   │   ├── file-storage/
+    │   │   │   │   ├── file-storage.constants.ts
+    │   │   │   │   ├── file-storage.module-definition.ts
+    │   │   │   │   ├── file-storage.module-factory.ts
+    │   │   │   │   ├── file-storage.module.ts
+    │   │   │   │   ├── file-storage.service.ts
+    │   │   │   │   ├── __tests__/
+    │   │   │   │   │   └── file-storage.service.spec.ts
+    │   │   │   │   ├── drivers/
+    │   │   │   │   │   ├── local.driver.ts
+    │   │   │   │   │   ├── s3.driver.ts
+    │   │   │   │   │   └── interfaces/
+    │   │   │   │   │       └── storage-driver.interface.ts
+    │   │   │   │   ├── interfaces/
+    │   │   │   │   │   ├── file-storage-exception.ts
+    │   │   │   │   │   ├── file-storage.interface.ts
+    │   │   │   │   │   └── index.ts
+    │   │   │   │   └── utils/
+    │   │   │   │       └── read-file-content.ts
+    │   │   │   ├── global-search/
+    │   │   │   │   ├── global-search.module.ts
+    │   │   │   │   ├── global-search.resolver.ts
+    │   │   │   │   ├── __mocks__/
+    │   │   │   │   │   └── mockObjectMetadataItemsWithFieldMaps.ts
+    │   │   │   │   ├── __tests__/
+    │   │   │   │   │   └── global-search.service.spec.ts
+    │   │   │   │   ├── constants/
+    │   │   │   │   │   ├── results-limit-by-object-without-search-terms.ts
+    │   │   │   │   │   └── standard-objects-by-priority-rank.ts
+    │   │   │   │   ├── dtos/
+    │   │   │   │   │   ├── global-search-args.ts
+    │   │   │   │   │   ├── global-search-record-dto.ts
+    │   │   │   │   │   └── object-record-filter-input.ts
+    │   │   │   │   ├── exceptions/
+    │   │   │   │   │   └── global-search.exception.ts
+    │   │   │   │   ├── filters/
+    │   │   │   │   │   └── global-search-api-exception.filter.ts
+    │   │   │   │   ├── services/
+    │   │   │   │   │   └── global-search.service.ts
+    │   │   │   │   ├── types/
+    │   │   │   │   │   └── records-with-object-metadata-item.ts
+    │   │   │   │   └── utils/
+    │   │   │   │       ├── format-search-terms.ts
+    │   │   │   │       └── __tests__/
+    │   │   │   │           └── format-search-terms.spec.ts
+    │   │   │   ├── graphql/
+    │   │   │   │   ├── engine-graphql.module.ts
+    │   │   │   │   ├── hooks/
+    │   │   │   │   │   └── use-graphql-error-handler.hook.ts
+    │   │   │   │   └── utils/
+    │   │   │   │       ├── generate-graphql-error-from-error.util.ts
+    │   │   │   │       ├── graphql-errors.util.ts
+    │   │   │   │       └── should-capture-exception.util.ts
+    │   │   │   ├── guard-redirect/
+    │   │   │   │   ├── guard-redirect.module.ts
+    │   │   │   │   └── services/
+    │   │   │   │       └── guard-redirect.service.ts
+    │   │   │   ├── health/
+    │   │   │   │   ├── health-cache.service.ts
+    │   │   │   │   ├── health.module.ts
+    │   │   │   │   ├── constants/
+    │   │   │   │   │   ├── health-error-messages.constants.ts
+    │   │   │   │   │   ├── health-indicators-timeout.conts.ts
+    │   │   │   │   │   └── metrics-failure-rate-threshold.const.ts
+    │   │   │   │   ├── controllers/
+    │   │   │   │   │   ├── health.controller.ts
+    │   │   │   │   │   ├── metrics.controller.ts
+    │   │   │   │   │   └── __tests__/
+    │   │   │   │   │       ├── health.controller.spec.ts
+    │   │   │   │   │       └── metrics.controller.spec.ts
+    │   │   │   │   ├── enums/
+    │   │   │   │   │   └── health-indicator-id.enum.ts
+    │   │   │   │   ├── indicators/
+    │   │   │   │   │   ├── app.health.ts
+    │   │   │   │   │   ├── connected-account.health.ts
+    │   │   │   │   │   ├── database.health.ts
+    │   │   │   │   │   ├── redis.health.ts
+    │   │   │   │   │   ├── worker.health.ts
+    │   │   │   │   │   └── __tests__/
+    │   │   │   │   │       ├── app.health.spec.ts
+    │   │   │   │   │       ├── connected-account.health.spec.ts
+    │   │   │   │   │       ├── database.health.spec.ts
+    │   │   │   │   │       ├── redis.health.spec.ts
+    │   │   │   │   │       └── worker.health.spec.ts
+    │   │   │   │   ├── types/
+    │   │   │   │   │   ├── account-sync-metrics.types.ts
+    │   │   │   │   │   ├── health-counter-cache-keys.type.ts
+    │   │   │   │   │   ├── worker-queue-health.type.ts
+    │   │   │   │   │   └── worker-queue-metrics.type.ts
+    │   │   │   │   └── utils/
+    │   │   │   │       ├── health-check-timeout.util.ts
+    │   │   │   │       └── health-state-manager.util.ts
+    │   │   │   ├── i18n/
+    │   │   │   │   ├── i18n.middleware.ts
+    │   │   │   │   ├── i18n.module.ts
+    │   │   │   │   ├── i18n.service.ts
+    │   │   │   │   ├── locales/
+    │   │   │   │   │   ├── aa-ER.po
+    │   │   │   │   │   ├── af-ZA.po
+    │   │   │   │   │   ├── ar-SA.po
+    │   │   │   │   │   ├── ca-ES.po
+    │   │   │   │   │   ├── cs-CZ.po
+    │   │   │   │   │   ├── da-DK.po
+    │   │   │   │   │   ├── de-DE.po
+    │   │   │   │   │   ├── el-GR.po
+    │   │   │   │   │   ├── en.po
+    │   │   │   │   │   ├── es-ES.po
+    │   │   │   │   │   ├── fi-FI.po
+    │   │   │   │   │   ├── fr-FR.po
+    │   │   │   │   │   ├── he-IL.po
+    │   │   │   │   │   ├── hu-HU.po
+    │   │   │   │   │   ├── it-IT.po
+    │   │   │   │   │   ├── ja-JP.po
+    │   │   │   │   │   ├── ko-KR.po
+    │   │   │   │   │   ├── nl-NL.po
+    │   │   │   │   │   ├── no-NO.po
+    │   │   │   │   │   ├── pl-PL.po
+    │   │   │   │   │   ├── pseudo-en.po
+    │   │   │   │   │   ├── pt-BR.po
+    │   │   │   │   │   ├── pt-PT.po
+    │   │   │   │   │   ├── ro-RO.po
+    │   │   │   │   │   ├── ru-RU.po
+    │   │   │   │   │   ├── sr-Cyrl.po
+    │   │   │   │   │   ├── sv-SE.po
+    │   │   │   │   │   ├── tr-TR.po
+    │   │   │   │   │   ├── uk-UA.po
+    │   │   │   │   │   ├── vi-VN.po
+    │   │   │   │   │   ├── zh-CN.po
+    │   │   │   │   │   ├── zh-TW.po
+    │   │   │   │   │   └── generated/
+    │   │   │   │   │       ├── af-ZA.ts
+    │   │   │   │   │       ├── ar-SA.ts
+    │   │   │   │   │       ├── ca-ES.ts
+    │   │   │   │   │       ├── cs-CZ.ts
+    │   │   │   │   │       ├── da-DK.ts
+    │   │   │   │   │       ├── de-DE.ts
+    │   │   │   │   │       ├── el-GR.ts
+    │   │   │   │   │       ├── en.ts
+    │   │   │   │   │       ├── es-ES.ts
+    │   │   │   │   │       ├── fi-FI.ts
+    │   │   │   │   │       ├── fr-FR.ts
+    │   │   │   │   │       ├── he-IL.ts
+    │   │   │   │   │       ├── hu-HU.ts
+    │   │   │   │   │       ├── it-IT.ts
+    │   │   │   │   │       ├── ja-JP.ts
+    │   │   │   │   │       ├── ko-KR.ts
+    │   │   │   │   │       ├── nl-NL.ts
+    │   │   │   │   │       ├── no-NO.ts
+    │   │   │   │   │       ├── pl-PL.ts
+    │   │   │   │   │       ├── pseudo-en.ts
+    │   │   │   │   │       ├── pt-BR.ts
+    │   │   │   │   │       ├── pt-PT.ts
+    │   │   │   │   │       ├── ro-RO.ts
+    │   │   │   │   │       ├── ru-RU.ts
+    │   │   │   │   │       ├── sr-Cyrl.ts
+    │   │   │   │   │       ├── sv-SE.ts
+    │   │   │   │   │       ├── tr-TR.ts
+    │   │   │   │   │       ├── uk-UA.ts
+    │   │   │   │   │       ├── vi-VN.ts
+    │   │   │   │   │       ├── zh-CN.ts
+    │   │   │   │   │       └── zh-TW.ts
+    │   │   │   │   ├── types/
+    │   │   │   │   │   └── i18n-context.type.ts
+    │   │   │   │   └── utils/
+    │   │   │   │       └── generateMessageId.ts
+    │   │   │   ├── jwt/
+    │   │   │   │   ├── jwt.module.ts
+    │   │   │   │   └── services/
+    │   │   │   │       └── jwt-wrapper.service.ts
+    │   │   │   ├── key-value-pair/
+    │   │   │   │   ├── key-value-pair.entity.ts
+    │   │   │   │   ├── key-value-pair.module.ts
+    │   │   │   │   └── key-value-pair.service.ts
+    │   │   │   ├── lab/
+    │   │   │   │   ├── lab.module.ts
+    │   │   │   │   ├── lab.resolver.ts
+    │   │   │   │   ├── dtos/
+    │   │   │   │   │   └── update-lab-public-feature-flag.input.ts
+    │   │   │   │   ├── services/
+    │   │   │   │   │   └── lab.service.ts
+    │   │   │   │   └── utils/
+    │   │   │   │       ├── is-public-feature-flag.util.spec.ts
+    │   │   │   │       └── is-public-feature-flag.util.ts
+    │   │   │   ├── llm-chat-model/
+    │   │   │   │   ├── llm-chat-model.constants.ts
+    │   │   │   │   ├── llm-chat-model.module-factory.ts
+    │   │   │   │   ├── llm-chat-model.module.ts
+    │   │   │   │   ├── llm-chat-model.service.ts
+    │   │   │   │   ├── drivers/
+    │   │   │   │   │   ├── openai.driver.ts
+    │   │   │   │   │   └── interfaces/
+    │   │   │   │   │       └── llm-prompt-template-driver.interface.ts
+    │   │   │   │   └── interfaces/
+    │   │   │   │       └── llm-chat-model.interface.ts
+    │   │   │   ├── llm-tracing/
+    │   │   │   │   ├── llm-tracing.constants.ts
+    │   │   │   │   ├── llm-tracing.module-factory.ts
+    │   │   │   │   ├── llm-tracing.module.ts
+    │   │   │   │   ├── llm-tracing.service.ts
+    │   │   │   │   ├── drivers/
+    │   │   │   │   │   ├── console.driver.ts
+    │   │   │   │   │   ├── langfuse.driver.ts
+    │   │   │   │   │   └── interfaces/
+    │   │   │   │   │       └── llm-tracing-driver.interface.ts
+    │   │   │   │   └── interfaces/
+    │   │   │   │       └── llm-tracing.interface.ts
+    │   │   │   ├── logger/
+    │   │   │   │   ├── logger.constants.ts
+    │   │   │   │   ├── logger.module-definition.ts
+    │   │   │   │   ├── logger.module-factory.ts
+    │   │   │   │   ├── logger.module.ts
+    │   │   │   │   ├── logger.service.ts
+    │   │   │   │   ├── __tests__/
+    │   │   │   │   │   └── logger.service.spec.ts
+    │   │   │   │   └── interfaces/
+    │   │   │   │       ├── index.ts
+    │   │   │   │       └── logger.interface.ts
+    │   │   │   ├── message-queue/
+    │   │   │   │   ├── jobs.module.ts
+    │   │   │   │   ├── message-queue-core.module.ts
+    │   │   │   │   ├── message-queue-metadata.accessor.ts
+    │   │   │   │   ├── message-queue.constants.ts
+    │   │   │   │   ├── message-queue.explorer.ts
+    │   │   │   │   ├── message-queue.module-definition.ts
+    │   │   │   │   ├── message-queue.module-factory.ts
+    │   │   │   │   ├── message-queue.module.ts
+    │   │   │   │   ├── decorators/
+    │   │   │   │   │   ├── message-queue.decorator.ts
+    │   │   │   │   │   ├── process.decorator.ts
+    │   │   │   │   │   └── processor.decorator.ts
+    │   │   │   │   ├── drivers/
+    │   │   │   │   │   ├── bullmq.driver.ts
+    │   │   │   │   │   ├── pg-boss.driver.ts
+    │   │   │   │   │   ├── sync.driver.ts
+    │   │   │   │   │   └── interfaces/
+    │   │   │   │   │       ├── job-options.interface.ts
+    │   │   │   │   │       └── message-queue-driver.interface.ts
+    │   │   │   │   ├── interfaces/
+    │   │   │   │   │   ├── index.ts
+    │   │   │   │   │   ├── message-queue-job.interface.ts
+    │   │   │   │   │   ├── message-queue-module-options.interface.ts
+    │   │   │   │   │   └── message-queue-worker-options.interface.ts
+    │   │   │   │   ├── services/
+    │   │   │   │   │   ├── message-queue.service.ts
+    │   │   │   │   │   └── __tests__/
+    │   │   │   │   │       └── message-queue-task-assigned.service.spec.ts
+    │   │   │   │   └── utils/
+    │   │   │   │       ├── get-job-key.util.ts
+    │   │   │   │       └── get-queue-token.util.ts
+    │   │   │   ├── messaging/
+    │   │   │   │   ├── timeline-messaging.module.ts
+    │   │   │   │   ├── timeline-messaging.resolver.ts
+    │   │   │   │   ├── constants/
+    │   │   │   │   │   └── messaging.constants.ts
+    │   │   │   │   ├── dtos/
+    │   │   │   │   │   ├── timeline-thread-participant.dto.ts
+    │   │   │   │   │   ├── timeline-thread.dto.ts
+    │   │   │   │   │   └── timeline-threads-with-total.dto.ts
+    │   │   │   │   ├── services/
+    │   │   │   │   │   ├── get-messages.service.ts
+    │   │   │   │   │   └── timeline-messaging.service.ts
+    │   │   │   │   └── utils/
+    │   │   │   │       ├── extract-participant-summary.util.ts
+    │   │   │   │       ├── filter-active-participants.util.ts
+    │   │   │   │       ├── format-thread-participant.util.ts
+    │   │   │   │       └── format-threads.util.ts
+    │   │   │   ├── onboarding/
+    │   │   │   │   ├── onboarding.module.ts
+    │   │   │   │   ├── onboarding.resolver.ts
+    │   │   │   │   ├── onboarding.service.ts
+    │   │   │   │   ├── dtos/
+    │   │   │   │   │   └── onboarding-step-success.dto.ts
+    │   │   │   │   └── enums/
+    │   │   │   │       └── onboarding-status.enum.ts
+    │   │   │   ├── open-api/
+    │   │   │   │   ├── open-api.controller.ts
+    │   │   │   │   ├── open-api.module.ts
+    │   │   │   │   ├── open-api.service.spec.ts
+    │   │   │   │   ├── open-api.service.ts
+    │   │   │   │   └── utils/
+    │   │   │   │       ├── base-schema.utils.ts
+    │   │   │   │       ├── components.utils.ts
+    │   │   │   │       ├── compute-schema-tags.utils.ts
+    │   │   │   │       ├── computeWebhooks.utils.ts
+    │   │   │   │       ├── get-error-responses.utils.ts
+    │   │   │   │       ├── parameters.utils.ts
+    │   │   │   │       ├── path.utils.ts
+    │   │   │   │       ├── request-body.utils.ts
+    │   │   │   │       ├── responses.utils.ts
+    │   │   │   │       └── __tests__/
+    │   │   │   │           ├── components.utils.spec.ts
+    │   │   │   │           └── parameters.utils.spec.ts
+    │   │   │   ├── postgres-credentials/
+    │   │   │   │   ├── postgres-credentials.entity.ts
+    │   │   │   │   ├── postgres-credentials.module.ts
+    │   │   │   │   ├── postgres-credentials.resolver.ts
+    │   │   │   │   ├── postgres-credentials.service.ts
+    │   │   │   │   └── dtos/
+    │   │   │   │       └── postgres-credentials.dto.ts
+    │   │   │   ├── redis-client/
+    │   │   │   │   ├── redis-client.module.ts
+    │   │   │   │   └── redis-client.service.ts
+    │   │   │   ├── serverless/
+    │   │   │   │   ├── serverless-module.factory.ts
+    │   │   │   │   ├── serverless.constants.ts
+    │   │   │   │   ├── serverless.interface.ts
+    │   │   │   │   ├── serverless.module.ts
+    │   │   │   │   ├── serverless.service.ts
+    │   │   │   │   ├── drivers/
+    │   │   │   │   │   ├── lambda.driver.ts
+    │   │   │   │   │   ├── local.driver.ts
+    │   │   │   │   │   ├── constants/
+    │   │   │   │   │   │   ├── base-typescript-project-input-schema.ts
+    │   │   │   │   │   │   ├── build-file-name.ts
+    │   │   │   │   │   │   ├── common-layer-name.ts
+    │   │   │   │   │   │   ├── env-file-name.ts
+    │   │   │   │   │   │   ├── index-file-name.ts
+    │   │   │   │   │   │   ├── outdir-folder.ts
+    │   │   │   │   │   │   ├── serverless-tmpdir-folder.ts
+    │   │   │   │   │   │   ├── .gitignore
+    │   │   │   │   │   │   ├── base-typescript-project/
+    │   │   │   │   │   │   │   ├── .env
+    │   │   │   │   │   │   │   └── src/
+    │   │   │   │   │   │   │       └── index.ts
+    │   │   │   │   │   │   └── executor/
+    │   │   │   │   │   │       └── index.mjs
+    │   │   │   │   │   ├── interfaces/
+    │   │   │   │   │   │   └── serverless-driver.interface.ts
+    │   │   │   │   │   ├── layers/
+    │   │   │   │   │   │   ├── last-layer-version.ts
+    │   │   │   │   │   │   ├── 1/
+    │   │   │   │   │   │   │   ├── package.json
+    │   │   │   │   │   │   │   └── yarn.lock
+    │   │   │   │   │   │   └── engine/
+    │   │   │   │   │   │       ├── .yarnrc.yml
+    │   │   │   │   │   │       └── .yarn/
+    │   │   │   │   │   │           └── releases/
+    │   │   │   │   │   │               └── yarn-4.4.0.cjs
+    │   │   │   │   │   └── utils/
+    │   │   │   │   │       ├── copy-and-build-dependencies.ts
+    │   │   │   │   │       ├── copy-executor.ts
+    │   │   │   │   │       ├── create-zip-file.ts
+    │   │   │   │   │       ├── get-base-typescript-project-files.ts
+    │   │   │   │   │       ├── get-executor-file-path.ts
+    │   │   │   │   │       ├── get-last-layer-dependencies.ts
+    │   │   │   │   │       ├── get-layer-dependencies-dir-name.ts
+    │   │   │   │   │       └── lambda-build-directory-manager.ts
+    │   │   │   │   └── utils/
+    │   │   │   │       └── serverless-get-folder.utils.ts
+    │   │   │   ├── session-storage/
+    │   │   │   │   └── session-storage.module-factory.ts
+    │   │   │   ├── sso/
+    │   │   │   │   ├── sso.exception.ts
+    │   │   │   │   ├── sso.module.ts
+    │   │   │   │   ├── sso.resolver.ts
+    │   │   │   │   ├── workspace-sso-identity-provider.entity.ts
+    │   │   │   │   ├── dtos/
+    │   │   │   │   │   ├── delete-sso.input.ts
+    │   │   │   │   │   ├── delete-sso.output.ts
+    │   │   │   │   │   ├── edit-sso.input.ts
+    │   │   │   │   │   ├── edit-sso.output.ts
+    │   │   │   │   │   ├── find-available-SSO-IDP.output.ts
+    │   │   │   │   │   ├── setup-sso.input.ts
+    │   │   │   │   │   ├── setup-sso.output.ts
+    │   │   │   │   │   └── validators/
+    │   │   │   │   │       └── x509.validator.ts
+    │   │   │   │   ├── services/
+    │   │   │   │   │   ├── sso.service.spec.ts
+    │   │   │   │   │   └── sso.service.ts
+    │   │   │   │   └── types/
+    │   │   │   │       └── SSOConfigurations.type.ts
+    │   │   │   ├── telemetry/
+    │   │   │   │   ├── telemetry.module.ts
+    │   │   │   │   └── telemetry.service.ts
+    │   │   │   ├── throttler/
+    │   │   │   │   ├── throttler.exception.ts
+    │   │   │   │   ├── throttler.module.ts
+    │   │   │   │   └── throttler.service.ts
+    │   │   │   ├── two-factor-method/
+    │   │   │   │   ├── two-factor-method.entity.ts
+    │   │   │   │   ├── two-factor-method.module.ts
+    │   │   │   │   └── two-factor-method.service.ts
+    │   │   │   ├── user/
+    │   │   │   │   ├── user.auto-resolver-opts.ts
+    │   │   │   │   ├── user.entity.ts
+    │   │   │   │   ├── user.exception.ts
+    │   │   │   │   ├── user.module.ts
+    │   │   │   │   ├── user.resolver.ts
+    │   │   │   │   ├── user.validate.ts
+    │   │   │   │   ├── dtos/
+    │   │   │   │   │   └── workspace-member.dto.ts
+    │   │   │   │   ├── services/
+    │   │   │   │   │   └── user.service.ts
+    │   │   │   │   └── user-vars/
+    │   │   │   │       ├── user-vars.module.ts
+    │   │   │   │       ├── services/
+    │   │   │   │       │   └── user-vars.service.ts
+    │   │   │   │       └── utils/
+    │   │   │   │           ├── merge-user-vars.util.ts
+    │   │   │   │           └── __tests__/
+    │   │   │   │               └── merge-user-vars.spec.ts
+    │   │   │   ├── user-workspace/
+    │   │   │   │   ├── user-workspace.entity.ts
+    │   │   │   │   ├── user-workspace.module.ts
+    │   │   │   │   ├── user-workspace.resolver.ts
+    │   │   │   │   └── user-workspace.service.ts
+    │   │   │   ├── workflow/
+    │   │   │   │   ├── workflow-api.module.ts
+    │   │   │   │   ├── dtos/
+    │   │   │   │   │   ├── compute-step-output-schema-input.dto.ts
+    │   │   │   │   │   ├── create-draft-from-workflow-version-input.ts
+    │   │   │   │   │   ├── create-workflow-version-step-input.dto.ts
+    │   │   │   │   │   ├── delete-workflow-version-step-input.dto.ts
+    │   │   │   │   │   ├── run-workflow-version-input.dto.ts
+    │   │   │   │   │   ├── submit-form-step-input.dto.ts
+    │   │   │   │   │   ├── update-workflow-version-step-input.dto.ts
+    │   │   │   │   │   ├── workflow-run.dto.ts
+    │   │   │   │   │   ├── workflow-step.dto.ts
+    │   │   │   │   │   └── workflow-version.dto.ts
+    │   │   │   │   ├── filters/
+    │   │   │   │   │   └── workflow-trigger-graphql-api-exception.filter.ts
+    │   │   │   │   └── resolvers/
+    │   │   │   │       ├── workflow-builder.resolver.ts
+    │   │   │   │       ├── workflow-trigger.resolver.ts
+    │   │   │   │       ├── workflow-version-step.resolver.ts
+    │   │   │   │       └── workflow-version.resolver.ts
+    │   │   │   ├── workspace/
+    │   │   │   │   ├── handle-workspace-member-deleted.job.ts
+    │   │   │   │   ├── workspace-workspace-member.listener.ts
+    │   │   │   │   ├── workspace.auto-resolver-opts.ts
+    │   │   │   │   ├── workspace.entity.ts
+    │   │   │   │   ├── workspace.exception.ts
+    │   │   │   │   ├── workspace.module.ts
+    │   │   │   │   ├── workspace.resolver.ts
+    │   │   │   │   ├── workspace.validate.ts
+    │   │   │   │   ├── __tests__/
+    │   │   │   │   │   └── workspace.service.spec.ts
+    │   │   │   │   ├── dtos/
+    │   │   │   │   │   ├── activate-workspace-input.ts
+    │   │   │   │   │   ├── public-workspace-data-output.ts
+    │   │   │   │   │   ├── update-workspace-input.ts
+    │   │   │   │   │   ├── workspace-subdomain-id.dto.ts
+    │   │   │   │   │   └── workspace-urls.dto.ts
+    │   │   │   │   ├── services/
+    │   │   │   │   │   └── workspace.service.ts
+    │   │   │   │   ├── types/
+    │   │   │   │   │   └── workspace.type.ts
+    │   │   │   │   └── utils/
+    │   │   │   │       ├── get-auth-providers-by-workspace.util.ts
+    │   │   │   │       ├── workspace-graphql-api-exception-handler.util.ts
+    │   │   │   │       └── __tests__/
+    │   │   │   │           ├── get-auth-providers-by-workspace.util.spec.ts
+    │   │   │   │           └── workspace-graphql-api-exception-handler.util.spec.ts
+    │   │   │   └── workspace-invitation/
+    │   │   │       ├── workspace-invitation.exception.ts
+    │   │   │       ├── workspace-invitation.module.ts
+    │   │   │       ├── workspace-invitation.resolver.ts
+    │   │   │       ├── dtos/
+    │   │   │       │   ├── send-invitations.input.ts
+    │   │   │       │   ├── send-invitations.output.ts
+    │   │   │       │   └── workspace-invitation.dto.ts
+    │   │   │       ├── services/
+    │   │   │       │   ├── workspace-invitation.service.spec.ts
+    │   │   │       │   └── workspace-invitation.service.ts
+    │   │   │       └── utils/
+    │   │   │           ├── cast-app-token-to-workspace-invitation.spec.ts
+    │   │   │           └── cast-app-token-to-workspace-invitation.util.ts
+    │   │   ├── dataloaders/
+    │   │   │   ├── dataloader.interface.ts
+    │   │   │   ├── dataloader.module.ts
+    │   │   │   └── dataloader.service.ts
+    │   │   ├── decorators/
+    │   │   │   ├── auth/
+    │   │   │   │   ├── auth-api-key.decorator.ts
+    │   │   │   │   ├── auth-user-workspace-id.decorator.ts
+    │   │   │   │   ├── auth-user.decorator.ts
+    │   │   │   │   ├── auth-workspace-member-id.decorator.ts
+    │   │   │   │   ├── auth-workspace.decorator.ts
+    │   │   │   │   └── origin-header.decorator.ts
+    │   │   │   ├── metadata/
+    │   │   │   │   └── is-valid-metadata-name.decorator.ts
+    │   │   │   └── observability/
+    │   │   │       └── log-execution-time.decorator.ts
+    │   │   ├── guards/
+    │   │   │   ├── impersonate-guard.spec.ts
+    │   │   │   ├── impersonate-guard.ts
+    │   │   │   ├── jwt-auth.guard.ts
+    │   │   │   ├── settings-permissions.guard.ts
+    │   │   │   ├── user-auth.guard.ts
+    │   │   │   └── workspace-auth.guard.ts
+    │   │   ├── metadata-modules/
+    │   │   │   ├── metadata-engine.module.ts
+    │   │   │   ├── constants/
+    │   │   │   │   └── search-vector-field.constants.ts
+    │   │   │   ├── data-source/
+    │   │   │   │   ├── data-source.entity.ts
+    │   │   │   │   ├── data-source.exception.ts
+    │   │   │   │   ├── data-source.module.ts
+    │   │   │   │   └── data-source.service.ts
+    │   │   │   ├── field-metadata/
+    │   │   │   │   ├── field-metadata-validation.service.ts
+    │   │   │   │   ├── field-metadata.entity.ts
+    │   │   │   │   ├── field-metadata.exception.ts
+    │   │   │   │   ├── field-metadata.module.ts
+    │   │   │   │   ├── field-metadata.resolver.ts
+    │   │   │   │   ├── field-metadata.service.ts
+    │   │   │   │   ├── composite-types/
+    │   │   │   │   │   ├── actor.composite-type.ts
+    │   │   │   │   │   ├── address.composite-type.ts
+    │   │   │   │   │   ├── currency.composite-type.ts
+    │   │   │   │   │   ├── emails.composite-type.ts
+    │   │   │   │   │   ├── full-name.composite-type.ts
+    │   │   │   │   │   ├── index.ts
+    │   │   │   │   │   ├── links.composite-type.ts
+    │   │   │   │   │   ├── phones.composite-type.ts
+    │   │   │   │   │   └── rich-text-v2.composite-type.ts
+    │   │   │   │   ├── dtos/
+    │   │   │   │   │   ├── create-field.input.ts
+    │   │   │   │   │   ├── default-value.input.ts
+    │   │   │   │   │   ├── delete-field.input.ts
+    │   │   │   │   │   ├── field-metadata.dto.ts
+    │   │   │   │   │   ├── options.input.ts
+    │   │   │   │   │   ├── relation-definition.dto.ts
+    │   │   │   │   │   ├── relation.dto.ts
+    │   │   │   │   │   └── update-field.input.ts
+    │   │   │   │   ├── interceptors/
+    │   │   │   │   │   └── field-metadata-graphql-api-exception.interceptor.ts
+    │   │   │   │   ├── interfaces/
+    │   │   │   │   │   ├── composite-type.interface.ts
+    │   │   │   │   │   ├── field-metadata-default-value.interface.ts
+    │   │   │   │   │   ├── field-metadata-options.interface.ts
+    │   │   │   │   │   ├── field-metadata-settings.interface.ts
+    │   │   │   │   │   ├── field-metadata.interface.ts
+    │   │   │   │   │   ├── object-metadata.interface.ts
+    │   │   │   │   │   ├── relation-metadata.interface.ts
+    │   │   │   │   │   ├── relation-on-delete-action.interface.ts
+    │   │   │   │   │   └── relation-type.interface.ts
+    │   │   │   │   ├── relation/
+    │   │   │   │   │   └── field-metadata-relation.service.ts
+    │   │   │   │   ├── services/
+    │   │   │   │   │   └── field-metadata-related-records.service.ts
+    │   │   │   │   ├── utils/
+    │   │   │   │   │   ├── assert-does-not-nullify-default-value-for-non-nullable-field.util.ts
+    │   │   │   │   │   ├── compute-column-name.util.ts
+    │   │   │   │   │   ├── field-metadata-graphql-api-exception-handler.util.ts
+    │   │   │   │   │   ├── generate-default-value.ts
+    │   │   │   │   │   ├── generate-nullable.ts
+    │   │   │   │   │   ├── generate-rating-optionts.util.ts
+    │   │   │   │   │   ├── is-composite-field-metadata-type.util.ts
+    │   │   │   │   │   ├── is-enum-field-metadata-type.util.ts
+    │   │   │   │   │   ├── is-function-default-value.util.ts
+    │   │   │   │   │   ├── is-select-field-metadata-type.util.ts
+    │   │   │   │   │   ├── serialize-default-value.ts
+    │   │   │   │   │   ├── serialize-function-default-value.util.ts
+    │   │   │   │   │   ├── unserialize-default-value.ts
+    │   │   │   │   │   ├── validate-default-value-for-type.util.ts
+    │   │   │   │   │   ├── validate-options-for-type.util.ts
+    │   │   │   │   │   └── __tests__/
+    │   │   │   │   │       ├── assert-does-not-nullify-default-value-for-non-nullable-field.spec.ts
+    │   │   │   │   │       ├── compute-column-name.spec.ts
+    │   │   │   │   │       ├── field-metadata-validation.service.spec.ts
+    │   │   │   │   │       ├── generate-nullable.spec.ts
+    │   │   │   │   │       ├── serialize-default-value.spec.ts
+    │   │   │   │   │       └── validate-default-value-based-on-type.spec.ts
+    │   │   │   │   └── validators/
+    │   │   │   │       ├── is-field-metadata-default-value.validator.ts
+    │   │   │   │       ├── is-field-metadata-options.validator.ts
+    │   │   │   │       ├── is-quoted-string.validator.ts
+    │   │   │   │       └── is-valid-graphql-enum-name.validator.ts
+    │   │   │   ├── index-metadata/
+    │   │   │   │   ├── index-field-metadata.entity.ts
+    │   │   │   │   ├── index-metadata.entity.ts
+    │   │   │   │   ├── index-metadata.module.ts
+    │   │   │   │   ├── index-metadata.service.ts
+    │   │   │   │   ├── dtos/
+    │   │   │   │   │   ├── index-field-metadata.dto.ts
+    │   │   │   │   │   └── index-metadata.dto.ts
+    │   │   │   │   ├── interfaces/
+    │   │   │   │   │   ├── index-field-metadata.interface.ts
+    │   │   │   │   │   └── index-metadata.interface.ts
+    │   │   │   │   └── utils/
+    │   │   │   │       └── generate-deterministic-index-name.ts
+    │   │   │   ├── object-metadata/
+    │   │   │   │   ├── object-metadata.constants.ts
+    │   │   │   │   ├── object-metadata.entity.ts
+    │   │   │   │   ├── object-metadata.exception.ts
+    │   │   │   │   ├── object-metadata.module.ts
+    │   │   │   │   ├── object-metadata.resolver.ts
+    │   │   │   │   ├── object-metadata.service.ts
+    │   │   │   │   ├── dtos/
+    │   │   │   │   │   ├── create-object.input.ts
+    │   │   │   │   │   ├── delete-object.input.ts
+    │   │   │   │   │   ├── object-metadata.dto.ts
+    │   │   │   │   │   └── update-object.input.ts
+    │   │   │   │   ├── hooks/
+    │   │   │   │   │   ├── before-create-one-object.hook.ts
+    │   │   │   │   │   ├── before-delete-one-object.hook.ts
+    │   │   │   │   │   └── before-update-one-object.hook.ts
+    │   │   │   │   ├── interceptors/
+    │   │   │   │   │   └── object-metadata-graphql-api-exception.interceptor.ts
+    │   │   │   │   ├── interfaces/
+    │   │   │   │   │   └── object-metadata-standard-id-to-id-map.ts
+    │   │   │   │   ├── services/
+    │   │   │   │   │   ├── object-metadata-migration.service.ts
+    │   │   │   │   │   ├── object-metadata-related-records.service.ts
+    │   │   │   │   │   └── object-metadata-relation.service.ts
+    │   │   │   │   └── utils/
+    │   │   │   │       ├── assert-mutation-not-on-remote-object.util.ts
+    │   │   │   │       ├── build-default-fields-for-custom-object.util.ts
+    │   │   │   │       ├── build-description-for-relation-field-on-from-field.util.ts
+    │   │   │   │       ├── build-description-for-relation-field-on-to-field.util.ts
+    │   │   │   │       ├── build-migrations-for-custom-object-relations.util.ts
+    │   │   │   │       ├── build-name-label-and-description-for-foreign-key-field-metadata.util.ts
+    │   │   │   │       ├── object-metadata-graphql-api-exception-handler.util.ts
+    │   │   │   │       ├── validate-object-metadata-input.util.ts
+    │   │   │   │       └── __tests__/
+    │   │   │   │           └── validate-object-metadata-input.util.spec.ts
+    │   │   │   ├── permissions/
+    │   │   │   │   ├── permissions.exception.ts
+    │   │   │   │   ├── permissions.module.ts
+    │   │   │   │   ├── permissions.service.ts
+    │   │   │   │   ├── constants/
+    │   │   │   │   │   ├── admin-role-label.constants.ts
+    │   │   │   │   │   ├── member-role-label.constants.ts
+    │   │   │   │   │   └── settings-permissions.constants.ts
+    │   │   │   │   └── utils/
+    │   │   │   │       ├── permission-graphql-api-exception-handler.util.ts
+    │   │   │   │       └── permissions-graphql-api-exception.filter.ts
+    │   │   │   ├── relation-metadata/
+    │   │   │   │   ├── relation-metadata.entity.ts
+    │   │   │   │   ├── relation-metadata.exception.ts
+    │   │   │   │   ├── relation-metadata.module.ts
+    │   │   │   │   ├── relation-metadata.resolver.ts
+    │   │   │   │   ├── relation-metadata.service.ts
+    │   │   │   │   ├── dtos/
+    │   │   │   │   │   ├── create-relation.input.ts
+    │   │   │   │   │   ├── delete-relation.input.ts
+    │   │   │   │   │   └── relation-metadata.dto.ts
+    │   │   │   │   ├── hooks/
+    │   │   │   │   │   ├── before-create-one-relation.hook.ts
+    │   │   │   │   │   └── before-delete-one-relation.hook.ts
+    │   │   │   │   ├── interceptors/
+    │   │   │   │   │   └── relation-metadata-graphql-api-exception.interceptor.ts
+    │   │   │   │   ├── types/
+    │   │   │   │   │   └── relation-to-delete.ts
+    │   │   │   │   └── utils/
+    │   │   │   │       ├── create-relation-foreign-key-field-metadata-name.util.ts
+    │   │   │   │       └── relation-metadata-graphql-api-exception-handler.util.ts
+    │   │   │   ├── remote-server/
+    │   │   │   │   ├── remote-server.entity.ts
+    │   │   │   │   ├── remote-server.exception.ts
+    │   │   │   │   ├── remote-server.module.ts
+    │   │   │   │   ├── remote-server.resolver.ts
+    │   │   │   │   ├── remote-server.service.ts
+    │   │   │   │   ├── dtos/
+    │   │   │   │   │   ├── create-remote-server.input.ts
+    │   │   │   │   │   ├── remote-server-id.input.ts
+    │   │   │   │   │   ├── remote-server-type.input.ts
+    │   │   │   │   │   ├── remote-server.dto.ts
+    │   │   │   │   │   ├── update-remote-server.input.ts
+    │   │   │   │   │   └── user-mapping-dto.ts
+    │   │   │   │   ├── remote-table/
+    │   │   │   │   │   ├── remote-table.entity.ts
+    │   │   │   │   │   ├── remote-table.exception.ts
+    │   │   │   │   │   ├── remote-table.module.ts
+    │   │   │   │   │   ├── remote-table.resolver.ts
+    │   │   │   │   │   ├── remote-table.service.ts
+    │   │   │   │   │   ├── distant-table/
+    │   │   │   │   │   │   ├── distant-table.exception.ts
+    │   │   │   │   │   │   ├── distant-table.module.ts
+    │   │   │   │   │   │   ├── distant-table.service.ts
+    │   │   │   │   │   │   ├── types/
+    │   │   │   │   │   │   │   └── distant-table.ts
+    │   │   │   │   │   │   └── utils/
+    │   │   │   │   │   │       ├── sort-distant-tables.util.ts
+    │   │   │   │   │   │       ├── stripe-distant-tables.util.ts
+    │   │   │   │   │   │       └── __tests__/
+    │   │   │   │   │   │           └── sort-distant-tables.spec.ts
+    │   │   │   │   │   ├── dtos/
+    │   │   │   │   │   │   ├── find-many-remote-tables-input.ts
+    │   │   │   │   │   │   ├── remote-table-input.ts
+    │   │   │   │   │   │   └── remote-table.dto.ts
+    │   │   │   │   │   ├── foreign-table/
+    │   │   │   │   │   │   ├── foreign-table.exception.ts
+    │   │   │   │   │   │   ├── foreign-table.module.ts
+    │   │   │   │   │   │   ├── foreign-table.service.ts
+    │   │   │   │   │   │   └── utils/
+    │   │   │   │   │   │       └── get-foreign-table-column-name.util.ts
+    │   │   │   │   │   ├── remote-table-relations/
+    │   │   │   │   │   │   ├── remote-table-relations.module.ts
+    │   │   │   │   │   │   ├── remote-table-relations.service.ts
+    │   │   │   │   │   │   └── utils/
+    │   │   │   │   │   │       ├── build-migrations-to-create-remote-table-relations.util.ts
+    │   │   │   │   │   │       └── build-migrations-to-remove-remote-table-relations.util.ts
+    │   │   │   │   │   ├── remote-table-schema-update/
+    │   │   │   │   │   │   ├── remote-table-schema-update.module.ts
+    │   │   │   │   │   │   └── remote-table-schema-update.service.ts
+    │   │   │   │   │   └── utils/
+    │   │   │   │   │       ├── fetch-table-columns.util.ts
+    │   │   │   │   │       ├── get-remote-table-local-name.util.ts
+    │   │   │   │   │       ├── remote-table-graphql-api-exception-handler.util.ts
+    │   │   │   │   │       └── udt-name-mapper.util.ts
+    │   │   │   │   ├── types/
+    │   │   │   │   │   ├── postgres-table-schema-column.ts
+    │   │   │   │   │   └── user-mapping-options.ts
+    │   │   │   │   └── utils/
+    │   │   │   │       ├── build-update-remote-server-raw-query.utils.ts
+    │   │   │   │       ├── remote-server-graphql-api-exception-handler.util.ts
+    │   │   │   │       ├── validate-remote-server-input.utils.ts
+    │   │   │   │       └── validate-remote-server-type.util.ts
+    │   │   │   ├── role/
+    │   │   │   │   ├── role.entity.ts
+    │   │   │   │   ├── role.module.ts
+    │   │   │   │   ├── role.resolver.ts
+    │   │   │   │   ├── role.service.ts
+    │   │   │   │   ├── user-workspace-role.entity.ts
+    │   │   │   │   └── dtos/
+    │   │   │   │       └── role.dto.ts
+    │   │   │   ├── search/
+    │   │   │   │   ├── search.module.ts
+    │   │   │   │   └── search.service.ts
+    │   │   │   ├── serverless-function/
+    │   │   │   │   ├── serverless-function.entity.ts
+    │   │   │   │   ├── serverless-function.exception.ts
+    │   │   │   │   ├── serverless-function.module.ts
+    │   │   │   │   ├── serverless-function.resolver.ts
+    │   │   │   │   ├── serverless-function.service.ts
+    │   │   │   │   ├── constants/
+    │   │   │   │   │   └── serverless-function-published.ts
+    │   │   │   │   ├── dtos/
+    │   │   │   │   │   ├── build-draft-serverless-function.input.ts
+    │   │   │   │   │   ├── create-serverless-function.input.ts
+    │   │   │   │   │   ├── execute-serverless-function.input.ts
+    │   │   │   │   │   ├── get-serverless-function-source-code.input.ts
+    │   │   │   │   │   ├── publish-serverless-function.input.ts
+    │   │   │   │   │   ├── serverless-function-execution-result.dto.ts
+    │   │   │   │   │   ├── serverless-function-id.input.ts
+    │   │   │   │   │   ├── serverless-function.dto.ts
+    │   │   │   │   │   └── update-serverless-function.input.ts
+    │   │   │   │   └── utils/
+    │   │   │   │       ├── serverless-function-create-hash.utils.ts
+    │   │   │   │       └── serverless-function-graphql-api-exception-handler.utils.ts
+    │   │   │   ├── types/
+    │   │   │   │   ├── field-metadata-map.ts
+    │   │   │   │   ├── object-metadata-item-with-field-maps.ts
+    │   │   │   │   └── object-metadata-maps.ts
+    │   │   │   ├── user-role/
+    │   │   │   │   ├── user-role.module.ts
+    │   │   │   │   └── user-role.service.ts
+    │   │   │   ├── utils/
+    │   │   │   │   ├── generate-object-metadata-maps.util.ts
+    │   │   │   │   ├── get-object-metadata-map-item-by-name-plural.util.ts
+    │   │   │   │   ├── get-object-metadata-map-item-by-name-singular.util.ts
+    │   │   │   │   ├── remove-field-maps-from-object-metadata.util.ts
+    │   │   │   │   ├── validate-database-identifier-length.utils.ts
+    │   │   │   │   ├── validate-field-name-availability.utils.ts
+    │   │   │   │   ├── validate-metadata-name-validity.utils.ts
+    │   │   │   │   ├── __tests__/
+    │   │   │   │   │   ├── get-object-metadata-map-item-by-name-singular.util.spec.ts
+    │   │   │   │   │   ├── validate-field-name-availability.spec.ts
+    │   │   │   │   │   └── validate-metadata-name-validity.spec.ts
+    │   │   │   │   ├── constants/
+    │   │   │   │   │   └── identifier-max-char-length.constants.ts
+    │   │   │   │   └── exceptions/
+    │   │   │   │       ├── invalid-string.exception.ts
+    │   │   │   │       ├── name-not-available.exception.ts
+    │   │   │   │       └── name-too-long.exception.ts
+    │   │   │   ├── workspace-metadata-cache/
+    │   │   │   │   ├── workspace-metadata-cache.module.ts
+    │   │   │   │   ├── exceptions/
+    │   │   │   │   │   └── workspace-metadata-cache.exception.ts
+    │   │   │   │   └── services/
+    │   │   │   │       └── workspace-metadata-cache.service.ts
+    │   │   │   ├── workspace-metadata-version/
+    │   │   │   │   ├── workspace-metadata-version.module.ts
+    │   │   │   │   ├── exceptions/
+    │   │   │   │   │   └── workspace-metadata-version.exception.ts
+    │   │   │   │   └── services/
+    │   │   │   │       └── workspace-metadata-version.service.ts
+    │   │   │   └── workspace-migration/
+    │   │   │       ├── workspace-migration.entity.ts
+    │   │   │       ├── workspace-migration.exception.ts
+    │   │   │       ├── workspace-migration.factory.ts
+    │   │   │       ├── workspace-migration.module.ts
+    │   │   │       ├── workspace-migration.service.ts
+    │   │   │       ├── factories/
+    │   │   │       │   ├── basic-column-action.factory.ts
+    │   │   │       │   ├── column-action-abstract.factory.ts
+    │   │   │       │   ├── composite-column-action.factory.ts
+    │   │   │       │   ├── enum-column-action.factory.ts
+    │   │   │       │   ├── factories.ts
+    │   │   │       │   └── ts-vector-column-action.factory.ts
+    │   │   │       ├── interfaces/
+    │   │   │       │   ├── workspace-column-action-factory.interface.ts
+    │   │   │       │   └── workspace-column-action-options.interface.ts
+    │   │   │       └── utils/
+    │   │   │           ├── field-metadata-type-to-column-type.util.ts
+    │   │   │           ├── generate-migration-name.util.ts
+    │   │   │           └── is-text-column-type.util.ts
+    │   │   ├── middlewares/
+    │   │   │   ├── graphql-hydrate-request-from-token.middleware.ts
+    │   │   │   ├── middleware.module.ts
+    │   │   │   ├── middleware.service.ts
+    │   │   │   ├── rest-core.middleware.ts
+    │   │   │   ├── constants/
+    │   │   │   │   ├── default-error-message.constant.ts
+    │   │   │   │   └── excluded-middleware-operations.constant.ts
+    │   │   │   └── utils/
+    │   │   │       └── graphql-token-validation-utils.ts
+    │   │   ├── object-metadata-repository/
+    │   │   │   ├── metadata-to-repository.mapping.ts
+    │   │   │   ├── object-metadata-repository.decorator.ts
+    │   │   │   └── object-metadata-repository.module.ts
+    │   │   ├── seeder/
+    │   │   │   ├── seeder.module.ts
+    │   │   │   ├── seeder.service.ts
+    │   │   │   ├── data-seeds/
+    │   │   │   │   ├── pets-data-seeds.ts
+    │   │   │   │   └── survey-results-data-seeds.ts
+    │   │   │   ├── interfaces/
+    │   │   │   │   └── object-metadata-seed.ts
+    │   │   │   └── metadata-seeds/
+    │   │   │       ├── pets-metadata-seeds.ts
+    │   │   │       └── survey-results-metadata-seeds.ts
+    │   │   ├── strategies/
+    │   │   │   └── aggregate-by-workspace-context-id.strategy.ts
+    │   │   ├── twenty-orm/
+    │   │   │   ├── base.workspace-entity.ts
+    │   │   │   ├── custom.workspace-entity.ts
+    │   │   │   ├── twenty-orm-global.manager.ts
+    │   │   │   ├── twenty-orm.manager.ts
+    │   │   │   ├── twenty-orm.module-definition.ts
+    │   │   │   ├── twenty-orm.module.ts
+    │   │   │   ├── datasource/
+    │   │   │   │   └── workspace.datasource.ts
+    │   │   │   ├── decorators/
+    │   │   │   │   ├── workspace-custom-entity.decorator.ts
+    │   │   │   │   ├── workspace-duplicate-criteria.decorator.ts
+    │   │   │   │   ├── workspace-dynamic-relation.decorator.ts
+    │   │   │   │   ├── workspace-entity.decorator.ts
+    │   │   │   │   ├── workspace-field-index.decorator.ts
+    │   │   │   │   ├── workspace-field.decorator.ts
+    │   │   │   │   ├── workspace-gate.decorator.ts
+    │   │   │   │   ├── workspace-index.decorator.ts
+    │   │   │   │   ├── workspace-is-deprecated.decorator.ts
+    │   │   │   │   ├── workspace-is-not-audit-logged.decorator.ts
+    │   │   │   │   ├── workspace-is-nullable.decorator.ts
+    │   │   │   │   ├── workspace-is-primary-field.decorator.ts
+    │   │   │   │   ├── workspace-is-searchable.decorator.ts
+    │   │   │   │   ├── workspace-is-system.decorator.ts
+    │   │   │   │   ├── workspace-is-unique.decorator.ts
+    │   │   │   │   ├── workspace-join-column.decorator.ts
+    │   │   │   │   └── workspace-relation.decorator.ts
+    │   │   │   ├── entity-manager/
+    │   │   │   │   └── entity.manager.ts
+    │   │   │   ├── exceptions/
+    │   │   │   │   └── twenty-orm.exception.ts
+    │   │   │   ├── factories/
+    │   │   │   │   ├── entity-schema-column.factory.ts
+    │   │   │   │   ├── entity-schema-relation.factory.ts
+    │   │   │   │   ├── entity-schema.factory.ts
+    │   │   │   │   ├── index.ts
+    │   │   │   │   ├── scoped-workspace-context.factory.ts
+    │   │   │   │   └── workspace-datasource.factory.ts
+    │   │   │   ├── interfaces/
+    │   │   │   │   ├── gate.interface.ts
+    │   │   │   │   ├── twenty-orm-options.interface.ts
+    │   │   │   │   ├── workspace-dynamic-relation-metadata-args.interface.ts
+    │   │   │   │   ├── workspace-entity-metadata-args.interface.ts
+    │   │   │   │   ├── workspace-extended-entity-metadata-args.interface.ts
+    │   │   │   │   ├── workspace-field-metadata-args.interface.ts
+    │   │   │   │   ├── workspace-index-metadata-args.interface.ts
+    │   │   │   │   ├── workspace-internal-context.interface.ts
+    │   │   │   │   ├── workspace-join-columns-metadata-args.interface.ts
+    │   │   │   │   └── workspace-relation-metadata-args.interface.ts
+    │   │   │   ├── repository/
+    │   │   │   │   └── workspace.repository.ts
+    │   │   │   ├── storage/
+    │   │   │   │   ├── cache-manager.storage.ts
+    │   │   │   │   ├── metadata-args.storage.ts
+    │   │   │   │   ├── workspace-entities.storage.ts
+    │   │   │   │   └── types/
+    │   │   │   │       └── cache-key.type.ts
+    │   │   │   └── utils/
+    │   │   │       ├── compute-relation-type.util.ts
+    │   │   │       ├── determine-relation-details.util.ts
+    │   │   │       ├── format-column-names-from-composite-field-and-subfield.util.ts
+    │   │   │       ├── format-data.util.ts
+    │   │   │       ├── format-result.util.ts
+    │   │   │       ├── get-composite-field-metadata-collection.ts
+    │   │   │       ├── get-default-columns-for-index.util.ts
+    │   │   │       ├── get-join-column.util.ts
+    │   │   │       ├── get-subfields-for-aggregate-operation.util.ts
+    │   │   │       └── __tests__/
+    │   │   │           ├── format-column-name-from-composite-field-and-subfield.util.spec.ts
+    │   │   │           └── get-default-columns-for-index.util.spec.ts
+    │   │   ├── utils/
+    │   │   │   ├── compute-object-target-table.util.ts
+    │   │   │   ├── compute-table-name.util.ts
+    │   │   │   ├── deduce-relation-direction.util.ts
+    │   │   │   ├── generate-fake-value.ts
+    │   │   │   ├── get-resolver-name.util.ts
+    │   │   │   ├── global-exception-handler.util.ts
+    │   │   │   ├── is-domain.ts
+    │   │   │   ├── is-field-metadata-of-type.util.ts
+    │   │   │   ├── is-relation-field-metadata-type.util.ts
+    │   │   │   ├── query-timeout.util.ts
+    │   │   │   ├── render-apollo-playground.util.ts
+    │   │   │   ├── should-seed-workspace-favorite.ts
+    │   │   │   ├── transform-enum-value.ts
+    │   │   │   └── __tests__/
+    │   │   │       ├── deduce-relation-direction.spec.ts
+    │   │   │       └── get-resolver-name.spec.ts
+    │   │   ├── workspace-cache-storage/
+    │   │   │   ├── workspace-cache-storage.module.ts
+    │   │   │   └── workspace-cache-storage.service.ts
+    │   │   ├── workspace-datasource/
+    │   │   │   ├── workspace-datasource.module.ts
+    │   │   │   └── workspace-datasource.service.ts
+    │   │   ├── workspace-event-emitter/
+    │   │   │   ├── workspace-event-emitter.module.ts
+    │   │   │   ├── workspace-event-emitter.ts
+    │   │   │   └── types/
+    │   │   │       ├── custom-event-name.type.ts
+    │   │   │       └── workspace-event.type.ts
+    │   │   └── workspace-manager/
+    │   │       ├── workspace-manager.module.ts
+    │   │       ├── workspace-manager.service.ts
+    │   │       ├── __tests__/
+    │   │       │   └── workspace-manager.service.spec.ts
+    │   │       ├── demo-objects-prefill-data/
+    │   │       │   ├── companies-demo.json.ts
+    │   │       │   ├── people-demo.json.ts
+    │   │       │   ├── seed-company-with-demo-data.ts
+    │   │       │   ├── seed-opportunity-with-demo-data.ts
+    │   │       │   ├── seed-person-with-demo-data.ts
+    │   │       │   ├── seed-workspace-member-with-demo-data.ts
+    │   │       │   └── seed-workspace-with-demo-data.ts
+    │   │       ├── standard-objects-prefill-data/
+    │   │       │   ├── company.ts
+    │   │       │   ├── create-workspace-views.ts
+    │   │       │   ├── person.ts
+    │   │       │   ├── seed-view-with-demo-data.ts
+    │   │       │   ├── standard-objects-prefill-data.ts
+    │   │       │   ├── types/
+    │   │       │   │   └── view-definition.interface.ts
+    │   │       │   └── views/
+    │   │       │       ├── companies-all.view.ts
+    │   │       │       ├── notes-all.view.ts
+    │   │       │       ├── opportunities-all.view.ts
+    │   │       │       ├── opportunity-by-stage.view.ts
+    │   │       │       ├── opportunity-table-by-stage.view.ts
+    │   │       │       ├── people-all.view.ts
+    │   │       │       ├── tasks-all.view.ts
+    │   │       │       ├── tasks-assigned-to-me.ts
+    │   │       │       ├── tasks-by-status.view.ts
+    │   │       │       ├── tasks-todo.view.ts
+    │   │       │       ├── workflow-runs-all.view.ts
+    │   │       │       ├── workflow-versions-all.view.ts
+    │   │       │       └── workflows-all.view.ts
+    │   │       ├── workspace-cleaner/
+    │   │       │   ├── workspace-cleaner.module.ts
+    │   │       │   ├── commands/
+    │   │       │   │   ├── clean-suspended-workspaces.command.ts
+    │   │       │   │   ├── clean-suspended-workspaces.cron.command.ts
+    │   │       │   │   └── delete-workspaces.command.ts
+    │   │       │   ├── constants/
+    │   │       │   │   └── user-workspace-deletion-warning-sent-key.constant.ts
+    │   │       │   ├── crons/
+    │   │       │   │   ├── clean-suspended-workspaces.cron.pattern.ts
+    │   │       │   │   └── clean-suspended-workspaces.job.ts
+    │   │       │   ├── exceptions/
+    │   │       │   │   └── workspace-cleaner.exception.ts
+    │   │       │   ├── jobs/
+    │   │       │   │   └── clean-workspace-deletion-warning-user-vars.job.ts
+    │   │       │   └── services/
+    │   │       │       └── cleaner.workspace-service.ts
+    │   │       ├── workspace-health/
+    │   │       │   ├── workspace-health.module.ts
+    │   │       │   ├── workspace-health.service.ts
+    │   │       │   ├── commands/
+    │   │       │   │   ├── workspace-health-command.module.ts
+    │   │       │   │   └── workspace-health.command.ts
+    │   │       │   ├── fixer/
+    │   │       │   │   ├── abstract-workspace.fixer.ts
+    │   │       │   │   ├── index.ts
+    │   │       │   │   ├── workspace-default-value.fixer.ts
+    │   │       │   │   ├── workspace-missing-column.fixer.ts
+    │   │       │   │   ├── workspace-nullable.fixer.ts
+    │   │       │   │   └── workspace-type.fixer.ts
+    │   │       │   ├── interfaces/
+    │   │       │   │   ├── workspace-health-fix-kind.interface.ts
+    │   │       │   │   ├── workspace-health-issue.interface.ts
+    │   │       │   │   ├── workspace-health-options.interface.ts
+    │   │       │   │   └── workspace-table-definition.interface.ts
+    │   │       │   ├── services/
+    │   │       │   │   ├── database-structure.service.ts
+    │   │       │   │   ├── field-metadata-health.service.ts
+    │   │       │   │   ├── object-metadata-health.service.ts
+    │   │       │   │   ├── relation-metadata.health.service.ts
+    │   │       │   │   └── workspace-fix.service.ts
+    │   │       │   └── utils/
+    │   │       │       └── valid-name.util.ts
+    │   │       ├── workspace-migration-builder/
+    │   │       │   ├── workspace-migration-builder.module.ts
+    │   │       │   ├── factories/
+    │   │       │   │   ├── index.ts
+    │   │       │   │   ├── workspace-migration-field.factory.ts
+    │   │       │   │   ├── workspace-migration-index.factory.ts
+    │   │       │   │   ├── workspace-migration-object.factory.ts
+    │   │       │   │   └── workspace-migration-relation.factory.ts
+    │   │       │   └── interfaces/
+    │   │       │       └── workspace-migration-builder-action.interface.ts
+    │   │       ├── workspace-migration-runner/
+    │   │       │   ├── workspace-migration-runner.module.ts
+    │   │       │   ├── workspace-migration-runner.service.ts
+    │   │       │   ├── commands/
+    │   │       │   │   ├── workspace-execute-pending-migrations.command.ts
+    │   │       │   │   └── workspace-migration-runner-commands.module.ts
+    │   │       │   ├── services/
+    │   │       │   │   ├── workspace-migration-enum.service.ts
+    │   │       │   │   ├── workspace-migration-type.service.ts
+    │   │       │   │   └── __tests__/
+    │   │       │   │       └── workspace-migration-enum.service.spec.ts
+    │   │       │   └── utils/
+    │   │       │       ├── convert-on-delete-action-to-on-delete.util.ts
+    │   │       │       └── table-default-column.util.ts
+    │   │       └── workspace-sync-metadata/
+    │   │           ├── workspace-sync-metadata.module.ts
+    │   │           ├── workspace-sync-metadata.service.ts
+    │   │           ├── commands/
+    │   │           │   ├── convert-record-positions-to-integers.command.ts
+    │   │           │   ├── sync-workspace-metadata.command.ts
+    │   │           │   ├── workspace-sync-metadata-commands.module.ts
+    │   │           │   └── services/
+    │   │           │       ├── sync-workspace-logger.module.ts
+    │   │           │       └── sync-workspace-logger.service.ts
+    │   │           ├── comparators/
+    │   │           │   ├── index.ts
+    │   │           │   ├── workspace-field.comparator.ts
+    │   │           │   ├── workspace-index.comparator.ts
+    │   │           │   ├── workspace-object.comparator.ts
+    │   │           │   ├── workspace-relation.comparator.ts
+    │   │           │   ├── __tests__/
+    │   │           │   │   ├── workspace-field.comparator.spec.ts
+    │   │           │   │   ├── workspace-object.comparator.spec.ts
+    │   │           │   │   └── workspace-relation.comparator.spec.ts
+    │   │           │   └── utils/
+    │   │           │       ├── order-object-properties.util.ts
+    │   │           │       ├── transform-metadata-for-comparison.util.ts
+    │   │           │       └── __tests__/
+    │   │           │           ├── order-object-properties.util.spec.ts
+    │   │           │           └── transform-metadata-for-comparison.util.spec.ts
+    │   │           ├── constants/
+    │   │           │   ├── default-feature-flags.ts
+    │   │           │   ├── standard-field-ids.ts
+    │   │           │   ├── standard-object-icons.ts
+    │   │           │   └── standard-object-ids.ts
+    │   │           ├── factories/
+    │   │           │   ├── index.ts
+    │   │           │   ├── standard-field.factory.ts
+    │   │           │   ├── standard-index.factory.ts
+    │   │           │   ├── standard-object.factory.ts
+    │   │           │   └── standard-relation.factory.ts
+    │   │           ├── interfaces/
+    │   │           │   ├── comparator.interface.ts
+    │   │           │   ├── partial-field-metadata.interface.ts
+    │   │           │   ├── partial-index-metadata.interface.ts
+    │   │           │   ├── partial-object-metadata.interface.ts
+    │   │           │   ├── relation.interface.ts
+    │   │           │   └── workspace-sync-context.interface.ts
+    │   │           ├── services/
+    │   │           │   ├── workspace-metadata-updater.service.ts
+    │   │           │   ├── workspace-sync-field-metadata.service.ts
+    │   │           │   ├── workspace-sync-index-metadata.service.ts
+    │   │           │   ├── workspace-sync-object-metadata-identifiers.service.ts
+    │   │           │   ├── workspace-sync-object-metadata.service.ts
+    │   │           │   └── workspace-sync-relation-metadata.service.ts
+    │   │           ├── standard-objects/
+    │   │           │   └── index.ts
+    │   │           ├── storage/
+    │   │           │   └── workspace-sync.storage.ts
+    │   │           └── utils/
+    │   │               ├── compute-standard-fields.util.ts
+    │   │               ├── convert-class-to-object-metadata-name.util.ts
+    │   │               ├── create-deterministic-uuid.util.ts
+    │   │               ├── get-ts-vector-column-expression.util.ts
+    │   │               ├── is-gate-and-not-enabled.util.ts
+    │   │               ├── is-searchable-field.util.ts
+    │   │               ├── is-searchable-subfield.util.ts
+    │   │               ├── sync-metadata.util.spec.ts
+    │   │               ├── sync-metadata.util.ts
+    │   │               └── __tests__/
+    │   │                   └── get-ts-vectors-column-expression.utils.spec.ts
+    │   ├── filters/
+    │   │   ├── graphql-validation-exception.filter.ts
+    │   │   └── unhandled-exception.filter.ts
+    │   ├── modules/
+    │   │   ├── modules.module.ts
+    │   │   ├── api-key/
+    │   │   │   └── standard-objects/
+    │   │   │       └── api-key.workspace-entity.ts
+    │   │   ├── attachment/
+    │   │   │   └── standard-objects/
+    │   │   │       └── attachment.workspace-entity.ts
+    │   │   ├── blocklist/
+    │   │   │   ├── blocklist-validation-manager/
+    │   │   │   │   ├── blocklist-validation-manager.module.ts
+    │   │   │   │   └── services/
+    │   │   │   │       └── blocklist-validation.service.ts
+    │   │   │   ├── query-hooks/
+    │   │   │   │   ├── blocklist-create-many.pre-query.hook.ts
+    │   │   │   │   ├── blocklist-query-hook.module.ts
+    │   │   │   │   ├── blocklist-update-many.pre-query.hook.ts
+    │   │   │   │   └── blocklist-update-one.pre-query.hook.ts
+    │   │   │   ├── repositories/
+    │   │   │   │   └── blocklist.repository.ts
+    │   │   │   ├── standard-objects/
+    │   │   │   │   └── blocklist.workspace-entity.ts
+    │   │   │   └── utils/
+    │   │   │       ├── is-email-blocklisted.util.ts
+    │   │   │       └── __tests__/
+    │   │   │           └── is-email-blocklisted.util.spec.ts
+    │   │   ├── calendar/
+    │   │   │   ├── calendar.module.ts
+    │   │   │   ├── blocklist-manager/
+    │   │   │   │   ├── calendar-blocklist-manager.module.ts
+    │   │   │   │   ├── jobs/
+    │   │   │   │   │   ├── blocklist-item-delete-calendar-events.job.ts
+    │   │   │   │   │   └── blocklist-reimport-calendar-events.job.ts
+    │   │   │   │   └── listeners/
+    │   │   │   │       └── calendar-blocklist.listener.ts
+    │   │   │   ├── calendar-event-cleaner/
+    │   │   │   │   ├── calendar-event-cleaner.module.ts
+    │   │   │   │   ├── jobs/
+    │   │   │   │   │   └── delete-connected-account-associated-calendar-data.job.ts
+    │   │   │   │   ├── listeners/
+    │   │   │   │   │   └── calendar-event-cleaner-connected-account.listener.ts
+    │   │   │   │   └── services/
+    │   │   │   │       └── calendar-event-cleaner.service.ts
+    │   │   │   ├── calendar-event-import-manager/
+    │   │   │   │   ├── calendar-event-import-manager.module.ts
+    │   │   │   │   ├── constants/
+    │   │   │   │   │   ├── calendar-event-import-batch-size.ts
+    │   │   │   │   │   ├── calendar-import-ongoing-sync-timeout.constant.ts
+    │   │   │   │   │   └── calendar-throttle-max-attempts.ts
+    │   │   │   │   ├── crons/
+    │   │   │   │   │   ├── commands/
+    │   │   │   │   │   │   ├── calendar-event-list-fetch.cron.command.ts
+    │   │   │   │   │   │   ├── calendar-import.cron.command.ts
+    │   │   │   │   │   │   └── calendar-ongoing-stale.cron.command.ts
+    │   │   │   │   │   └── jobs/
+    │   │   │   │   │       ├── calendar-event-list-fetch.cron.job.ts
+    │   │   │   │   │       ├── calendar-events-import.cron.job.ts
+    │   │   │   │   │       └── calendar-ongoing-stale.cron.job.ts
+    │   │   │   │   ├── drivers/
+    │   │   │   │   │   ├── exceptions/
+    │   │   │   │   │   │   └── calendar-event-import-driver.exception.ts
+    │   │   │   │   │   ├── google-calendar/
+    │   │   │   │   │   │   ├── google-calendar-driver.module.ts
+    │   │   │   │   │   │   ├── providers/
+    │   │   │   │   │   │   │   └── google-calendar.provider.ts
+    │   │   │   │   │   │   ├── services/
+    │   │   │   │   │   │   │   └── google-calendar-get-events.service.ts
+    │   │   │   │   │   │   └── utils/
+    │   │   │   │   │   │       ├── format-google-calendar-event.util.ts
+    │   │   │   │   │   │       ├── parse-gaxios-error.util.ts
+    │   │   │   │   │   │       └── parse-google-calendar-error.util.ts
+    │   │   │   │   │   └── microsoft-calendar/
+    │   │   │   │   │       ├── microsoft-calendar-driver.module.ts
+    │   │   │   │   │       ├── services/
+    │   │   │   │   │       │   ├── microsoft-calendar-get-events.service.ts
+    │   │   │   │   │       │   └── microsoft-calendar-import-events.service.ts
+    │   │   │   │   │       └── utils/
+    │   │   │   │   │           ├── format-microsoft-calendar-event.util.ts
+    │   │   │   │   │           └── parse-microsoft-calendar-error.util.ts
+    │   │   │   │   ├── exceptions/
+    │   │   │   │   │   └── calendar-event-import.exception.ts
+    │   │   │   │   ├── jobs/
+    │   │   │   │   │   ├── calendar-event-list-fetch.job.ts
+    │   │   │   │   │   ├── calendar-events-import.job.ts
+    │   │   │   │   │   └── calendar-ongoing-stale.job.ts
+    │   │   │   │   ├── services/
+    │   │   │   │   │   ├── calendar-event-import-exception-handler.service.ts
+    │   │   │   │   │   ├── calendar-events-import.service.ts
+    │   │   │   │   │   ├── calendar-fetch-events.service.ts
+    │   │   │   │   │   ├── calendar-get-events.service.ts
+    │   │   │   │   │   └── calendar-save-events.service.ts
+    │   │   │   │   └── utils/
+    │   │   │   │       ├── filter-events.util.ts
+    │   │   │   │       ├── filter-out-blocklisted-events.util.ts
+    │   │   │   │       ├── get-flattened-values-and-values-string-for-batch-raw-query.util.ts
+    │   │   │   │       ├── inject-ids-in-calendar-events.util.ts
+    │   │   │   │       └── is-sync-stale.util.ts
+    │   │   │   ├── calendar-event-participant-manager/
+    │   │   │   │   ├── calendar-event-participant-manager.module.ts
+    │   │   │   │   ├── jobs/
+    │   │   │   │   │   ├── calendar-create-company-and-contact-after-sync.job.ts
+    │   │   │   │   │   ├── calendar-event-participant-match-participant.job.ts
+    │   │   │   │   │   └── calendar-event-participant-unmatch-participant.job.ts
+    │   │   │   │   ├── listeners/
+    │   │   │   │   │   ├── calendar-event-participant-person.listener.ts
+    │   │   │   │   │   ├── calendar-event-participant-workspace-member.listener.ts
+    │   │   │   │   │   └── calendar-event-participant.listener.ts
+    │   │   │   │   └── services/
+    │   │   │   │       └── calendar-event-participant.service.ts
+    │   │   │   └── common/
+    │   │   │       ├── calendar-common.module.ts
+    │   │   │       ├── query-hooks/
+    │   │   │       │   ├── calendar-query-hook.module.ts
+    │   │   │       │   └── calendar-event/
+    │   │   │       │       ├── calendar-event-find-many.pre-query.hook.ts
+    │   │   │       │       ├── calendar-event-find-one.pre-query-hook.ts
+    │   │   │       │       └── services/
+    │   │   │       │           └── can-access-calendar-event.service.ts
+    │   │   │       ├── services/
+    │   │   │       │   └── calendar-channel-sync-status.service.ts
+    │   │   │       ├── standard-objects/
+    │   │   │       │   ├── calendar-channel-event-association.workspace-entity.ts
+    │   │   │       │   ├── calendar-channel.workspace-entity.ts
+    │   │   │       │   ├── calendar-event-participant.workspace-entity.ts
+    │   │   │       │   └── calendar-event.workspace-entity.ts
+    │   │   │       └── types/
+    │   │   │           └── calendar-event.ts
+    │   │   ├── company/
+    │   │   │   └── standard-objects/
+    │   │   │       └── company.workspace-entity.ts
+    │   │   ├── connected-account/
+    │   │   │   ├── connected-account.module.ts
+    │   │   │   ├── email-alias-manager/
+    │   │   │   │   ├── email-alias-manager.module.ts
+    │   │   │   │   ├── drivers/
+    │   │   │   │   │   ├── google/
+    │   │   │   │   │   │   └── google-email-alias-manager.service.ts
+    │   │   │   │   │   └── microsoft/
+    │   │   │   │   │       ├── microsoft-email-alias-manager.service.ts
+    │   │   │   │   │       └── mocks/
+    │   │   │   │   │           └── microsoft-api-examples.ts
+    │   │   │   │   └── services/
+    │   │   │   │       ├── email-alias-manager.service.spec.ts
+    │   │   │   │       └── email-alias-manager.service.ts
+    │   │   │   ├── jobs/
+    │   │   │   │   └── delete-workspace-member-connected-accounts.job.ts
+    │   │   │   ├── listeners/
+    │   │   │   │   ├── connected-account-workspace-member.listener.ts
+    │   │   │   │   └── connected-account.listener.ts
+    │   │   │   ├── oauth2-client-manager/
+    │   │   │   │   ├── oauth2-client-manager.module.ts
+    │   │   │   │   ├── drivers/
+    │   │   │   │   │   ├── google/
+    │   │   │   │   │   │   └── google-oauth2-client-manager.service.ts
+    │   │   │   │   │   └── microsoft/
+    │   │   │   │   │       └── microsoft-oauth2-client-manager.service.ts
+    │   │   │   │   └── services/
+    │   │   │   │       └── oauth2-client-manager.service.ts
+    │   │   │   ├── query-hooks/
+    │   │   │   │   ├── connected-account-delete-one.pre-query.hook.ts
+    │   │   │   │   └── connected-account-query-hook.module.ts
+    │   │   │   ├── refresh-tokens-manager/
+    │   │   │   │   ├── connected-account-refresh-tokens-manager.module.ts
+    │   │   │   │   ├── drivers/
+    │   │   │   │   │   ├── google/
+    │   │   │   │   │   │   ├── google-api-refresh-access-token.module.ts
+    │   │   │   │   │   │   └── services/
+    │   │   │   │   │   │       └── google-api-refresh-access-token.service.ts
+    │   │   │   │   │   └── microsoft/
+    │   │   │   │   │       ├── microsoft-api-refresh-access-token.module.ts
+    │   │   │   │   │       └── services/
+    │   │   │   │   │           └── microsoft-api-refresh-tokens.service.ts
+    │   │   │   │   ├── exceptions/
+    │   │   │   │   │   └── connected-account-refresh-tokens.exception.ts
+    │   │   │   │   └── services/
+    │   │   │   │       └── connected-account-refresh-tokens.service.ts
+    │   │   │   ├── services/
+    │   │   │   │   └── accounts-to-reconnect.service.ts
+    │   │   │   ├── standard-objects/
+    │   │   │   │   └── connected-account.workspace-entity.ts
+    │   │   │   ├── types/
+    │   │   │   │   └── accounts-to-reconnect-key-value.type.ts
+    │   │   │   └── utils/
+    │   │   │       └── is-throttled.ts
+    │   │   ├── contact-creation-manager/
+    │   │   │   ├── contact-creation-manager.module.ts
+    │   │   │   ├── constants/
+    │   │   │   │   └── contacts-creation-batch-size.constant.ts
+    │   │   │   ├── jobs/
+    │   │   │   │   ├── auto-companies-and-contacts-creation-job.module.ts
+    │   │   │   │   └── create-company-and-contact.job.ts
+    │   │   │   ├── listeners/
+    │   │   │   │   ├── auto-companies-and-contacts-creation-calendar-channel.listener.ts
+    │   │   │   │   └── auto-companies-and-contacts-creation-message-channel.listener.ts
+    │   │   │   ├── services/
+    │   │   │   │   ├── create-company-and-contact.service.ts
+    │   │   │   │   ├── create-company.service.ts
+    │   │   │   │   └── create-contact.service.ts
+    │   │   │   ├── types/
+    │   │   │   │   └── contact.type.ts
+    │   │   │   └── utils/
+    │   │   │       ├── extract-domain-from-link.util.ts
+    │   │   │       ├── filter-out-contacts-from-company-or-workspace.util.ts
+    │   │   │       ├── get-company-name-from-domain-name.util.ts
+    │   │   │       ├── get-domain-name-from-handle.util.ts
+    │   │   │       ├── get-first-name-and-last-name-from-handle-and-display-name.util.ts
+    │   │   │       ├── get-unique-contacts-and-handles.util.ts
+    │   │   │       └── __tests__/
+    │   │   │           ├── extract-domain-from-link.spec.ts
+    │   │   │           └── get-unique-contacts-and-handles.spec.ts
+    │   │   ├── favorite/
+    │   │   │   ├── favorite.module.ts
+    │   │   │   ├── constants/
+    │   │   │   │   └── favorite-deletion-batch-size.ts
+    │   │   │   ├── jobs/
+    │   │   │   │   └── favorite-deletion.job.ts
+    │   │   │   ├── listeners/
+    │   │   │   │   └── favorite-deletion.listener.ts
+    │   │   │   ├── services/
+    │   │   │   │   └── favorite-deletion.service.ts
+    │   │   │   └── standard-objects/
+    │   │   │       └── favorite.workspace-entity.ts
+    │   │   ├── favorite-folder/
+    │   │   │   ├── favorite-folder.module.ts
+    │   │   │   ├── listeners/
+    │   │   │   │   └── favorite-folder.listener.ts
+    │   │   │   └── standard-objects/
+    │   │   │       └── favorite-folder.workspace-entity.ts
+    │   │   ├── match-participant/
+    │   │   │   ├── match-participant.module.ts
+    │   │   │   └── match-participant.service.ts
+    │   │   ├── messaging/
+    │   │   │   ├── messaging.module.ts
+    │   │   │   ├── blocklist-manager/
+    │   │   │   │   ├── messaging-blocklist-manager.module.ts
+    │   │   │   │   ├── jobs/
+    │   │   │   │   │   ├── messaging-blocklist-item-delete-messages.job.ts
+    │   │   │   │   │   └── messaging-blocklist-reimport-messages.job.ts
+    │   │   │   │   └── listeners/
+    │   │   │   │       └── messaging-blocklist.listener.ts
+    │   │   │   ├── common/
+    │   │   │   │   ├── messaging-common.module.ts
+    │   │   │   │   ├── enums/
+    │   │   │   │   │   └── message-direction.enum.ts
+    │   │   │   │   ├── query-hooks/
+    │   │   │   │   │   ├── messaging-query-hook.module.ts
+    │   │   │   │   │   └── message/
+    │   │   │   │   │       ├── can-access-message-thread.service.ts
+    │   │   │   │   │       ├── message-find-many.pre-query.hook.ts
+    │   │   │   │   │       └── message-find-one.pre-query-hook.ts
+    │   │   │   │   ├── services/
+    │   │   │   │   │   └── message-channel-sync-status.service.ts
+    │   │   │   │   └── standard-objects/
+    │   │   │   │       ├── message-channel-message-association.workspace-entity.ts
+    │   │   │   │       ├── message-channel.workspace-entity.ts
+    │   │   │   │       ├── message-folder.workspace-entity.ts
+    │   │   │   │       ├── message-participant.workspace-entity.ts
+    │   │   │   │       ├── message-thread.workspace-entity.ts
+    │   │   │   │       └── message.workspace-entity.ts
+    │   │   │   ├── message-cleaner/
+    │   │   │   │   ├── messaging-message-cleaner.module.ts
+    │   │   │   │   ├── jobs/
+    │   │   │   │   │   └── messaging-connected-account-deletion-cleanup.job.ts
+    │   │   │   │   ├── listeners/
+    │   │   │   │   │   └── messaging-message-cleaner-connected-account.listener.ts
+    │   │   │   │   ├── services/
+    │   │   │   │   │   └── messaging-message-cleaner.service.ts
+    │   │   │   │   └── utils/
+    │   │   │   │       ├── delete-using-pagination.util.ts
+    │   │   │   │       └── __tests__/
+    │   │   │   │           └── delete-using-pagination.util.spec.ts
+    │   │   │   ├── message-import-manager/
+    │   │   │   │   ├── messaging-import-manager.module.ts
+    │   │   │   │   ├── commands/
+    │   │   │   │   │   └── messaging-single-message-import.command.ts
+    │   │   │   │   ├── constants/
+    │   │   │   │   │   ├── messaging-import-ongoing-sync-timeout.constant.ts
+    │   │   │   │   │   ├── messaging-throttle-duration.ts
+    │   │   │   │   │   └── messaging-throttle-max-attempts.ts
+    │   │   │   │   ├── crons/
+    │   │   │   │   │   ├── commands/
+    │   │   │   │   │   │   ├── messaging-message-list-fetch.cron.command.ts
+    │   │   │   │   │   │   ├── messaging-messages-import.cron.command.ts
+    │   │   │   │   │   │   └── messaging-ongoing-stale.cron.command.ts
+    │   │   │   │   │   └── jobs/
+    │   │   │   │   │       ├── messaging-message-list-fetch.cron.job.ts
+    │   │   │   │   │       ├── messaging-messages-import.cron.job.ts
+    │   │   │   │   │       └── messaging-ongoing-stale.cron.job.ts
+    │   │   │   │   ├── drivers/
+    │   │   │   │   │   ├── exceptions/
+    │   │   │   │   │   │   └── message-import-driver.exception.ts
+    │   │   │   │   │   ├── gmail/
+    │   │   │   │   │   │   ├── messaging-gmail-driver.module.ts
+    │   │   │   │   │   │   ├── constants/
+    │   │   │   │   │   │   │   ├── messaging-gmail-excluded-categories.ts
+    │   │   │   │   │   │   │   ├── messaging-gmail-users-history-max-result.constant.ts
+    │   │   │   │   │   │   │   ├── messaging-gmail-users-messages-get-batch-size.constant.ts
+    │   │   │   │   │   │   │   └── messaging-gmail-users-messages-list-max-result.constant.ts
+    │   │   │   │   │   │   ├── mocks/
+    │   │   │   │   │   │   │   ├── gaxios-error-mocks.ts
+    │   │   │   │   │   │   │   └── gmail-api-error-mocks.ts
+    │   │   │   │   │   │   ├── providers/
+    │   │   │   │   │   │   │   └── gmail-client.provider.ts
+    │   │   │   │   │   │   ├── services/
+    │   │   │   │   │   │   │   ├── gmail-fetch-by-batch.service.ts
+    │   │   │   │   │   │   │   ├── gmail-get-history.service.ts
+    │   │   │   │   │   │   │   ├── gmail-get-message-list.service.ts
+    │   │   │   │   │   │   │   ├── gmail-get-messages.service.ts
+    │   │   │   │   │   │   │   └── gmail-handle-error.service.ts
+    │   │   │   │   │   │   ├── types/
+    │   │   │   │   │   │   │   ├── gmail-message-parsed-response.type.ts
+    │   │   │   │   │   │   │   └── gmail-message.type.ts
+    │   │   │   │   │   │   └── utils/
+    │   │   │   │   │   │       ├── compute-gmail-category-excude-search-filter.util.ts
+    │   │   │   │   │   │       ├── compute-gmail-category-label-id.util.ts
+    │   │   │   │   │   │       ├── compute-message-direction.util.ts
+    │   │   │   │   │   │       ├── create-queries-from-message-ids.util.ts
+    │   │   │   │   │   │       ├── get-attachment-data.util.ts
+    │   │   │   │   │   │       ├── get-body-data.util.ts
+    │   │   │   │   │   │       ├── get-property-from-headers.util.ts
+    │   │   │   │   │   │       ├── parse-and-format-gmail-message.util.ts
+    │   │   │   │   │   │       ├── parse-gaxios-error.util.ts
+    │   │   │   │   │   │       ├── parse-gmail-message-list-fetch-error.util.ts
+    │   │   │   │   │   │       ├── parse-gmail-message.util.ts
+    │   │   │   │   │   │       ├── parse-gmail-messages-import-error.util.ts
+    │   │   │   │   │   │       ├── sanitize-string.util.ts
+    │   │   │   │   │   │       └── __tests__/
+    │   │   │   │   │   │           ├── compute-gmail-category-excude-search-filter.spec.ts
+    │   │   │   │   │   │           ├── compute-gmail-category-label-id.spec.ts
+    │   │   │   │   │   │           ├── parse-gaxios-error.spec.ts
+    │   │   │   │   │   │           ├── parse-gmail-message-list-fetch-error.spec.ts
+    │   │   │   │   │   │           └── parse-gmail-messages-import-error.spec.ts
+    │   │   │   │   │   └── microsoft/
+    │   │   │   │   │       ├── messaging-microsoft-driver.module.ts
+    │   │   │   │   │       ├── mocks/
+    │   │   │   │   │       │   └── microsoft-api-examples.ts
+    │   │   │   │   │       ├── providers/
+    │   │   │   │   │       │   └── microsoft-client.provider.ts
+    │   │   │   │   │       ├── services/
+    │   │   │   │   │       │   ├── microsoft-fetch-by-batch.service.ts
+    │   │   │   │   │       │   ├── microsoft-get-message-list.service.dev.spec.ts
+    │   │   │   │   │       │   ├── microsoft-get-message-list.service.ts
+    │   │   │   │   │       │   ├── microsoft-get-messages.interface.ts
+    │   │   │   │   │       │   ├── microsoft-get-messages.service.dev.spec.ts
+    │   │   │   │   │       │   ├── microsoft-get-messages.service.spec.ts
+    │   │   │   │   │       │   ├── microsoft-get-messages.service.ts
+    │   │   │   │   │       │   └── microsoft-handle-error.service.ts
+    │   │   │   │   │       └── types/
+    │   │   │   │   │           └── folders.ts
+    │   │   │   │   ├── exceptions/
+    │   │   │   │   │   └── message-import.exception.ts
+    │   │   │   │   ├── jobs/
+    │   │   │   │   │   ├── messaging-add-single-message-to-cache-for-import.job.ts
+    │   │   │   │   │   ├── messaging-clean-cache.ts
+    │   │   │   │   │   ├── messaging-message-list-fetch.job.ts
+    │   │   │   │   │   ├── messaging-messages-import.job.ts
+    │   │   │   │   │   └── messaging-ongoing-stale.job.ts
+    │   │   │   │   ├── listeners/
+    │   │   │   │   │   └── messaging-import-manager-message-channel.listener.ts
+    │   │   │   │   ├── services/
+    │   │   │   │   │   ├── messaging-cursor.service.ts
+    │   │   │   │   │   ├── messaging-full-message-list-fetch.service.ts
+    │   │   │   │   │   ├── messaging-get-message-list.service.ts
+    │   │   │   │   │   ├── messaging-get-messages.service.ts
+    │   │   │   │   │   ├── messaging-import-exception-handler.service.ts
+    │   │   │   │   │   ├── messaging-message.service.ts
+    │   │   │   │   │   ├── messaging-messages-import.service.ts
+    │   │   │   │   │   ├── messaging-partial-message-list-fetch.service.ts
+    │   │   │   │   │   ├── messaging-save-messages-and-enqueue-contact-creation.service.ts
+    │   │   │   │   │   └── messaging-send-message.service.ts
+    │   │   │   │   ├── types/
+    │   │   │   │   │   ├── batch-queries.ts
+    │   │   │   │   │   ├── message-or-thread-query.ts
+    │   │   │   │   │   └── message.ts
+    │   │   │   │   └── utils/
+    │   │   │   │       ├── filter-emails.util.ts
+    │   │   │   │       ├── format-address-object-as-participants.util.ts
+    │   │   │   │       ├── is-sync-stale.util.ts
+    │   │   │   │       ├── __mocks__/
+    │   │   │   │       │   └── messages.ts
+    │   │   │   │       └── __tests__/
+    │   │   │   │           ├── filter-emails.util.spec.ts
+    │   │   │   │           ├── format-address-object-as-participants.util.spec.ts
+    │   │   │   │           └── is-sync-stale.util.spec.ts
+    │   │   │   ├── message-participant-manager/
+    │   │   │   │   ├── message-participant-manager.module.ts
+    │   │   │   │   ├── jobs/
+    │   │   │   │   │   ├── message-participant-match-participant.job.ts
+    │   │   │   │   │   ├── message-participant-unmatch-participant.job.ts
+    │   │   │   │   │   └── messaging-create-company-and-contact-after-sync.job.ts
+    │   │   │   │   ├── listeners/
+    │   │   │   │   │   ├── message-participant-person.listener.ts
+    │   │   │   │   │   ├── message-participant-workspace-member.listener.ts
+    │   │   │   │   │   └── message-participant.listener.ts
+    │   │   │   │   └── services/
+    │   │   │   │       └── messaging-message-participant.service.ts
+    │   │   │   └── monitoring/
+    │   │   │       ├── messaging-monitoring.module.ts
+    │   │   │       ├── crons/
+    │   │   │       │   ├── commands/
+    │   │   │       │   │   └── messaging-message-channel-sync-status-monitoring.cron.command.ts
+    │   │   │       │   └── jobs/
+    │   │   │       │       └── messaging-message-channel-sync-status-monitoring.cron.job.ts
+    │   │   │       └── services/
+    │   │   │           └── messaging-telemetry.service.ts
+    │   │   ├── note/
+    │   │   │   └── standard-objects/
+    │   │   │       ├── note-target.workspace-entity.ts
+    │   │   │       └── note.workspace-entity.ts
+    │   │   ├── opportunity/
+    │   │   │   └── standard-objects/
+    │   │   │       └── opportunity.workspace-entity.ts
+    │   │   ├── person/
+    │   │   │   └── standard-objects/
+    │   │   │       └── person.workspace-entity.ts
+    │   │   ├── task/
+    │   │   │   └── standard-objects/
+    │   │   │       ├── task-target.workspace-entity.ts
+    │   │   │       └── task.workspace-entity.ts
+    │   │   ├── timeline/
+    │   │   │   ├── timeline-activity.module.ts
+    │   │   │   ├── jobs/
+    │   │   │   │   ├── create-audit-log-from-internal-event.ts
+    │   │   │   │   ├── timeline-job.module.ts
+    │   │   │   │   ├── upsert-timeline-activity-from-behavioral-event.ts
+    │   │   │   │   └── upsert-timeline-activity-from-internal-event.job.ts
+    │   │   │   ├── repositiories/
+    │   │   │   │   ├── audit-log.repository.ts
+    │   │   │   │   └── timeline-activity.repository.ts
+    │   │   │   ├── services/
+    │   │   │   │   └── timeline-activity.service.ts
+    │   │   │   └── standard-objects/
+    │   │   │       ├── audit-log.workspace-entity.ts
+    │   │   │       ├── behavioral-event.workspace-entity.ts
+    │   │   │       └── timeline-activity.workspace-entity.ts
+    │   │   ├── view/
+    │   │   │   ├── view.module.ts
+    │   │   │   ├── services/
+    │   │   │   │   └── view.service.ts
+    │   │   │   └── standard-objects/
+    │   │   │       ├── view-field.workspace-entity.ts
+    │   │   │       ├── view-filter-group.workspace-entity.ts
+    │   │   │       ├── view-filter.workspace-entity.ts
+    │   │   │       ├── view-group.workspace-entity.ts
+    │   │   │       ├── view-sort.workspace-entity.ts
+    │   │   │       └── view.workspace-entity.ts
+    │   │   ├── webhook/
+    │   │   │   ├── jobs/
+    │   │   │   │   ├── call-webhook-jobs.job.ts
+    │   │   │   │   ├── call-webhook.job.ts
+    │   │   │   │   └── webhook-job.module.ts
+    │   │   │   └── standard-objects/
+    │   │   │       └── webhook.workspace-entity.ts
+    │   │   ├── workflow/
+    │   │   │   ├── workflow.module.ts
+    │   │   │   ├── common/
+    │   │   │   │   ├── workflow-common.module.ts
+    │   │   │   │   ├── exceptions/
+    │   │   │   │   │   ├── workflow-query-validation.exception.ts
+    │   │   │   │   │   └── workflow-version-step.exception.ts
+    │   │   │   │   ├── query-hooks/
+    │   │   │   │   │   ├── workflow-create-many.post-query.hook.ts
+    │   │   │   │   │   ├── workflow-create-many.pre-query.hook.ts
+    │   │   │   │   │   ├── workflow-create-one.post-query.hook.ts
+    │   │   │   │   │   ├── workflow-create-one.pre-query.hook.ts
+    │   │   │   │   │   ├── workflow-delete-many.post-query.hook.ts
+    │   │   │   │   │   ├── workflow-delete-one.post-query.hook.ts
+    │   │   │   │   │   ├── workflow-query-hook.module.ts
+    │   │   │   │   │   ├── workflow-run-create-many.pre-query.hook.ts
+    │   │   │   │   │   ├── workflow-run-create-one.pre-query.hook.ts
+    │   │   │   │   │   ├── workflow-run-delete-many.pre-query.hook.ts
+    │   │   │   │   │   ├── workflow-run-delete-one.pre-query.hook.ts
+    │   │   │   │   │   ├── workflow-run-update-many.pre-query.hook.ts
+    │   │   │   │   │   ├── workflow-run-update-one.pre-query.hook.ts
+    │   │   │   │   │   ├── workflow-update-many.pre-query.hook.ts
+    │   │   │   │   │   ├── workflow-update-one.pre-query.hook.ts
+    │   │   │   │   │   ├── workflow-version-create-many.pre-query.hook.ts
+    │   │   │   │   │   ├── workflow-version-create-one.pre-query.hook.ts
+    │   │   │   │   │   ├── workflow-version-delete-many.pre-query.hook.ts
+    │   │   │   │   │   ├── workflow-version-delete-one.pre-query.hook.ts
+    │   │   │   │   │   ├── workflow-version-update-many.pre-query.hook.ts
+    │   │   │   │   │   └── workflow-version-update-one.pre-query.hook.ts
+    │   │   │   │   ├── standard-objects/
+    │   │   │   │   │   ├── workflow-event-listener.workspace-entity.ts
+    │   │   │   │   │   ├── workflow-run.workspace-entity.ts
+    │   │   │   │   │   ├── workflow-version.workspace-entity.ts
+    │   │   │   │   │   └── workflow.workspace-entity.ts
+    │   │   │   │   ├── utils/
+    │   │   │   │   │   ├── assert-workflow-statuses-not-set-or-empty.ts
+    │   │   │   │   │   ├── assert-workflow-statuses-not-set.ts
+    │   │   │   │   │   ├── assert-workflow-version-has-steps.ts
+    │   │   │   │   │   ├── assert-workflow-version-is-draft.util.ts
+    │   │   │   │   │   └── assert-workflow-version-trigger-is-defined.util.ts
+    │   │   │   │   └── workspace-services/
+    │   │   │   │       ├── workflow-common.workspace-service.ts
+    │   │   │   │       └── workflow-version-validation.workspace-service.ts
+    │   │   │   ├── workflow-builder/
+    │   │   │   │   ├── workflow-builder.module.ts
+    │   │   │   │   ├── workflow-schema/
+    │   │   │   │   │   ├── workflow-schema.module.ts
+    │   │   │   │   │   ├── workflow-schema.workspace-service.ts
+    │   │   │   │   │   ├── types/
+    │   │   │   │   │   │   ├── input-schema.type.ts
+    │   │   │   │   │   │   └── output-schema.type.ts
+    │   │   │   │   │   └── utils/
+    │   │   │   │   │       ├── generate-fake-field.ts
+    │   │   │   │   │       ├── generate-fake-form-response.ts
+    │   │   │   │   │       ├── generate-fake-object-record-event.ts
+    │   │   │   │   │       ├── generate-fake-object-record.ts
+    │   │   │   │   │       ├── should-generate-field-fake-value.ts
+    │   │   │   │   │       └── __tests__/
+    │   │   │   │   │           ├── generate-fake-field.spec.ts
+    │   │   │   │   │           └── generate-fake-form-response.spec.ts
+    │   │   │   │   ├── workflow-step/
+    │   │   │   │   │   ├── workflow-version-step.module.ts
+    │   │   │   │   │   └── workflow-version-step.workspace-service.ts
+    │   │   │   │   └── workflow-version/
+    │   │   │   │       ├── workflow-version.module.ts
+    │   │   │   │       └── workflow-version.workspace-service.ts
+    │   │   │   ├── workflow-executor/
+    │   │   │   │   ├── workflow-executor.module.ts
+    │   │   │   │   ├── exceptions/
+    │   │   │   │   │   ├── workflow-executor.exception.ts
+    │   │   │   │   │   └── workflow-step-executor.exception.ts
+    │   │   │   │   ├── factories/
+    │   │   │   │   │   └── workflow-executor.factory.ts
+    │   │   │   │   ├── interfaces/
+    │   │   │   │   │   └── workflow-executor.interface.ts
+    │   │   │   │   ├── types/
+    │   │   │   │   │   ├── workflow-executor-input.ts
+    │   │   │   │   │   └── workflow-executor-output.type.ts
+    │   │   │   │   ├── utils/
+    │   │   │   │   │   ├── variable-resolver.util.ts
+    │   │   │   │   │   └── __tests__/
+    │   │   │   │   │       └── variable-resolver.util.spec.ts
+    │   │   │   │   ├── workflow-actions/
+    │   │   │   │   │   ├── code/
+    │   │   │   │   │   │   ├── code-action.module.ts
+    │   │   │   │   │   │   ├── code.workflow-action.ts
+    │   │   │   │   │   │   ├── guards/
+    │   │   │   │   │   │   │   └── is-workflow-code-action.guard.ts
+    │   │   │   │   │   │   └── types/
+    │   │   │   │   │   │       ├── workflow-code-action-input.type.ts
+    │   │   │   │   │   │       └── workflow-code-action-settings.type.ts
+    │   │   │   │   │   ├── form/
+    │   │   │   │   │   │   ├── form-action.module.ts
+    │   │   │   │   │   │   ├── form.workflow-action.ts
+    │   │   │   │   │   │   ├── guards/
+    │   │   │   │   │   │   │   └── is-workflow-form-action.guard.ts
+    │   │   │   │   │   │   └── types/
+    │   │   │   │   │   │       └── workflow-form-action-settings.type.ts
+    │   │   │   │   │   ├── mail-sender/
+    │   │   │   │   │   │   ├── send-email-action.module.ts
+    │   │   │   │   │   │   ├── send-email.workflow-action.ts
+    │   │   │   │   │   │   ├── exceptions/
+    │   │   │   │   │   │   │   └── send-email-action.exception.ts
+    │   │   │   │   │   │   ├── guards/
+    │   │   │   │   │   │   │   └── is-workflow-send-email-action.guard.ts
+    │   │   │   │   │   │   └── types/
+    │   │   │   │   │   │       ├── workflow-send-email-action-input.type.ts
+    │   │   │   │   │   │       └── workflow-send-email-action-settings.type.ts
+    │   │   │   │   │   ├── record-crud/
+    │   │   │   │   │   │   ├── create-record.workflow-action.ts
+    │   │   │   │   │   │   ├── delete-record.workflow-action.ts
+    │   │   │   │   │   │   ├── find-records.workflow-action.ts
+    │   │   │   │   │   │   ├── record-crud-action.module.ts
+    │   │   │   │   │   │   ├── update-record.workflow-action.ts
+    │   │   │   │   │   │   ├── exceptions/
+    │   │   │   │   │   │   │   └── record-crud-action.exception.ts
+    │   │   │   │   │   │   ├── guards/
+    │   │   │   │   │   │   │   ├── is-workflow-create-record-action.guard.ts
+    │   │   │   │   │   │   │   ├── is-workflow-delete-record-action.guard.ts
+    │   │   │   │   │   │   │   ├── is-workflow-find-records-action.guard.ts
+    │   │   │   │   │   │   │   └── is-workflow-update-record-action.guard.ts
+    │   │   │   │   │   │   └── types/
+    │   │   │   │   │   │       ├── workflow-record-crud-action-input.type.ts
+    │   │   │   │   │   │       └── workflow-record-crud-action-settings.type.ts
+    │   │   │   │   │   └── types/
+    │   │   │   │   │       ├── workflow-action-settings.type.ts
+    │   │   │   │   │       └── workflow-action.type.ts
+    │   │   │   │   └── workspace-services/
+    │   │   │   │       ├── workflow-executor.workspace-service.ts
+    │   │   │   │       └── __tests__/
+    │   │   │   │           └── workflow-executor.workspace-service.spec.ts
+    │   │   │   ├── workflow-runner/
+    │   │   │   │   ├── workflow-runner.module.ts
+    │   │   │   │   ├── exceptions/
+    │   │   │   │   │   └── workflow-run.exception.ts
+    │   │   │   │   ├── jobs/
+    │   │   │   │   │   └── run-workflow.job.ts
+    │   │   │   │   ├── workflow-run/
+    │   │   │   │   │   ├── workflow-run.module.ts
+    │   │   │   │   │   └── workflow-run.workspace-service.ts
+    │   │   │   │   └── workspace-services/
+    │   │   │   │       └── workflow-runner.workspace-service.ts
+    │   │   │   ├── workflow-status/
+    │   │   │   │   ├── workflow-status.module.ts
+    │   │   │   │   ├── constants/
+    │   │   │   │   │   ├── workflow-status.constants.ts
+    │   │   │   │   │   └── workflow-version-status-updated.constants.ts
+    │   │   │   │   ├── enums/
+    │   │   │   │   │   └── workflow-status.enum.ts
+    │   │   │   │   ├── jobs/
+    │   │   │   │   │   ├── workflow-statuses-update.job.ts
+    │   │   │   │   │   └── __tests__/
+    │   │   │   │   │       └── workflow-statuses-update.job.spec.ts
+    │   │   │   │   ├── listeners/
+    │   │   │   │   │   └── workflow-version-status.listener.ts
+    │   │   │   │   └── utils/
+    │   │   │   │       ├── get-status-combination-from-array.util.ts
+    │   │   │   │       ├── get-status-combination-from-update.util.ts
+    │   │   │   │       └── get-statuses-from-combination.util.ts
+    │   │   │   └── workflow-trigger/
+    │   │   │       ├── workflow-trigger.module.ts
+    │   │   │       ├── database-event-trigger/
+    │   │   │       │   ├── database-event-trigger.module.ts
+    │   │   │       │   ├── database-event-trigger.service.ts
+    │   │   │       │   └── listeners/
+    │   │   │       │       └── database-event-trigger.listener.ts
+    │   │   │       ├── exceptions/
+    │   │   │       │   └── workflow-trigger.exception.ts
+    │   │   │       ├── jobs/
+    │   │   │       │   └── workflow-trigger.job.ts
+    │   │   │       ├── types/
+    │   │   │       │   └── workflow-trigger.type.ts
+    │   │   │       ├── utils/
+    │   │   │       │   ├── assert-version-can-be-activated.util.ts
+    │   │   │       │   ├── compute-cron-pattern-from-schedule.ts
+    │   │   │       │   └── __tests__/
+    │   │   │       │       └── compute-cron-pattern-from-schedule.spec.ts
+    │   │   │       └── workspace-services/
+    │   │   │           └── workflow-trigger.workspace-service.ts
+    │   │   └── workspace-member/
+    │   │       ├── query-hooks/
+    │   │       │   ├── workspace-member-create-many.pre-query.hook.ts
+    │   │       │   ├── workspace-member-create-one.pre-query.hook.ts
+    │   │       │   ├── workspace-member-delete-many.pre-query.hook.ts
+    │   │       │   ├── workspace-member-delete-one.pre-query.hook.ts
+    │   │       │   ├── workspace-member-destroy-many.pre-query.hook.ts
+    │   │       │   ├── workspace-member-destroy-one.pre-query.hook.ts
+    │   │       │   ├── workspace-member-pre-query-hook.service.ts
+    │   │       │   ├── workspace-member-query-hook.module.ts
+    │   │       │   ├── workspace-member-restore-many.pre-query.hook.ts
+    │   │       │   ├── workspace-member-restore-one.pre-query.hook.ts
+    │   │       │   ├── workspace-member-update-many.pre-query.hook.ts
+    │   │       │   └── workspace-member-update-one.pre-query.hook.ts
+    │   │       ├── repositories/
+    │   │       │   └── workspace-member.repository.ts
+    │   │       └── standard-objects/
+    │   │           └── workspace-member.workspace-entity.ts
+    │   ├── queue-worker/
+    │   │   ├── queue-worker.module.ts
+    │   │   └── queue-worker.ts
+    │   └── utils/
+    │       ├── anonymize.ts
+    │       ├── assert.ts
+    │       ├── camel-case.ts
+    │       ├── camel-to-title-case.ts
+    │       ├── compute-display-name.ts
+    │       ├── custom-exception.ts
+    │       ├── email-providers.ts
+    │       ├── extract-request.ts
+    │       ├── generate-front-config.ts
+    │       ├── get-domain-name-by-email.ts
+    │       ├── get-dry-run-log-header.ts
+    │       ├── get-server-url.ts
+    │       ├── image.ts
+    │       ├── is-group-email.ts
+    │       ├── is-plain-object.ts
+    │       ├── is-work-email.ts
+    │       ├── kebab-case.ts
+    │       ├── pascal-case.ts
+    │       ├── remove-secret-from-webhook-record.ts
+    │       ├── resolve-absolute-path.ts
+    │       ├── snake-case.ts
+    │       ├── stream-to-buffer.ts
+    │       ├── typed-reflect.ts
+    │       ├── __test__/
+    │       │   ├── get-domain-name-by-email.spec.ts
+    │       │   └── is-work-email.spec.ts
+    │       └── date/
+    │           ├── isDate.ts
+    │           └── isValidDate.ts
+    └── test/
+        └── integration/
+            ├── billing/
+            │   ├── suites/
+            │   │   └── billing-controller.integration-spec.ts
+            │   └── utils/
+            │       ├── create-mock-stripe-entitlement-updated-data.util.ts
+            │       ├── create-mock-stripe-price-created-data.util.ts
+            │       ├── create-mock-stripe-product-updated-data.util.ts
+            │       └── create-mock-stripe-subscription-created-data.util.ts
+            ├── constants/
+            │   ├── initial-person-data.constants.ts
+            │   ├── mock-person-ids.constants.ts
+            │   └── person-gql-fields.constants.ts
+            ├── graphql/
+            │   ├── integration.constants.ts
+            │   ├── codegen/
+            │   │   ├── index.ts
+            │   │   ├── introspection-query.ts
+            │   │   └── introspection.interface.ts
+            │   ├── suites/
+            │   │   ├── all-people-resolvers.integration-spec.ts
+            │   │   ├── auth.integration-spec.ts
+            │   │   ├── user.integration-spec.ts
+            │   │   ├── object-generated/
+            │   │   │   ├── api-keys.integration-spec.ts
+            │   │   │   ├── attachments.integration-spec.ts
+            │   │   │   ├── audit-logs.integration-spec.ts
+            │   │   │   ├── blocklists.integration-spec.ts
+            │   │   │   ├── calendar-channel-event-associations.integration-spec.ts
+            │   │   │   ├── calendar-channels.integration-spec.ts
+            │   │   │   ├── calendar-event-participants.integration-spec.ts
+            │   │   │   ├── companies.integration-spec.ts
+            │   │   │   ├── connected-accounts.integration-spec.ts
+            │   │   │   ├── favorites.integration-spec.ts
+            │   │   │   ├── index-metadatas.integration-spec.ts
+            │   │   │   ├── message-channel-message-associations.integration-spec.ts
+            │   │   │   ├── message-channels.integration-spec.ts
+            │   │   │   ├── message-participants.integration-spec.ts
+            │   │   │   ├── message-threads.integration-spec.ts
+            │   │   │   ├── note-targets.integration-spec.ts
+            │   │   │   ├── notes.integration-spec.ts
+            │   │   │   ├── objects.integration-spec.ts
+            │   │   │   ├── opportunities.integration-spec.ts
+            │   │   │   ├── people.integration-spec.ts
+            │   │   │   ├── rockets.integration-spec.ts
+            │   │   │   ├── search-api-keys.integration-spec.ts
+            │   │   │   ├── search-attachments.integration-spec.ts
+            │   │   │   ├── search-audit-logs.integration-spec.ts
+            │   │   │   ├── search-blocklists.integration-spec.ts
+            │   │   │   ├── search-calendar-channel-event-associations.integration-spec.ts
+            │   │   │   ├── search-calendar-channels.integration-spec.ts
+            │   │   │   ├── search-calendar-event-participants.integration-spec.ts
+            │   │   │   ├── search-calendar-events.integration-spec.ts
+            │   │   │   ├── search-companies.integration-spec.ts
+            │   │   │   ├── search-connected-accounts.integration-spec.ts
+            │   │   │   ├── search-favorites.integration-spec.ts
+            │   │   │   ├── search-message-channel-message-associations.integration-spec.ts
+            │   │   │   ├── search-message-channels.integration-spec.ts
+            │   │   │   ├── search-message-participants.integration-spec.ts
+            │   │   │   ├── search-message-threads.integration-spec.ts
+            │   │   │   ├── search-messages.integration-spec.ts
+            │   │   │   ├── search-note-targets.integration-spec.ts
+            │   │   │   ├── search-notes.integration-spec.ts
+            │   │   │   ├── search-opportunities.integration-spec.ts
+            │   │   │   ├── search-people.integration-spec.ts
+            │   │   │   ├── search-rockets.integration-spec.ts
+            │   │   │   ├── search-task-targets.integration-spec.ts
+            │   │   │   ├── search-tasks.integration-spec.ts
+            │   │   │   ├── search-timeline-activities.integration-spec.ts
+            │   │   │   ├── search-view-fields.integration-spec.ts
+            │   │   │   ├── search-view-filters.integration-spec.ts
+            │   │   │   ├── search-view-sorts.integration-spec.ts
+            │   │   │   ├── search-views.integration-spec.ts
+            │   │   │   ├── search-webhooks.integration-spec.ts
+            │   │   │   ├── search-workflow-event-listeners.integration-spec.ts
+            │   │   │   ├── search-workflow-runs.integration-spec.ts
+            │   │   │   ├── search-workflow-versions.integration-spec.ts
+            │   │   │   ├── search-workflows.integration-spec.ts
+            │   │   │   ├── search-workspace-members.integration-spec.ts
+            │   │   │   ├── serverless-functions.integration-spec.ts
+            │   │   │   ├── task-targets.integration-spec.ts
+            │   │   │   ├── tasks.integration-spec.ts
+            │   │   │   ├── timeline-activities.integration-spec.ts
+            │   │   │   ├── view-fields.integration-spec.ts
+            │   │   │   ├── view-filters.integration-spec.ts
+            │   │   │   ├── view-sorts.integration-spec.ts
+            │   │   │   ├── views.integration-spec.ts
+            │   │   │   ├── webhooks.integration-spec.ts
+            │   │   │   ├── workflow-event-listeners.integration-spec.ts
+            │   │   │   ├── workflow-versions.integration-spec.ts
+            │   │   │   ├── workflows.integration-spec.ts
+            │   │   │   └── workspace-members.integration-spec.ts
+            │   │   ├── object-records-permissions/
+            │   │   │   ├── create-many-object-records-permissions.integration-spec.ts
+            │   │   │   ├── create-one-object-records-permissions.integration-spec.ts
+            │   │   │   ├── delete-many-object-records-permissions.integration-spec.ts
+            │   │   │   ├── delete-one-object-records-permissions.integration-spec.ts
+            │   │   │   ├── destroy-many-object-records-permissions.integration-spec.ts
+            │   │   │   ├── destroy-one-object-records-permissions.integration-spec.ts
+            │   │   │   ├── restore-many-object-records-permissions.integration-spec.ts
+            │   │   │   ├── restore-one-object-records-permissions.integration-spec.ts
+            │   │   │   ├── update-many-object-records-permissions.integration-spec.ts
+            │   │   │   └── update-one-object-records-permissions.integration-spec.ts
+            │   │   └── settings-permissions/
+            │   │       ├── api-key-webhooks.integration-spec.ts
+            │   │       ├── data-model.integration-spec.ts
+            │   │       ├── roles.integration-spec.ts
+            │   │       ├── security.integration-spec.ts
+            │   │       ├── workspace-invitation.integration-spec.ts
+            │   │       ├── workspace-members.integration-spec.ts
+            │   │       └── workspace.integration-spec.ts
+            │   └── utils/
+            │       ├── create-many-operation-factory.util.ts
+            │       ├── create-one-operation-factory.util.ts
+            │       ├── delete-many-operation-factory.util.ts
+            │       ├── delete-one-operation-factory.util.ts
+            │       ├── destroy-many-operation-factory.util.ts
+            │       ├── destroy-one-operation-factory.util.ts
+            │       ├── find-many-operation-factory.util.ts
+            │       ├── find-one-operation-factory.util.ts
+            │       ├── make-graphql-api-request-with-guest-role.util.ts
+            │       ├── make-graphql-api-request-with-member-role.util.ts
+            │       ├── make-graphql-api-request.util.ts
+            │       ├── restore-many-operation-factory.util.ts
+            │       ├── restore-one-operation-factory.util.ts
+            │       ├── update-feature-flag-factory.util.ts
+            │       ├── update-many-operation-factory.util.ts
+            │       └── update-one-operation-factory.util.ts
+            ├── metadata/
+            │   └── suites/
+            │       ├── field-metadata/
+            │       │   ├── create-one-field-metadata.integration-spec.ts
+            │       │   ├── delete-one-field-metadata.integration-spec.ts
+            │       │   ├── update-one-field-metadata.integration-spec.ts
+            │       │   └── utils/
+            │       │       ├── create-custom-text-field-metadata.util.ts
+            │       │       ├── create-one-field-metadata-factory.util.ts
+            │       │       ├── delete-one-field-metadata-factory.util.ts
+            │       │       ├── delete-one-field-metadata.util.ts
+            │       │       └── update-one-field-metadata-factory.util.ts
+            │       ├── object-metadata/
+            │       │   ├── rename-custom-object.integration-spec.ts
+            │       │   └── utils/
+            │       │       ├── create-one-object-metadata-factory.util.ts
+            │       │       ├── create-test-object-metadata.util.ts
+            │       │       ├── delete-one-object-metadata-factory.util.ts
+            │       │       ├── delete-one-object-metadata.util.ts
+            │       │       ├── objects-metadata-factory.util.ts
+            │       │       └── update-one-object-metadata-factory.util.ts
+            │       └── utils/
+            │           ├── create-one-relation-metadata-factory.util.ts
+            │           ├── delete-one-relation-metadata-factory.util.ts
+            │           ├── fields-metadata-factory.util.ts
+            │           ├── make-metadata-api-request-with-member-role.util.ts
+            │           └── make-metadata-api-request.util.ts
+            ├── rest/
+            │   ├── suites/
+            │   │   ├── rest-api-core-create-one.integration-spec.ts
+            │   │   ├── rest-api-core-delete.integration-spec.ts
+            │   │   └── rest-api-core-update.integration-spec.ts
+            │   └── utils/
+            │       └── make-rest-api-request.util.ts
+            └── utils/
+                ├── create-app.ts
+                ├── generate-record-name.ts
+                ├── setup-test.ts
+                └── teardown-test.ts
