@@ -10,7 +10,7 @@ app.use(express.static(__dirname));
 
 // Serve JSON data
 app.get('/data.json', (req, res) => {
-    const jsonPath = path.join(__dirname, '..', 'data-sinks-analysis.json');
+    const jsonPath = path.join(__dirname, '..', 'data-sinks-analysis-ast.json');
     const jsonData = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
     res.json(jsonData);
 });
