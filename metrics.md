@@ -2,7 +2,7 @@
 Total Files Analyzed: 2247  
 Data Sinks Found: 257 (11.44%)  
 
-=== Top 10 Directories ===
+=== Top 10 Directories based on Size===  
 test/integration/graphql/suites/object-generated: 68 files (0 sinks)  
 src/database/typeorm/core/migrations/common: 50 files (0 sinks)  
 src/database/typeorm/metadata/migrations: 50 files (0 sinks)  
