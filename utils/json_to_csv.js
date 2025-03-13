@@ -3,10 +3,10 @@ const fs = require('fs');
 function convertJsonToCsv() {
     try {
         // Read JSON file
-        const jsonData = JSON.parse(fs.readFileSync('privado_data_sinks.json', 'utf8'));
+        const jsonData = JSON.parse(fs.readFileSync('embedding_data-sinks.json', 'utf8'));
         
         // CSV header
-        const csvRows = ['file_path,ast_is_data_sink'];
+        const csvRows = ['file_path,embedding_is_data_sink'];
         
         // Convert each JSON object to CSV row
         jsonData.forEach(item => {
@@ -16,7 +16,7 @@ function convertJsonToCsv() {
         });
         
         // Write to CSV file
-        fs.writeFileSync('privado_data-sinks.csv', csvRows.join('\n'));
+        fs.writeFileSync('embedding_data-sinks.csv', csvRows.join('\n'));
         
         // Print statistics
         console.log('\nConversion completed successfully!');
@@ -25,7 +25,7 @@ function convertJsonToCsv() {
         console.log('\nSample of converted data:');
         console.log(csvRows.slice(0, 6).join('\n'));
         
-        console.log('\nOutput saved to: privado_data-sinks.csv');
+        console.log('\nOutput saved to: embedding_data-sinks.csv');
         
     } catch (error) {
         console.error('Error converting JSON to CSV:', error);

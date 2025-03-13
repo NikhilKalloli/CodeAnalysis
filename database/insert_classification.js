@@ -2,25 +2,39 @@ const { createClient } = require("@libsql/client");
 const fs = require('fs');
 const csv = require('csv-parse');
 const path = require('path');
-require('dotenv').config();
+const dotenv = require('dotenv');
+
+// Configure dotenv to look for .env file in the correct location
+const envPath = path.resolve(__dirname, '../.env');
+dotenv.config({ path: envPath });
+
+// Verify environment variables are loaded
+if (!process.env.TURSO_DATABASE_URL || !process.env.TURSO_AUTH_TOKEN) {
+    console.error('Error: Missing required environment variables');
+    console.error('Please ensure your .env file exists and contains:');
+    console.error('TURSO_DATABASE_URL=your_database_url');
+    console.error('TURSO_AUTH_TOKEN=your_auth_token');
+    console.error(`Looking for .env file at: ${envPath}`);
+    process.exit(1);
+}
 
 const turso = createClient({
-  url: process.env.TURSO_DATABASE_URL,
-  authToken: process.env.TURSO_AUTH_TOKEN,
+    url: process.env.TURSO_DATABASE_URL,
+    authToken: process.env.TURSO_AUTH_TOKEN,
 });
 
 async function createTable() {
   try {
     // Drop table if exists
     await turso.execute(`
-      DROP TABLE IF EXISTS repo_classification_privado;
+      DROP TABLE IF EXISTS repo_classification_embedding;
     `);
 
     // Create table
     await turso.execute(`
-      CREATE TABLE IF NOT EXISTS repo_classification_privado (
+      CREATE TABLE IF NOT EXISTS repo_classification_embedding (
         file_path TEXT PRIMARY KEY,
-        privado_is_data_sink INTEGER NOT NULL
+        embedding_is_data_sink INTEGER NOT NULL
       );
     `);
 
@@ -33,7 +47,7 @@ async function createTable() {
 
 async function insertData() {
   try {
-    const fileContent = fs.readFileSync('privado_data-sinks.csv', 'utf-8');
+    const fileContent = fs.readFileSync('embedding_data-sinks.csv', 'utf-8');
     
     // Parse CSV
     const records = await new Promise((resolve, reject) => {
@@ -65,14 +79,14 @@ async function insertData() {
       batch.forEach((record, idx) => {
         placeholders.push(`(?, ?)`); // Use ? instead of $n
         values.push(record.file_path);
-        values.push(parseInt(record.privado_is_data_sink));
+        values.push(parseInt(record.embedding_is_data_sink));
       });
 
       const query = `
-        INSERT INTO repo_classification_privado (file_path, privado_is_data_sink)
+        INSERT INTO repo_classification_embedding (file_path, embedding_is_data_sink)
         VALUES ${placeholders.join(', ')}
         ON CONFLICT (file_path) DO UPDATE 
-        SET privado_is_data_sink = EXCLUDED.privado_is_data_sink;
+        SET embedding_is_data_sink = EXCLUDED.embedding_is_data_sink;
       `;
 
       // Debug log for first batch
@@ -91,15 +105,15 @@ async function insertData() {
     }
 
     // Verify data
-    const result = await turso.execute('SELECT COUNT(*) as count FROM repo_classification_privado');
+    const result = await turso.execute('SELECT COUNT(*) as count FROM repo_classification_embedding');
     console.log('\nVerification:');
     console.log(`Total records in database: ${result.rows[0].count}`);
     
-    const dataSinks = await turso.execute('SELECT COUNT(*) as count FROM repo_classification_privado WHERE privado_is_data_sink = 1');
+    const dataSinks = await turso.execute('SELECT COUNT(*) as count FROM repo_classification_embedding WHERE embedding_is_data_sink = 1');
     console.log(`Data sinks found: ${dataSinks.rows[0].count}`);
 
     // Show some sample data
-    const samples = await turso.execute('SELECT * FROM repo_classification_privado LIMIT 5');
+    const samples = await turso.execute('SELECT * FROM repo_classification_embedding LIMIT 5');
     console.log('\nSample entries:');
     console.table(samples.rows);
 
