@@ -1,0 +1,95 @@
+{
+  "filePath": "twenty\\packages\\twenty-server\\src\\engine\\core-modules\\redis-client\\redis-client.service.ts",
+  "analysis": {
+    "dataSinks": [
+      {
+        "methodName": "getOwnPropertyDescriptor",
+        "location": "Line 3",
+        "score": 0.12,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.6",
+          "Special case score: 0"
+        ],
+        "context": ""
+      },
+      {
+        "methodName": "decorate",
+        "location": "Line 4",
+        "score": 0.12,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.6",
+          "Special case score: 0"
+        ],
+        "context": "import { Injectable, OnModuleDestroy } from '@nestjs/common';\r\n\r\nimport IORedis from 'ioredis';\r\n\r\nimport { EnvironmentService } from 'src/engine/core-modules/environment/environment.service';\r\n\r\n@Injectable()\r"
+      },
+      {
+        "methodName": "defineProperty",
+        "location": "Line 6",
+        "score": 0.12,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.6",
+          "Special case score: 0"
+        ],
+        "context": "import IORedis from 'ioredis';\r\n\r\nimport { EnvironmentService } from 'src/engine/core-modules/environment/environment.service';\r\n\r\n@Injectable()\r\nexport class RedisClientService implements OnModuleDestroy {\r\n  private redisClient: IORedis | null = null;\r"
+      },
+      {
+        "methodName": "metadata",
+        "location": "Line 9",
+        "score": 0.12,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.6",
+          "Special case score: 0"
+        ],
+        "context": "\r\n@Injectable()\r\nexport class RedisClientService implements OnModuleDestroy {\r\n  private redisClient: IORedis | null = null;\r\n\r\n  constructor(private readonly environmentService: EnvironmentService) {}\r\n\r"
+      },
+      {
+        "methodName": "defineProperty",
+        "location": "Line 12",
+        "score": 0.12,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.6",
+          "Special case score: 0"
+        ],
+        "context": "  private redisClient: IORedis | null = null;\r\n\r\n  constructor(private readonly environmentService: EnvironmentService) {}\r\n\r\n  getClient() {\r\n    if (!this.redisClient) {\r\n      const redisUrl = this.environmentService.get('REDIS_URL');\r"
+      },
+      {
+        "methodName": "get",
+        "location": "Line 25",
+        "score": 0.12,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.6",
+          "Special case score: 0"
+        ],
+        "context": "        maxRetriesPerRequest: null,\r\n      });\r\n    }\r\n\r\n    return this.redisClient;\r\n  }\r\n\r"
+      },
+      {
+        "methodName": "quit",
+        "location": "Line 37",
+        "score": 0.12,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.6",
+          "Special case score: 0"
+        ],
+        "context": "  }\r\n}\r\n"
+      }
+    ],
+    "summary": {
+      "totalFound": 7,
+      "confirmedDataSinks": 0
+    }
+  }
+}

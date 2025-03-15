@@ -1,0 +1,389 @@
+{
+  "filePath": "twenty\\packages\\twenty-server\\src\\database\\commands\\data-seed-dev-workspace.command.ts",
+  "analysis": {
+    "dataSinks": [
+      {
+        "methodName": "createWorkspaceSchema",
+        "location": "Line 81",
+        "score": 0.7400000000000001,
+        "isDataSink": true,
+        "matchDetails": [
+          "Regex pattern match: /create\\w+/i (confidence: 0.8)",
+          "Regex pattern match: /create\\w+/i (confidence: 0.8)",
+          "Context score: 0",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "      }\r\n    } catch (error) {\r\n      this.logger.error(error);\r\n\r\n      return;\r\n    }\r\n\r"
+      },
+      {
+        "methodName": "createMany",
+        "location": "Line 151",
+        "score": 0.7400000000000001,
+        "isDataSink": true,
+        "matchDetails": [
+          "Regex pattern match: /create\\w+/i (confidence: 0.8)",
+          "Regex pattern match: /create\\w+/i (confidence: 0.8)",
+          "Context score: 0",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "      );\r\n    } catch (error) {\r\n      this.logger.error(error);\r\n    }\r\n\r\n    await this.typeORMService.disconnectFromDataSource(dataSourceMetadata.id);\r\n  }\r\n\r\n  async seedStandardObjectRecords(\r\n    workspaceDataSource: DataSource,\r"
+      },
+      {
+        "methodName": "createMany",
+        "location": "Line 161",
+        "score": 0.7400000000000001,
+        "isDataSink": true,
+        "matchDetails": [
+          "Regex pattern match: /create\\w+/i (confidence: 0.8)",
+          "Regex pattern match: /create\\w+/i (confidence: 0.8)",
+          "Context score: 0",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "    dataSourceMetadata: DataSourceEntity,\r\n  ) {\r\n    await workspaceDataSource.transaction(\r\n      async (entityManager: EntityManager) => {\r\n        const { objectMetadataStandardIdToIdMap } =\r\n          await this.objectMetadataService.getObjectMetadataStandardIdToIdMap(\r\n            dataSourceMetadata.workspaceId,\r\n          );\r\n\r\n        await seedCompanies(entityManager, dataSourceMetadata.schema);\r"
+      },
+      {
+        "methodName": "decorate",
+        "location": "Line 4",
+        "score": 0.175,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0.25",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "import { Logger } from '@nestjs/common';\r\n\r\nimport { Command, CommandRunner } from 'nest-commander';\r\nimport { DataSource, EntityManager } from 'typeorm';\r\n\r\nimport { seedCoreSchema } from 'src/database/typeorm-seeds/core';\r\nimport {\r"
+      },
+      {
+        "methodName": "defineProperty",
+        "location": "Line 6",
+        "score": 0.175,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0.25",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "import { Command, CommandRunner } from 'nest-commander';\r\nimport { DataSource, EntityManager } from 'typeorm';\r\n\r\nimport { seedCoreSchema } from 'src/database/typeorm-seeds/core';\r\nimport {\r\n  SEED_ACME_WORKSPACE_ID,\r\n  SEED_APPLE_WORKSPACE_ID,\r"
+      },
+      {
+        "methodName": "metadata",
+        "location": "Line 9",
+        "score": 0.175,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0.25",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "import { seedCoreSchema } from 'src/database/typeorm-seeds/core';\r\nimport {\r\n  SEED_ACME_WORKSPACE_ID,\r\n  SEED_APPLE_WORKSPACE_ID,\r\n} from 'src/database/typeorm-seeds/core/workspaces';\r\nimport {\r\n  getDevSeedCompanyCustomFields,\r"
+      },
+      {
+        "methodName": "defineProperty",
+        "location": "Line 16",
+        "score": 0.175,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0.25",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "  getDevSeedPeopleCustomFields,\r\n} from 'src/database/typeorm-seeds/metadata/fieldsMetadata';\r\nimport { seedCalendarChannels } from 'src/database/typeorm-seeds/workspace/calendar-channel';\r\nimport { seedCalendarChannelEventAssociations } from 'src/database/typeorm-seeds/workspace/calendar-channel-event-association';\r\nimport { seedCalendarEventParticipants } from 'src/database/typeorm-seeds/workspace/calendar-event-participants';\r\nimport { seedCalendarEvents } from 'src/database/typeorm-seeds/workspace/calendar-events';\r\nimport { seedCompanies } from 'src/database/typeorm-seeds/workspace/companies';\r"
+      },
+      {
+        "methodName": "getOwnPropertyDescriptor",
+        "location": "Line 3",
+        "score": 0.1,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": ""
+      },
+      {
+        "methodName": "error",
+        "location": "Line 85",
+        "score": 0.1,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "      return;\r\n    }\r\n\r\n    for (const workspaceId of this.workspaceIds) {\r\n      await this.seedWorkspace(workspaceId);\r\n    }\r\n  }\r"
+      },
+      {
+        "methodName": "seedWorkspace",
+        "location": "Line 89",
+        "score": 0.1,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "      await this.seedWorkspace(workspaceId);\r\n    }\r\n  }\r\n\r\n  async createWorkspaceSchema(workspaceId: string) {\r\n    await this.workspaceSchemaCache.flush();\r\n\r"
+      },
+      {
+        "methodName": "flush",
+        "location": "Line 93",
+        "score": 0.1,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "  async createWorkspaceSchema(workspaceId: string) {\r\n    await this.workspaceSchemaCache.flush();\r\n\r\n    await rawDataSource.initialize();\r\n\r\n    await seedCoreSchema(rawDataSource, workspaceId);\r\n\r"
+      },
+      {
+        "methodName": "initialize",
+        "location": "Line 94",
+        "score": 0.1,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "    await this.workspaceSchemaCache.flush();\r\n\r\n    await rawDataSource.initialize();\r\n\r\n    await seedCoreSchema(rawDataSource, workspaceId);\r\n\r\n    await rawDataSource.destroy();\r"
+      },
+      {
+        "methodName": "destroy",
+        "location": "Line 96",
+        "score": 0.1,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "    await rawDataSource.initialize();\r\n\r\n    await seedCoreSchema(rawDataSource, workspaceId);\r\n\r\n    await rawDataSource.destroy();\r\n\r\n    await this.workspaceManagerService.initDev(workspaceId);\r"
+      },
+      {
+        "methodName": "initDev",
+        "location": "Line 97",
+        "score": 0.1,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "\r\n    await seedCoreSchema(rawDataSource, workspaceId);\r\n\r\n    await rawDataSource.destroy();\r\n\r\n    await this.workspaceManagerService.initDev(workspaceId);\r\n  }\r"
+      },
+      {
+        "methodName": "getLastDataSourceMetadataFromWorkspaceIdOrFail",
+        "location": "Line 100",
+        "score": 0.1,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "    await rawDataSource.destroy();\r\n\r\n    await this.workspaceManagerService.initDev(workspaceId);\r\n  }\r\n\r\n  async seedWorkspace(workspaceId: string) {\r\n    const dataSourceMetadata =\r"
+      },
+      {
+        "methodName": "connectToDataSource",
+        "location": "Line 101",
+        "score": 0.1,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "\r\n    await this.workspaceManagerService.initDev(workspaceId);\r\n  }\r\n\r\n  async seedWorkspace(workspaceId: string) {\r\n    const dataSourceMetadata =\r\n      await this.dataSourceService.getLastDataSourceMetadataFromWorkspaceIdOrFail(\r"
+      },
+      {
+        "methodName": "getObjectMetadataStandardIdToIdMap",
+        "location": "Line 106",
+        "score": 0.1,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "    const dataSourceMetadata =\r\n      await this.dataSourceService.getLastDataSourceMetadataFromWorkspaceIdOrFail(\r\n        workspaceId,\r\n      );\r\n\r\n    const workspaceDataSource =\r\n      await this.typeORMService.connectToDataSource(dataSourceMetadata);\r"
+      },
+      {
+        "methodName": "seedCompanyCustomFields",
+        "location": "Line 107",
+        "score": 0.1,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "      await this.dataSourceService.getLastDataSourceMetadataFromWorkspaceIdOrFail(\r\n        workspaceId,\r\n      );\r\n\r\n    const workspaceDataSource =\r\n      await this.typeORMService.connectToDataSource(dataSourceMetadata);\r\n\r"
+      },
+      {
+        "methodName": "seedPeopleCustomFields",
+        "location": "Line 108",
+        "score": 0.1,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "        workspaceId,\r\n      );\r\n\r\n    const workspaceDataSource =\r\n      await this.typeORMService.connectToDataSource(dataSourceMetadata);\r\n\r\n    if (!workspaceDataSource) {\r"
+      },
+      {
+        "methodName": "seedStandardObjectRecords",
+        "location": "Line 109",
+        "score": 0.1,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "      );\r\n\r\n    const workspaceDataSource =\r\n      await this.typeORMService.connectToDataSource(dataSourceMetadata);\r\n\r\n    if (!workspaceDataSource) {\r\n      throw new Error('Could not connect to workspace data source');\r"
+      },
+      {
+        "methodName": "seedCustomObjects",
+        "location": "Line 110",
+        "score": 0.1,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "\r\n    const workspaceDataSource =\r\n      await this.typeORMService.connectToDataSource(dataSourceMetadata);\r\n\r\n    if (!workspaceDataSource) {\r\n      throw new Error('Could not connect to workspace data source');\r\n    }\r"
+      },
+      {
+        "methodName": "seedCustomObjects",
+        "location": "Line 111",
+        "score": 0.1,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "    const workspaceDataSource =\r\n      await this.typeORMService.connectToDataSource(dataSourceMetadata);\r\n\r\n    if (!workspaceDataSource) {\r\n      throw new Error('Could not connect to workspace data source');\r\n    }\r\n\r"
+      },
+      {
+        "methodName": "error",
+        "location": "Line 114",
+        "score": 0.1,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "    if (!workspaceDataSource) {\r\n      throw new Error('Could not connect to workspace data source');\r\n    }\r\n\r\n    try {\r\n      const { objectMetadataStandardIdToIdMap } =\r\n        await this.objectMetadataService.getObjectMetadataStandardIdToIdMap(\r"
+      },
+      {
+        "methodName": "disconnectFromDataSource",
+        "location": "Line 116",
+        "score": 0.1,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "    }\r\n\r\n    try {\r\n      const { objectMetadataStandardIdToIdMap } =\r\n        await this.objectMetadataService.getObjectMetadataStandardIdToIdMap(\r\n          workspaceId,\r\n        );\r"
+      },
+      {
+        "methodName": "getObjectMetadataStandardIdToIdMap",
+        "location": "Line 120",
+        "score": 0.1,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "        await this.objectMetadataService.getObjectMetadataStandardIdToIdMap(\r\n          workspaceId,\r\n        );\r\n\r\n      await this.seedCompanyCustomFields(\r\n        objectMetadataStandardIdToIdMap[STANDARD_OBJECT_IDS.company].id,\r\n        workspaceId,\r"
+      },
+      {
+        "methodName": "push",
+        "location": "Line 139",
+        "score": 0.1,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "      await this.seederService.seedCustomObjects(\r\n        dataSourceMetadata.id,\r\n        workspaceId,\r\n        PETS_METADATA_SEEDS,\r\n        PETS_DATA_SEEDS,\r\n      );\r\n\r"
+      },
+      {
+        "methodName": "filter",
+        "location": "Line 140",
+        "score": 0.1,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "        dataSourceMetadata.id,\r\n        workspaceId,\r\n        PETS_METADATA_SEEDS,\r\n        PETS_DATA_SEEDS,\r\n      );\r\n\r\n      await this.seederService.seedCustomObjects(\r\n        dataSourceMetadata.id,\r\n        workspaceId,\r"
+      },
+      {
+        "methodName": "map",
+        "location": "Line 140",
+        "score": 0.1,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "        dataSourceMetadata.id,\r\n        workspaceId,\r\n        PETS_METADATA_SEEDS,\r\n        PETS_DATA_SEEDS,\r\n      );\r\n\r\n      await this.seederService.seedCustomObjects(\r\n        dataSourceMetadata.id,\r\n        workspaceId,\r\n        SURVEY_RESULTS_METADATA_SEEDS,\r"
+      },
+      {
+        "methodName": "transaction",
+        "location": "Line 119",
+        "score": 0.1,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "      const { objectMetadataStandardIdToIdMap } =\r\n        await this.objectMetadataService.getObjectMetadataStandardIdToIdMap(\r\n          workspaceId,\r\n        );\r\n\r\n      await this.seedCompanyCustomFields(\r\n        objectMetadataStandardIdToIdMap[STANDARD_OBJECT_IDS.company].id,\r\n        workspaceId,\r\n      );\r\n\r\n      await this.seedPeopleCustomFields(\r\n        objectMetadataStandardIdToIdMap[STANDARD_OBJECT_IDS.person].id,\r\n        workspaceId,\r\n      );\r\n\r\n      await this.seedStandardObjectRecords(\r\n        workspaceDataSource,\r\n        dataSourceMetadata,\r\n      );\r\n\r\n      await this.seederService.seedCustomObjects(\r\n        dataSourceMetadata.id,\r\n        workspaceId,\r\n        PETS_METADATA_SEEDS,\r\n        PETS_DATA_SEEDS,\r\n      );\r\n\r\n      await this.seederService.seedCustomObjects(\r\n        dataSourceMetadata.id,\r\n        workspaceId,\r\n        SURVEY_RESULTS_METADATA_SEEDS,\r\n        SURVEY_RESULTS_DATA_SEEDS,\r"
+      },
+      {
+        "methodName": "map",
+        "location": "Line 151",
+        "score": 0.1,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "      );\r\n    } catch (error) {\r\n      this.logger.error(error);\r\n    }\r\n\r\n    await this.typeORMService.disconnectFromDataSource(dataSourceMetadata.id);\r\n  }\r\n\r\n  async seedStandardObjectRecords(\r\n    workspaceDataSource: DataSource,\r"
+      },
+      {
+        "methodName": "map",
+        "location": "Line 161",
+        "score": 0.1,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.5",
+          "Special case score: 0"
+        ],
+        "context": "    dataSourceMetadata: DataSourceEntity,\r\n  ) {\r\n    await workspaceDataSource.transaction(\r\n      async (entityManager: EntityManager) => {\r\n        const { objectMetadataStandardIdToIdMap } =\r\n          await this.objectMetadataService.getObjectMetadataStandardIdToIdMap(\r\n            dataSourceMetadata.workspaceId,\r\n          );\r\n\r\n        await seedCompanies(entityManager, dataSourceMetadata.schema);\r"
+      }
+    ],
+    "summary": {
+      "totalFound": 31,
+      "confirmedDataSinks": 3
+    }
+  }
+}

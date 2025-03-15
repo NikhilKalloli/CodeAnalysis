@@ -1,0 +1,146 @@
+{
+  "filePath": "twenty\\packages\\twenty-server\\src\\command\\command-logger.ts",
+  "analysis": {
+    "dataSinks": [
+      {
+        "methodName": "writeFile",
+        "location": "Line 38",
+        "score": 0.9800000000000002,
+        "isDataSink": true,
+        "matchDetails": [
+          "Direct pattern match: writeFile (confidence: 0.8)",
+          "Regex pattern match: /write\\w+/i (confidence: 0.6)",
+          "Regex pattern match: /write\\w+/i (confidence: 0.9)",
+          "Context score: 0",
+          "File path score: 0.3",
+          "Special case score: 0"
+        ],
+        "context": "    try {\r\n      const logFilePath = `${path}/${fileName}.json`;\r\n\r\n      await fs.writeFile(logFilePath, JSON.stringify(data, null, 2), {\r\n        flag: append ? 'a' : 'w',\r\n      });\r\n\r\n      const absoluteLogFilePath = joinPath(process.cwd(), logFilePath);\r\n\r"
+      },
+      {
+        "methodName": "error",
+        "location": "Line 45",
+        "score": 0.09,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0.1",
+          "File path score: 0.3",
+          "Special case score: 0"
+        ],
+        "context": "      const absoluteLogFilePath = joinPath(process.cwd(), logFilePath);\r\n\r\n      return absoluteLogFilePath;\r\n    } catch (err) {\r\n      console.error(\r\n        `Error writing to file ${path}/${fileName}.json: ${err?.message}`,\r\n      );\r"
+      },
+      {
+        "methodName": "getOwnPropertyDescriptor",
+        "location": "Line 3",
+        "score": 0.06,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.3",
+          "Special case score: 0"
+        ],
+        "context": ""
+      },
+      {
+        "methodName": "decorate",
+        "location": "Line 4",
+        "score": 0.06,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.3",
+          "Special case score: 0"
+        ],
+        "context": "/* eslint-disable no-console */\r\nimport { Injectable } from '@nestjs/common';\r\n\r\nimport { existsSync } from 'fs';\r\nimport fs from 'fs/promises';\r\nimport { join as joinPath } from 'path';\r\n\r"
+      },
+      {
+        "methodName": "defineProperty",
+        "location": "Line 6",
+        "score": 0.06,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.3",
+          "Special case score: 0"
+        ],
+        "context": "\r\nimport { existsSync } from 'fs';\r\nimport fs from 'fs/promises';\r\nimport { join as joinPath } from 'path';\r\n\r\nimport { kebabCase } from 'src/utils/kebab-case';\r\n\r"
+      },
+      {
+        "methodName": "metadata",
+        "location": "Line 9",
+        "score": 0.06,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.3",
+          "Special case score: 0"
+        ],
+        "context": "import { join as joinPath } from 'path';\r\n\r\nimport { kebabCase } from 'src/utils/kebab-case';\r\n\r\n@Injectable()\r\nexport class CommandLogger {\r\n  constructor(private readonly className: string) {}\r"
+      },
+      {
+        "methodName": "defineProperty",
+        "location": "Line 11",
+        "score": 0.06,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.3",
+          "Special case score: 0"
+        ],
+        "context": "import { kebabCase } from 'src/utils/kebab-case';\r\n\r\n@Injectable()\r\nexport class CommandLogger {\r\n  constructor(private readonly className: string) {}\r\n\r\n  async createSubDirectory(subDirectory: string): Promise<void> {\r"
+      },
+      {
+        "methodName": "mkdir",
+        "location": "Line 27",
+        "score": 0.06,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.3",
+          "Special case score: 0"
+        ],
+        "context": "  async writeLog(\r\n    fileName: string,\r\n    data: unknown,\r\n    append = false,\r\n  ): Promise<string> {\r\n    const path = `./logs/${kebabCase(this.className)}`;\r\n\r"
+      },
+      {
+        "methodName": "mkdir",
+        "location": "Line 34",
+        "score": 0.06,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.3",
+          "Special case score: 0"
+        ],
+        "context": "    if (existsSync(path) === false) {\r\n      await fs.mkdir(path, { recursive: true });\r\n    }\r\n\r\n    try {\r\n      const logFilePath = `${path}/${fileName}.json`;\r\n\r"
+      },
+      {
+        "methodName": "stringify",
+        "location": "Line 38",
+        "score": 0.06,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.3",
+          "Special case score: 0"
+        ],
+        "context": "    try {\r\n      const logFilePath = `${path}/${fileName}.json`;\r\n\r\n      await fs.writeFile(logFilePath, JSON.stringify(data, null, 2), {\r\n        flag: append ? 'a' : 'w',\r\n      });\r\n\r"
+      },
+      {
+        "methodName": "cwd",
+        "location": "Line 41",
+        "score": 0.06,
+        "isDataSink": false,
+        "matchDetails": [
+          "Context score: 0",
+          "File path score: 0.3",
+          "Special case score: 0"
+        ],
+        "context": "      await fs.writeFile(logFilePath, JSON.stringify(data, null, 2), {\r\n        flag: append ? 'a' : 'w',\r\n      });\r\n\r\n      const absoluteLogFilePath = joinPath(process.cwd(), logFilePath);\r\n\r\n      return absoluteLogFilePath;\r"
+      }
+    ],
+    "summary": {
+      "totalFound": 11,
+      "confirmedDataSinks": 1
+    }
+  }
+}
