@@ -11,8 +11,8 @@ class ASTAnalyzer {
         this.parser = acorn.Parser.extend(jsx());
         this.results = [];
         
-        // Load patterns from data-sink-patterns.json
-        const patternsFile = fs.readFileSync('data-sink-patterns.json', 'utf8');
+        // Load patterns from combined-data-sink-patterns.json
+        const patternsFile = fs.readFileSync('utils/combined-data-sink-patterns.json', 'utf8');
         this.patterns = JSON.parse(patternsFile);
         
         // Compile all patterns for efficient matching
@@ -318,6 +318,7 @@ const main = async () => {
     try {
         console.log(`Analyzing codebase: ${codebasePath}`);
         console.log('This may take a while depending on the size of the codebase...');
+        console.log('Using combined data sink patterns for enhanced detection...');
         
         const analyzer = new ASTAnalyzer(codebasePath);
         await analyzer.analyzeDirectory();

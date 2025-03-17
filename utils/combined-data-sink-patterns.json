@@ -1,0 +1,852 @@
+{
+  "categories": {
+    "fileSystem": {
+      "description": "File system write operations",
+      "patterns": [
+        {
+          "pattern": "fs.writeFileSync",
+          "confidence": 0.9,
+          "explanation": "This is a Node.js function that writes data to a file, indicating a data sink"
+        },
+        {
+          "pattern": "fs.appendFileSync",
+          "confidence": 0.9,
+          "explanation": "This is a Node.js function that appends data to a file, indicating a data sink"
+        },
+        {
+          "pattern": "writeFile",
+          "confidence": 0.8,
+          "explanation": "This is a function name that suggests writing data to a file, indicating a potential data sink"
+        },
+        {
+          "pattern": "createWriteStream",
+          "confidence": 0.8,
+          "explanation": "This is a function name that suggests creating a stream for writing data to a file, indicating a potential data sink"
+        },
+        {
+          "pattern": "redis.set",
+          "confidence": 0.7,
+          "explanation": "This is a Redis function that sets a value, indicating a potential data sink"
+        },
+        {
+          "pattern": "redis.hset",
+          "confidence": 0.7,
+          "explanation": "This is a Redis function that sets a hash value, indicating a potential data sink"
+        },
+        {
+          "pattern": " BullMQ.add",
+          "confidence": 0.6,
+          "explanation": "This is a BullMQ function that adds a job to a queue, indicating a potential data sink"
+        },
+        {
+          "pattern": "fs.writeFile",
+          "confidence": 0.9,
+          "explanation": "Node.js function that writes data to a file asynchronously"
+        },
+        {
+          "pattern": "fs.cp",
+          "confidence": 0.7,
+          "explanation": "Node.js function that copies files, creating new data"
+        },
+        {
+          "pattern": "fs.rename",
+          "confidence": 0.6,
+          "explanation": "Node.js function that renames files, potentially creating new data"
+        },
+        {
+          "pattern": "CommandLogger.writeLog",
+          "confidence": 0.8,
+          "explanation": "Custom logging function that writes to JSON files"
+        },
+        {
+          "pattern": "LocalDriver",
+          "confidence": 0.7,
+          "explanation": "File storage driver that uses fs operations to write files"
+        }
+      ],
+      "filePatterns": [
+        {
+          "pattern": "**/server/**/*.ts",
+          "explanation": "These files are likely to contain data sinks because they are part of the server-side codebase, which often involves writing data to files or databases"
+        },
+        {
+          "pattern": "**/patches/**/*.patch",
+          "explanation": "These files are likely to contain data sinks because they are patch files, which may contain code that writes data to files or databases"
+        },
+        {
+          "pattern": "**/config/**/*.json",
+          "explanation": "These files are likely to contain data sinks because they are configuration files, which may contain code that writes data to files or databases"
+        },
+        {
+          "pattern": "**/utils/**/*.ts",
+          "explanation": "These files are likely to contain data sinks because they are utility files, which may contain code that writes data to files or databases"
+        },
+        {
+          "pattern": "**/generate-front-config.ts",
+          "explanation": "This file generates static configuration files using fs.writeFileSync"
+        }
+      ]
+    },
+    "database": {
+      "description": "Database write operations",
+      "patterns": [
+        {
+          "pattern": "create\\w+",
+          "confidence": 0.8,
+          "explanation": "Function names starting with 'create' often indicate data being written to a database"
+        },
+        {
+          "pattern": "insert\\w+",
+          "confidence": 0.7,
+          "explanation": "Function names containing 'insert' may suggest data insertion into a database"
+        },
+        {
+          "pattern": "update\\w+",
+          "confidence": 0.7,
+          "explanation": "Function names starting with 'update' could imply data modification in a database"
+        },
+        {
+          "pattern": "save\\w+",
+          "confidence": 0.6,
+          "explanation": "Function names containing 'save' might indicate data being persisted to a database"
+        },
+        {
+          "pattern": "write\\w+",
+          "confidence": 0.6,
+          "explanation": "Function names starting with 'write' often suggest data being written to a database or file"
+        },
+        {
+          "pattern": "send\\w+",
+          "confidence": 0.5,
+          "explanation": "Function names starting with 'send' could imply data being transmitted or written to an external system"
+        },
+        {
+          "pattern": "repository.save",
+          "confidence": 0.9,
+          "explanation": "TypeORM repository method to save entities to the database"
+        },
+        {
+          "pattern": "repository.delete",
+          "confidence": 0.9,
+          "explanation": "TypeORM repository method to delete entities from the database"
+        },
+        {
+          "pattern": "repository.update",
+          "confidence": 0.9,
+          "explanation": "TypeORM repository method to update entities in the database"
+        },
+        {
+          "pattern": "repository.softDelete",
+          "confidence": 0.9,
+          "explanation": "TypeORM repository method to soft delete entities in the database"
+        },
+        {
+          "pattern": "insert\\(\\).into\\(\\)",
+          "confidence": 0.9,
+          "explanation": "TypeORM query builder method for inserting data"
+        },
+        {
+          "pattern": "execute\\(\\)",
+          "confidence": 0.8,
+          "explanation": "TypeORM method to execute database queries"
+        }
+      ],
+      "filePatterns": [
+        {
+          "pattern": "**/database/**/*.ts",
+          "explanation": "Files within the database directory are likely to contain database operations, including data sinks"
+        },
+        {
+          "pattern": "**/models/**/*.ts",
+          "explanation": "Model files often define database schema and may contain functions for data manipulation, including data sinks"
+        },
+        {
+          "pattern": "**/repositories/**/*.ts",
+          "explanation": "Repository files typically encapsulate data access and manipulation logic, making them likely to contain data sinks"
+        },
+        {
+          "pattern": "**/services/**/*.ts",
+          "explanation": "Service files may contain business logic that interacts with the database, potentially including data sinks"
+        },
+        {
+          "pattern": "**/*.controller.ts",
+          "explanation": "Controller files often handle user input and may contain logic for writing data to the database"
+        },
+        {
+          "pattern": "**/migrations/**/*.ts",
+          "explanation": "Migration files contain database schema changes and data transformations"
+        },
+        {
+          "pattern": "**/seeds/**/*.ts",
+          "explanation": "Seed files insert initial data into the database"
+        }
+      ]
+    },
+    "network": {
+      "description": "Network request functions and API calls",
+      "patterns": [
+        {
+          "pattern": "fetch\\(.*\\)",
+          "confidence": 0.9,
+          "explanation": "The fetch function is commonly used for making network requests, which can be a data sink."
+        },
+        {
+          "pattern": "axios\\..*\\(.*\\)",
+          "confidence": 0.8,
+          "explanation": "Axios is a popular library for making HTTP requests, which can be used to send data to external services."
+        },
+        {
+          "pattern": ".*\\.send\\(.*\\)",
+          "confidence": 0.7,
+          "explanation": "The send method is often used to transmit data over a network, making it a potential data sink."
+        },
+        {
+          "pattern": ".*\\.post\\(.*\\)",
+          "confidence": 0.7,
+          "explanation": "The post method is commonly used for sending data to a server, which can be a data sink."
+        },
+        {
+          "pattern": ".*\\.put\\(.*\\)",
+          "confidence": 0.6,
+          "explanation": "The put method is sometimes used to update data on a server, making it a potential data sink."
+        },
+        {
+          "pattern": "transport.sendMail",
+          "confidence": 0.9,
+          "explanation": "Nodemailer function to send emails via SMTP"
+        },
+        {
+          "pattern": "emailService.send",
+          "confidence": 0.9,
+          "explanation": "Service method to send emails"
+        },
+        {
+          "pattern": "analyticsService.create",
+          "confidence": 0.9,
+          "explanation": "Service method to send analytics data to external services like Tinybird"
+        },
+        {
+          "pattern": "telemetryService.create",
+          "confidence": 0.9,
+          "explanation": "Service method to send telemetry data to external endpoints"
+        }
+      ],
+      "filePatterns": [
+        {
+          "pattern": "api\\/*",
+          "explanation": "Files within the api directory are likely to contain functions that make network requests, which can be data sinks."
+        },
+        {
+          "pattern": "services\\/*",
+          "explanation": "Files within the services directory may contain functions that interact with external services, making them potential data sinks."
+        },
+        {
+          "pattern": "controllers\\/*",
+          "explanation": "Files within the controllers directory often handle incoming requests and may send data to external services, making them potential data sinks."
+        },
+        {
+          "pattern": "utils\\/*",
+          "explanation": "Files within the utils directory may contain helper functions that make network requests or interact with external services, making them potential data sinks."
+        },
+        {
+          "pattern": ".*\\.http",
+          "explanation": "Files with the .http extension may contain HTTP requests, which can be data sinks."
+        },
+        {
+          "pattern": "**/api/**",
+          "explanation": "Files within the api directory are likely to contain functions that make network requests, which can be data sinks."
+        },
+        {
+          "pattern": "**/services/**",
+          "explanation": "Files within the services directory may contain functions that interact with external services, making them potential data sinks."
+        },
+        {
+          "pattern": "**/controllers/**",
+          "explanation": "Files within the controllers directory often handle incoming requests and may send data to external services, making them potential data sinks."
+        },
+        {
+          "pattern": "**/utils/**",
+          "explanation": "Files within the utils directory may contain helper functions that make network requests or interact with external services, making them potential data sinks."
+        },
+        {
+          "pattern": "**/*.http",
+          "explanation": "Files with the .http extension may contain HTTP requests, which can be data sinks."
+        },
+        {
+          "pattern": "**/email/**/*.ts",
+          "explanation": "Email-related files that send emails via SMTP or other services"
+        },
+        {
+          "pattern": "**/analytics/**/*.ts",
+          "explanation": "Analytics-related files that send data to external analytics services"
+        },
+        {
+          "pattern": "**/telemetry/**/*.ts",
+          "explanation": "Telemetry-related files that send usage data to external endpoints"
+        }
+      ]
+    },
+    "apiEndpoints": {
+      "description": "API endpoints and response handling",
+      "patterns": [
+        {
+          "pattern": "create\\w+",
+          "confidence": 0.8,
+          "explanation": "Function names starting with 'create' often indicate data being written or sent"
+        },
+        {
+          "pattern": "send\\w+",
+          "confidence": 0.7,
+          "explanation": "Function names starting with 'send' often indicate data being sent over a network"
+        },
+        {
+          "pattern": "write\\w+",
+          "confidence": 0.9,
+          "explanation": "Function names starting with 'write' often indicate data being written to a file or database"
+        },
+        {
+          "pattern": "update\\w+",
+          "confidence": 0.8,
+          "explanation": "Function names starting with 'update' often indicate data being modified or sent"
+        },
+        {
+          "pattern": "delete\\w+",
+          "confidence": 0.7,
+          "explanation": "Function names starting with 'delete' often indicate data being removed"
+        },
+        {
+          "pattern": "res\\.send",
+          "confidence": 0.8,
+          "explanation": "Express.js method to send HTTP responses to clients"
+        },
+        {
+          "pattern": "res\\.json",
+          "confidence": 0.8,
+          "explanation": "Express.js method to send JSON responses to clients"
+        },
+        {
+          "pattern": "res\\.pipe",
+          "confidence": 0.8,
+          "explanation": "Method to pipe file streams to HTTP responses"
+        }
+      ],
+      "filePatterns": [
+        {
+          "pattern": "**/api/**",
+          "explanation": "Files within the api directory are likely to contain API endpoints"
+        },
+        {
+          "pattern": "**/controllers/**",
+          "explanation": "Controller files often define API endpoints"
+        },
+        {
+          "pattern": "**/services/**",
+          "explanation": "Files within the 'services' directory are likely to contain data sinks and business logic"
+        },
+        {
+          "pattern": "**/repositories/**",
+          "explanation": "Files within the 'repositories' directory are likely to contain data sinks and database interactions"
+        },
+        {
+          "pattern": "**/*.controller.ts",
+          "explanation": "Files with the '.controller.ts' extension are likely to contain API endpoints and data sinks"
+        },
+        {
+          "pattern": "**/*.service.ts",
+          "explanation": "Files with the '.service.ts' extension are likely to contain data sinks and business logic"
+        },
+        {
+          "pattern": "**/resolvers/**",
+          "explanation": "GraphQL resolver files define API endpoints"
+        },
+        {
+          "pattern": "**/routes/**",
+          "explanation": "Route files define API endpoints"
+        }
+      ]
+    },
+    "clientServer": {
+      "description": "Client-server interactions and data transfers",
+      "patterns": [
+        {
+          "pattern": "write\\(.*\\)",
+          "confidence": 0.9,
+          "explanation": "Function calls with 'write' in the name often indicate data being written or sent"
+        },
+        {
+          "pattern": "send\\(.*\\)",
+          "confidence": 0.8,
+          "explanation": "Function calls with 'send' in the name often indicate data being sent over a network"
+        },
+        {
+          "pattern": "post\\(.*\\)",
+          "confidence": 0.7,
+          "explanation": "Function calls with 'post' in the name often indicate data being sent via HTTP POST"
+        },
+        {
+          "pattern": "put\\(.*\\)",
+          "confidence": 0.7,
+          "explanation": "Function calls with 'put' in the name often indicate data being sent via HTTP PUT"
+        },
+        {
+          "pattern": "patch\\(.*\\)",
+          "confidence": 0.6,
+          "explanation": "Function calls with 'patch' in the name often indicate data being sent via HTTP PATCH"
+        }
+      ],
+      "filePatterns": [
+        {
+          "pattern": "*.ts",
+          "explanation": "TypeScript files often contain server-side logic and may include data sinks"
+        },
+        {
+          "pattern": "*.js",
+          "explanation": "JavaScript files often contain client-side logic and may include data sinks"
+        },
+        {
+          "pattern": "api/*.ts",
+          "explanation": "Files in the 'api' directory often contain API endpoints and may include data sinks"
+        },
+        {
+          "pattern": "controllers/*.ts",
+          "explanation": "Files in the 'controllers' directory often contain server-side logic and may include data sinks"
+        },
+        {
+          "pattern": "services/*.ts",
+          "explanation": "Files in the 'services' directory often contain business logic and may include data sinks"
+        }
+      ]
+    },
+    "cloudServices": {
+      "description": "Cloud service interactions (AWS, Cloudflare, etc.)",
+      "patterns": [
+        {
+          "pattern": "S3Driver",
+          "confidence": 0.9,
+          "explanation": "Driver for AWS S3 storage operations"
+        },
+        {
+          "pattern": "PutObjectCommand",
+          "confidence": 0.9,
+          "explanation": "AWS SDK command to upload objects to S3"
+        },
+        {
+          "pattern": "DeleteObjectCommand",
+          "confidence": 0.9,
+          "explanation": "AWS SDK command to delete objects from S3"
+        },
+        {
+          "pattern": "CreateFunctionCommand",
+          "confidence": 0.9,
+          "explanation": "AWS SDK command to create Lambda functions"
+        },
+        {
+          "pattern": "PublishLayerVersionCommand",
+          "confidence": 0.9,
+          "explanation": "AWS SDK command to publish Lambda layer versions"
+        },
+        {
+          "pattern": "lambda.invoke",
+          "confidence": 0.8,
+          "explanation": "AWS SDK method to invoke Lambda functions"
+        },
+        {
+          "pattern": "cloudflareApiClient",
+          "confidence": 0.9,
+          "explanation": "Client for Cloudflare API operations"
+        },
+        {
+          "pattern": "customHostnames.create",
+          "confidence": 0.9,
+          "explanation": "Cloudflare API method to create custom hostnames"
+        },
+        {
+          "pattern": "customHostnames.delete",
+          "confidence": 0.9,
+          "explanation": "Cloudflare API method to delete custom hostnames"
+        }
+      ],
+      "filePatterns": [
+        {
+          "pattern": "**/aws/**/*.ts",
+          "explanation": "Files related to AWS service interactions"
+        },
+        {
+          "pattern": "**/s3/**/*.ts",
+          "explanation": "Files related to AWS S3 storage operations"
+        },
+        {
+          "pattern": "**/lambda/**/*.ts",
+          "explanation": "Files related to AWS Lambda operations"
+        },
+        {
+          "pattern": "**/cloudflare/**/*.ts",
+          "explanation": "Files related to Cloudflare API operations"
+        },
+        {
+          "pattern": "**/custom-domain/**/*.ts",
+          "explanation": "Files related to custom domain management with Cloudflare"
+        }
+      ]
+    },
+    "messageQueues": {
+      "description": "Message queue operations (BullMQ, PgBoss)",
+      "patterns": [
+        {
+          "pattern": "messageQueueService.add",
+          "confidence": 0.9,
+          "explanation": "Service method to add jobs to message queues"
+        },
+        {
+          "pattern": "messageQueueService.addCron",
+          "confidence": 0.9,
+          "explanation": "Service method to add cron jobs to message queues"
+        },
+        {
+          "pattern": "BullMQ.add",
+          "confidence": 0.9,
+          "explanation": "BullMQ method to add jobs to Redis-backed queues"
+        }
+      ],
+      "filePatterns": [
+        {
+          "pattern": "**/queue/**/*.ts",
+          "explanation": "Files related to message queue operations"
+        },
+        {
+          "pattern": "**/jobs/**/*.ts",
+          "explanation": "Files defining background jobs for message queues"
+        },
+        {
+          "pattern": "**/*.job.ts",
+          "explanation": "Job files for message queues"
+        },
+        {
+          "pattern": "**/bull/**/*.ts",
+          "explanation": "Files related to BullMQ operations"
+        },
+        {
+          "pattern": "**/pgboss/**/*.ts",
+          "explanation": "Files related to PgBoss operations"
+        }
+      ]
+    },
+    "cacheAndSession": {
+      "description": "Cache and session storage operations (Redis)",
+      "patterns": [
+        {
+          "pattern": "redis.set",
+          "confidence": 0.9,
+          "explanation": "Redis method to set key-value pairs"
+        },
+        {
+          "pattern": "redis.hset",
+          "confidence": 0.9,
+          "explanation": "Redis method to set hash field-value pairs"
+        },
+        {
+          "pattern": "cacheStorageService.set",
+          "confidence": 0.9,
+          "explanation": "Service method to set cache entries"
+        },
+        {
+          "pattern": "cacheStorageService.del",
+          "confidence": 0.9,
+          "explanation": "Service method to delete cache entries"
+        },
+        {
+          "pattern": "cacheStorageService.flush",
+          "confidence": 0.9,
+          "explanation": "Service method to flush the cache"
+        },
+        {
+          "pattern": "cacheStorageService.setAdd",
+          "confidence": 0.9,
+          "explanation": "Service method to add values to a set in the cache"
+        }
+      ],
+      "filePatterns": [
+        {
+          "pattern": "**/cache/**/*.ts",
+          "explanation": "Files related to cache operations"
+        },
+        {
+          "pattern": "**/redis/**/*.ts",
+          "explanation": "Files related to Redis operations"
+        },
+        {
+          "pattern": "**/session/**/*.ts",
+          "explanation": "Files related to session management"
+        },
+        {
+          "pattern": "**/session-storage/**/*.ts",
+          "explanation": "Files related to session storage"
+        }
+      ]
+    },
+    "errorMonitoring": {
+      "description": "Error monitoring and logging (Sentry, console)",
+      "patterns": [
+        {
+          "pattern": "Sentry.init",
+          "confidence": 0.9,
+          "explanation": "Sentry initialization with DSN"
+        },
+        {
+          "pattern": "Sentry.captureException",
+          "confidence": 0.9,
+          "explanation": "Sentry method to capture exceptions"
+        },
+        {
+          "pattern": "console.log",
+          "confidence": 0.6,
+          "explanation": "Console logging method"
+        },
+        {
+          "pattern": "console.error",
+          "confidence": 0.7,
+          "explanation": "Console error logging method"
+        },
+        {
+          "pattern": "logger.log",
+          "confidence": 0.7,
+          "explanation": "Logger method to log messages"
+        }
+      ],
+      "filePatterns": [
+        {
+          "pattern": "**/sentry/**/*.ts",
+          "explanation": "Files related to Sentry error monitoring"
+        },
+        {
+          "pattern": "**/logging/**/*.ts",
+          "explanation": "Files related to logging operations"
+        },
+        {
+          "pattern": "**/logger/**/*.ts",
+          "explanation": "Files related to logger implementations"
+        }
+      ]
+    },
+    "paymentProcessing": {
+      "description": "Payment processing operations (Stripe)",
+      "patterns": [
+        {
+          "pattern": "stripe.checkout.sessions.create",
+          "confidence": 0.9,
+          "explanation": "Stripe method to create checkout sessions"
+        },
+        {
+          "pattern": "stripe.subscriptions.cancel",
+          "confidence": 0.9,
+          "explanation": "Stripe method to cancel subscriptions"
+        },
+        {
+          "pattern": "stripe.customers.update",
+          "confidence": 0.9,
+          "explanation": "Stripe method to update customer information"
+        },
+        {
+          "pattern": "stripe.subscriptionItems.update",
+          "confidence": 0.9,
+          "explanation": "Stripe method to update subscription items"
+        }
+      ],
+      "filePatterns": [
+        {
+          "pattern": "**/stripe/**/*.ts",
+          "explanation": "Files related to Stripe payment processing"
+        },
+        {
+          "pattern": "**/billing/**/*.ts",
+          "explanation": "Files related to billing operations"
+        },
+        {
+          "pattern": "**/payment/**/*.ts",
+          "explanation": "Files related to payment processing"
+        },
+        {
+          "pattern": "**/subscription/**/*.ts",
+          "explanation": "Files related to subscription management"
+        }
+      ]
+    },
+    "webhooks": {
+      "description": "Webhook operations",
+      "patterns": [
+        {
+          "pattern": "call-webhook",
+          "confidence": 0.9,
+          "explanation": "Function or job to call webhooks"
+        }
+      ],
+      "filePatterns": [
+        {
+          "pattern": "**/webhook/**/*.ts",
+          "explanation": "Files related to webhook operations"
+        },
+        {
+          "pattern": "**/webhooks/**/*.ts",
+          "explanation": "Files related to webhook operations"
+        },
+        {
+          "pattern": "**/*webhook*.ts",
+          "explanation": "Files related to webhook operations"
+        }
+      ]
+    },
+    "oauthAndExternalAPIs": {
+      "description": "OAuth and external API operations",
+      "patterns": [
+        {
+          "pattern": "microsoftAPIsService.refreshMicrosoftRefreshToken",
+          "confidence": 0.9,
+          "explanation": "Service method to refresh Microsoft OAuth tokens"
+        },
+        {
+          "pattern": "googleAPIsService.refreshGoogleRefreshToken",
+          "confidence": 0.9,
+          "explanation": "Service method to refresh Google OAuth tokens"
+        }
+      ],
+      "filePatterns": [
+        {
+          "pattern": "**/oauth/**/*.ts",
+          "explanation": "Files related to OAuth operations"
+        },
+        {
+          "pattern": "**/microsoft/**/*.ts",
+          "explanation": "Files related to Microsoft API operations"
+        },
+        {
+          "pattern": "**/google/**/*.ts",
+          "explanation": "Files related to Google API operations"
+        },
+        {
+          "pattern": "**/external-api/**/*.ts",
+          "explanation": "Files related to external API operations"
+        }
+      ]
+    }
+  },
+  "recommendations": {
+    "highPriorityPatterns": [
+      {
+        "pattern": "API endpoint handlers",
+        "explanation": "Functions that handle API requests often involve data sinks, as they may write data to databases or external services."
+      },
+      {
+        "pattern": "Database query builders",
+        "reason": "These construct queries that interact with the database, potentially revealing data sinks"
+      },
+      {
+        "pattern": "Redis caching mechanisms",
+        "reason": "Caching can sometimes obscure data sinks, so it's essential to analyze caching logic"
+      },
+      {
+        "pattern": "Database operations",
+        "explanation": "Functions that interact with databases are likely to involve data sinks, as they may write data to the database."
+      },
+      {
+        "pattern": "File system operations",
+        "explanation": "Functions that interact with the file system may involve data sinks, as they may write data to files."
+      },
+      {
+        "pattern": "External API calls",
+        "explanation": "Functions that make calls to external APIs may involve data sinks, as they may send data to external services."
+      },
+      {
+        "pattern": "Message queue operations",
+        "explanation": "Functions that interact with message queues may involve data sinks, as they may enqueue data for processing."
+      },
+      {
+        "pattern": "Logging and error monitoring",
+        "explanation": "Functions that log data or monitor errors may involve data sinks, as they may write data to logs or external monitoring services."
+      },
+      {
+        "pattern": "Email sending",
+        "explanation": "Functions that send emails may involve data sinks, as they transmit data via SMTP or other email services."
+      },
+      {
+        "pattern": "Cache operations",
+        "explanation": "Functions that interact with caches may involve data sinks, as they may write data to the cache."
+      },
+      {
+        "pattern": "Payment processing",
+        "explanation": "Functions that process payments may involve data sinks, as they may send data to payment processors."
+      },
+      {
+        "pattern": "Webhook calls",
+        "explanation": "Functions that call webhooks may involve data sinks, as they may send data to external endpoints."
+      },
+      {
+        "pattern": "OAuth operations",
+        "explanation": "Functions that interact with OAuth providers may involve data sinks, as they may send tokens or other data to external services."
+      },
+      {
+        "pattern": "Cloud service operations",
+        "explanation": "Functions that interact with cloud services may involve data sinks, as they may write data to cloud storage or other cloud services."
+      }
+    ],
+    "priorityFiles": [
+      {
+        "pattern": "server-dir/**/controllers/*.ts",
+        "reason": "These files contain API endpoint handlers and are likely to have data sink logic"
+      },
+      {
+        "pattern": "server-dir/**/services/*.ts",
+        "reason": "Services often encapsulate business logic, including data processing and storage, making them high-priority for analysis"
+      },
+      {
+        "pattern": "server-dir/**/repositories/*.ts",
+        "reason": "Repositories typically interact with the database, making them a key area for data sink analysis"
+      }
+    ],
+    "specialCases": [
+      {
+        "case": "TypeScript type guards and conditional types",
+        "handling": "Be cautious when analyzing type guards and conditional types, as they can introduce complexity and potential false positives"
+      },
+      {
+        "case": "Third-party library integrations",
+        "handling": "When analyzing integrations with third-party libraries, consider the library's documentation and potential data sink implications"
+      },
+      {
+        "case": "Environment-specific configurations",
+        "handling": "Be aware of environment-specific configurations (e.g., .env files) that may affect data sink analysis"
+      }
+    ],
+    "falsePositives": [
+      {
+        "pattern": "Logging statements",
+        "reason": "Logging statements may resemble data sinks but are actually just logging mechanisms"
+      },
+      {
+        "pattern": "Debugging code",
+        "reason": "Debugging code may contain data sink-like patterns but is intended for development purposes only"
+      },
+      {
+        "pattern": "TypeScript type assertions",
+        "reason": "Type assertions can sometimes be misinterpreted as data sinks, but they are actually just type-related constructs"
+      }
+    ],
+    "lowPriorityPatterns": [
+      {
+        "pattern": "Utility functions",
+        "explanation": "Utility functions are less likely to involve data sinks, as they often perform transformations or calculations without writing data."
+      },
+      {
+        "pattern": "Helper functions",
+        "explanation": "Helper functions are less likely to involve data sinks, as they often assist with tasks without writing data."
+      },
+      {
+        "pattern": "Validation functions",
+        "explanation": "Validation functions are less likely to involve data sinks, as they often check data without writing it."
+      },
+      {
+        "pattern": "Transformation functions",
+        "explanation": "Transformation functions are less likely to involve data sinks, as they often convert data without writing it."
+      }
+    ]
+  }
+}
