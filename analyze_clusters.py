@@ -20,42 +20,42 @@ def main():
     analyzer = ClusterDataSinkAnalyzer(api_key=FIREWORKS_API_KEY)
     
     # Sample cluster data - in practice, this would come from your AST analysis
-    clusters = [
-        {
-            "cluster_id": -1,
-            "file_paths": [
-                "/content/drive/MyDrive/Colab Notebooks/AST/raw.datasource.ts.txt",
-                "/content/drive/MyDrive/Colab Notebooks/AST/message-queue-core.module.ts.txt",
-                "/content/drive/MyDrive/Colab Notebooks/AST/rest-api-exception.filter.ts.txt",
-                "/content/drive/MyDrive/Colab Notebooks/AST/workspace-missing-column.fixer.ts.txt",
-                "/content/drive/MyDrive/Colab Notebooks/AST/workspace-nullable.fixer.ts.txt"
-            ],
-            "top_features": "importdeclaration, stringliteral, identifier, exportkeyword, newexpression"
-        },
-        {
-            "cluster_id": 0,
-            "file_paths": [
-                "/content/drive/MyDrive/Colab Notebooks/AST/1724056827317-addInvitation.ts.txt",
-                "/content/drive/MyDrive/Colab Notebooks/AST/1721057142509-fixIdentifierTypes.ts.txt",
-                "/content/drive/MyDrive/Colab Notebooks/AST/1730298416367-addAuthProvidersColumnsToWorkspace.ts.txt",
-                "/content/drive/MyDrive/Colab Notebooks/AST/1722855213422-addAuthProviders.ts.txt",
-                "/content/drive/MyDrive/Colab Notebooks/AST/1723281282713-addUserAuthConnection.ts.txt"
-            ],
-            "top_features": "identifier, expressionstatement awaitexpression callexpression, callexpression propertyaccessexpression identifier, callexpression propertyaccessexpression, expressionstatement"
-        },
-        {
-            "cluster_id": 1,
-            "file_paths": [
-                "/content/drive/MyDrive/Colab Notebooks/AST/auth-providers.controller.ts.txt",
-                "/content/drive/MyDrive/Colab Notebooks/AST/auth-providers.module.ts.txt",
-                "/content/drive/MyDrive/Colab Notebooks/AST/auth-providers.service.ts.txt"
-            ],
-            "top_features": "decorator callexpression identifier objectliteraleexpression, classdeclaration decorators classname, exportkeyword classdeclaration, implementsclause"
-        }
-    ]
+    # clusters = [
+    #     {
+    #         "cluster_id": -1,
+    #         "file_paths": [
+    #             "/content/drive/MyDrive/Colab Notebooks/AST/raw.datasource.ts.txt",
+    #             "/content/drive/MyDrive/Colab Notebooks/AST/message-queue-core.module.ts.txt",
+    #             "/content/drive/MyDrive/Colab Notebooks/AST/rest-api-exception.filter.ts.txt",
+    #             "/content/drive/MyDrive/Colab Notebooks/AST/workspace-missing-column.fixer.ts.txt",
+    #             "/content/drive/MyDrive/Colab Notebooks/AST/workspace-nullable.fixer.ts.txt"
+    #         ],
+    #         "top_features": "importdeclaration, stringliteral, identifier, exportkeyword, newexpression"
+    #     },
+    #     {
+    #         "cluster_id": 0,
+    #         "file_paths": [
+    #             "/content/drive/MyDrive/Colab Notebooks/AST/1724056827317-addInvitation.ts.txt",
+    #             "/content/drive/MyDrive/Colab Notebooks/AST/1721057142509-fixIdentifierTypes.ts.txt",
+    #             "/content/drive/MyDrive/Colab Notebooks/AST/1730298416367-addAuthProvidersColumnsToWorkspace.ts.txt",
+    #             "/content/drive/MyDrive/Colab Notebooks/AST/1722855213422-addAuthProviders.ts.txt",
+    #             "/content/drive/MyDrive/Colab Notebooks/AST/1723281282713-addUserAuthConnection.ts.txt"
+    #         ],
+    #         "top_features": "identifier, expressionstatement awaitexpression callexpression, callexpression propertyaccessexpression identifier, callexpression propertyaccessexpression, expressionstatement"
+    #     },
+    #     {
+    #         "cluster_id": 1,
+    #         "file_paths": [
+    #             "/content/drive/MyDrive/Colab Notebooks/AST/auth-providers.controller.ts.txt",
+    #             "/content/drive/MyDrive/Colab Notebooks/AST/auth-providers.module.ts.txt",
+    #             "/content/drive/MyDrive/Colab Notebooks/AST/auth-providers.service.ts.txt"
+    #         ],
+    #         "top_features": "decorator callexpression identifier objectliteraleexpression, classdeclaration decorators classname, exportkeyword classdeclaration, implementsclause"
+    #     }
+    # ]
     
     # Alternatively, load from a JSON file
-    # clusters = load_cluster_data("clusters.json")
+    clusters = load_cluster_data("cluster_details.json")
     
     # Analyze all clusters
     results = analyzer.analyze_all_clusters(clusters)
