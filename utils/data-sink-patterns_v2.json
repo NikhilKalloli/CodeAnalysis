@@ -1,0 +1,207 @@
+{
+  "categories": {
+    "fileSystem": {
+      "description": "File system write operations",
+      "patterns": [
+        {
+          "pattern": "\\b(?:fwrite|fopen|writeFile|FileWriter)\\b",
+          "confidence": 0.8,
+          "explanation": "Common file I/O functions like fwrite, fopen, writeFile, and FileWriter are direct indicators of data sink operations when used with write modes."
+        },
+        {
+          "pattern": "open\\([^)]*[\"']w[+\"]?",
+          "confidence": 0.9,
+          "explanation": "File open operations with write ('w') or append ('a') modes explicitly create/overwrite files, indicating data sinks."
+        }
+      ],
+      "filePatterns": [
+        {
+          "pattern": "\\*\\.\\{log,csv,txt,db,json,xml\\}",
+          "explanation": "Common data storage formats like logs, CSVs, databases, and structured data files frequently contain write operations to persist information."
+        },
+        {
+          "pattern": "\\*\\.\\{config,cfg,ini\\}",
+          "explanation": "Configuration files are often modified programmatically to update settings, making them data sinks."
+        }
+      ]
+    },
+    "database": {
+      "description": "Database write operations",
+      "patterns": [
+        {
+          "pattern": "\\.(createTable|addColumn|addConstraint|addForeignKey|dropTable|alterColumn)\\(",
+          "confidence": 0.8,
+          "explanation": "TypeORM migration methods like createTable/addColumn directly modify database schema structure, indicating schema-altering write operations"
+        }
+      ],
+      "filePatterns": [
+        {
+          "pattern": "\\*\\*/migrations/\\*\\.ts",
+          "explanation": "Database migration files contain schema modification instructions that persist structural changes to the database (data sink for DDL operations)"
+        }
+      ]
+    },
+    "network": {
+      "description": "Network request functions and API calls",
+      "patterns": [
+        {
+          "pattern": "\\b(?:fetch|axios\\.\\w+|XMLHttpRequest|requests?\\.(?:get|post|put|delete))\\b",
+          "confidence": 0.8,
+          "explanation": "Common functions for HTTP requests that send/receive data to external endpoints"
+        }
+      ],
+      "filePatterns": [
+        {
+          "pattern": "\\*api\\*\\.\\{js,ts,py\\}",
+          "explanation": "Files with 'api' naming conventions often contain API client logic and data sinks"
+        },
+        {
+          "pattern": "\\*service\\*\\.\\{js,ts,py\\}",
+          "explanation": "Service layers typically handle network operations and external communications"
+        },
+        {
+          "pattern": "\\*controller\\*\\.\\{js,ts\\}",
+          "explanation": "Controllers in web frameworks frequently make API calls to process requests"
+        }
+      ]
+    },
+    "apiEndpoints": {
+      "description": "API endpoints and response handling",
+      "patterns": [
+        {
+          "pattern": "app\\.(get|post|put|delete)\\s*\\(\\s*['\"`]/api/",
+          "confidence": 0.8,
+          "explanation": "Express.js HTTP methods with '/api/' routes indicate REST endpoint definitions"
+        },
+        {
+          "pattern": "res\\.(json|send|end)\\s*\\(",
+          "confidence": 0.9,
+          "explanation": "Response methods directly send data to clients, creating explicit data sinks"
+        }
+      ],
+      "filePatterns": [
+        {
+          "pattern": "\\*routes\\*\\.js",
+          "explanation": "Route files typically contain endpoint definitions and response handling logic"
+        },
+        {
+          "pattern": "controllers/*.js",
+          "explanation": "Controller files often process requests and return responses through data sinks"
+        }
+      ]
+    },
+    "clientServer": {
+      "description": "Client-server interactions and data transfers",
+      "patterns": [
+        {
+          "pattern": "\\(\\?i\\)\\(CREATE\\\\s\\+TABLE\\|ALTER\\\\s\\+TABLE\\|ADD\\\\s\\+CONSTRAINT\\|DROP\\\\s\\+CONSTRAINT\\|CREATE\\\\s\\+INDEX\\)",
+          "confidence": 0.8,
+          "explanation": "SQL schema modification operations in migration files indicate data structure definitions and constraints that enforce data storage rules, representing persistent data sinks"
+        }
+      ],
+      "filePatterns": [
+        {
+          "pattern": "\\*\\*/migrations/\\*\\.ts",
+          "explanation": "TypeORM migration files directly modify database schema structures which govern how application data is stored and constrained, making them foundational data sink definitions"
+        }
+      ]
+    },
+    "cloudStorage": {
+      "description": "Cloud storage write operations (S3, GCS, Azure Blob)",
+      "patterns": [
+        {
+          "pattern": "\\b(upload_(file|bytes|text)|put_object|write|save(_to)?|copy_(to|from)|transfer|(s3|gcs|azure_blob)_[A-Za-z0-9_]+_write)\\b",
+          "confidence": 0.8,
+          "explanation": "Common cloud storage SDK methods like upload_file, put_object, or write indicate data being sent to external storage services"
+        }
+      ],
+      "filePatterns": [
+        {
+          "pattern": ".*\\.(config|conf|yml|yaml|json|tf|cfn)$",
+          "explanation": "Configuration files and infrastructure-as-code templates often contain cloud storage bucket names, connection strings, or access policies defining data sinks"
+        }
+      ]
+    },
+    "messageQueues": {
+      "description": "Message queue producers (Kafka, RabbitMQ, SQS)",
+      "patterns": [
+        {
+          "pattern": "\\.add\\(|\\.publish\\(",
+          "confidence": 0.8,
+          "explanation": "Methods like add() or publish() are commonly used to enqueue messages in message queue producers"
+        }
+      ],
+      "filePatterns": [
+        {
+          "pattern": "\\*message-queue\\*\\.ts",
+          "explanation": "Files containing message queue constants, decorators, or services likely define queue configurations"
+        },
+        {
+          "pattern": "\\*-queue\\.service\\.ts",
+          "explanation": "Service files with naming conventions related to queues typically handle message production"
+        },
+        {
+          "pattern": "\\*-producer\\.service\\.ts",
+          "explanation": "Files named with 'producer' suffix often contain message queue sending logic"
+        }
+      ]
+    },
+    "loggingServices": {
+      "description": "Logging service integrations (Splunk, Datadog, ELK)",
+      "patterns": [
+        {
+          "pattern": "(https?:\\/\\/(?:\\w+\\.)*(splunkcloud\\.com|datadoghq\\.com|elk-internal\\.net)(:\\d+)?\\/(?:services|api)\\/(?:collector|v1|logstash))",
+          "confidence": 0.8,
+          "explanation": "HTTP/S endpoints for Splunk HEC, Datadog API, and ELK Logstash indicate direct logging integrations"
+        },
+        {
+          "pattern": "(splunk_token|datadog_api_key|logstash_host)\\s*[=:]\\s*[\"'][\\w-]+[\"']",
+          "confidence": 0.9,
+          "explanation": "Credentials/configuration parameters specific to known logging services"
+        },
+        {
+          "pattern": "(LogEvent|MetricsLogger|ELKClient)\\s*\\(",
+          "confidence": 0.7,
+          "explanation": "Common class/method names from logging service SDKs"
+        }
+      ],
+      "filePatterns": [
+        {
+          "pattern": "(logging|telemetry)_config\\.(json|yaml|conf)",
+          "explanation": "Centralized configuration files often contain service endpoints and credentials"
+        },
+        {
+          "pattern": "(docker-compose|helm)/.*\\.(yml|yaml)",
+          "explanation": "Orchestration files may configure logging drivers/sidecars for these services"
+        },
+        {
+          "pattern": "/etc/(splunk-forwarder|datadog-agent|filebeat)/.*\\.conf",
+          "explanation": "Agent configuration directories for enterprise logging tools"
+        }
+      ]
+    },
+    "cicdPipelines": {
+      "description": "CI/CD pipeline artifacts and deployments",
+      "patterns": [
+        {
+          "pattern": "pipeline\\(.*,\\s*fs\\.createWriteStream\\(.*\\)\\)",
+          "confidence": 0.8,
+          "explanation": "Pipeline operations writing to file streams indicate data persistence sinks in deployment processes"
+        }
+      ],
+      "filePatterns": [
+        {
+          "pattern": "src/database/typeorm/\\*\\*/migrations/\\*\\.ts",
+          "explanation": "Database migration files frequently contain schema changes and constraints that represent data sinks when deployed"
+        }
+      ]
+    }
+  },
+  "recommendations": {
+    "highPriorityPatterns": [],
+    "priorityFiles": [],
+    "specialCases": [],
+    "falsePositives": []
+  },
+  "timestamp": "2025-03-21T14:21:57.747Z"
+}
