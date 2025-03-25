@@ -1,0 +1,3727 @@
+<CLUSTER_0>
+Number of Code Snippets part of this cluster: 37
+Code Snippets:
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a job processor that handles workspace events, identifies relevant webhooks, sanitizes record data, and enqueues tasks to call these webhooks.
+Code Snippet:
+import { Logger } from '@nestjs/common';
+
+import { ArrayContains } from 'typeorm';
+
+import { ObjectRecordEvent } from 'src/engine/core-modules/event-emitter/types/object-record-event.event';
+import { InjectMessageQueue } from 'src/engine/core-modules/message-queue/decorators/message-queue.decorator';
+import { Process } from 'src/engine/core-modules/message-queue/decorators/process.decorator';
+import { Processor } from 'src/engine/core-modules/message-queue/decorators/processor.decorator';
+import { MessageQueue } from 'src/engine/core-modules/message-queue/message-queue.constants';
+import { MessageQueueService } from 'src/engine/core-modules/message-queue/services/message-queue.service';
+import { TwentyORMGlobalManager } from 'src/engine/twenty-orm/twenty-orm-global.manager';
+import { WorkspaceEventBatch } from 'src/engine/workspace-event-emitter/types/workspace-event.type';
+import {
+  CallWebhookJob,
+  CallWebhookJobData,
+} from 'src/modules/webhook/jobs/call-webhook.job';
+import { WebhookWorkspaceEntity } from 'src/modules/webhook/standard-objects/webhook.workspace-entity';
+import { removeSecretFromWebhookRecord } from 'src/utils/remove-secret-from-webhook-record';
+
+@Processor(MessageQueue.webhookQueue)
+export class CallWebhookJobsJob {
+  private readonly logger = new Logger(CallWebhookJobsJob.name);
+
+  constructor(
+    @InjectMessageQueue(MessageQueue.webhookQueue)
+    private readonly messageQueueService: MessageQueueService,
+    private readonly twentyORMGlobalManager: TwentyORMGlobalManager,
+  ) {}
+
+  @Process(CallWebhookJobsJob.name)
+  async handle(
+    workspaceEventBatch: WorkspaceEventBatch<ObjectRecordEvent>,
+  ): Promise<void> {
+    // If you change that function, double check it does not break Zapier
+    // trigger in packages/twenty-zapier/src/triggers/trigger_record.ts
+    // Also change the openApi schema for webhooks
+    // packages/twenty-server/src/engine/core-modules/open-api/utils/computeWebhooks.utils.ts
+
+    const webhookRepository =
+      await this.twentyORMGlobalManager.getRepositoryForWorkspace<WebhookWorkspaceEntity>(
+        workspaceEventBatch.workspaceId,
+        'webhook',
+      );
+
+    const [nameSingular, operation] = workspaceEventBatch.name.split('.');
+
+    const webhooks = await webhookRepository.find({
+      where: [
+        { operations: ArrayContains([`${nameSingular}.${operation}`]) },
+        { operations: ArrayContains([`*.${operation}`]) },
+        { operations: ArrayContains([`${nameSingular}.*`]) },
+        { operations: ArrayContains(['*.*']) },
+      ],
+    });
+
+    for (const eventData of workspaceEventBatch.events) {
+      const eventName = workspaceEventBatch.name;
+      const objectMetadata = {
+        id: eventData.objectMetadata.id,
+        nameSingular: eventData.objectMetadata.nameSingular,
+      };
+      const workspaceId = workspaceEventBatch.workspaceId;
+      const record =
+        'after' in eventData.properties
+          ? eventData.properties.after
+          : 'before' in eventData.properties
+            ? eventData.properties.before
+            : {};
+      const updatedFields =
+        'updatedFields' in eventData.properties
+          ? eventData.properties.updatedFields
+          : undefined;
+
+      const isWebhookEvent = nameSingular === 'webhook';
+      const sanitizedRecord = removeSecretFromWebhookRecord(
+        record,
+        isWebhookEvent,
+      );
+
+      webhooks.forEach((webhook) => {
+        const webhookData = {
+          targetUrl: webhook.targetUrl,
+          secret: webhook.secret,
+          eventName,
+          objectMetadata,
+          workspaceId,
+          webhookId: webhook.id,
+          eventDate: new Date(),
+          record: sanitizedRecord,
+          ...(updatedFields && { updatedFields }),
+        };
+
+        this.messageQueueService.add<CallWebhookJobData>(
+          CallWebhookJob.name,
+          webhookData,
+          { retryLimit: 3 },
+        );
+      });
+
+      webhooks.length > 0 &&
+        this.logger.log(
+          `CallWebhookJobsJob on eventName '${workspaceEventBatch.name}' triggered webhooks with ids [\n"${webhooks.map((webhook) => webhook.id).join('",\n"')}"\n]`,
+        );
+    }
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a listener for database events related to the destruction of connected accounts, which then triggers the removal of accounts to reconnect for the associated workspace member.
+Code Snippet:
+import { Injectable } from '@nestjs/common';
+
+import { ObjectRecordDeleteEvent } from 'src/engine/core-modules/event-emitter/types/object-record-delete.event';
+import { TwentyORMGlobalManager } from 'src/engine/twenty-orm/twenty-orm-global.manager';
+import { WorkspaceEventBatch } from 'src/engine/workspace-event-emitter/types/workspace-event.type';
+import { AccountsToReconnectService } from 'src/modules/connected-account/services/accounts-to-reconnect.service';
+import { ConnectedAccountWorkspaceEntity } from 'src/modules/connected-account/standard-objects/connected-account.workspace-entity';
+import { WorkspaceMemberWorkspaceEntity } from 'src/modules/workspace-member/standard-objects/workspace-member.workspace-entity';
+import { OnDatabaseBatchEvent } from 'src/engine/api/graphql/graphql-query-runner/decorators/on-database-batch-event.decorator';
+import { DatabaseEventAction } from 'src/engine/api/graphql/graphql-query-runner/enums/database-event-action';
+
+@Injectable()
+export class ConnectedAccountListener {
+  constructor(
+    private readonly twentyORMGlobalManager: TwentyORMGlobalManager,
+    private readonly accountsToReconnectService: AccountsToReconnectService,
+  ) {}
+
+  @OnDatabaseBatchEvent('connectedAccount', DatabaseEventAction.DESTROYED)
+  async handleDestroyedEvent(
+    payload: WorkspaceEventBatch<
+      ObjectRecordDeleteEvent<ConnectedAccountWorkspaceEntity>
+    >,
+  ) {
+    for (const eventPayload of payload.events) {
+      const workspaceMemberId = eventPayload.properties.before.accountOwnerId;
+      const workspaceId = payload.workspaceId;
+      const workspaceMemberRepository =
+        await this.twentyORMGlobalManager.getRepositoryForWorkspace<WorkspaceMemberWorkspaceEntity>(
+          workspaceId,
+          'workspaceMember',
+        );
+      const workspaceMember = await workspaceMemberRepository.findOneOrFail({
+        where: { id: workspaceMemberId },
+      });
+
+      const userId = workspaceMember.userId;
+
+      const connectedAccountId = eventPayload.properties.before.id;
+
+      await this.accountsToReconnectService.removeAccountToReconnect(
+        userId,
+        workspaceId,
+        connectedAccountId,
+      );
+    }
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a NestJS processor that handles jobs related to matching participants for calendar events based on workspace data and participant service.
+Code Snippet:
+import { Scope } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+
+import { Repository } from 'typeorm';
+
+import { Workspace } from 'src/engine/core-modules/workspace/workspace.entity';
+import { Process } from 'src/engine/core-modules/message-queue/decorators/process.decorator';
+import { Processor } from 'src/engine/core-modules/message-queue/decorators/processor.decorator';
+import { MessageQueue } from 'src/engine/core-modules/message-queue/message-queue.constants';
+import { CalendarEventParticipantWorkspaceEntity } from 'src/modules/calendar/common/standard-objects/calendar-event-participant.workspace-entity';
+import { MatchParticipantService } from 'src/modules/match-participant/match-participant.service';
+
+export type CalendarEventParticipantMatchParticipantJobData = {
+  workspaceId: string;
+  email: string;
+  personId?: string;
+  workspaceMemberId?: string;
+};
+
+@Processor({
+  queueName: MessageQueue.calendarQueue,
+  scope: Scope.REQUEST,
+})
+export class CalendarEventParticipantMatchParticipantJob {
+  constructor(
+    @InjectRepository(Workspace, 'core')
+    private readonly workspaceRepository: Repository<Workspace>,
+    private readonly matchParticipantService: MatchParticipantService<CalendarEventParticipantWorkspaceEntity>,
+  ) {}
+
+  @Process(CalendarEventParticipantMatchParticipantJob.name)
+  async handle(
+    data: CalendarEventParticipantMatchParticipantJobData,
+  ): Promise<void> {
+    const { workspaceId, email, personId, workspaceMemberId } = data;
+
+    const workspace = await this.workspaceRepository.findOne({
+      where: {
+        id: workspaceId,
+      },
+    });
+
+    if (workspace?.activationStatus !== 'ACTIVE') {
+      return;
+    }
+
+    await this.matchParticipantService.matchParticipantsAfterPersonOrWorkspaceMemberCreation(
+      email,
+      'calendarEventParticipant',
+      personId,
+      workspaceMemberId,
+    );
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: Listens for workspace member creation and update events, and enqueues jobs to match or unmatch calendar event participants based on email changes.
+Code Snippet:
+import { Injectable } from '@nestjs/common';
+
+import { ObjectRecordCreateEvent } from 'src/engine/core-modules/event-emitter/types/object-record-create.event';
+import { ObjectRecordUpdateEvent } from 'src/engine/core-modules/event-emitter/types/object-record-update.event';
+import { objectRecordChangedProperties as objectRecordUpdateEventChangedProperties } from 'src/engine/core-modules/event-emitter/utils/object-record-changed-properties.util';
+import { InjectMessageQueue } from 'src/engine/core-modules/message-queue/decorators/message-queue.decorator';
+import { MessageQueue } from 'src/engine/core-modules/message-queue/message-queue.constants';
+import { MessageQueueService } from 'src/engine/core-modules/message-queue/services/message-queue.service';
+import { WorkspaceEventBatch } from 'src/engine/workspace-event-emitter/types/workspace-event.type';
+import {
+  CalendarEventParticipantMatchParticipantJob,
+  CalendarEventParticipantMatchParticipantJobData,
+} from 'src/modules/calendar/calendar-event-participant-manager/jobs/calendar-event-participant-match-participant.job';
+import {
+  CalendarEventParticipantUnmatchParticipantJob,
+  CalendarEventParticipantUnmatchParticipantJobData,
+} from 'src/modules/calendar/calendar-event-participant-manager/jobs/calendar-event-participant-unmatch-participant.job';
+import { WorkspaceMemberWorkspaceEntity } from 'src/modules/workspace-member/standard-objects/workspace-member.workspace-entity';
+import { OnDatabaseBatchEvent } from 'src/engine/api/graphql/graphql-query-runner/decorators/on-database-batch-event.decorator';
+import { DatabaseEventAction } from 'src/engine/api/graphql/graphql-query-runner/enums/database-event-action';
+
+@Injectable()
+export class CalendarEventParticipantWorkspaceMemberListener {
+  constructor(
+    @InjectMessageQueue(MessageQueue.calendarQueue)
+    private readonly messageQueueService: MessageQueueService,
+  ) {}
+
+  @OnDatabaseBatchEvent('workspaceMember', DatabaseEventAction.CREATED)
+  async handleCreatedEvent(
+    payload: WorkspaceEventBatch<
+      ObjectRecordCreateEvent<WorkspaceMemberWorkspaceEntity>
+    >,
+  ) {
+    for (const eventPayload of payload.events) {
+      if (!eventPayload.properties.after.userEmail) {
+        continue;
+      }
+
+      await this.messageQueueService.add<CalendarEventParticipantMatchParticipantJobData>(
+        CalendarEventParticipantMatchParticipantJob.name,
+        {
+          workspaceId: payload.workspaceId,
+          email: eventPayload.properties.after.userEmail,
+          workspaceMemberId: eventPayload.recordId,
+        },
+      );
+    }
+  }
+
+  @OnDatabaseBatchEvent('workspaceMember', DatabaseEventAction.UPDATED)
+  async handleUpdatedEvent(
+    payload: WorkspaceEventBatch<
+      ObjectRecordUpdateEvent<WorkspaceMemberWorkspaceEntity>
+    >,
+  ) {
+    for (const eventPayload of payload.events) {
+      if (
+        objectRecordUpdateEventChangedProperties<WorkspaceMemberWorkspaceEntity>(
+          eventPayload.properties.before,
+          eventPayload.properties.after,
+        ).includes('userEmail')
+      ) {
+        await this.messageQueueService.add<CalendarEventParticipantUnmatchParticipantJobData>(
+          CalendarEventParticipantUnmatchParticipantJob.name,
+          {
+            workspaceId: payload.workspaceId,
+            email: eventPayload.properties.before.userEmail,
+            personId: eventPayload.recordId,
+          },
+        );
+
+        await this.messageQueueService.add<CalendarEventParticipantMatchParticipantJobData>(
+          CalendarEventParticipantMatchParticipantJob.name,
+          {
+            workspaceId: payload.workspaceId,
+            email: eventPayload.properties.after.userEmail,
+            workspaceMemberId: eventPayload.recordId,
+          },
+        );
+      }
+    }
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: This code listens for database events related to person records and enqueues jobs to match or unmatch calendar event participants based on email changes.
+Code Snippet:
+import { Injectable } from '@nestjs/common';
+
+import { ObjectRecordCreateEvent } from 'src/engine/core-modules/event-emitter/types/object-record-create.event';
+import { ObjectRecordUpdateEvent } from 'src/engine/core-modules/event-emitter/types/object-record-update.event';
+import { objectRecordChangedProperties as objectRecordUpdateEventChangedProperties } from 'src/engine/core-modules/event-emitter/utils/object-record-changed-properties.util';
+import { InjectMessageQueue } from 'src/engine/core-modules/message-queue/decorators/message-queue.decorator';
+import { MessageQueue } from 'src/engine/core-modules/message-queue/message-queue.constants';
+import { MessageQueueService } from 'src/engine/core-modules/message-queue/services/message-queue.service';
+import { WorkspaceEventBatch } from 'src/engine/workspace-event-emitter/types/workspace-event.type';
+import {
+  CalendarEventParticipantMatchParticipantJob,
+  CalendarEventParticipantMatchParticipantJobData,
+} from 'src/modules/calendar/calendar-event-participant-manager/jobs/calendar-event-participant-match-participant.job';
+import {
+  CalendarEventParticipantUnmatchParticipantJob,
+  CalendarEventParticipantUnmatchParticipantJobData,
+} from 'src/modules/calendar/calendar-event-participant-manager/jobs/calendar-event-participant-unmatch-participant.job';
+import { PersonWorkspaceEntity } from 'src/modules/person/standard-objects/person.workspace-entity';
+import { OnDatabaseBatchEvent } from 'src/engine/api/graphql/graphql-query-runner/decorators/on-database-batch-event.decorator';
+import { DatabaseEventAction } from 'src/engine/api/graphql/graphql-query-runner/enums/database-event-action';
+
+@Injectable()
+export class CalendarEventParticipantPersonListener {
+  constructor(
+    @InjectMessageQueue(MessageQueue.calendarQueue)
+    private readonly messageQueueService: MessageQueueService,
+  ) {}
+
+  @OnDatabaseBatchEvent('person', DatabaseEventAction.CREATED)
+  async handleCreatedEvent(
+    payload: WorkspaceEventBatch<
+      ObjectRecordCreateEvent<PersonWorkspaceEntity>
+    >,
+  ) {
+    for (const eventPayload of payload.events) {
+      if (eventPayload.properties.after.emails?.primaryEmail === null) {
+        continue;
+      }
+
+      // TODO: modify this job to take an array of participants to match
+      await this.messageQueueService.add<CalendarEventParticipantMatchParticipantJobData>(
+        CalendarEventParticipantMatchParticipantJob.name,
+        {
+          workspaceId: payload.workspaceId,
+          email: eventPayload.properties.after.emails?.primaryEmail,
+          personId: eventPayload.recordId,
+        },
+      );
+    }
+  }
+
+  @OnDatabaseBatchEvent('person', DatabaseEventAction.UPDATED)
+  async handleUpdatedEvent(
+    payload: WorkspaceEventBatch<
+      ObjectRecordUpdateEvent<PersonWorkspaceEntity>
+    >,
+  ) {
+    for (const eventPayload of payload.events) {
+      if (
+        objectRecordUpdateEventChangedProperties(
+          eventPayload.properties.before,
+          eventPayload.properties.after,
+        ).includes('emails')
+      ) {
+        // TODO: modify this job to take an array of participants to match
+        await this.messageQueueService.add<CalendarEventParticipantUnmatchParticipantJobData>(
+          CalendarEventParticipantUnmatchParticipantJob.name,
+          {
+            workspaceId: payload.workspaceId,
+            email: eventPayload.properties.before.emails?.primaryEmail,
+            personId: eventPayload.recordId,
+          },
+        );
+
+        await this.messageQueueService.add<CalendarEventParticipantMatchParticipantJobData>(
+          CalendarEventParticipantMatchParticipantJob.name,
+          {
+            workspaceId: payload.workspaceId,
+            email: eventPayload.properties.after.emails?.primaryEmail,
+            personId: eventPayload.recordId,
+          },
+        );
+      }
+    }
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a service to manage calendar event participants, including upserting, updating, and deleting participants.
+Code Snippet:
+import { Injectable } from '@nestjs/common';
+
+import { isDefined } from 'class-validator';
+import differenceWith from 'lodash.differencewith';
+import { Any } from 'typeorm';
+
+import { TwentyORMManager } from 'src/engine/twenty-orm/twenty-orm.manager';
+import { CalendarEventParticipantWorkspaceEntity } from 'src/modules/calendar/common/standard-objects/calendar-event-participant.workspace-entity';
+import { CalendarEventParticipantWithCalendarEventId } from 'src/modules/calendar/common/types/calendar-event';
+import { MatchParticipantService } from 'src/modules/match-participant/match-participant.service';
+
+@Injectable()
+export class CalendarEventParticipantService {
+  constructor(
+    private readonly twentyORMManager: TwentyORMManager,
+    private readonly matchParticipantService: MatchParticipantService<CalendarEventParticipantWorkspaceEntity>,
+  ) {}
+
+  public async upsertAndDeleteCalendarEventParticipants(
+    participantsToSave: CalendarEventParticipantWithCalendarEventId[],
+    participantsToUpdate: CalendarEventParticipantWithCalendarEventId[],
+    transactionManager?: any,
+  ): Promise<void> {
+    const calendarEventParticipantRepository =
+      await this.twentyORMManager.getRepository<CalendarEventParticipantWorkspaceEntity>(
+        'calendarEventParticipant',
+      );
+
+    const existingCalendarEventParticipants =
+      await calendarEventParticipantRepository.find({
+        where: {
+          calendarEventId: Any(
+            participantsToUpdate
+              .map((participant) => participant.calendarEventId)
+              .filter(isDefined),
+          ),
+        },
+      });
+
+    const { calendarEventParticipantsToUpdate, newCalendarEventParticipants } =
+      participantsToUpdate.reduce(
+        (acc, calendarEventParticipant) => {
+          const existingCalendarEventParticipant =
+            existingCalendarEventParticipants.find(
+              (existingCalendarEventParticipant) =>
+                existingCalendarEventParticipant.handle ===
+                  calendarEventParticipant.handle &&
+                existingCalendarEventParticipant.calendarEventId ===
+                  calendarEventParticipant.calendarEventId,
+            );
+
+          if (existingCalendarEventParticipant) {
+            acc.calendarEventParticipantsToUpdate.push(
+              calendarEventParticipant,
+            );
+          } else {
+            acc.newCalendarEventParticipants.push(calendarEventParticipant);
+          }
+
+          return acc;
+        },
+        {
+          calendarEventParticipantsToUpdate:
+            [] as CalendarEventParticipantWithCalendarEventId[],
+          newCalendarEventParticipants:
+            [] as CalendarEventParticipantWithCalendarEventId[],
+        },
+      );
+
+    const calendarEventParticipantsToDelete = differenceWith(
+      existingCalendarEventParticipants,
+      participantsToUpdate,
+      (existingCalendarEventParticipant, participantToUpdate) =>
+        existingCalendarEventParticipant.handle ===
+          participantToUpdate.handle &&
+        existingCalendarEventParticipant.calendarEventId ===
+          participantToUpdate.calendarEventId,
+    );
+
+    await calendarEventParticipantRepository.delete(
+      {
+        id: Any(
+          calendarEventParticipantsToDelete.map(
+            (calendarEventParticipant) => calendarEventParticipant.id,
+          ),
+        ),
+      },
+      transactionManager,
+    );
+
+    for (const calendarEventParticipantToUpdate of calendarEventParticipantsToUpdate) {
+      await calendarEventParticipantRepository.update(
+        {
+          calendarEventId: calendarEventParticipantToUpdate.calendarEventId,
+          handle: calendarEventParticipantToUpdate.handle,
+        },
+        {
+          ...calendarEventParticipantToUpdate,
+        },
+        transactionManager,
+      );
+    }
+
+    participantsToSave.push(...newCalendarEventParticipants);
+
+    const savedParticipants = await calendarEventParticipantRepository.save(
+      participantsToSave,
+      {},
+      transactionManager,
+    );
+
+    await this.matchParticipantService.matchParticipants(
+      savedParticipants,
+      'calendarEventParticipant',
+      transactionManager,
+    );
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a service for fetching calendar events from Google Calendar, handling pagination and error parsing.
+Code Snippet:
+import { Injectable } from '@nestjs/common';
+
+import { GaxiosError } from 'gaxios';
+import { calendar_v3 as calendarV3 } from 'googleapis';
+
+import { GoogleCalendarClientProvider } from 'src/modules/calendar/calendar-event-import-manager/drivers/google-calendar/providers/google-calendar.provider';
+import { formatGoogleCalendarEvents } from 'src/modules/calendar/calendar-event-import-manager/drivers/google-calendar/utils/format-google-calendar-event.util';
+import { parseGaxiosError } from 'src/modules/calendar/calendar-event-import-manager/drivers/google-calendar/utils/parse-gaxios-error.util';
+import { parseGoogleCalendarError } from 'src/modules/calendar/calendar-event-import-manager/drivers/google-calendar/utils/parse-google-calendar-error.util';
+import { GetCalendarEventsResponse } from 'src/modules/calendar/calendar-event-import-manager/services/calendar-get-events.service';
+import { ConnectedAccountWorkspaceEntity } from 'src/modules/connected-account/standard-objects/connected-account.workspace-entity';
+
+@Injectable()
+export class GoogleCalendarGetEventsService {
+  constructor(
+    private readonly googleCalendarClientProvider: GoogleCalendarClientProvider,
+  ) {}
+
+  public async getCalendarEvents(
+    connectedAccount: Pick<
+      ConnectedAccountWorkspaceEntity,
+      'provider' | 'refreshToken' | 'id'
+    >,
+    syncCursor?: string,
+  ): Promise<GetCalendarEventsResponse> {
+    const googleCalendarClient =
+      await this.googleCalendarClientProvider.getGoogleCalendarClient(
+        connectedAccount,
+      );
+
+    let nextSyncToken: string | null | undefined;
+    let nextPageToken: string | undefined;
+    const events: calendarV3.Schema$Event[] = [];
+
+    let hasMoreEvents = true;
+
+    while (hasMoreEvents) {
+      const googleCalendarEvents = await googleCalendarClient.events
+        .list({
+          calendarId: 'primary',
+          maxResults: 500,
+          syncToken: syncCursor,
+          pageToken: nextPageToken,
+          showDeleted: true,
+        })
+        .catch(async (error: GaxiosError) => {
+          this.handleError(error);
+
+          return {
+            data: {
+              items: [],
+              nextSyncToken: undefined,
+              nextPageToken: undefined,
+            },
+          };
+        });
+
+      nextSyncToken = googleCalendarEvents.data.nextSyncToken;
+      nextPageToken = googleCalendarEvents.data.nextPageToken || undefined;
+
+      const { items } = googleCalendarEvents.data;
+
+      if (!items || items.length === 0) {
+        break;
+      }
+
+      events.push(...items);
+
+      if (!nextPageToken) {
+        hasMoreEvents = false;
+      }
+    }
+
+    return {
+      fullEvents: true,
+      calendarEvents: formatGoogleCalendarEvents(events),
+      nextSyncCursor: nextSyncToken || '',
+    };
+  }
+
+  private handleError(error: GaxiosError) {
+    if (
+      error.code &&
+      [
+        'ECONNRESET',
+        'ENOTFOUND',
+        'ECONNABORTED',
+        'ETIMEDOUT',
+        'ERR_NETWORK',
+      ].includes(error.code)
+    ) {
+      throw parseGaxiosError(error);
+    }
+    if (error.response?.status !== 410) {
+      const googleCalendarError = {
+        code: error.response?.status,
+        reason:
+          error.response?.data?.error?.errors?.[0].reason ||
+          error.response?.data?.error ||
+          '',
+        message:
+          error.response?.data?.error?.errors?.[0].message ||
+          error.response?.data?.error_description ||
+          '',
+      };
+
+      throw parseGoogleCalendarError(googleCalendarError);
+    }
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a NestJS processor that checks for stale calendar sync operations and resets their status if necessary.
+Code Snippet:
+import { Logger, Scope } from '@nestjs/common';
+
+import { In } from 'typeorm';
+
+import { Process } from 'src/engine/core-modules/message-queue/decorators/process.decorator';
+import { Processor } from 'src/engine/core-modules/message-queue/decorators/processor.decorator';
+import { MessageQueue } from 'src/engine/core-modules/message-queue/message-queue.constants';
+import { TwentyORMManager } from 'src/engine/twenty-orm/twenty-orm.manager';
+import { isSyncStale } from 'src/modules/calendar/calendar-event-import-manager/utils/is-sync-stale.util';
+import { CalendarChannelSyncStatusService } from 'src/modules/calendar/common/services/calendar-channel-sync-status.service';
+import {
+  CalendarChannelSyncStage,
+  CalendarChannelWorkspaceEntity,
+} from 'src/modules/calendar/common/standard-objects/calendar-channel.workspace-entity';
+
+export type CalendarOngoingStaleJobData = {
+  workspaceId: string;
+};
+
+@Processor({
+  queueName: MessageQueue.calendarQueue,
+  scope: Scope.REQUEST,
+})
+export class CalendarOngoingStaleJob {
+  private readonly logger = new Logger(CalendarOngoingStaleJob.name);
+  constructor(
+    private readonly twentyORMManager: TwentyORMManager,
+    private readonly calendarChannelSyncStatusService: CalendarChannelSyncStatusService,
+  ) {}
+
+  @Process(CalendarOngoingStaleJob.name)
+  async handle(data: CalendarOngoingStaleJobData): Promise<void> {
+    const { workspaceId } = data;
+
+    const calendarChannelRepository =
+      await this.twentyORMManager.getRepository<CalendarChannelWorkspaceEntity>(
+        'calendarChannel',
+      );
+
+    const calendarChannels = await calendarChannelRepository.find({
+      where: {
+        syncStage: In([
+          CalendarChannelSyncStage.CALENDAR_EVENTS_IMPORT_ONGOING,
+          CalendarChannelSyncStage.CALENDAR_EVENT_LIST_FETCH_ONGOING,
+        ]),
+      },
+    });
+
+    for (const calendarChannel of calendarChannels) {
+      if (
+        calendarChannel.syncStageStartedAt &&
+        isSyncStale(calendarChannel.syncStageStartedAt)
+      ) {
+        this.logger.log(
+          `Sync for calendar channel ${calendarChannel.id} and workspace ${workspaceId} is stale. Setting sync stage to pending`,
+        );
+        await this.calendarChannelSyncStatusService.resetSyncStageStartedAt([
+          calendarChannel.id,
+        ]);
+
+        switch (calendarChannel.syncStage) {
+          case CalendarChannelSyncStage.CALENDAR_EVENT_LIST_FETCH_ONGOING:
+            await this.calendarChannelSyncStatusService.schedulePartialCalendarEventListFetch(
+              [calendarChannel.id],
+            );
+            break;
+          case CalendarChannelSyncStage.CALENDAR_EVENTS_IMPORT_ONGOING:
+            await this.calendarChannelSyncStatusService.scheduleCalendarEventsImport(
+              [calendarChannel.id],
+            );
+            break;
+          default:
+            break;
+        }
+      }
+    }
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a listener for database events related to the destruction of connected account records. Upon detection of such events, it enqueues a job to clean up associated calendar data.
+Code Snippet:
+import { Injectable } from '@nestjs/common';
+
+import { ObjectRecordDeleteEvent } from 'src/engine/core-modules/event-emitter/types/object-record-delete.event';
+import { InjectMessageQueue } from 'src/engine/core-modules/message-queue/decorators/message-queue.decorator';
+import { MessageQueue } from 'src/engine/core-modules/message-queue/message-queue.constants';
+import { MessageQueueService } from 'src/engine/core-modules/message-queue/services/message-queue.service';
+import { WorkspaceEventBatch } from 'src/engine/workspace-event-emitter/types/workspace-event.type';
+import {
+  DeleteConnectedAccountAssociatedCalendarDataJob,
+  DeleteConnectedAccountAssociatedCalendarDataJobData,
+} from 'src/modules/calendar/calendar-event-cleaner/jobs/delete-connected-account-associated-calendar-data.job';
+import { ConnectedAccountWorkspaceEntity } from 'src/modules/connected-account/standard-objects/connected-account.workspace-entity';
+import { OnDatabaseBatchEvent } from 'src/engine/api/graphql/graphql-query-runner/decorators/on-database-batch-event.decorator';
+import { DatabaseEventAction } from 'src/engine/api/graphql/graphql-query-runner/enums/database-event-action';
+
+@Injectable()
+export class CalendarEventCleanerConnectedAccountListener {
+  constructor(
+    @InjectMessageQueue(MessageQueue.calendarQueue)
+    private readonly calendarQueueService: MessageQueueService,
+  ) {}
+
+  @OnDatabaseBatchEvent('connectedAccount', DatabaseEventAction.DESTROYED)
+  async handleDestroyedEvent(
+    payload: WorkspaceEventBatch<
+      ObjectRecordDeleteEvent<ConnectedAccountWorkspaceEntity>
+    >,
+  ) {
+    await Promise.all(
+      payload.events.map((eventPayload) =>
+        this.calendarQueueService.add<DeleteConnectedAccountAssociatedCalendarDataJobData>(
+          DeleteConnectedAccountAssociatedCalendarDataJob.name,
+          {
+            workspaceId: payload.workspaceId,
+            connectedAccountId: eventPayload.recordId,
+          },
+        ),
+      ),
+    );
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a service to clean non-associated calendar events for a given workspace using pagination.
+Code Snippet:
+import { Injectable } from '@nestjs/common';
+
+import { Any, IsNull } from 'typeorm';
+
+import { TwentyORMManager } from 'src/engine/twenty-orm/twenty-orm.manager';
+import { deleteUsingPagination } from 'src/modules/messaging/message-cleaner/utils/delete-using-pagination.util';
+
+@Injectable()
+export class CalendarEventCleanerService {
+  constructor(private readonly twentyORMManager: TwentyORMManager) {}
+
+  public async cleanWorkspaceCalendarEvents(workspaceId: string) {
+    const calendarEventRepository =
+      await this.twentyORMManager.getRepository('calendarEvent');
+
+    await deleteUsingPagination(
+      workspaceId,
+      500,
+      async (limit, offset) => {
+        const nonAssociatedCalendarEvents = await calendarEventRepository.find({
+          where: {
+            calendarChannelEventAssociations: {
+              id: IsNull(),
+            },
+          },
+          take: limit,
+          skip: offset,
+        });
+
+        return nonAssociatedCalendarEvents.map(({ id }) => id);
+      },
+      async (ids) => {
+        await calendarEventRepository.delete({ id: Any(ids) });
+      },
+    );
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a NestJS processor that handles the deletion of calendar events associated with blocklisted items in a workspace.
+Code Snippet:
+import { Logger, Scope } from '@nestjs/common';
+
+import { And, Any, ILike, In, Not, Or } from 'typeorm';
+
+import { ObjectRecordCreateEvent } from 'src/engine/core-modules/event-emitter/types/object-record-create.event';
+import { Process } from 'src/engine/core-modules/message-queue/decorators/process.decorator';
+import { Processor } from 'src/engine/core-modules/message-queue/decorators/processor.decorator';
+import { MessageQueue } from 'src/engine/core-modules/message-queue/message-queue.constants';
+import { TwentyORMManager } from 'src/engine/twenty-orm/twenty-orm.manager';
+import { WorkspaceEventBatch } from 'src/engine/workspace-event-emitter/types/workspace-event.type';
+import { BlocklistWorkspaceEntity } from 'src/modules/blocklist/standard-objects/blocklist.workspace-entity';
+import { CalendarEventCleanerService } from 'src/modules/calendar/calendar-event-cleaner/services/calendar-event-cleaner.service';
+import { CalendarChannelEventAssociationWorkspaceEntity } from 'src/modules/calendar/common/standard-objects/calendar-channel-event-association.workspace-entity';
+import { CalendarChannelWorkspaceEntity } from 'src/modules/calendar/common/standard-objects/calendar-channel.workspace-entity';
+
+export type BlocklistItemDeleteCalendarEventsJobData = WorkspaceEventBatch<
+  ObjectRecordCreateEvent<BlocklistWorkspaceEntity>
+>;
+
+@Processor({
+  queueName: MessageQueue.calendarQueue,
+  scope: Scope.REQUEST,
+})
+export class BlocklistItemDeleteCalendarEventsJob {
+  private readonly logger = new Logger(
+    BlocklistItemDeleteCalendarEventsJob.name,
+  );
+
+  constructor(
+    private readonly twentyORMManager: TwentyORMManager,
+    private readonly calendarEventCleanerService: CalendarEventCleanerService,
+  ) {}
+
+  @Process(BlocklistItemDeleteCalendarEventsJob.name)
+  async handle(data: BlocklistItemDeleteCalendarEventsJobData): Promise<void> {
+    const workspaceId = data.workspaceId;
+
+    const blocklistItemIds = data.events.map(
+      (eventPayload) => eventPayload.recordId,
+    );
+
+    const blocklistRepository =
+      await this.twentyORMManager.getRepository<BlocklistWorkspaceEntity>(
+        'blocklist',
+      );
+
+    const blocklist = await blocklistRepository.find({
+      where: {
+        id: Any(blocklistItemIds),
+      },
+    });
+
+    const handlesToDeleteByWorkspaceMemberIdMap = blocklist.reduce(
+      (acc, blocklistItem) => {
+        const { handle, workspaceMemberId } = blocklistItem;
+
+        if (!acc.has(workspaceMemberId)) {
+          acc.set(workspaceMemberId, []);
+        }
+
+        acc.get(workspaceMemberId)?.push(handle);
+
+        return acc;
+      },
+      new Map<string, string[]>(),
+    );
+
+    const calendarChannelRepository =
+      await this.twentyORMManager.getRepository<CalendarChannelWorkspaceEntity>(
+        'calendarChannel',
+      );
+
+    const calendarChannelEventAssociationRepository =
+      await this.twentyORMManager.getRepository<CalendarChannelEventAssociationWorkspaceEntity>(
+        'calendarChannelEventAssociation',
+      );
+
+    for (const workspaceMemberId of handlesToDeleteByWorkspaceMemberIdMap.keys()) {
+      const handles =
+        handlesToDeleteByWorkspaceMemberIdMap.get(workspaceMemberId);
+
+      if (!handles) {
+        continue;
+      }
+
+      this.logger.log(
+        `Deleting calendar events from ${handles.join(
+          ', ',
+        )} in workspace ${workspaceId} for workspace member ${workspaceMemberId}`,
+      );
+
+      const calendarChannels = await calendarChannelRepository.find({
+        select: {
+          id: true,
+          handle: true,
+          connectedAccount: {
+            handleAliases: true,
+          },
+        },
+        where: {
+          connectedAccount: {
+            accountOwnerId: workspaceMemberId,
+          },
+        },
+        relations: ['connectedAccount'],
+      });
+
+      for (const calendarChannel of calendarChannels) {
+        const calendarChannelHandles = [calendarChannel.handle];
+
+        if (calendarChannel.connectedAccount.handleAliases) {
+          calendarChannelHandles.push(
+            ...calendarChannel.connectedAccount.handleAliases.split(','),
+          );
+        }
+
+        const handleConditions = handles.map((handle) => {
+          const isHandleDomain = handle.startsWith('@');
+
+          return isHandleDomain
+            ? {
+                handle: And(
+                  Or(ILike(`%${handle}`), ILike(`%.${handle.slice(1)}`)),
+                  Not(In(calendarChannelHandles)),
+                ),
+              }
+            : { handle };
+        });
+
+        const calendarEventsAssociationsToDelete =
+          await calendarChannelEventAssociationRepository.find({
+            where: {
+              calendarChannelId: calendarChannel.id,
+              calendarEvent: {
+                calendarEventParticipants: handleConditions,
+              },
+            },
+          });
+
+        if (calendarEventsAssociationsToDelete.length === 0) {
+          continue;
+        }
+
+        await calendarChannelEventAssociationRepository.delete(
+          calendarEventsAssociationsToDelete.map(({ id }) => id),
+        );
+      }
+
+      this.logger.log(
+        `Deleted calendar events from handle ${handles.join(
+          ', ',
+        )} in workspace ${workspaceId} for workspace member ${workspaceMemberId}`,
+      );
+    }
+
+    await this.calendarEventCleanerService.cleanWorkspaceCalendarEvents(
+      workspaceId,
+    );
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a listener for blocklist events that triggers jobs to manage calendar events based on blocklist changes.
+Code Snippet:
+import { Injectable } from '@nestjs/common';
+
+import { ObjectRecordCreateEvent } from 'src/engine/core-modules/event-emitter/types/object-record-create.event';
+import { ObjectRecordDeleteEvent } from 'src/engine/core-modules/event-emitter/types/object-record-delete.event';
+import { ObjectRecordUpdateEvent } from 'src/engine/core-modules/event-emitter/types/object-record-update.event';
+import { InjectMessageQueue } from 'src/engine/core-modules/message-queue/decorators/message-queue.decorator';
+import { MessageQueue } from 'src/engine/core-modules/message-queue/message-queue.constants';
+import { MessageQueueService } from 'src/engine/core-modules/message-queue/services/message-queue.service';
+import { WorkspaceEventBatch } from 'src/engine/workspace-event-emitter/types/workspace-event.type';
+import { BlocklistWorkspaceEntity } from 'src/modules/blocklist/standard-objects/blocklist.workspace-entity';
+import {
+  BlocklistItemDeleteCalendarEventsJob,
+  BlocklistItemDeleteCalendarEventsJobData,
+} from 'src/modules/calendar/blocklist-manager/jobs/blocklist-item-delete-calendar-events.job';
+import {
+  BlocklistReimportCalendarEventsJob,
+  BlocklistReimportCalendarEventsJobData,
+} from 'src/modules/calendar/blocklist-manager/jobs/blocklist-reimport-calendar-events.job';
+import { OnDatabaseBatchEvent } from 'src/engine/api/graphql/graphql-query-runner/decorators/on-database-batch-event.decorator';
+import { DatabaseEventAction } from 'src/engine/api/graphql/graphql-query-runner/enums/database-event-action';
+
+@Injectable()
+export class CalendarBlocklistListener {
+  constructor(
+    @InjectMessageQueue(MessageQueue.calendarQueue)
+    private readonly messageQueueService: MessageQueueService,
+  ) {}
+
+  @OnDatabaseBatchEvent('blocklist', DatabaseEventAction.CREATED)
+  async handleCreatedEvent(
+    payload: WorkspaceEventBatch<
+      ObjectRecordCreateEvent<BlocklistWorkspaceEntity>
+    >,
+  ) {
+    await this.messageQueueService.add<BlocklistItemDeleteCalendarEventsJobData>(
+      BlocklistItemDeleteCalendarEventsJob.name,
+      payload,
+    );
+  }
+
+  @OnDatabaseBatchEvent('blocklist', DatabaseEventAction.DELETED)
+  async handleDeletedEvent(
+    payload: WorkspaceEventBatch<
+      ObjectRecordDeleteEvent<BlocklistWorkspaceEntity>
+    >,
+  ) {
+    await this.messageQueueService.add<BlocklistReimportCalendarEventsJobData>(
+      BlocklistReimportCalendarEventsJob.name,
+      payload,
+    );
+  }
+
+  @OnDatabaseBatchEvent('blocklist', DatabaseEventAction.UPDATED)
+  async handleUpdatedEvent(
+    payload: WorkspaceEventBatch<
+      ObjectRecordUpdateEvent<BlocklistWorkspaceEntity>
+    >,
+  ) {
+    await this.messageQueueService.add<BlocklistItemDeleteCalendarEventsJobData>(
+      BlocklistItemDeleteCalendarEventsJob.name,
+      payload,
+    );
+
+    await this.messageQueueService.add<BlocklistReimportCalendarEventsJobData>(
+      BlocklistReimportCalendarEventsJob.name,
+      payload,
+    );
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a listener that triggers a job to create companies and contacts in a calendar channel when the auto-creation feature is enabled.
+Code Snippet:
+import { Injectable } from '@nestjs/common';
+
+import { ObjectRecordUpdateEvent } from 'src/engine/core-modules/event-emitter/types/object-record-update.event';
+import { objectRecordChangedProperties } from 'src/engine/core-modules/event-emitter/utils/object-record-changed-properties.util';
+import { InjectMessageQueue } from 'src/engine/core-modules/message-queue/decorators/message-queue.decorator';
+import { MessageQueue } from 'src/engine/core-modules/message-queue/message-queue.constants';
+import { MessageQueueService } from 'src/engine/core-modules/message-queue/services/message-queue.service';
+import { WorkspaceEventBatch } from 'src/engine/workspace-event-emitter/types/workspace-event.type';
+import {
+  CalendarCreateCompanyAndContactAfterSyncJob,
+  CalendarCreateCompanyAndContactAfterSyncJobData,
+} from 'src/modules/calendar/calendar-event-participant-manager/jobs/calendar-create-company-and-contact-after-sync.job';
+import { MessageChannelWorkspaceEntity } from 'src/modules/messaging/common/standard-objects/message-channel.workspace-entity';
+import { OnDatabaseBatchEvent } from 'src/engine/api/graphql/graphql-query-runner/decorators/on-database-batch-event.decorator';
+import { DatabaseEventAction } from 'src/engine/api/graphql/graphql-query-runner/enums/database-event-action';
+
+@Injectable()
+export class AutoCompaniesAndContactsCreationCalendarChannelListener {
+  constructor(
+    @InjectMessageQueue(MessageQueue.calendarQueue)
+    private readonly messageQueueService: MessageQueueService,
+  ) {}
+
+  @OnDatabaseBatchEvent('calendarChannel', DatabaseEventAction.UPDATED)
+  async handleUpdatedEvent(
+    payload: WorkspaceEventBatch<
+      ObjectRecordUpdateEvent<MessageChannelWorkspaceEntity>
+    >,
+  ) {
+    await Promise.all(
+      payload.events.map((eventPayload) => {
+        if (
+          objectRecordChangedProperties(
+            eventPayload.properties.before,
+            eventPayload.properties.after,
+          ).includes('isContactAutoCreationEnabled') &&
+          eventPayload.properties.after.isContactAutoCreationEnabled
+        ) {
+          return this.messageQueueService.add<CalendarCreateCompanyAndContactAfterSyncJobData>(
+            CalendarCreateCompanyAndContactAfterSyncJob.name,
+            {
+              workspaceId: payload.workspaceId,
+              calendarChannelId: eventPayload.recordId,
+            },
+          );
+        }
+      }),
+    );
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a listener for database update events on message channels. When the 'isContactAutoCreationEnabled' property is updated to true, it triggers a job to create companies and contacts.
+Code Snippet:
+import { Injectable } from '@nestjs/common';
+
+import { ObjectRecordUpdateEvent } from 'src/engine/core-modules/event-emitter/types/object-record-update.event';
+import { objectRecordChangedProperties } from 'src/engine/core-modules/event-emitter/utils/object-record-changed-properties.util';
+import { InjectMessageQueue } from 'src/engine/core-modules/message-queue/decorators/message-queue.decorator';
+import { MessageQueue } from 'src/engine/core-modules/message-queue/message-queue.constants';
+import { MessageQueueService } from 'src/engine/core-modules/message-queue/services/message-queue.service';
+import { WorkspaceEventBatch } from 'src/engine/workspace-event-emitter/types/workspace-event.type';
+import { MessageChannelWorkspaceEntity } from 'src/modules/messaging/common/standard-objects/message-channel.workspace-entity';
+import {
+  MessagingCreateCompanyAndContactAfterSyncJob,
+  MessagingCreateCompanyAndContactAfterSyncJobData,
+} from 'src/modules/messaging/message-participant-manager/jobs/messaging-create-company-and-contact-after-sync.job';
+import { OnDatabaseBatchEvent } from 'src/engine/api/graphql/graphql-query-runner/decorators/on-database-batch-event.decorator';
+import { DatabaseEventAction } from 'src/engine/api/graphql/graphql-query-runner/enums/database-event-action';
+
+@Injectable()
+export class AutoCompaniesAndContactsCreationMessageChannelListener {
+  constructor(
+    @InjectMessageQueue(MessageQueue.contactCreationQueue)
+    private readonly messageQueueService: MessageQueueService,
+  ) {}
+
+  @OnDatabaseBatchEvent('messageChannel', DatabaseEventAction.UPDATED)
+  async handleUpdatedEvent(
+    payload: WorkspaceEventBatch<
+      ObjectRecordUpdateEvent<MessageChannelWorkspaceEntity>
+    >,
+  ) {
+    await Promise.all(
+      payload.events.map((eventPayload) => {
+        if (
+          objectRecordChangedProperties(
+            eventPayload.properties.before,
+            eventPayload.properties.after,
+          ).includes('isContactAutoCreationEnabled') &&
+          eventPayload.properties.after.isContactAutoCreationEnabled
+        ) {
+          return this.messageQueueService.add<MessagingCreateCompanyAndContactAfterSyncJobData>(
+            MessagingCreateCompanyAndContactAfterSyncJob.name,
+            {
+              workspaceId: payload.workspaceId,
+              messageChannelId: eventPayload.recordId,
+            },
+          );
+        }
+      }),
+    );
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: This code defines a service for matching participants with persons and workspace members in a NestJS application using TypeORM.
+Code Snippet:
+import { Injectable } from '@nestjs/common';
+
+import { Any, EntityManager, Equal } from 'typeorm';
+
+import { ScopedWorkspaceContextFactory } from 'src/engine/twenty-orm/factories/scoped-workspace-context.factory';
+import { TwentyORMManager } from 'src/engine/twenty-orm/twenty-orm.manager';
+import { WorkspaceEventEmitter } from 'src/engine/workspace-event-emitter/workspace-event-emitter';
+import { CalendarEventParticipantWorkspaceEntity } from 'src/modules/calendar/common/standard-objects/calendar-event-participant.workspace-entity';
+import { MessageParticipantWorkspaceEntity } from 'src/modules/messaging/common/standard-objects/message-participant.workspace-entity';
+import { PersonWorkspaceEntity } from 'src/modules/person/standard-objects/person.workspace-entity';
+import { WorkspaceMemberWorkspaceEntity } from 'src/modules/workspace-member/standard-objects/workspace-member.workspace-entity';
+
+@Injectable()
+export class MatchParticipantService<
+  ParticipantWorkspaceEntity extends
+    | CalendarEventParticipantWorkspaceEntity
+    | MessageParticipantWorkspaceEntity,
+> {
+  constructor(
+    private readonly workspaceEventEmitter: WorkspaceEventEmitter,
+    private readonly twentyORMManager: TwentyORMManager,
+    private readonly scopedWorkspaceContextFactory: ScopedWorkspaceContextFactory,
+  ) {}
+
+  private async getParticipantRepository(
+    objectMetadataName: 'messageParticipant' | 'calendarEventParticipant',
+  ) {
+    if (objectMetadataName === 'messageParticipant') {
+      return await this.twentyORMManager.getRepository<MessageParticipantWorkspaceEntity>(
+        objectMetadataName,
+      );
+    }
+
+    return await this.twentyORMManager.getRepository<CalendarEventParticipantWorkspaceEntity>(
+      objectMetadataName,
+    );
+  }
+
+  public async matchParticipants(
+    participants: ParticipantWorkspaceEntity[],
+    objectMetadataName: 'messageParticipant' | 'calendarEventParticipant',
+    transactionManager?: EntityManager,
+  ) {
+    const participantRepository =
+      await this.getParticipantRepository(objectMetadataName);
+
+    const workspaceId = this.scopedWorkspaceContextFactory.create().workspaceId;
+
+    if (!workspaceId) {
+      throw new Error('Workspace ID is required');
+    }
+
+    const participantIds = participants.map((participant) => participant.id);
+    const uniqueParticipantsHandles = [
+      ...new Set(participants.map((participant) => participant.handle)),
+    ];
+
+    const personRepository =
+      await this.twentyORMManager.getRepository<PersonWorkspaceEntity>(
+        'person',
+      );
+
+    const people = await personRepository.find(
+      {
+        where: {
+          emails: Any(uniqueParticipantsHandles),
+        },
+      },
+      transactionManager,
+    );
+
+    const workspaceMemberRepository =
+      await this.twentyORMManager.getRepository<WorkspaceMemberWorkspaceEntity>(
+        'workspaceMember',
+      );
+
+    const workspaceMembers = await workspaceMemberRepository.find(
+      {
+        where: {
+          userEmail: Any(uniqueParticipantsHandles),
+        },
+      },
+      transactionManager,
+    );
+
+    for (const handle of uniqueParticipantsHandles) {
+      const person = people.find(
+        (person) => person.emails?.primaryEmail === handle,
+      );
+
+      const workspaceMember = workspaceMembers.find(
+        (workspaceMember) => workspaceMember.userEmail === handle,
+      );
+
+      await participantRepository.update(
+        {
+          id: Any(participantIds),
+          handle,
+        },
+        {
+          personId: person?.id,
+          workspaceMemberId: workspaceMember?.id,
+        },
+        transactionManager,
+      );
+    }
+
+    const matchedParticipants = await participantRepository.find(
+      {
+        where: {
+          id: Any(participantIds),
+          handle: Any(uniqueParticipantsHandles),
+        },
+      },
+      transactionManager,
+    );
+
+    this.workspaceEventEmitter.emitCustomBatchEvent(
+      `${objectMetadataName}_matched`,
+      [
+        {
+          workspaceMemberId: null,
+          participants: matchedParticipants,
+        },
+      ],
+      workspaceId,
+    );
+  }
+
+  public async matchParticipantsAfterPersonOrWorkspaceMemberCreation(
+    handle: string,
+    objectMetadataName: 'messageParticipant' | 'calendarEventParticipant',
+    personId?: string,
+    workspaceMemberId?: string,
+  ) {
+    const participantRepository =
+      await this.getParticipantRepository(objectMetadataName);
+
+    const workspaceId = this.scopedWorkspaceContextFactory.create().workspaceId;
+
+    if (!workspaceId) {
+      throw new Error('Workspace ID is required');
+    }
+
+    const participantsToUpdate = await participantRepository.find({
+      where: {
+        handle: Equal(handle),
+      },
+    });
+
+    const participantIdsToUpdate = participantsToUpdate.map(
+      (participant) => participant.id,
+    );
+
+    if (personId) {
+      await participantRepository.update(
+        {
+          id: Any(participantIdsToUpdate),
+        },
+        {
+          person: {
+            id: personId,
+          },
+        },
+      );
+
+      const updatedParticipants = await participantRepository.find({
+        where: {
+          id: Any(participantIdsToUpdate),
+        },
+      });
+
+      this.workspaceEventEmitter.emitCustomBatchEvent(
+        `${objectMetadataName}_matched`,
+        [
+          {
+            workspaceId,
+            name: `${objectMetadataName}_matched`,
+            workspaceMemberId: null,
+            participants: updatedParticipants,
+          },
+        ],
+        workspaceId,
+      );
+    }
+
+    if (workspaceMemberId) {
+      await participantRepository.update(
+        {
+          id: Any(participantIdsToUpdate),
+        },
+        {
+          workspaceMember: {
+            id: workspaceMemberId,
+          },
+        },
+      );
+    }
+  }
+
+  public async unmatchParticipants(
+    handle: string,
+    objectMetadataName: 'messageParticipant' | 'calendarEventParticipant',
+    personId?: string,
+    workspaceMemberId?: string,
+  ) {
+    const participantRepository =
+      await this.getParticipantRepository(objectMetadataName);
+
+    if (personId) {
+      await participantRepository.update(
+        {
+          handle: Equal(handle),
+        },
+        {
+          person: null,
+        },
+      );
+    }
+    if (workspaceMemberId) {
+      await participantRepository.update(
+        {
+          handle: Equal(handle),
+        },
+        {
+          workspaceMember: null,
+        },
+      );
+    }
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a NestJS service to execute a workflow step for sending an email, involving validation, sanitization, and sending the email through a messaging service.
+Code Snippet:
+import { Injectable, Logger } from '@nestjs/common';
+
+import DOMPurify from 'dompurify';
+import { JSDOM } from 'jsdom';
+import { isDefined, isValidUuid } from 'twenty-shared';
+import { z } from 'zod';
+
+import { WorkflowExecutor } from 'src/modules/workflow/workflow-executor/interfaces/workflow-executor.interface';
+
+import { ScopedWorkspaceContextFactory } from 'src/engine/twenty-orm/factories/scoped-workspace-context.factory';
+import { TwentyORMGlobalManager } from 'src/engine/twenty-orm/twenty-orm-global.manager';
+import { ConnectedAccountWorkspaceEntity } from 'src/modules/connected-account/standard-objects/connected-account.workspace-entity';
+import { MessagingSendMessageService } from 'src/modules/messaging/message-import-manager/services/messaging-send-message.service';
+import {
+  WorkflowStepExecutorException,
+  WorkflowStepExecutorExceptionCode,
+} from 'src/modules/workflow/workflow-executor/exceptions/workflow-step-executor.exception';
+import { WorkflowExecutorInput } from 'src/modules/workflow/workflow-executor/types/workflow-executor-input';
+import { WorkflowExecutorOutput } from 'src/modules/workflow/workflow-executor/types/workflow-executor-output.type';
+import { resolveInput } from 'src/modules/workflow/workflow-executor/utils/variable-resolver.util';
+import {
+  SendEmailActionException,
+  SendEmailActionExceptionCode,
+} from 'src/modules/workflow/workflow-executor/workflow-actions/mail-sender/exceptions/send-email-action.exception';
+import { isWorkflowSendEmailAction } from 'src/modules/workflow/workflow-executor/workflow-actions/mail-sender/guards/is-workflow-send-email-action.guard';
+import { WorkflowSendEmailActionInput } from 'src/modules/workflow/workflow-executor/workflow-actions/mail-sender/types/workflow-send-email-action-input.type';
+
+export type WorkflowSendEmailStepOutputSchema = {
+  success: boolean;
+};
+
+@Injectable()
+export class SendEmailWorkflowAction implements WorkflowExecutor {
+  private readonly logger = new Logger(SendEmailWorkflowAction.name);
+  constructor(
+    private readonly scopedWorkspaceContextFactory: ScopedWorkspaceContextFactory,
+    private readonly twentyORMGlobalManager: TwentyORMGlobalManager,
+    private readonly sendMessageService: MessagingSendMessageService,
+  ) {}
+
+  private async getConnectedAccount(connectedAccountId: string) {
+    if (!isValidUuid(connectedAccountId)) {
+      throw new SendEmailActionException(
+        `Connected Account ID is not a valid UUID`,
+        SendEmailActionExceptionCode.INVALID_CONNECTED_ACCOUNT_ID,
+      );
+    }
+
+    const { workspaceId } = this.scopedWorkspaceContextFactory.create();
+
+    if (!workspaceId) {
+      throw new WorkflowStepExecutorException(
+        'Scoped workspace not found',
+        WorkflowStepExecutorExceptionCode.SCOPED_WORKSPACE_NOT_FOUND,
+      );
+    }
+
+    const connectedAccountRepository =
+      await this.twentyORMGlobalManager.getRepositoryForWorkspace<ConnectedAccountWorkspaceEntity>(
+        workspaceId,
+        'connectedAccount',
+      );
+    const connectedAccount = await connectedAccountRepository.findOneBy({
+      id: connectedAccountId,
+    });
+
+    if (!isDefined(connectedAccount)) {
+      throw new SendEmailActionException(
+        `Connected Account '${connectedAccountId}' not found`,
+        SendEmailActionExceptionCode.CONNECTED_ACCOUNT_NOT_FOUND,
+      );
+    }
+
+    return connectedAccount;
+  }
+
+  async execute({
+    currentStepIndex,
+    steps,
+    context,
+  }: WorkflowExecutorInput): Promise<WorkflowExecutorOutput> {
+    const step = steps[currentStepIndex];
+
+    if (!isWorkflowSendEmailAction(step)) {
+      throw new WorkflowStepExecutorException(
+        'Step is not a send email action',
+        WorkflowStepExecutorExceptionCode.INVALID_STEP_TYPE,
+      );
+    }
+
+    const connectedAccount = await this.getConnectedAccount(
+      step.settings.input.connectedAccountId,
+    );
+
+    const workflowActionInput = resolveInput(
+      step.settings.input,
+      context,
+    ) as WorkflowSendEmailActionInput;
+
+    const { email, body, subject } = workflowActionInput;
+
+    const emailSchema = z.string().trim().email('Invalid email');
+
+    const result = emailSchema.safeParse(email);
+
+    if (!result.success) {
+      throw new SendEmailActionException(
+        `Email '${email}' invalid`,
+        SendEmailActionExceptionCode.INVALID_EMAIL,
+      );
+    }
+
+    const window = new JSDOM('').window;
+    const purify = DOMPurify(window);
+    const safeBody = purify.sanitize(body || '');
+    const safeSubject = purify.sanitize(subject || '');
+
+    await this.sendMessageService.sendMessage(
+      {
+        to: email,
+        subject: safeSubject,
+        body: safeBody,
+      },
+      connectedAccount,
+    );
+
+    this.logger.log(`Email sent successfully`);
+
+    return {
+      result: { success: true } satisfies WorkflowSendEmailStepOutputSchema,
+    };
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a NestJS processor that handles workflow version events (create, status update, delete) by updating workflow statuses and publishing serverless functions as needed.
+Code Snippet:
+import { Logger, Scope } from '@nestjs/common';
+
+import { isDefined } from 'twenty-shared';
+
+import { Process } from 'src/engine/core-modules/message-queue/decorators/process.decorator';
+import { Processor } from 'src/engine/core-modules/message-queue/decorators/processor.decorator';
+import { MessageQueue } from 'src/engine/core-modules/message-queue/message-queue.constants';
+import { ServerlessFunctionService } from 'src/engine/metadata-modules/serverless-function/serverless-function.service';
+import { WorkspaceRepository } from 'src/engine/twenty-orm/repository/workspace.repository';
+import { TwentyORMManager } from 'src/engine/twenty-orm/twenty-orm.manager';
+import {
+  WorkflowVersionStatus,
+  WorkflowVersionWorkspaceEntity,
+} from 'src/modules/workflow/common/standard-objects/workflow-version.workspace-entity';
+import { WorkflowWorkspaceEntity } from 'src/modules/workflow/common/standard-objects/workflow.workspace-entity';
+import {
+  WorkflowAction,
+  WorkflowActionType,
+} from 'src/modules/workflow/workflow-executor/workflow-actions/types/workflow-action.type';
+import { getStatusCombinationFromArray } from 'src/modules/workflow/workflow-status/utils/get-status-combination-from-array.util';
+import { getStatusCombinationFromUpdate } from 'src/modules/workflow/workflow-status/utils/get-status-combination-from-update.util';
+import { getWorkflowStatusesFromCombination } from 'src/modules/workflow/workflow-status/utils/get-statuses-from-combination.util';
+import { ServerlessFunctionExceptionCode } from 'src/engine/metadata-modules/serverless-function/serverless-function.exception';
+
+export enum WorkflowVersionEventType {
+  CREATE = 'CREATE',
+  STATUS_UPDATE = 'STATUS_UPDATE',
+  DELETE = 'DELETE',
+}
+
+export type WorkflowVersionBatchEvent = {
+  workspaceId: string;
+} & (
+  | WorkflowVersionBatchCreateEvent
+  | WorkflowVersionBatchStatusUpdate
+  | WorkflowVersionBatchDelete
+);
+
+export type WorkflowVersionBatchCreateEvent = {
+  type: WorkflowVersionEventType.CREATE;
+} & {
+  workflowIds: string[];
+};
+
+export type WorkflowVersionStatusUpdate = {
+  workflowId: string;
+  workflowVersionId: string;
+  previousStatus: WorkflowVersionStatus;
+  newStatus: WorkflowVersionStatus;
+};
+
+export type WorkflowVersionBatchStatusUpdate = {
+  type: WorkflowVersionEventType.STATUS_UPDATE;
+} & {
+  statusUpdates: WorkflowVersionStatusUpdate[];
+};
+
+export type WorkflowVersionBatchDelete = {
+  type: WorkflowVersionEventType.DELETE;
+} & { workflowIds: string[] };
+
+@Processor({ queueName: MessageQueue.workflowQueue, scope: Scope.REQUEST })
+export class WorkflowStatusesUpdateJob {
+  protected readonly logger = new Logger(WorkflowStatusesUpdateJob.name);
+
+  constructor(
+    private readonly twentyORMManager: TwentyORMManager,
+    private readonly serverlessFunctionService: ServerlessFunctionService,
+  ) {}
+
+  @Process(WorkflowStatusesUpdateJob.name)
+  async handle(event: WorkflowVersionBatchEvent): Promise<void> {
+    switch (event.type) {
+      case WorkflowVersionEventType.CREATE:
+        await Promise.all(
+          event.workflowIds.map((workflowId) =>
+            this.handleWorkflowVersionCreated(workflowId),
+          ),
+        );
+        break;
+      case WorkflowVersionEventType.STATUS_UPDATE:
+        await Promise.all(
+          event.statusUpdates.map((statusUpdate) =>
+            this.handleWorkflowVersionStatusUpdated(
+              statusUpdate,
+              event.workspaceId,
+            ),
+          ),
+        );
+        break;
+      case WorkflowVersionEventType.DELETE:
+        await Promise.all(
+          event.workflowIds.map((workflowId) =>
+            this.handleWorkflowVersionDeleted(workflowId),
+          ),
+        );
+        break;
+      default:
+        break;
+    }
+  }
+
+  private async handleWorkflowVersionCreated(
+    workflowId: string,
+  ): Promise<void> {
+    const workflowRepository =
+      await this.twentyORMManager.getRepository<WorkflowWorkspaceEntity>(
+        'workflow',
+      );
+
+    const workflow = await workflowRepository.findOneOrFail({
+      where: {
+        id: workflowId,
+      },
+    });
+
+    const currentWorkflowStatusCombination = getStatusCombinationFromArray(
+      workflow.statuses || [],
+    );
+
+    const newWorkflowStatusCombination = getStatusCombinationFromUpdate(
+      currentWorkflowStatusCombination,
+      undefined,
+      WorkflowVersionStatus.DRAFT,
+    );
+
+    if (newWorkflowStatusCombination === currentWorkflowStatusCombination) {
+      return;
+    }
+
+    await workflowRepository.update(
+      {
+        id: workflow.id,
+      },
+      {
+        statuses: getWorkflowStatusesFromCombination(
+          newWorkflowStatusCombination,
+        ),
+      },
+    );
+  }
+
+  private async handlePublishServerlessFunction({
+    statusUpdate,
+    workspaceId,
+    workflowVersion,
+    workflowVersionRepository,
+  }: {
+    statusUpdate: WorkflowVersionStatusUpdate;
+    workspaceId: string;
+    workflowVersion: WorkflowVersionWorkspaceEntity;
+    workflowVersionRepository: WorkspaceRepository<WorkflowVersionWorkspaceEntity>;
+  }) {
+    const shouldComputeNewSteps =
+      statusUpdate.newStatus === WorkflowVersionStatus.ACTIVE &&
+      isDefined(workflowVersion.steps) &&
+      workflowVersion.steps.filter(
+        (step) => step.type === WorkflowActionType.CODE,
+      ).length > 0;
+
+    if (shouldComputeNewSteps) {
+      const newSteps: WorkflowAction[] = [];
+
+      for (const step of workflowVersion.steps || []) {
+        const newStep = { ...step };
+
+        if (step.type === WorkflowActionType.CODE) {
+          try {
+            await this.serverlessFunctionService.publishOneServerlessFunction(
+              step.settings.input.serverlessFunctionId,
+              workspaceId,
+            );
+          } catch (e) {
+            // publishOneServerlessFunction throws if no change have been
+            // applied between draft and lastPublished version.
+            // If no change have been applied, we just use the same
+            // serverless function version
+            if (
+              e.code !==
+              ServerlessFunctionExceptionCode.SERVERLESS_FUNCTION_CODE_UNCHANGED
+            ) {
+              this.logger.error(
+                `Error while publishing serverless function '${step.settings.input.serverlessFunctionId}': ${e}`,
+              );
+            }
+          }
+
+          const serverlessFunction =
+            await this.serverlessFunctionService.findOneOrFail({
+              id: step.settings.input.serverlessFunctionId,
+              workspaceId,
+            });
+
+          const newStepSettings = { ...step.settings };
+
+          newStepSettings.input.serverlessFunctionVersion =
+            serverlessFunction.latestVersion;
+
+          newStep.settings = newStepSettings;
+        }
+        newSteps.push(newStep);
+      }
+
+      await workflowVersionRepository.update(statusUpdate.workflowVersionId, {
+        steps: newSteps,
+      });
+    }
+  }
+
+  private async handleWorkflowVersionStatusUpdated(
+    statusUpdate: WorkflowVersionStatusUpdate,
+    workspaceId: string,
+  ): Promise<void> {
+    const workflowRepository =
+      await this.twentyORMManager.getRepository<WorkflowWorkspaceEntity>(
+        'workflow',
+      );
+
+    const workflowVersionRepository =
+      await this.twentyORMManager.getRepository<WorkflowVersionWorkspaceEntity>(
+        'workflowVersion',
+      );
+
+    const workflow = await workflowRepository.findOneOrFail({
+      where: {
+        id: statusUpdate.workflowId,
+      },
+    });
+
+    const workflowVersion = await workflowVersionRepository.findOneOrFail({
+      where: { id: statusUpdate.workflowVersionId },
+    });
+
+    await this.handlePublishServerlessFunction({
+      workflowVersion,
+      workflowVersionRepository,
+      workspaceId,
+      statusUpdate,
+    });
+
+    const currentWorkflowStatusCombination = getStatusCombinationFromArray(
+      workflow.statuses || [],
+    );
+
+    const newWorkflowStatusCombination = getStatusCombinationFromUpdate(
+      currentWorkflowStatusCombination,
+      statusUpdate.previousStatus,
+      statusUpdate.newStatus,
+    );
+
+    if (newWorkflowStatusCombination === currentWorkflowStatusCombination) {
+      return;
+    }
+
+    await workflowRepository.update(
+      {
+        id: statusUpdate.workflowId,
+      },
+      {
+        statuses: getWorkflowStatusesFromCombination(
+          newWorkflowStatusCombination,
+        ),
+      },
+    );
+  }
+
+  private async handleWorkflowVersionDeleted(
+    workflowId: string,
+  ): Promise<void> {
+    const workflowRepository =
+      await this.twentyORMManager.getRepository<WorkflowWorkspaceEntity>(
+        'workflow',
+      );
+
+    const workflow = await workflowRepository.findOneOrFail({
+      where: {
+        id: workflowId,
+      },
+    });
+
+    const currentWorkflowStatusCombination = getStatusCombinationFromArray(
+      workflow.statuses || [],
+    );
+
+    const newWorkflowStatusCombination = getStatusCombinationFromUpdate(
+      currentWorkflowStatusCombination,
+      WorkflowVersionStatus.DRAFT,
+      undefined,
+    );
+
+    if (newWorkflowStatusCombination === currentWorkflowStatusCombination) {
+      return;
+    }
+
+    await workflowRepository.update(
+      {
+        id: workflowId,
+      },
+      {
+        statuses: getWorkflowStatusesFromCombination(
+          newWorkflowStatusCombination,
+        ),
+      },
+    );
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a listener for workflow version events that sends updates to a message queue based on create, update, and delete actions.
+Code Snippet:
+import { Injectable } from '@nestjs/common';
+
+import { ObjectRecordCreateEvent } from 'src/engine/core-modules/event-emitter/types/object-record-create.event';
+import { ObjectRecordDeleteEvent } from 'src/engine/core-modules/event-emitter/types/object-record-delete.event';
+import { InjectMessageQueue } from 'src/engine/core-modules/message-queue/decorators/message-queue.decorator';
+import { MessageQueue } from 'src/engine/core-modules/message-queue/message-queue.constants';
+import { MessageQueueService } from 'src/engine/core-modules/message-queue/services/message-queue.service';
+import { WorkspaceEventBatch } from 'src/engine/workspace-event-emitter/types/workspace-event.type';
+import {
+  WorkflowVersionStatus,
+  WorkflowVersionWorkspaceEntity,
+} from 'src/modules/workflow/common/standard-objects/workflow-version.workspace-entity';
+import {
+  WorkflowStatusesUpdateJob,
+  WorkflowVersionBatchEvent,
+  WorkflowVersionEventType,
+  WorkflowVersionStatusUpdate,
+} from 'src/modules/workflow/workflow-status/jobs/workflow-statuses-update.job';
+import { OnDatabaseBatchEvent } from 'src/engine/api/graphql/graphql-query-runner/decorators/on-database-batch-event.decorator';
+import { DatabaseEventAction } from 'src/engine/api/graphql/graphql-query-runner/enums/database-event-action';
+import { WORKFLOW_VERSION_STATUS_UPDATED } from 'src/modules/workflow/workflow-status/constants/workflow-version-status-updated.constants';
+import { OnCustomBatchEvent } from 'src/engine/api/graphql/graphql-query-runner/decorators/on-custom-batch-event.decorator';
+
+@Injectable()
+export class WorkflowVersionStatusListener {
+  constructor(
+    @InjectMessageQueue(MessageQueue.workflowQueue)
+    private readonly messageQueueService: MessageQueueService,
+  ) {}
+
+  @OnDatabaseBatchEvent('workflowVersion', DatabaseEventAction.CREATED)
+  async handleWorkflowVersionCreated(
+    batchEvent: WorkspaceEventBatch<
+      ObjectRecordCreateEvent<WorkflowVersionWorkspaceEntity>
+    >,
+  ): Promise<void> {
+    const workflowIds = batchEvent.events
+      .filter(
+        (event) =>
+          !event.properties.after.status ||
+          event.properties.after.status === WorkflowVersionStatus.DRAFT,
+      )
+      .map((event) => event.properties.after.workflowId);
+
+    if (workflowIds.length === 0) {
+      return;
+    }
+
+    await this.messageQueueService.add<WorkflowVersionBatchEvent>(
+      WorkflowStatusesUpdateJob.name,
+      {
+        type: WorkflowVersionEventType.CREATE,
+        workspaceId: batchEvent.workspaceId,
+        workflowIds,
+      },
+    );
+  }
+
+  @OnCustomBatchEvent(WORKFLOW_VERSION_STATUS_UPDATED)
+  async handleWorkflowVersionUpdated(
+    batchEvent: WorkspaceEventBatch<WorkflowVersionStatusUpdate>,
+  ): Promise<void> {
+    await this.messageQueueService.add<WorkflowVersionBatchEvent>(
+      WorkflowStatusesUpdateJob.name,
+      {
+        type: WorkflowVersionEventType.STATUS_UPDATE,
+        workspaceId: batchEvent.workspaceId,
+        statusUpdates: batchEvent.events,
+      },
+    );
+  }
+
+  @OnDatabaseBatchEvent('workflowVersion', DatabaseEventAction.DELETED)
+  async handleWorkflowVersionDeleted(
+    batchEvent: WorkspaceEventBatch<
+      ObjectRecordDeleteEvent<WorkflowVersionWorkspaceEntity>
+    >,
+  ): Promise<void> {
+    const workflowIds = batchEvent.events
+      .filter(
+        (event) =>
+          event.properties.before.status === WorkflowVersionStatus.DRAFT,
+      )
+      .map((event) => event.properties.before.workflowId);
+
+    if (workflowIds.length === 0) {
+      return;
+    }
+
+    await this.messageQueueService.add<WorkflowVersionBatchEvent>(
+      WorkflowStatusesUpdateJob.name,
+      {
+        type: WorkflowVersionEventType.DELETE,
+        workspaceId: batchEvent.workspaceId,
+        workflowIds,
+      },
+    );
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a NestJS service for running and resuming workflows, checking billing usage, and managing workflow runs via a message queue.
+Code Snippet:
+import { Injectable, Logger } from '@nestjs/common';
+
+import { BillingUsageService } from 'src/engine/core-modules/billing/services/billing-usage.service';
+import { InjectMessageQueue } from 'src/engine/core-modules/message-queue/decorators/message-queue.decorator';
+import { MessageQueue } from 'src/engine/core-modules/message-queue/message-queue.constants';
+import { MessageQueueService } from 'src/engine/core-modules/message-queue/services/message-queue.service';
+import { ActorMetadata } from 'src/engine/metadata-modules/field-metadata/composite-types/actor.composite-type';
+import {
+  RunWorkflowJob,
+  RunWorkflowJobData,
+} from 'src/modules/workflow/workflow-runner/jobs/run-workflow.job';
+import { WorkflowRunWorkspaceService } from 'src/modules/workflow/workflow-runner/workflow-run/workflow-run.workspace-service';
+
+@Injectable()
+export class WorkflowRunnerWorkspaceService {
+  private readonly logger = new Logger(WorkflowRunnerWorkspaceService.name);
+  constructor(
+    private readonly workflowRunWorkspaceService: WorkflowRunWorkspaceService,
+    @InjectMessageQueue(MessageQueue.workflowQueue)
+    private readonly messageQueueService: MessageQueueService,
+    private readonly billingUsageService: BillingUsageService,
+  ) {}
+
+  async run(
+    workspaceId: string,
+    workflowVersionId: string,
+    payload: object,
+    source: ActorMetadata,
+  ) {
+    const canFeatureBeUsed =
+      await this.billingUsageService.canFeatureBeUsed(workspaceId);
+
+    if (!canFeatureBeUsed) {
+      this.logger.log(
+        'Cannot execute billed function, there is no subscription for this workspace',
+      );
+    }
+    const workflowRunId =
+      await this.workflowRunWorkspaceService.createWorkflowRun({
+        workflowVersionId,
+        createdBy: source,
+      });
+
+    await this.messageQueueService.add<RunWorkflowJobData>(
+      RunWorkflowJob.name,
+      {
+        workspaceId,
+        payload: payload,
+        workflowRunId,
+      },
+    );
+
+    return { workflowRunId };
+  }
+
+  async resume({
+    workspaceId,
+    workflowRunId,
+    lastExecutedStepId,
+  }: {
+    workspaceId: string;
+    workflowRunId: string;
+    lastExecutedStepId: string;
+  }) {
+    await this.messageQueueService.add<RunWorkflowJobData>(
+      RunWorkflowJob.name,
+      {
+        workspaceId,
+        workflowRunId,
+        lastExecutedStepId,
+      },
+    );
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a service that listens for database events (create, update, delete, destroy) and triggers workflows based on these events if a feature flag is enabled.
+Code Snippet:
+import { Injectable, Logger } from '@nestjs/common';
+
+import { ObjectRecordCreateEvent } from 'src/engine/core-modules/event-emitter/types/object-record-create.event';
+import { ObjectRecordDeleteEvent } from 'src/engine/core-modules/event-emitter/types/object-record-delete.event';
+import { ObjectRecordDestroyEvent } from 'src/engine/core-modules/event-emitter/types/object-record-destroy.event';
+import { ObjectRecordUpdateEvent } from 'src/engine/core-modules/event-emitter/types/object-record-update.event';
+import { FeatureFlagKey } from 'src/engine/core-modules/feature-flag/enums/feature-flag-key.enum';
+import { FeatureFlagService } from 'src/engine/core-modules/feature-flag/services/feature-flag.service';
+import { InjectMessageQueue } from 'src/engine/core-modules/message-queue/decorators/message-queue.decorator';
+import { MessageQueue } from 'src/engine/core-modules/message-queue/message-queue.constants';
+import { MessageQueueService } from 'src/engine/core-modules/message-queue/services/message-queue.service';
+import { TwentyORMGlobalManager } from 'src/engine/twenty-orm/twenty-orm-global.manager';
+import { WorkspaceEventBatch } from 'src/engine/workspace-event-emitter/types/workspace-event.type';
+import { WorkflowEventListenerWorkspaceEntity } from 'src/modules/workflow/common/standard-objects/workflow-event-listener.workspace-entity';
+import {
+  WorkflowTriggerJob,
+  WorkflowTriggerJobData,
+} from 'src/modules/workflow/workflow-trigger/jobs/workflow-trigger.job';
+import { OnDatabaseBatchEvent } from 'src/engine/api/graphql/graphql-query-runner/decorators/on-database-batch-event.decorator';
+import { DatabaseEventAction } from 'src/engine/api/graphql/graphql-query-runner/enums/database-event-action';
+
+@Injectable()
+export class DatabaseEventTriggerListener {
+  private readonly logger = new Logger('DatabaseEventTriggerListener');
+
+  constructor(
+    private readonly twentyORMGlobalManager: TwentyORMGlobalManager,
+    @InjectMessageQueue(MessageQueue.workflowQueue)
+    private readonly messageQueueService: MessageQueueService,
+    private readonly isFeatureFlagEnabledService: FeatureFlagService,
+  ) {}
+
+  @OnDatabaseBatchEvent('*', DatabaseEventAction.CREATED)
+  async handleObjectRecordCreateEvent(
+    payload: WorkspaceEventBatch<ObjectRecordCreateEvent>,
+  ) {
+    await this.handleEvent(payload);
+  }
+
+  @OnDatabaseBatchEvent('*', DatabaseEventAction.UPDATED)
+  async handleObjectRecordUpdateEvent(
+    payload: WorkspaceEventBatch<ObjectRecordUpdateEvent>,
+  ) {
+    await this.handleEvent(payload);
+  }
+
+  @OnDatabaseBatchEvent('*', DatabaseEventAction.DELETED)
+  async handleObjectRecordDeleteEvent(
+    payload: WorkspaceEventBatch<ObjectRecordDeleteEvent>,
+  ) {
+    await this.handleEvent(payload);
+  }
+
+  @OnDatabaseBatchEvent('*', DatabaseEventAction.DESTROYED)
+  async handleObjectRecordDestroyEvent(
+    payload: WorkspaceEventBatch<ObjectRecordDestroyEvent>,
+  ) {
+    await this.handleEvent(payload);
+  }
+
+  private async handleEvent(
+    payload: WorkspaceEventBatch<
+      | ObjectRecordCreateEvent
+      | ObjectRecordUpdateEvent
+      | ObjectRecordDeleteEvent
+      | ObjectRecordDestroyEvent
+    >,
+  ) {
+    const workspaceId = payload.workspaceId;
+    const eventName = payload.name;
+
+    if (!workspaceId || !eventName) {
+      this.logger.error(
+        `Missing workspaceId or eventName in payload ${JSON.stringify(
+          payload,
+        )}`,
+      );
+
+      return;
+    }
+
+    const isWorkflowEnabled =
+      await this.isFeatureFlagEnabledService.isFeatureEnabled(
+        FeatureFlagKey.IsWorkflowEnabled,
+        workspaceId,
+      );
+
+    if (!isWorkflowEnabled) {
+      return;
+    }
+
+    const workflowEventListenerRepository =
+      await this.twentyORMGlobalManager.getRepositoryForWorkspace<WorkflowEventListenerWorkspaceEntity>(
+        workspaceId,
+        'workflowEventListener',
+      );
+
+    const eventListeners = await workflowEventListenerRepository.find({
+      where: {
+        eventName,
+      },
+    });
+
+    for (const eventListener of eventListeners) {
+      for (const eventPayload of payload.events) {
+        this.messageQueueService.add<WorkflowTriggerJobData>(
+          WorkflowTriggerJob.name,
+          {
+            workspaceId,
+            workflowId: eventListener.workflowId,
+            payload: eventPayload,
+          },
+          { retryLimit: 3 },
+        );
+      }
+    }
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a processor that handles workspace events to create audit logs from internal events.
+Code Snippet:
+import { ObjectRecordEvent } from 'src/engine/core-modules/event-emitter/types/object-record-event.event';
+import { Process } from 'src/engine/core-modules/message-queue/decorators/process.decorator';
+import { Processor } from 'src/engine/core-modules/message-queue/decorators/processor.decorator';
+import { MessageQueue } from 'src/engine/core-modules/message-queue/message-queue.constants';
+import { InjectObjectMetadataRepository } from 'src/engine/object-metadata-repository/object-metadata-repository.decorator';
+import { WorkspaceEventBatch } from 'src/engine/workspace-event-emitter/types/workspace-event.type';
+import { AuditLogRepository } from 'src/modules/timeline/repositiories/audit-log.repository';
+import { AuditLogWorkspaceEntity } from 'src/modules/timeline/standard-objects/audit-log.workspace-entity';
+import { WorkspaceMemberRepository } from 'src/modules/workspace-member/repositories/workspace-member.repository';
+import { WorkspaceMemberWorkspaceEntity } from 'src/modules/workspace-member/standard-objects/workspace-member.workspace-entity';
+
+@Processor(MessageQueue.entityEventsToDbQueue)
+export class CreateAuditLogFromInternalEvent {
+  constructor(
+    @InjectObjectMetadataRepository(WorkspaceMemberWorkspaceEntity)
+    private readonly workspaceMemberService: WorkspaceMemberRepository,
+    @InjectObjectMetadataRepository(AuditLogWorkspaceEntity)
+    private readonly auditLogRepository: AuditLogRepository,
+  ) {}
+
+  @Process(CreateAuditLogFromInternalEvent.name)
+  async handle(
+    workspaceEventBatch: WorkspaceEventBatch<ObjectRecordEvent>,
+  ): Promise<void> {
+    for (const eventData of workspaceEventBatch.events) {
+      let workspaceMemberId: string | null = null;
+
+      if (eventData.userId) {
+        const workspaceMember = await this.workspaceMemberService.getByIdOrFail(
+          eventData.userId,
+          workspaceEventBatch.workspaceId,
+        );
+
+        workspaceMemberId = workspaceMember.id;
+      }
+
+      await this.auditLogRepository.insert(
+        workspaceEventBatch.name,
+        'diff' in eventData.properties
+          ? {
+              // we remove "before" and "after" property for a cleaner/slimmer event payload
+              diff: eventData.properties.diff,
+            }
+          : eventData.properties,
+        workspaceMemberId,
+        workspaceEventBatch.name.split('.')[0],
+        eventData.objectMetadata.id,
+        eventData.recordId,
+        workspaceEventBatch.workspaceId,
+      );
+    }
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a processor class to handle workspace events by upserting timeline activities based on specific conditions.
+Code Snippet:
+import { ObjectRecordNonDestructiveEvent } from 'src/engine/core-modules/event-emitter/types/object-record-non-destructive-event';
+import { Process } from 'src/engine/core-modules/message-queue/decorators/process.decorator';
+import { Processor } from 'src/engine/core-modules/message-queue/decorators/processor.decorator';
+import { MessageQueue } from 'src/engine/core-modules/message-queue/message-queue.constants';
+import { InjectObjectMetadataRepository } from 'src/engine/object-metadata-repository/object-metadata-repository.decorator';
+import { WorkspaceEventBatch } from 'src/engine/workspace-event-emitter/types/workspace-event.type';
+import { TimelineActivityService } from 'src/modules/timeline/services/timeline-activity.service';
+import { WorkspaceMemberRepository } from 'src/modules/workspace-member/repositories/workspace-member.repository';
+import { WorkspaceMemberWorkspaceEntity } from 'src/modules/workspace-member/standard-objects/workspace-member.workspace-entity';
+
+@Processor(MessageQueue.entityEventsToDbQueue)
+export class UpsertTimelineActivityFromInternalEvent {
+  constructor(
+    @InjectObjectMetadataRepository(WorkspaceMemberWorkspaceEntity)
+    private readonly workspaceMemberService: WorkspaceMemberRepository,
+    private readonly timelineActivityService: TimelineActivityService,
+  ) {}
+
+  @Process(UpsertTimelineActivityFromInternalEvent.name)
+  async handle(
+    workspaceEventBatch: WorkspaceEventBatch<ObjectRecordNonDestructiveEvent>,
+  ): Promise<void> {
+    for (const eventData of workspaceEventBatch.events) {
+      if (eventData.userId) {
+        const workspaceMember = await this.workspaceMemberService.getByIdOrFail(
+          eventData.userId,
+          workspaceEventBatch.workspaceId,
+        );
+
+        eventData.workspaceMemberId = workspaceMember.id;
+      }
+
+      // Temporary
+      // We ignore every that is not a LinkedObject or a Business Object
+      if (
+        eventData.objectMetadata.isSystem &&
+        eventData.objectMetadata.nameSingular !== 'noteTarget' &&
+        eventData.objectMetadata.nameSingular !== 'taskTarget'
+      ) {
+        continue;
+      }
+
+      await this.timelineActivityService.upsertEvent({
+        event:
+          // we remove "before" and "after" property for a cleaner/slimmer event payload
+          'diff' in eventData.properties && eventData.properties.diff
+            ? {
+                ...eventData,
+                properties: {
+                  diff: eventData.properties.diff,
+                },
+              }
+            : eventData,
+        eventName: workspaceEventBatch.name,
+        workspaceId: workspaceEventBatch.workspaceId,
+      });
+    }
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a service for handling timeline activities, transforming events into timeline activities, and upserting them into a repository.
+Code Snippet:
+import { Injectable } from '@nestjs/common';
+
+import { ObjectRecordNonDestructiveEvent } from 'src/engine/core-modules/event-emitter/types/object-record-non-destructive-event';
+import { ObjectRecordBaseEvent } from 'src/engine/core-modules/event-emitter/types/object-record.base.event';
+import { InjectObjectMetadataRepository } from 'src/engine/object-metadata-repository/object-metadata-repository.decorator';
+import { WorkspaceDataSourceService } from 'src/engine/workspace-datasource/workspace-datasource.service';
+import { TimelineActivityRepository } from 'src/modules/timeline/repositiories/timeline-activity.repository';
+import { TimelineActivityWorkspaceEntity } from 'src/modules/timeline/standard-objects/timeline-activity.workspace-entity';
+
+type TimelineActivity = Omit<ObjectRecordNonDestructiveEvent, 'properties'> & {
+  name: string;
+  objectName?: string;
+  linkedRecordCachedName?: string;
+  linkedRecordId?: string;
+  linkedObjectMetadataId?: string;
+  properties: Record<string, any>; // more relaxed conditions than for internal events
+};
+
+@Injectable()
+export class TimelineActivityService {
+  constructor(
+    @InjectObjectMetadataRepository(TimelineActivityWorkspaceEntity)
+    private readonly timelineActivityRepository: TimelineActivityRepository,
+    private readonly workspaceDataSourceService: WorkspaceDataSourceService,
+  ) {}
+
+  private targetObjects: Record<string, string> = {
+    note: 'noteTarget',
+    task: 'taskTarget',
+  };
+
+  async upsertEvent({
+    event,
+    eventName,
+    workspaceId,
+  }: {
+    event: ObjectRecordBaseEvent;
+    eventName: string;
+    workspaceId: string;
+  }) {
+    const timelineActivities = await this.transformEventToTimelineActivities({
+      event,
+      workspaceId,
+      eventName,
+    });
+
+    if (!timelineActivities || timelineActivities.length === 0) return;
+
+    for (const timelineActivity of timelineActivities) {
+      await this.timelineActivityRepository.upsertOne(
+        timelineActivity.name,
+        timelineActivity.properties,
+        timelineActivity.objectName ?? event.objectMetadata.nameSingular,
+        timelineActivity.recordId,
+        workspaceId,
+        timelineActivity.workspaceMemberId,
+        timelineActivity.linkedRecordCachedName,
+        timelineActivity.linkedRecordId,
+        timelineActivity.linkedObjectMetadataId,
+      );
+    }
+  }
+
+  private async transformEventToTimelineActivities({
+    event,
+    workspaceId,
+    eventName,
+  }: {
+    event: ObjectRecordBaseEvent;
+    workspaceId: string;
+    eventName: string;
+  }): Promise<TimelineActivity[] | undefined> {
+    if (['note', 'task'].includes(event.objectMetadata.nameSingular)) {
+      const linkedTimelineActivities = await this.getLinkedTimelineActivities({
+        event,
+        workspaceId,
+        eventName,
+      });
+
+      // 2 timelines, one for the linked object and one for the task/note
+      if (linkedTimelineActivities && linkedTimelineActivities?.length > 0)
+        return [
+          ...linkedTimelineActivities,
+          { ...event, name: eventName },
+        ] satisfies TimelineActivity[];
+    }
+
+    if (
+      ['noteTarget', 'taskTarget', 'messageParticipant'].includes(
+        event.objectMetadata.nameSingular,
+      )
+    ) {
+      return await this.getLinkedTimelineActivities({
+        event,
+        workspaceId,
+        eventName,
+      });
+    }
+
+    return [{ ...event, name: eventName }] satisfies TimelineActivity[];
+  }
+
+  private async getLinkedTimelineActivities({
+    event,
+    workspaceId,
+    eventName,
+  }: {
+    event: ObjectRecordBaseEvent;
+    workspaceId: string;
+    eventName: string;
+  }): Promise<TimelineActivity[] | undefined> {
+    const dataSourceSchema =
+      this.workspaceDataSourceService.getSchemaName(workspaceId);
+
+    switch (event.objectMetadata.nameSingular) {
+      case 'noteTarget':
+        return this.computeActivityTargets({
+          event,
+          dataSourceSchema,
+          activityType: 'note',
+          eventName,
+          workspaceId,
+        });
+      case 'taskTarget':
+        return this.computeActivityTargets({
+          event,
+          dataSourceSchema,
+          activityType: 'task',
+          eventName,
+          workspaceId,
+        });
+      case 'note':
+      case 'task':
+        return this.computeActivities({
+          event,
+          dataSourceSchema,
+          activityType: event.objectMetadata.nameSingular,
+          eventName,
+          workspaceId,
+        });
+      default:
+        return [];
+    }
+  }
+
+  private async computeActivities({
+    event,
+    dataSourceSchema,
+    activityType,
+    eventName,
+    workspaceId,
+  }: {
+    event: ObjectRecordBaseEvent;
+    dataSourceSchema: string;
+    activityType: string;
+    eventName: string;
+    workspaceId: string;
+  }) {
+    const activityTargets =
+      await this.workspaceDataSourceService.executeRawQuery(
+        `SELECT * FROM ${dataSourceSchema}."${this.targetObjects[activityType]}"
+         WHERE "${activityType}Id" = $1`,
+        [event.recordId],
+        workspaceId,
+      );
+
+    const activity = await this.workspaceDataSourceService.executeRawQuery(
+      `SELECT * FROM ${dataSourceSchema}."${activityType}"
+       WHERE "id" = $1`,
+      [event.recordId],
+      workspaceId,
+    );
+
+    if (activityTargets.length === 0) return;
+    if (activity.length === 0) return;
+
+    return activityTargets
+      .map((activityTarget) => {
+        const targetColumn: string[] = Object.entries(activityTarget)
+          .map(([columnName, columnValue]: [string, string]) => {
+            if (
+              columnName === activityType + 'Id' ||
+              !columnName.endsWith('Id')
+            )
+              return;
+            if (columnValue === null) return;
+
+            return columnName;
+          })
+          .filter((column): column is string => column !== undefined);
+
+        if (targetColumn.length === 0) return;
+
+        return {
+          ...event,
+          name: 'linked-' + eventName,
+          objectName: targetColumn[0].replace(/Id$/, ''),
+          recordId: activityTarget[targetColumn[0]],
+          linkedRecordCachedName: activity[0].title,
+          linkedRecordId: activity[0].id,
+          linkedObjectMetadataId: event.objectMetadata.id,
+        } satisfies TimelineActivity;
+      })
+      .filter((event): event is TimelineActivity => event !== undefined);
+  }
+
+  private async computeActivityTargets({
+    event,
+    dataSourceSchema,
+    activityType,
+    eventName,
+    workspaceId,
+  }: {
+    event: ObjectRecordBaseEvent;
+    dataSourceSchema: string;
+    activityType: string;
+    eventName: string;
+    workspaceId: string;
+  }): Promise<TimelineActivity[] | undefined> {
+    const activityTarget =
+      await this.workspaceDataSourceService.executeRawQuery(
+        `SELECT * FROM ${dataSourceSchema}."${this.targetObjects[activityType]}"
+         WHERE "id" = $1`,
+        [event.recordId],
+        workspaceId,
+      );
+
+    if (activityTarget.length === 0) return;
+
+    const activity = await this.workspaceDataSourceService.executeRawQuery(
+      `SELECT * FROM ${dataSourceSchema}."${activityType}"
+       WHERE "id" = $1`,
+      [activityTarget[0].activityId],
+      workspaceId,
+    );
+
+    if (activity.length === 0) return;
+
+    const activityObjectMetadataId = event.objectMetadata.fields.find(
+      (field) => field.name === activityType,
+    )?.toRelationMetadata?.fromObjectMetadataId;
+
+    const targetColumn: string[] = Object.entries(activityTarget[0])
+      .map(([columnName, columnValue]: [string, string]) => {
+        if (columnName === activityType + 'Id' || !columnName.endsWith('Id'))
+          return;
+        if (columnValue === null) return;
+
+        return columnName;
+      })
+      .filter((column): column is string => column !== undefined);
+
+    if (targetColumn.length === 0) return;
+
+    return [
+      {
+        ...event,
+        name: 'linked-' + eventName,
+        properties: {},
+        objectName: targetColumn[0].replace(/Id$/, ''),
+        recordId: activityTarget[0][targetColumn[0]],
+        linkedRecordCachedName: activity[0].title,
+        linkedRecordId: activity[0].id,
+        linkedObjectMetadataId: activityObjectMetadataId,
+      } satisfies TimelineActivity,
+    ];
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a job processor that creates companies and contacts after a sync operation based on message channel and participant data.
+Code Snippet:
+import { Logger } from '@nestjs/common';
+
+import { Any, IsNull } from 'typeorm';
+
+import { Process } from 'src/engine/core-modules/message-queue/decorators/process.decorator';
+import { Processor } from 'src/engine/core-modules/message-queue/decorators/processor.decorator';
+import { MessageQueue } from 'src/engine/core-modules/message-queue/message-queue.constants';
+import { FieldActorSource } from 'src/engine/metadata-modules/field-metadata/composite-types/actor.composite-type';
+import { TwentyORMManager } from 'src/engine/twenty-orm/twenty-orm.manager';
+import { ConnectedAccountWorkspaceEntity } from 'src/modules/connected-account/standard-objects/connected-account.workspace-entity';
+import { CreateCompanyAndContactService } from 'src/modules/contact-creation-manager/services/create-company-and-contact.service';
+import { MessageDirection } from 'src/modules/messaging/common/enums/message-direction.enum';
+import {
+  MessageChannelContactAutoCreationPolicy,
+  MessageChannelWorkspaceEntity,
+} from 'src/modules/messaging/common/standard-objects/message-channel.workspace-entity';
+import { MessageParticipantWorkspaceEntity } from 'src/modules/messaging/common/standard-objects/message-participant.workspace-entity';
+
+export type MessagingCreateCompanyAndContactAfterSyncJobData = {
+  workspaceId: string;
+  messageChannelId: string;
+};
+
+@Processor(MessageQueue.messagingQueue)
+export class MessagingCreateCompanyAndContactAfterSyncJob {
+  private readonly logger = new Logger(
+    MessagingCreateCompanyAndContactAfterSyncJob.name,
+  );
+  constructor(
+    private readonly createCompanyAndContactService: CreateCompanyAndContactService,
+    private readonly twentyORMManager: TwentyORMManager,
+  ) {}
+
+  @Process(MessagingCreateCompanyAndContactAfterSyncJob.name)
+  async handle(
+    data: MessagingCreateCompanyAndContactAfterSyncJobData,
+  ): Promise<void> {
+    this.logger.log(
+      `create contacts and companies after sync for workspace ${data.workspaceId} and messageChannel ${data.messageChannelId}`,
+    );
+    const { workspaceId, messageChannelId } = data;
+
+    const messageChannelRepository =
+      await this.twentyORMManager.getRepository<MessageChannelWorkspaceEntity>(
+        'messageChannel',
+      );
+
+    const messageChannel = await messageChannelRepository.findOneOrFail({
+      where: {
+        id: messageChannelId,
+      },
+    });
+
+    const { contactAutoCreationPolicy, connectedAccountId } = messageChannel;
+
+    if (
+      contactAutoCreationPolicy === MessageChannelContactAutoCreationPolicy.NONE
+    ) {
+      return;
+    }
+
+    const connectedAccountRepository =
+      await this.twentyORMManager.getRepository<ConnectedAccountWorkspaceEntity>(
+        'connectedAccount',
+      );
+
+    const connectedAccount = await connectedAccountRepository.findOne({
+      where: {
+        id: connectedAccountId,
+      },
+    });
+
+    if (!connectedAccount) {
+      throw new Error(
+        `Connected account with id ${connectedAccountId} not found in workspace ${workspaceId}`,
+      );
+    }
+
+    const messageParticipantRepository =
+      await this.twentyORMManager.getRepository<MessageParticipantWorkspaceEntity>(
+        'messageParticipant',
+      );
+
+    const directionFilter =
+      contactAutoCreationPolicy ===
+      MessageChannelContactAutoCreationPolicy.SENT_AND_RECEIVED
+        ? Any([MessageDirection.INCOMING, MessageDirection.OUTGOING])
+        : MessageDirection.OUTGOING;
+
+    const contactsToCreate = await messageParticipantRepository.find({
+      where: {
+        message: {
+          messageChannelMessageAssociations: {
+            messageChannelId,
+            direction: directionFilter,
+          },
+        },
+        personId: IsNull(),
+        workspaceMemberId: IsNull(),
+      },
+    });
+
+    await this.createCompanyAndContactService.createCompaniesAndContactsAndUpdateParticipants(
+      connectedAccount,
+      contactsToCreate,
+      workspaceId,
+      FieldActorSource.EMAIL,
+    );
+
+    this.logger.log(
+      `create contacts and companies after sync for workspace ${data.workspaceId} and messageChannel ${data.messageChannelId} done`,
+    );
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a service for saving message participants and matching them using an ORM manager and a match participant service.
+Code Snippet:
+import { Injectable } from '@nestjs/common';
+
+import { EntityManager } from 'typeorm';
+
+import { TwentyORMManager } from 'src/engine/twenty-orm/twenty-orm.manager';
+import { MatchParticipantService } from 'src/modules/match-participant/match-participant.service';
+import { MessageParticipantWorkspaceEntity } from 'src/modules/messaging/common/standard-objects/message-participant.workspace-entity';
+import { ParticipantWithMessageId } from 'src/modules/messaging/message-import-manager/drivers/gmail/types/gmail-message.type';
+
+@Injectable()
+export class MessagingMessageParticipantService {
+  constructor(
+    private readonly twentyORMManager: TwentyORMManager,
+    private readonly matchParticipantService: MatchParticipantService<MessageParticipantWorkspaceEntity>,
+  ) {}
+
+  public async saveMessageParticipants(
+    participants: ParticipantWithMessageId[],
+    transactionManager?: EntityManager,
+  ): Promise<void> {
+    const messageParticipantRepository =
+      await this.twentyORMManager.getRepository<MessageParticipantWorkspaceEntity>(
+        'messageParticipant',
+      );
+
+    const savedParticipants = await messageParticipantRepository.save(
+      participants.map((participant) => {
+        return {
+          messageId: participant.messageId,
+          role: participant.role,
+          handle: participant.handle,
+          displayName: participant.displayName,
+        };
+      }),
+      {},
+      transactionManager,
+    );
+
+    await this.matchParticipantService.matchParticipants(
+      savedParticipants,
+      'messageParticipant',
+      transactionManager,
+    );
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a command-line command to enqueue a job for importing a single message into a cache, using a message queue service.
+Code Snippet:
+import { Command, CommandRunner, Option } from 'nest-commander';
+
+import { InjectMessageQueue } from 'src/engine/core-modules/message-queue/decorators/message-queue.decorator';
+import { MessageQueue } from 'src/engine/core-modules/message-queue/message-queue.constants';
+import { MessageQueueService } from 'src/engine/core-modules/message-queue/services/message-queue.service';
+import {
+  MessagingAddSingleMessageToCacheForImportJob,
+  MessagingAddSingleMessageToCacheForImportJobData,
+} from 'src/modules/messaging/message-import-manager/jobs/messaging-add-single-message-to-cache-for-import.job';
+
+type MessagingSingleMessageImportCommandOptions = {
+  messageExternalId: string;
+  messageChannelId: string;
+  workspaceId: string;
+};
+
+@Command({
+  name: 'messaging:single-message-import',
+  description: 'Enqueue a job to schedule the import of a single message',
+})
+export class MessagingSingleMessageImportCommand extends CommandRunner {
+  constructor(
+    @InjectMessageQueue(MessageQueue.messagingQueue)
+    private readonly messageQueueService: MessageQueueService,
+  ) {
+    super();
+  }
+
+  async run(
+    _passedParam: string[],
+    options: MessagingSingleMessageImportCommandOptions,
+  ): Promise<void> {
+    await this.messageQueueService.add<MessagingAddSingleMessageToCacheForImportJobData>(
+      MessagingAddSingleMessageToCacheForImportJob.name,
+      {
+        messageExternalId: options.messageExternalId,
+        messageChannelId: options.messageChannelId,
+        workspaceId: options.workspaceId,
+      },
+    );
+  }
+
+  @Option({
+    flags: '-m, --message-external-id [message_external_id]',
+    description: 'Message external ID',
+    required: true,
+  })
+  parseMessageId(value: string): string {
+    return value;
+  }
+
+  @Option({
+    flags: '-M, --message-channel-id [message_channel_id]',
+    description: 'Message channel ID',
+    required: true,
+  })
+  parseMessageChannelId(value: string): string {
+    return value;
+  }
+
+  @Option({
+    flags: '-w, --workspace-id [workspace_id]',
+    description: 'Workspace ID',
+    required: true,
+  })
+  parseWorkspaceId(value: string): string {
+    return value;
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a NestJS processor to handle stale messaging sync jobs, checking for ongoing syncs and resetting them if stale.
+Code Snippet:
+import { Logger, Scope } from '@nestjs/common';
+
+import { In } from 'typeorm';
+
+import { Process } from 'src/engine/core-modules/message-queue/decorators/process.decorator';
+import { Processor } from 'src/engine/core-modules/message-queue/decorators/processor.decorator';
+import { MessageQueue } from 'src/engine/core-modules/message-queue/message-queue.constants';
+import { TwentyORMManager } from 'src/engine/twenty-orm/twenty-orm.manager';
+import { MessageChannelSyncStatusService } from 'src/modules/messaging/common/services/message-channel-sync-status.service';
+import {
+  MessageChannelSyncStage,
+  MessageChannelWorkspaceEntity,
+} from 'src/modules/messaging/common/standard-objects/message-channel.workspace-entity';
+import { isSyncStale } from 'src/modules/messaging/message-import-manager/utils/is-sync-stale.util';
+
+export type MessagingOngoingStaleJobData = {
+  workspaceId: string;
+};
+
+@Processor({
+  queueName: MessageQueue.messagingQueue,
+  scope: Scope.REQUEST,
+})
+export class MessagingOngoingStaleJob {
+  private readonly logger = new Logger(MessagingOngoingStaleJob.name);
+  constructor(
+    private readonly twentyORMManager: TwentyORMManager,
+    private readonly messageChannelSyncStatusService: MessageChannelSyncStatusService,
+  ) {}
+
+  @Process(MessagingOngoingStaleJob.name)
+  async handle(data: MessagingOngoingStaleJobData): Promise<void> {
+    const { workspaceId } = data;
+
+    const messageChannelRepository =
+      await this.twentyORMManager.getRepository<MessageChannelWorkspaceEntity>(
+        'messageChannel',
+      );
+
+    const messageChannels = await messageChannelRepository.find({
+      where: {
+        syncStage: In([
+          MessageChannelSyncStage.MESSAGES_IMPORT_ONGOING,
+          MessageChannelSyncStage.MESSAGE_LIST_FETCH_ONGOING,
+        ]),
+      },
+    });
+
+    for (const messageChannel of messageChannels) {
+      if (
+        messageChannel.syncStageStartedAt &&
+        isSyncStale(messageChannel.syncStageStartedAt)
+      ) {
+        this.logger.log(
+          `Sync for message channel ${messageChannel.id} and workspace ${workspaceId} is stale. Setting sync stage to MESSAGES_IMPORT_PENDING`,
+        );
+
+        await this.messageChannelSyncStatusService.resetSyncStageStartedAt([
+          messageChannel.id,
+        ]);
+
+        switch (messageChannel.syncStage) {
+          case MessageChannelSyncStage.MESSAGE_LIST_FETCH_ONGOING:
+            await this.messageChannelSyncStatusService.schedulePartialMessageListFetch(
+              [messageChannel.id],
+            );
+            break;
+          case MessageChannelSyncStage.MESSAGES_IMPORT_ONGOING:
+            await this.messageChannelSyncStatusService.scheduleMessagesImport([
+              messageChannel.id,
+            ]);
+            break;
+          default:
+            break;
+        }
+      }
+    }
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a NestJS service that listens for database batch events related to the destruction of message channels and enqueues a job to clean the cache for these channels.
+Code Snippet:
+import { Injectable } from '@nestjs/common';
+
+import { ObjectRecordDeleteEvent } from 'src/engine/core-modules/event-emitter/types/object-record-delete.event';
+import { InjectMessageQueue } from 'src/engine/core-modules/message-queue/decorators/message-queue.decorator';
+import { MessageQueue } from 'src/engine/core-modules/message-queue/message-queue.constants';
+import { MessageQueueService } from 'src/engine/core-modules/message-queue/services/message-queue.service';
+import { WorkspaceEventBatch } from 'src/engine/workspace-event-emitter/types/workspace-event.type';
+import { MessageChannelWorkspaceEntity } from 'src/modules/messaging/common/standard-objects/message-channel.workspace-entity';
+import {
+  MessagingCleanCacheJob,
+  MessagingCleanCacheJobData,
+} from 'src/modules/messaging/message-import-manager/jobs/messaging-clean-cache';
+import { OnDatabaseBatchEvent } from 'src/engine/api/graphql/graphql-query-runner/decorators/on-database-batch-event.decorator';
+import { DatabaseEventAction } from 'src/engine/api/graphql/graphql-query-runner/enums/database-event-action';
+
+@Injectable()
+export class MessagingMessageImportManagerMessageChannelListener {
+  constructor(
+    @InjectMessageQueue(MessageQueue.messagingQueue)
+    private readonly messageQueueService: MessageQueueService,
+  ) {}
+
+  @OnDatabaseBatchEvent('messageChannel', DatabaseEventAction.DESTROYED)
+  async handleDestroyedEvent(
+    payload: WorkspaceEventBatch<
+      ObjectRecordDeleteEvent<MessageChannelWorkspaceEntity>
+    >,
+  ) {
+    await Promise.all(
+      payload.events.map((eventPayload) =>
+        this.messageQueueService.add<MessagingCleanCacheJobData>(
+          MessagingCleanCacheJob.name,
+          {
+            workspaceId: payload.workspaceId,
+            messageChannelId: eventPayload.recordId,
+          },
+        ),
+      ),
+    );
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a service for handling exceptions during message import operations, managing sync statuses, and interacting with a data repository.
+Code Snippet:
+import { Injectable } from '@nestjs/common';
+
+import { TwentyORMManager } from 'src/engine/twenty-orm/twenty-orm.manager';
+import { MessageChannelSyncStatusService } from 'src/modules/messaging/common/services/message-channel-sync-status.service';
+import { MessageChannelWorkspaceEntity } from 'src/modules/messaging/common/standard-objects/message-channel.workspace-entity';
+import { MESSAGING_THROTTLE_MAX_ATTEMPTS } from 'src/modules/messaging/message-import-manager/constants/messaging-throttle-max-attempts';
+import {
+  MessageImportDriverException,
+  MessageImportDriverExceptionCode,
+} from 'src/modules/messaging/message-import-manager/drivers/exceptions/message-import-driver.exception';
+import {
+  MessageImportException,
+  MessageImportExceptionCode,
+} from 'src/modules/messaging/message-import-manager/exceptions/message-import.exception';
+
+export enum MessageImportSyncStep {
+  FULL_MESSAGE_LIST_FETCH = 'FULL_MESSAGE_LIST_FETCH',
+  PARTIAL_MESSAGE_LIST_FETCH = 'PARTIAL_MESSAGE_LIST_FETCH',
+  FULL_OR_PARTIAL_MESSAGE_LIST_FETCH = 'FULL_OR_PARTIAL_MESSAGE_LIST_FETCH',
+  MESSAGES_IMPORT = 'MESSAGES_IMPORT',
+}
+
+@Injectable()
+export class MessageImportExceptionHandlerService {
+  constructor(
+    private readonly twentyORMManager: TwentyORMManager,
+    private readonly messageChannelSyncStatusService: MessageChannelSyncStatusService,
+  ) {}
+
+  public async handleDriverException(
+    exception: MessageImportDriverException,
+    syncStep: MessageImportSyncStep,
+    messageChannel: Pick<
+      MessageChannelWorkspaceEntity,
+      'id' | 'throttleFailureCount'
+    >,
+    workspaceId: string,
+  ): Promise<void> {
+    switch (exception.code) {
+      case MessageImportDriverExceptionCode.NOT_FOUND:
+        await this.handleNotFoundException(
+          syncStep,
+          messageChannel,
+          workspaceId,
+        );
+        break;
+      case MessageImportDriverExceptionCode.TEMPORARY_ERROR:
+        await this.handleTemporaryException(
+          syncStep,
+          messageChannel,
+          workspaceId,
+        );
+        break;
+      case MessageImportDriverExceptionCode.INSUFFICIENT_PERMISSIONS:
+        await this.handleInsufficientPermissionsException(
+          messageChannel,
+          workspaceId,
+        );
+        break;
+      case MessageImportDriverExceptionCode.UNKNOWN:
+      case MessageImportDriverExceptionCode.UNKNOWN_NETWORK_ERROR:
+        await this.handleUnknownException(
+          exception,
+          messageChannel,
+          workspaceId,
+        );
+        break;
+      case MessageImportDriverExceptionCode.SYNC_CURSOR_ERROR:
+        await this.handlePermanentException(
+          exception,
+          messageChannel,
+          workspaceId,
+        );
+        break;
+      default:
+        throw exception;
+    }
+  }
+
+  private async handleTemporaryException(
+    syncStep: MessageImportSyncStep,
+    messageChannel: Pick<
+      MessageChannelWorkspaceEntity,
+      'id' | 'throttleFailureCount'
+    >,
+    workspaceId: string,
+  ): Promise<void> {
+    if (
+      messageChannel.throttleFailureCount >= MESSAGING_THROTTLE_MAX_ATTEMPTS
+    ) {
+      await this.messageChannelSyncStatusService.markAsFailedUnknownAndFlushMessagesToImport(
+        [messageChannel.id],
+        workspaceId,
+      );
+      throw new MessageImportException(
+        `Unknown error occurred multiple times while importing messages for message channel ${messageChannel.id} in workspace ${workspaceId}`,
+        MessageImportExceptionCode.UNKNOWN,
+      );
+    }
+
+    const messageChannelRepository =
+      await this.twentyORMManager.getRepository<MessageChannelWorkspaceEntity>(
+        'messageChannel',
+      );
+
+    await messageChannelRepository.increment(
+      { id: messageChannel.id },
+      'throttleFailureCount',
+      1,
+    );
+
+    switch (syncStep) {
+      case MessageImportSyncStep.FULL_MESSAGE_LIST_FETCH:
+        await this.messageChannelSyncStatusService.scheduleFullMessageListFetch(
+          [messageChannel.id],
+        );
+        break;
+
+      case MessageImportSyncStep.PARTIAL_MESSAGE_LIST_FETCH:
+        await this.messageChannelSyncStatusService.schedulePartialMessageListFetch(
+          [messageChannel.id],
+        );
+        break;
+
+      case MessageImportSyncStep.MESSAGES_IMPORT:
+        await this.messageChannelSyncStatusService.scheduleMessagesImport([
+          messageChannel.id,
+        ]);
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  private async handleInsufficientPermissionsException(
+    messageChannel: Pick<MessageChannelWorkspaceEntity, 'id'>,
+    workspaceId: string,
+  ): Promise<void> {
+    await this.messageChannelSyncStatusService.markAsFailedInsufficientPermissionsAndFlushMessagesToImport(
+      [messageChannel.id],
+      workspaceId,
+    );
+  }
+
+  private async handleUnknownException(
+    exception: MessageImportDriverException,
+    messageChannel: Pick<MessageChannelWorkspaceEntity, 'id'>,
+    workspaceId: string,
+  ): Promise<void> {
+    await this.messageChannelSyncStatusService.markAsFailedUnknownAndFlushMessagesToImport(
+      [messageChannel.id],
+      workspaceId,
+    );
+
+    throw new MessageImportException(
+      `Unknown error occurred while importing messages for message channel ${messageChannel.id} in workspace ${workspaceId}: ${exception.message}`,
+      MessageImportExceptionCode.UNKNOWN,
+    );
+  }
+
+  private async handlePermanentException(
+    exception: MessageImportDriverException,
+    messageChannel: Pick<MessageChannelWorkspaceEntity, 'id'>,
+    workspaceId: string,
+  ): Promise<void> {
+    await this.messageChannelSyncStatusService.markAsFailedUnknownAndFlushMessagesToImport(
+      [messageChannel.id],
+      workspaceId,
+    );
+
+    throw new MessageImportException(
+      `Permanent error occurred while importing messages for message channel ${messageChannel.id} in workspace ${workspaceId}: ${exception.message}`,
+      MessageImportExceptionCode.UNKNOWN,
+    );
+  }
+
+  private async handleNotFoundException(
+    syncStep: MessageImportSyncStep,
+    messageChannel: Pick<MessageChannelWorkspaceEntity, 'id'>,
+    workspaceId: string,
+  ): Promise<void> {
+    if (syncStep === MessageImportSyncStep.FULL_MESSAGE_LIST_FETCH) {
+      return;
+    }
+
+    await this.messageChannelSyncStatusService.resetAndScheduleFullMessageListFetch(
+      [messageChannel.id],
+      workspaceId,
+    );
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a listener service that triggers a cleanup job in a message queue when a connected account is deleted from the database.
+Code Snippet:
+import { Injectable } from '@nestjs/common';
+
+import { ObjectRecordDeleteEvent } from 'src/engine/core-modules/event-emitter/types/object-record-delete.event';
+import { InjectMessageQueue } from 'src/engine/core-modules/message-queue/decorators/message-queue.decorator';
+import { MessageQueue } from 'src/engine/core-modules/message-queue/message-queue.constants';
+import { MessageQueueService } from 'src/engine/core-modules/message-queue/services/message-queue.service';
+import { WorkspaceEventBatch } from 'src/engine/workspace-event-emitter/types/workspace-event.type';
+import { ConnectedAccountWorkspaceEntity } from 'src/modules/connected-account/standard-objects/connected-account.workspace-entity';
+import {
+  MessagingConnectedAccountDeletionCleanupJob,
+  MessagingConnectedAccountDeletionCleanupJobData,
+} from 'src/modules/messaging/message-cleaner/jobs/messaging-connected-account-deletion-cleanup.job';
+import { OnDatabaseBatchEvent } from 'src/engine/api/graphql/graphql-query-runner/decorators/on-database-batch-event.decorator';
+import { DatabaseEventAction } from 'src/engine/api/graphql/graphql-query-runner/enums/database-event-action';
+
+@Injectable()
+export class MessagingMessageCleanerConnectedAccountListener {
+  constructor(
+    @InjectMessageQueue(MessageQueue.messagingQueue)
+    private readonly messageQueueService: MessageQueueService,
+  ) {}
+
+  @OnDatabaseBatchEvent('connectedAccount', DatabaseEventAction.DESTROYED)
+  async handleDestroyedEvent(
+    payload: WorkspaceEventBatch<
+      ObjectRecordDeleteEvent<ConnectedAccountWorkspaceEntity>
+    >,
+  ) {
+    await Promise.all(
+      payload.events.map((eventPayload) =>
+        this.messageQueueService.add<MessagingConnectedAccountDeletionCleanupJobData>(
+          MessagingConnectedAccountDeletionCleanupJob.name,
+          {
+            workspaceId: payload.workspaceId,
+            connectedAccountId: eventPayload.recordId,
+          },
+        ),
+      ),
+    );
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code processes a job to delete messages associated with blocklisted items in a workspace.
+Code Snippet:
+import { Logger, Scope } from '@nestjs/common';
+
+import { And, Any, ILike, In, Not, Or } from 'typeorm';
+
+import { ObjectRecordCreateEvent } from 'src/engine/core-modules/event-emitter/types/object-record-create.event';
+import { Process } from 'src/engine/core-modules/message-queue/decorators/process.decorator';
+import { Processor } from 'src/engine/core-modules/message-queue/decorators/processor.decorator';
+import { MessageQueue } from 'src/engine/core-modules/message-queue/message-queue.constants';
+import { TwentyORMManager } from 'src/engine/twenty-orm/twenty-orm.manager';
+import { WorkspaceEventBatch } from 'src/engine/workspace-event-emitter/types/workspace-event.type';
+import { BlocklistWorkspaceEntity } from 'src/modules/blocklist/standard-objects/blocklist.workspace-entity';
+import { MessageChannelMessageAssociationWorkspaceEntity } from 'src/modules/messaging/common/standard-objects/message-channel-message-association.workspace-entity';
+import { MessageChannelWorkspaceEntity } from 'src/modules/messaging/common/standard-objects/message-channel.workspace-entity';
+import { MessagingMessageCleanerService } from 'src/modules/messaging/message-cleaner/services/messaging-message-cleaner.service';
+
+export type BlocklistItemDeleteMessagesJobData = WorkspaceEventBatch<
+  ObjectRecordCreateEvent<BlocklistWorkspaceEntity>
+>;
+
+@Processor({
+  queueName: MessageQueue.messagingQueue,
+  scope: Scope.REQUEST,
+})
+export class BlocklistItemDeleteMessagesJob {
+  private readonly logger = new Logger(BlocklistItemDeleteMessagesJob.name);
+
+  constructor(
+    private readonly threadCleanerService: MessagingMessageCleanerService,
+    private readonly twentyORMManager: TwentyORMManager,
+  ) {}
+
+  @Process(BlocklistItemDeleteMessagesJob.name)
+  async handle(data: BlocklistItemDeleteMessagesJobData): Promise<void> {
+    const workspaceId = data.workspaceId;
+
+    const blocklistItemIds = data.events.map(
+      (eventPayload) => eventPayload.recordId,
+    );
+
+    const blocklistRepository =
+      await this.twentyORMManager.getRepository<BlocklistWorkspaceEntity>(
+        'blocklist',
+      );
+
+    const blocklist = await blocklistRepository.find({
+      where: {
+        id: Any(blocklistItemIds),
+      },
+    });
+
+    const handlesToDeleteByWorkspaceMemberIdMap = blocklist.reduce(
+      (acc, blocklistItem) => {
+        const { handle, workspaceMemberId } = blocklistItem;
+
+        if (!acc.has(workspaceMemberId)) {
+          acc.set(workspaceMemberId, []);
+        }
+
+        acc.get(workspaceMemberId)?.push(handle);
+
+        return acc;
+      },
+      new Map<string, string[]>(),
+    );
+
+    const messageChannelRepository =
+      await this.twentyORMManager.getRepository<MessageChannelWorkspaceEntity>(
+        'messageChannel',
+      );
+
+    const messageChannelMessageAssociationRepository =
+      await this.twentyORMManager.getRepository<MessageChannelMessageAssociationWorkspaceEntity>(
+        'messageChannelMessageAssociation',
+      );
+
+    for (const workspaceMemberId of handlesToDeleteByWorkspaceMemberIdMap.keys()) {
+      const handles =
+        handlesToDeleteByWorkspaceMemberIdMap.get(workspaceMemberId);
+
+      if (!handles) {
+        continue;
+      }
+
+      this.logger.log(
+        `Deleting messages from ${handles.join(
+          ', ',
+        )} in workspace ${workspaceId} for workspace member ${workspaceMemberId}`,
+      );
+
+      const rolesToDelete: ('from' | 'to')[] = ['from', 'to'];
+
+      const messageChannels = await messageChannelRepository.find({
+        select: {
+          id: true,
+          handle: true,
+          connectedAccount: {
+            handleAliases: true,
+          },
+        },
+        where: {
+          connectedAccount: {
+            accountOwnerId: workspaceMemberId,
+          },
+        },
+        relations: ['connectedAccount'],
+      });
+
+      for (const messageChannel of messageChannels) {
+        const messageChannelHandles = [messageChannel.handle];
+
+        if (messageChannel.connectedAccount.handleAliases) {
+          messageChannelHandles.push(
+            ...messageChannel.connectedAccount.handleAliases.split(','),
+          );
+        }
+
+        const handleConditions = handles.map((handle) => {
+          const isHandleDomain = handle.startsWith('@');
+
+          return isHandleDomain
+            ? {
+                handle: And(
+                  Or(ILike(`%${handle}`), ILike(`%.${handle.slice(1)}`)),
+                  Not(In(messageChannelHandles)),
+                ),
+                role: In(rolesToDelete),
+              }
+            : { handle, role: In(rolesToDelete) };
+        });
+
+        const messageChannelMessageAssociationsToDelete =
+          await messageChannelMessageAssociationRepository.find({
+            where: {
+              messageChannelId: messageChannel.id,
+              message: {
+                messageParticipants: handleConditions,
+              },
+            },
+          });
+
+        if (messageChannelMessageAssociationsToDelete.length === 0) {
+          continue;
+        }
+
+        await messageChannelMessageAssociationRepository.delete(
+          messageChannelMessageAssociationsToDelete.map(({ id }) => id),
+        );
+      }
+
+      this.logger.log(
+        `Deleted messages from handle ${handles.join(
+          ', ',
+        )} in workspace ${workspaceId} for workspace member ${workspaceMemberId}`,
+      );
+    }
+
+    await this.threadCleanerService.cleanWorkspaceThreads(workspaceId);
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a listener service that handles database events for blocklist operations and enqueues messages for processing.
+Code Snippet:
+import { Injectable, Scope } from '@nestjs/common';
+
+import { ObjectRecordCreateEvent } from 'src/engine/core-modules/event-emitter/types/object-record-create.event';
+import { ObjectRecordDeleteEvent } from 'src/engine/core-modules/event-emitter/types/object-record-delete.event';
+import { ObjectRecordUpdateEvent } from 'src/engine/core-modules/event-emitter/types/object-record-update.event';
+import { InjectMessageQueue } from 'src/engine/core-modules/message-queue/decorators/message-queue.decorator';
+import { MessageQueue } from 'src/engine/core-modules/message-queue/message-queue.constants';
+import { MessageQueueService } from 'src/engine/core-modules/message-queue/services/message-queue.service';
+import { WorkspaceEventBatch } from 'src/engine/workspace-event-emitter/types/workspace-event.type';
+import { BlocklistWorkspaceEntity } from 'src/modules/blocklist/standard-objects/blocklist.workspace-entity';
+import {
+  BlocklistItemDeleteMessagesJob,
+  BlocklistItemDeleteMessagesJobData,
+} from 'src/modules/messaging/blocklist-manager/jobs/messaging-blocklist-item-delete-messages.job';
+import {
+  BlocklistReimportMessagesJob,
+  BlocklistReimportMessagesJobData,
+} from 'src/modules/messaging/blocklist-manager/jobs/messaging-blocklist-reimport-messages.job';
+import { OnDatabaseBatchEvent } from 'src/engine/api/graphql/graphql-query-runner/decorators/on-database-batch-event.decorator';
+import { DatabaseEventAction } from 'src/engine/api/graphql/graphql-query-runner/enums/database-event-action';
+
+@Injectable({ scope: Scope.REQUEST })
+export class MessagingBlocklistListener {
+  constructor(
+    @InjectMessageQueue(MessageQueue.messagingQueue)
+    private readonly messageQueueService: MessageQueueService,
+  ) {}
+
+  @OnDatabaseBatchEvent('blocklist', DatabaseEventAction.CREATED)
+  async handleCreatedEvent(
+    payload: WorkspaceEventBatch<
+      ObjectRecordCreateEvent<BlocklistWorkspaceEntity>
+    >,
+  ) {
+    await this.messageQueueService.add<BlocklistItemDeleteMessagesJobData>(
+      BlocklistItemDeleteMessagesJob.name,
+      payload,
+    );
+  }
+
+  @OnDatabaseBatchEvent('blocklist', DatabaseEventAction.CREATED)
+  async handleDeletedEvent(
+    payload: WorkspaceEventBatch<
+      ObjectRecordDeleteEvent<BlocklistWorkspaceEntity>
+    >,
+  ) {
+    await this.messageQueueService.add<BlocklistReimportMessagesJobData>(
+      BlocklistReimportMessagesJob.name,
+      payload,
+    );
+  }
+
+  @OnDatabaseBatchEvent('blocklist', DatabaseEventAction.UPDATED)
+  async handleUpdatedEvent(
+    payload: WorkspaceEventBatch<
+      ObjectRecordUpdateEvent<BlocklistWorkspaceEntity>
+    >,
+  ) {
+    await this.messageQueueService.add<BlocklistItemDeleteMessagesJobData>(
+      BlocklistItemDeleteMessagesJob.name,
+      payload,
+    );
+
+    await this.messageQueueService.add<BlocklistReimportMessagesJobData>(
+      BlocklistReimportMessagesJob.name,
+      payload,
+    );
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a NestJS global module for logging, with support for synchronous and asynchronous configuration of a console logger.
+Code Snippet:
+import { ConsoleLogger, DynamicModule, Global, Module } from '@nestjs/common';
+
+import { LoggerDriverType } from 'src/engine/core-modules/logger/interfaces';
+import { LOGGER_DRIVER } from 'src/engine/core-modules/logger/logger.constants';
+import {
+  ASYNC_OPTIONS_TYPE,
+  ConfigurableModuleClass,
+  OPTIONS_TYPE,
+} from 'src/engine/core-modules/logger/logger.module-definition';
+import { LoggerService } from 'src/engine/core-modules/logger/logger.service';
+
+@Global()
+@Module({
+  providers: [LoggerService],
+  exports: [LoggerService],
+})
+export class LoggerModule extends ConfigurableModuleClass {
+  static forRoot(options: typeof OPTIONS_TYPE): DynamicModule {
+    const provider = {
+      provide: LOGGER_DRIVER,
+      useValue:
+        options.type === LoggerDriverType.Console
+          ? new ConsoleLogger()
+          : undefined,
+    };
+    const dynamicModule = super.forRoot(options);
+
+    return {
+      ...dynamicModule,
+      providers: [...(dynamicModule.providers ?? []), provider],
+    };
+  }
+
+  static forRootAsync(options: typeof ASYNC_OPTIONS_TYPE): DynamicModule {
+    const provider = {
+      provide: LOGGER_DRIVER,
+      useFactory: async (...args: any[]) => {
+        const config = await options?.useFactory?.(...args);
+
+        if (!config) {
+          return null;
+        }
+
+        const logLevels = config.logLevels ?? [];
+
+        const logger =
+          config?.type === LoggerDriverType.Console
+            ? new ConsoleLogger()
+            : undefined;
+
+        logger?.setLogLevels(logLevels);
+
+        return logger;
+      },
+      inject: options.inject || [],
+    };
+    const dynamicModule = super.forRootAsync(options);
+
+    return {
+      ...dynamicModule,
+      providers: [...(dynamicModule.providers ?? []), provider],
+    };
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a class that captures exceptions and logs them to the console.
+Code Snippet:
+/* eslint-disable no-console */
+import { ExceptionHandlerOptions } from 'src/engine/core-modules/exception-handler/interfaces/exception-handler-options.interface';
+
+import { ExceptionHandlerDriverInterface } from 'src/engine/core-modules/exception-handler/interfaces';
+
+export class ExceptionHandlerConsoleDriver
+  implements ExceptionHandlerDriverInterface
+{
+  captureExceptions(
+    exceptions: ReadonlyArray<any>,
+    options?: ExceptionHandlerOptions,
+  ) {
+    console.group('Exception Captured');
+    console.info(options);
+    console.error(exceptions);
+    console.groupEnd();
+
+    return [];
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a NestJS module for LLM tracing, which configures and provides a tracing driver based on the provided options.
+Code Snippet:
+import { Global, DynamicModule } from '@nestjs/common';
+
+import {
+  LLMTracingModuleAsyncOptions,
+  LLMTracingDriver,
+} from 'src/engine/core-modules/llm-tracing/interfaces/llm-tracing.interface';
+
+import { LangfuseDriver } from 'src/engine/core-modules/llm-tracing/drivers/langfuse.driver';
+import { ConsoleDriver } from 'src/engine/core-modules/llm-tracing/drivers/console.driver';
+import { LLMTracingService } from 'src/engine/core-modules/llm-tracing/llm-tracing.service';
+import { LLM_TRACING_DRIVER } from 'src/engine/core-modules/llm-tracing/llm-tracing.constants';
+
+@Global()
+export class LLMTracingModule {
+  static forRoot(options: LLMTracingModuleAsyncOptions): DynamicModule {
+    const provider = {
+      provide: LLM_TRACING_DRIVER,
+      useFactory: (...args: any[]) => {
+        const config = options.useFactory(...args);
+
+        switch (config.type) {
+          case LLMTracingDriver.Langfuse: {
+            return new LangfuseDriver(config.options);
+          }
+          case LLMTracingDriver.Console: {
+            return new ConsoleDriver();
+          }
+        }
+      },
+      inject: options.inject || [],
+    };
+
+    return {
+      module: LLMTracingModule,
+      providers: [LLMTracingService, provider],
+      exports: [LLMTracingService],
+    };
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a custom callback handler that logs metadata to the console and implements an LLMTracingDriver to provide this handler.
+Code Snippet:
+/* eslint-disable no-console */
+import { BaseCallbackHandler } from '@langchain/core/callbacks/base';
+import { Run } from '@langchain/core/tracers/base';
+import { ConsoleCallbackHandler } from '@langchain/core/tracers/console';
+
+import { LLMTracingDriver } from 'src/engine/core-modules/llm-tracing/drivers/interfaces/llm-tracing-driver.interface';
+
+class WithMetadataConsoleCallbackHandler extends ConsoleCallbackHandler {
+  private metadata: Record<string, unknown>;
+
+  constructor(metadata: Record<string, unknown>) {
+    super();
+    this.metadata = metadata;
+  }
+
+  onChainStart(run: Run) {
+    console.log(`Chain metadata: ${JSON.stringify(this.metadata)}`);
+    super.onChainStart(run);
+  }
+}
+
+export class ConsoleDriver implements LLMTracingDriver {
+  getCallbackHandler(metadata: Record<string, unknown>): BaseCallbackHandler {
+    return new WithMetadataConsoleCallbackHandler(metadata);
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+============================================ CODE SNIPPET START ============================================
+Summary: The code defines a NestJS processor job that cleans user variables related to workspace deletion warnings for all members of a specified workspace.
+Code Snippet:
+import { Logger, Scope } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+
+import chunk from 'lodash.chunk';
+import { Repository } from 'typeorm';
+
+import { Process } from 'src/engine/core-modules/message-queue/decorators/process.decorator';
+import { Processor } from 'src/engine/core-modules/message-queue/decorators/processor.decorator';
+import { MessageQueue } from 'src/engine/core-modules/message-queue/message-queue.constants';
+import { UserService } from 'src/engine/core-modules/user/services/user.service';
+import { UserVarsService } from 'src/engine/core-modules/user/user-vars/services/user-vars.service';
+import { Workspace } from 'src/engine/core-modules/workspace/workspace.entity';
+import { USER_WORKSPACE_DELETION_WARNING_SENT_KEY } from 'src/engine/workspace-manager/workspace-cleaner/constants/user-workspace-deletion-warning-sent-key.constant';
+
+export type CleanWorkspaceDeletionWarningUserVarsJobData = {
+  workspaceId: string;
+};
+
+@Processor({
+  queueName: MessageQueue.workspaceQueue,
+  scope: Scope.REQUEST,
+})
+export class CleanWorkspaceDeletionWarningUserVarsJob {
+  protected readonly logger = new Logger(
+    CleanWorkspaceDeletionWarningUserVarsJob.name,
+  );
+
+  constructor(
+    private readonly userService: UserService,
+    private readonly userVarsService: UserVarsService,
+    @InjectRepository(Workspace, 'core')
+    private readonly workspaceRepository: Repository<Workspace>,
+  ) {}
+
+  @Process(CleanWorkspaceDeletionWarningUserVarsJob.name)
+  async handle(
+    data: CleanWorkspaceDeletionWarningUserVarsJobData,
+  ): Promise<void> {
+    this.logger.log(`Job running...`);
+
+    const { workspaceId } = data;
+
+    try {
+      const workspace = await this.workspaceRepository.findOneOrFail({
+        where: { id: workspaceId },
+      });
+
+      const workspaceMembers =
+        await this.userService.loadWorkspaceMembers(workspace);
+
+      const workspaceMembersChunks = chunk(workspaceMembers, 5);
+
+      for (const workspaceMembersChunk of workspaceMembersChunks) {
+        await Promise.all(
+          workspaceMembersChunk.map(async (workspaceMember) => {
+            await this.userVarsService.delete({
+              userId: workspaceMember.userId,
+              workspaceId: workspace.id,
+              key: USER_WORKSPACE_DELETION_WARNING_SENT_KEY,
+            });
+            this.logger.log(
+              `Successfully cleaned user vars for ${workspaceMember.userId} user in ${workspace.id} workspace`,
+            );
+          }),
+        );
+      }
+      this.logger.log(`Job done!`);
+    } catch (error) {
+      this.logger.error(
+        `Failed to clean ${workspaceId} workspace users deletion warning user vars: ${error.message}`,
+      );
+    }
+  }
+}
+
+============================================ CODE SNIPPET END ============================================
+
+
+</CLUSTER_0>
