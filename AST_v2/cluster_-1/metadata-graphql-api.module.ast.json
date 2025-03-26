@@ -1,0 +1,5019 @@
+{
+  "type": "Program",
+  "range": [
+    0,
+    1715
+  ],
+  "body": [
+    {
+      "type": "ImportDeclaration",
+      "attributes": [],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "raw": "'@nestjs/common'",
+        "value": "@nestjs/common",
+        "range": [
+          23,
+          39
+        ],
+        "loc": {
+          "end": {
+            "column": 39,
+            "line": 1
+          },
+          "start": {
+            "column": 23,
+            "line": 1
+          }
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "Module",
+            "optional": false,
+            "range": [
+              9,
+              15
+            ],
+            "loc": {
+              "end": {
+                "column": 15,
+                "line": 1
+              },
+              "start": {
+                "column": 9,
+                "line": 1
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "Module",
+            "optional": false,
+            "range": [
+              9,
+              15
+            ],
+            "loc": {
+              "end": {
+                "column": 15,
+                "line": 1
+              },
+              "start": {
+                "column": 9,
+                "line": 1
+              }
+            }
+          },
+          "range": [
+            9,
+            15
+          ],
+          "loc": {
+            "end": {
+              "column": 15,
+              "line": 1
+            },
+            "start": {
+              "column": 9,
+              "line": 1
+            }
+          }
+        }
+      ],
+      "range": [
+        0,
+        40
+      ],
+      "loc": {
+        "end": {
+          "column": 40,
+          "line": 1
+        },
+        "start": {
+          "column": 0,
+          "line": 1
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "attributes": [],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "raw": "'@nestjs/graphql'",
+        "value": "@nestjs/graphql",
+        "range": [
+          72,
+          89
+        ],
+        "loc": {
+          "end": {
+            "column": 47,
+            "line": 2
+          },
+          "start": {
+            "column": 30,
+            "line": 2
+          }
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "GraphQLModule",
+            "optional": false,
+            "range": [
+              51,
+              64
+            ],
+            "loc": {
+              "end": {
+                "column": 22,
+                "line": 2
+              },
+              "start": {
+                "column": 9,
+                "line": 2
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "GraphQLModule",
+            "optional": false,
+            "range": [
+              51,
+              64
+            ],
+            "loc": {
+              "end": {
+                "column": 22,
+                "line": 2
+              },
+              "start": {
+                "column": 9,
+                "line": 2
+              }
+            }
+          },
+          "range": [
+            51,
+            64
+          ],
+          "loc": {
+            "end": {
+              "column": 22,
+              "line": 2
+            },
+            "start": {
+              "column": 9,
+              "line": 2
+            }
+          }
+        }
+      ],
+      "range": [
+        42,
+        90
+      ],
+      "loc": {
+        "end": {
+          "column": 48,
+          "line": 2
+        },
+        "start": {
+          "column": 0,
+          "line": 2
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "attributes": [],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "raw": "'@graphql-yoga/nestjs'",
+        "value": "@graphql-yoga/nestjs",
+        "range": [
+          139,
+          161
+        ],
+        "loc": {
+          "end": {
+            "column": 67,
+            "line": 4
+          },
+          "start": {
+            "column": 45,
+            "line": 4
+          }
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "YogaDriver",
+            "optional": false,
+            "range": [
+              103,
+              113
+            ],
+            "loc": {
+              "end": {
+                "column": 19,
+                "line": 4
+              },
+              "start": {
+                "column": 9,
+                "line": 4
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "YogaDriver",
+            "optional": false,
+            "range": [
+              103,
+              113
+            ],
+            "loc": {
+              "end": {
+                "column": 19,
+                "line": 4
+              },
+              "start": {
+                "column": 9,
+                "line": 4
+              }
+            }
+          },
+          "range": [
+            103,
+            113
+          ],
+          "loc": {
+            "end": {
+              "column": 19,
+              "line": 4
+            },
+            "start": {
+              "column": 9,
+              "line": 4
+            }
+          }
+        },
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "YogaDriverConfig",
+            "optional": false,
+            "range": [
+              115,
+              131
+            ],
+            "loc": {
+              "end": {
+                "column": 37,
+                "line": 4
+              },
+              "start": {
+                "column": 21,
+                "line": 4
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "YogaDriverConfig",
+            "optional": false,
+            "range": [
+              115,
+              131
+            ],
+            "loc": {
+              "end": {
+                "column": 37,
+                "line": 4
+              },
+              "start": {
+                "column": 21,
+                "line": 4
+              }
+            }
+          },
+          "range": [
+            115,
+            131
+          ],
+          "loc": {
+            "end": {
+              "column": 37,
+              "line": 4
+            },
+            "start": {
+              "column": 21,
+              "line": 4
+            }
+          }
+        }
+      ],
+      "range": [
+        94,
+        162
+      ],
+      "loc": {
+        "end": {
+          "column": 68,
+          "line": 4
+        },
+        "start": {
+          "column": 0,
+          "line": 4
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "attributes": [],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "raw": "'src/engine/api/graphql/graphql-config/graphql-config.module'",
+        "value": "src/engine/api/graphql/graphql-config/graphql-config.module",
+        "range": [
+          202,
+          263
+        ],
+        "loc": {
+          "end": {
+            "column": 97,
+            "line": 6
+          },
+          "start": {
+            "column": 36,
+            "line": 6
+          }
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "GraphQLConfigModule",
+            "optional": false,
+            "range": [
+              175,
+              194
+            ],
+            "loc": {
+              "end": {
+                "column": 28,
+                "line": 6
+              },
+              "start": {
+                "column": 9,
+                "line": 6
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "GraphQLConfigModule",
+            "optional": false,
+            "range": [
+              175,
+              194
+            ],
+            "loc": {
+              "end": {
+                "column": 28,
+                "line": 6
+              },
+              "start": {
+                "column": 9,
+                "line": 6
+              }
+            }
+          },
+          "range": [
+            175,
+            194
+          ],
+          "loc": {
+            "end": {
+              "column": 28,
+              "line": 6
+            },
+            "start": {
+              "column": 9,
+              "line": 6
+            }
+          }
+        }
+      ],
+      "range": [
+        166,
+        264
+      ],
+      "loc": {
+        "end": {
+          "column": 98,
+          "line": 6
+        },
+        "start": {
+          "column": 0,
+          "line": 6
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "attributes": [],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "raw": "'src/engine/api/graphql/metadata.module-factory'",
+        "value": "src/engine/api/graphql/metadata.module-factory",
+        "range": [
+          304,
+          352
+        ],
+        "loc": {
+          "end": {
+            "column": 86,
+            "line": 7
+          },
+          "start": {
+            "column": 38,
+            "line": 7
+          }
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "metadataModuleFactory",
+            "optional": false,
+            "range": [
+              275,
+              296
+            ],
+            "loc": {
+              "end": {
+                "column": 30,
+                "line": 7
+              },
+              "start": {
+                "column": 9,
+                "line": 7
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "metadataModuleFactory",
+            "optional": false,
+            "range": [
+              275,
+              296
+            ],
+            "loc": {
+              "end": {
+                "column": 30,
+                "line": 7
+              },
+              "start": {
+                "column": 9,
+                "line": 7
+              }
+            }
+          },
+          "range": [
+            275,
+            296
+          ],
+          "loc": {
+            "end": {
+              "column": 30,
+              "line": 7
+            },
+            "start": {
+              "column": 9,
+              "line": 7
+            }
+          }
+        }
+      ],
+      "range": [
+        266,
+        353
+      ],
+      "loc": {
+        "end": {
+          "column": 87,
+          "line": 7
+        },
+        "start": {
+          "column": 0,
+          "line": 7
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "attributes": [],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "raw": "'src/engine/dataloaders/dataloader.module'",
+        "value": "src/engine/dataloaders/dataloader.module",
+        "range": [
+          388,
+          430
+        ],
+        "loc": {
+          "end": {
+            "column": 75,
+            "line": 8
+          },
+          "start": {
+            "column": 33,
+            "line": 8
+          }
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "DataloaderModule",
+            "optional": false,
+            "range": [
+              364,
+              380
+            ],
+            "loc": {
+              "end": {
+                "column": 25,
+                "line": 8
+              },
+              "start": {
+                "column": 9,
+                "line": 8
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "DataloaderModule",
+            "optional": false,
+            "range": [
+              364,
+              380
+            ],
+            "loc": {
+              "end": {
+                "column": 25,
+                "line": 8
+              },
+              "start": {
+                "column": 9,
+                "line": 8
+              }
+            }
+          },
+          "range": [
+            364,
+            380
+          ],
+          "loc": {
+            "end": {
+              "column": 25,
+              "line": 8
+            },
+            "start": {
+              "column": 9,
+              "line": 8
+            }
+          }
+        }
+      ],
+      "range": [
+        355,
+        431
+      ],
+      "loc": {
+        "end": {
+          "column": 76,
+          "line": 8
+        },
+        "start": {
+          "column": 0,
+          "line": 8
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "attributes": [],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "raw": "'src/engine/dataloaders/dataloader.service'",
+        "value": "src/engine/dataloaders/dataloader.service",
+        "range": [
+          467,
+          510
+        ],
+        "loc": {
+          "end": {
+            "column": 77,
+            "line": 9
+          },
+          "start": {
+            "column": 34,
+            "line": 9
+          }
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "DataloaderService",
+            "optional": false,
+            "range": [
+              442,
+              459
+            ],
+            "loc": {
+              "end": {
+                "column": 26,
+                "line": 9
+              },
+              "start": {
+                "column": 9,
+                "line": 9
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "DataloaderService",
+            "optional": false,
+            "range": [
+              442,
+              459
+            ],
+            "loc": {
+              "end": {
+                "column": 26,
+                "line": 9
+              },
+              "start": {
+                "column": 9,
+                "line": 9
+              }
+            }
+          },
+          "range": [
+            442,
+            459
+          ],
+          "loc": {
+            "end": {
+              "column": 26,
+              "line": 9
+            },
+            "start": {
+              "column": 9,
+              "line": 9
+            }
+          }
+        }
+      ],
+      "range": [
+        433,
+        511
+      ],
+      "loc": {
+        "end": {
+          "column": 78,
+          "line": 9
+        },
+        "start": {
+          "column": 0,
+          "line": 9
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "attributes": [],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "raw": "'src/engine/core-modules/cache-storage/types/cache-storage-namespace.enum'",
+        "value": "src/engine/core-modules/cache-storage/types/cache-storage-namespace.enum",
+        "range": [
+          551,
+          625
+        ],
+        "loc": {
+          "end": {
+            "column": 112,
+            "line": 10
+          },
+          "start": {
+            "column": 38,
+            "line": 10
+          }
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "CacheStorageNamespace",
+            "optional": false,
+            "range": [
+              522,
+              543
+            ],
+            "loc": {
+              "end": {
+                "column": 30,
+                "line": 10
+              },
+              "start": {
+                "column": 9,
+                "line": 10
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "CacheStorageNamespace",
+            "optional": false,
+            "range": [
+              522,
+              543
+            ],
+            "loc": {
+              "end": {
+                "column": 30,
+                "line": 10
+              },
+              "start": {
+                "column": 9,
+                "line": 10
+              }
+            }
+          },
+          "range": [
+            522,
+            543
+          ],
+          "loc": {
+            "end": {
+              "column": 30,
+              "line": 10
+            },
+            "start": {
+              "column": 9,
+              "line": 10
+            }
+          }
+        }
+      ],
+      "range": [
+        513,
+        626
+      ],
+      "loc": {
+        "end": {
+          "column": 113,
+          "line": 10
+        },
+        "start": {
+          "column": 0,
+          "line": 10
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "attributes": [],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "raw": "'src/engine/core-modules/environment/environment.service'",
+        "value": "src/engine/core-modules/environment/environment.service",
+        "range": [
+          663,
+          720
+        ],
+        "loc": {
+          "end": {
+            "column": 92,
+            "line": 11
+          },
+          "start": {
+            "column": 35,
+            "line": 11
+          }
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "EnvironmentService",
+            "optional": false,
+            "range": [
+              637,
+              655
+            ],
+            "loc": {
+              "end": {
+                "column": 27,
+                "line": 11
+              },
+              "start": {
+                "column": 9,
+                "line": 11
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "EnvironmentService",
+            "optional": false,
+            "range": [
+              637,
+              655
+            ],
+            "loc": {
+              "end": {
+                "column": 27,
+                "line": 11
+              },
+              "start": {
+                "column": 9,
+                "line": 11
+              }
+            }
+          },
+          "range": [
+            637,
+            655
+          ],
+          "loc": {
+            "end": {
+              "column": 27,
+              "line": 11
+            },
+            "start": {
+              "column": 9,
+              "line": 11
+            }
+          }
+        }
+      ],
+      "range": [
+        628,
+        721
+      ],
+      "loc": {
+        "end": {
+          "column": 93,
+          "line": 11
+        },
+        "start": {
+          "column": 0,
+          "line": 11
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "attributes": [],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "raw": "'src/engine/core-modules/exception-handler/exception-handler.service'",
+        "value": "src/engine/core-modules/exception-handler/exception-handler.service",
+        "range": [
+          763,
+          832
+        ],
+        "loc": {
+          "end": {
+            "column": 109,
+            "line": 12
+          },
+          "start": {
+            "column": 40,
+            "line": 12
+          }
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "ExceptionHandlerService",
+            "optional": false,
+            "range": [
+              732,
+              755
+            ],
+            "loc": {
+              "end": {
+                "column": 32,
+                "line": 12
+              },
+              "start": {
+                "column": 9,
+                "line": 12
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "ExceptionHandlerService",
+            "optional": false,
+            "range": [
+              732,
+              755
+            ],
+            "loc": {
+              "end": {
+                "column": 32,
+                "line": 12
+              },
+              "start": {
+                "column": 9,
+                "line": 12
+              }
+            }
+          },
+          "range": [
+            732,
+            755
+          ],
+          "loc": {
+            "end": {
+              "column": 32,
+              "line": 12
+            },
+            "start": {
+              "column": 9,
+              "line": 12
+            }
+          }
+        }
+      ],
+      "range": [
+        723,
+        833
+      ],
+      "loc": {
+        "end": {
+          "column": 110,
+          "line": 12
+        },
+        "start": {
+          "column": 0,
+          "line": 12
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "attributes": [],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "raw": "'src/engine/metadata-modules/metadata-engine.module'",
+        "value": "src/engine/metadata-modules/metadata-engine.module",
+        "range": [
+          872,
+          924
+        ],
+        "loc": {
+          "end": {
+            "column": 89,
+            "line": 13
+          },
+          "start": {
+            "column": 37,
+            "line": 13
+          }
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "MetadataEngineModule",
+            "optional": false,
+            "range": [
+              844,
+              864
+            ],
+            "loc": {
+              "end": {
+                "column": 29,
+                "line": 13
+              },
+              "start": {
+                "column": 9,
+                "line": 13
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "MetadataEngineModule",
+            "optional": false,
+            "range": [
+              844,
+              864
+            ],
+            "loc": {
+              "end": {
+                "column": 29,
+                "line": 13
+              },
+              "start": {
+                "column": 9,
+                "line": 13
+              }
+            }
+          },
+          "range": [
+            844,
+            864
+          ],
+          "loc": {
+            "end": {
+              "column": 29,
+              "line": 13
+            },
+            "start": {
+              "column": 9,
+              "line": 13
+            }
+          }
+        }
+      ],
+      "range": [
+        835,
+        925
+      ],
+      "loc": {
+        "end": {
+          "column": 90,
+          "line": 13
+        },
+        "start": {
+          "column": 0,
+          "line": 13
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "attributes": [],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "raw": "'src/engine/metadata-modules/workspace-migration/workspace-migration.module'",
+        "value": "src/engine/metadata-modules/workspace-migration/workspace-migration.module",
+        "range": [
+          968,
+          1044
+        ],
+        "loc": {
+          "end": {
+            "column": 117,
+            "line": 14
+          },
+          "start": {
+            "column": 41,
+            "line": 14
+          }
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "WorkspaceMigrationModule",
+            "optional": false,
+            "range": [
+              936,
+              960
+            ],
+            "loc": {
+              "end": {
+                "column": 33,
+                "line": 14
+              },
+              "start": {
+                "column": 9,
+                "line": 14
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "WorkspaceMigrationModule",
+            "optional": false,
+            "range": [
+              936,
+              960
+            ],
+            "loc": {
+              "end": {
+                "column": 33,
+                "line": 14
+              },
+              "start": {
+                "column": 9,
+                "line": 14
+              }
+            }
+          },
+          "range": [
+            936,
+            960
+          ],
+          "loc": {
+            "end": {
+              "column": 33,
+              "line": 14
+            },
+            "start": {
+              "column": 9,
+              "line": 14
+            }
+          }
+        }
+      ],
+      "range": [
+        927,
+        1045
+      ],
+      "loc": {
+        "end": {
+          "column": 118,
+          "line": 14
+        },
+        "start": {
+          "column": 0,
+          "line": 14
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "attributes": [],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "raw": "'src/engine/workspace-manager/workspace-migration-runner/workspace-migration-runner.module'",
+        "value": "src/engine/workspace-manager/workspace-migration-runner/workspace-migration-runner.module",
+        "range": [
+          1094,
+          1185
+        ],
+        "loc": {
+          "end": {
+            "column": 138,
+            "line": 15
+          },
+          "start": {
+            "column": 47,
+            "line": 15
+          }
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "WorkspaceMigrationRunnerModule",
+            "optional": false,
+            "range": [
+              1056,
+              1086
+            ],
+            "loc": {
+              "end": {
+                "column": 39,
+                "line": 15
+              },
+              "start": {
+                "column": 9,
+                "line": 15
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "WorkspaceMigrationRunnerModule",
+            "optional": false,
+            "range": [
+              1056,
+              1086
+            ],
+            "loc": {
+              "end": {
+                "column": 39,
+                "line": 15
+              },
+              "start": {
+                "column": 9,
+                "line": 15
+              }
+            }
+          },
+          "range": [
+            1056,
+            1086
+          ],
+          "loc": {
+            "end": {
+              "column": 39,
+              "line": 15
+            },
+            "start": {
+              "column": 9,
+              "line": 15
+            }
+          }
+        }
+      ],
+      "range": [
+        1047,
+        1186
+      ],
+      "loc": {
+        "end": {
+          "column": 139,
+          "line": 15
+        },
+        "start": {
+          "column": 0,
+          "line": 15
+        }
+      }
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "range": [
+        1673,
+        1713
+      ],
+      "attributes": [],
+      "declaration": {
+        "type": "ClassDeclaration",
+        "abstract": false,
+        "body": {
+          "type": "ClassBody",
+          "range": [
+            1711,
+            1713
+          ],
+          "body": [],
+          "loc": {
+            "end": {
+              "column": 40,
+              "line": 35
+            },
+            "start": {
+              "column": 38,
+              "line": 35
+            }
+          }
+        },
+        "declare": false,
+        "decorators": [
+          {
+            "type": "Decorator",
+            "expression": {
+              "type": "CallExpression",
+              "arguments": [
+                {
+                  "type": "ObjectExpression",
+                  "properties": [
+                    {
+                      "type": "Property",
+                      "computed": false,
+                      "key": {
+                        "type": "Identifier",
+                        "decorators": [],
+                        "name": "imports",
+                        "optional": false,
+                        "range": [
+                          1203,
+                          1210
+                        ],
+                        "loc": {
+                          "end": {
+                            "column": 9,
+                            "line": 18
+                          },
+                          "start": {
+                            "column": 2,
+                            "line": 18
+                          }
+                        }
+                      },
+                      "kind": "init",
+                      "method": false,
+                      "optional": false,
+                      "shorthand": false,
+                      "value": {
+                        "type": "ArrayExpression",
+                        "elements": [
+                          {
+                            "type": "CallExpression",
+                            "arguments": [
+                              {
+                                "type": "ObjectExpression",
+                                "properties": [
+                                  {
+                                    "type": "Property",
+                                    "computed": false,
+                                    "key": {
+                                      "type": "Identifier",
+                                      "decorators": [],
+                                      "name": "driver",
+                                      "optional": false,
+                                      "range": [
+                                        1273,
+                                        1279
+                                      ],
+                                      "loc": {
+                                        "end": {
+                                          "column": 12,
+                                          "line": 20
+                                        },
+                                        "start": {
+                                          "column": 6,
+                                          "line": 20
+                                        }
+                                      }
+                                    },
+                                    "kind": "init",
+                                    "method": false,
+                                    "optional": false,
+                                    "shorthand": false,
+                                    "value": {
+                                      "type": "Identifier",
+                                      "decorators": [],
+                                      "name": "YogaDriver",
+                                      "optional": false,
+                                      "range": [
+                                        1281,
+                                        1291
+                                      ],
+                                      "loc": {
+                                        "end": {
+                                          "column": 24,
+                                          "line": 20
+                                        },
+                                        "start": {
+                                          "column": 14,
+                                          "line": 20
+                                        }
+                                      }
+                                    },
+                                    "range": [
+                                      1273,
+                                      1291
+                                    ],
+                                    "loc": {
+                                      "end": {
+                                        "column": 24,
+                                        "line": 20
+                                      },
+                                      "start": {
+                                        "column": 6,
+                                        "line": 20
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "type": "Property",
+                                    "computed": false,
+                                    "key": {
+                                      "type": "Identifier",
+                                      "decorators": [],
+                                      "name": "useFactory",
+                                      "optional": false,
+                                      "range": [
+                                        1300,
+                                        1310
+                                      ],
+                                      "loc": {
+                                        "end": {
+                                          "column": 16,
+                                          "line": 21
+                                        },
+                                        "start": {
+                                          "column": 6,
+                                          "line": 21
+                                        }
+                                      }
+                                    },
+                                    "kind": "init",
+                                    "method": false,
+                                    "optional": false,
+                                    "shorthand": false,
+                                    "value": {
+                                      "type": "Identifier",
+                                      "decorators": [],
+                                      "name": "metadataModuleFactory",
+                                      "optional": false,
+                                      "range": [
+                                        1312,
+                                        1333
+                                      ],
+                                      "loc": {
+                                        "end": {
+                                          "column": 39,
+                                          "line": 21
+                                        },
+                                        "start": {
+                                          "column": 18,
+                                          "line": 21
+                                        }
+                                      }
+                                    },
+                                    "range": [
+                                      1300,
+                                      1333
+                                    ],
+                                    "loc": {
+                                      "end": {
+                                        "column": 39,
+                                        "line": 21
+                                      },
+                                      "start": {
+                                        "column": 6,
+                                        "line": 21
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "type": "Property",
+                                    "computed": false,
+                                    "key": {
+                                      "type": "Identifier",
+                                      "decorators": [],
+                                      "name": "imports",
+                                      "optional": false,
+                                      "range": [
+                                        1342,
+                                        1349
+                                      ],
+                                      "loc": {
+                                        "end": {
+                                          "column": 13,
+                                          "line": 22
+                                        },
+                                        "start": {
+                                          "column": 6,
+                                          "line": 22
+                                        }
+                                      }
+                                    },
+                                    "kind": "init",
+                                    "method": false,
+                                    "optional": false,
+                                    "shorthand": false,
+                                    "value": {
+                                      "type": "ArrayExpression",
+                                      "elements": [
+                                        {
+                                          "type": "Identifier",
+                                          "decorators": [],
+                                          "name": "GraphQLConfigModule",
+                                          "optional": false,
+                                          "range": [
+                                            1352,
+                                            1371
+                                          ],
+                                          "loc": {
+                                            "end": {
+                                              "column": 35,
+                                              "line": 22
+                                            },
+                                            "start": {
+                                              "column": 16,
+                                              "line": 22
+                                            }
+                                          }
+                                        },
+                                        {
+                                          "type": "Identifier",
+                                          "decorators": [],
+                                          "name": "DataloaderModule",
+                                          "optional": false,
+                                          "range": [
+                                            1373,
+                                            1389
+                                          ],
+                                          "loc": {
+                                            "end": {
+                                              "column": 53,
+                                              "line": 22
+                                            },
+                                            "start": {
+                                              "column": 37,
+                                              "line": 22
+                                            }
+                                          }
+                                        }
+                                      ],
+                                      "range": [
+                                        1351,
+                                        1390
+                                      ],
+                                      "loc": {
+                                        "end": {
+                                          "column": 54,
+                                          "line": 22
+                                        },
+                                        "start": {
+                                          "column": 15,
+                                          "line": 22
+                                        }
+                                      }
+                                    },
+                                    "range": [
+                                      1342,
+                                      1390
+                                    ],
+                                    "loc": {
+                                      "end": {
+                                        "column": 54,
+                                        "line": 22
+                                      },
+                                      "start": {
+                                        "column": 6,
+                                        "line": 22
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "type": "Property",
+                                    "computed": false,
+                                    "key": {
+                                      "type": "Identifier",
+                                      "decorators": [],
+                                      "name": "inject",
+                                      "optional": false,
+                                      "range": [
+                                        1399,
+                                        1405
+                                      ],
+                                      "loc": {
+                                        "end": {
+                                          "column": 12,
+                                          "line": 23
+                                        },
+                                        "start": {
+                                          "column": 6,
+                                          "line": 23
+                                        }
+                                      }
+                                    },
+                                    "kind": "init",
+                                    "method": false,
+                                    "optional": false,
+                                    "shorthand": false,
+                                    "value": {
+                                      "type": "ArrayExpression",
+                                      "elements": [
+                                        {
+                                          "type": "Identifier",
+                                          "decorators": [],
+                                          "name": "EnvironmentService",
+                                          "optional": false,
+                                          "range": [
+                                            1418,
+                                            1436
+                                          ],
+                                          "loc": {
+                                            "end": {
+                                              "column": 26,
+                                              "line": 24
+                                            },
+                                            "start": {
+                                              "column": 8,
+                                              "line": 24
+                                            }
+                                          }
+                                        },
+                                        {
+                                          "type": "Identifier",
+                                          "decorators": [],
+                                          "name": "ExceptionHandlerService",
+                                          "optional": false,
+                                          "range": [
+                                            1447,
+                                            1470
+                                          ],
+                                          "loc": {
+                                            "end": {
+                                              "column": 31,
+                                              "line": 25
+                                            },
+                                            "start": {
+                                              "column": 8,
+                                              "line": 25
+                                            }
+                                          }
+                                        },
+                                        {
+                                          "type": "Identifier",
+                                          "decorators": [],
+                                          "name": "DataloaderService",
+                                          "optional": false,
+                                          "range": [
+                                            1481,
+                                            1498
+                                          ],
+                                          "loc": {
+                                            "end": {
+                                              "column": 25,
+                                              "line": 26
+                                            },
+                                            "start": {
+                                              "column": 8,
+                                              "line": 26
+                                            }
+                                          }
+                                        },
+                                        {
+                                          "type": "MemberExpression",
+                                          "computed": false,
+                                          "object": {
+                                            "type": "Identifier",
+                                            "decorators": [],
+                                            "name": "CacheStorageNamespace",
+                                            "optional": false,
+                                            "range": [
+                                              1509,
+                                              1530
+                                            ],
+                                            "loc": {
+                                              "end": {
+                                                "column": 29,
+                                                "line": 27
+                                              },
+                                              "start": {
+                                                "column": 8,
+                                                "line": 27
+                                              }
+                                            }
+                                          },
+                                          "optional": false,
+                                          "property": {
+                                            "type": "Identifier",
+                                            "decorators": [],
+                                            "name": "EngineWorkspace",
+                                            "optional": false,
+                                            "range": [
+                                              1531,
+                                              1546
+                                            ],
+                                            "loc": {
+                                              "end": {
+                                                "column": 45,
+                                                "line": 27
+                                              },
+                                              "start": {
+                                                "column": 30,
+                                                "line": 27
+                                              }
+                                            }
+                                          },
+                                          "range": [
+                                            1509,
+                                            1546
+                                          ],
+                                          "loc": {
+                                            "end": {
+                                              "column": 45,
+                                              "line": 27
+                                            },
+                                            "start": {
+                                              "column": 8,
+                                              "line": 27
+                                            }
+                                          }
+                                        }
+                                      ],
+                                      "range": [
+                                        1407,
+                                        1556
+                                      ],
+                                      "loc": {
+                                        "end": {
+                                          "column": 7,
+                                          "line": 28
+                                        },
+                                        "start": {
+                                          "column": 14,
+                                          "line": 23
+                                        }
+                                      }
+                                    },
+                                    "range": [
+                                      1399,
+                                      1556
+                                    ],
+                                    "loc": {
+                                      "end": {
+                                        "column": 7,
+                                        "line": 28
+                                      },
+                                      "start": {
+                                        "column": 6,
+                                        "line": 23
+                                      }
+                                    }
+                                  }
+                                ],
+                                "range": [
+                                  1264,
+                                  1564
+                                ],
+                                "loc": {
+                                  "end": {
+                                    "column": 5,
+                                    "line": 29
+                                  },
+                                  "start": {
+                                    "column": 49,
+                                    "line": 19
+                                  }
+                                }
+                              }
+                            ],
+                            "callee": {
+                              "type": "MemberExpression",
+                              "computed": false,
+                              "object": {
+                                "type": "Identifier",
+                                "decorators": [],
+                                "name": "GraphQLModule",
+                                "optional": false,
+                                "range": [
+                                  1219,
+                                  1232
+                                ],
+                                "loc": {
+                                  "end": {
+                                    "column": 17,
+                                    "line": 19
+                                  },
+                                  "start": {
+                                    "column": 4,
+                                    "line": 19
+                                  }
+                                }
+                              },
+                              "optional": false,
+                              "property": {
+                                "type": "Identifier",
+                                "decorators": [],
+                                "name": "forRootAsync",
+                                "optional": false,
+                                "range": [
+                                  1233,
+                                  1245
+                                ],
+                                "loc": {
+                                  "end": {
+                                    "column": 30,
+                                    "line": 19
+                                  },
+                                  "start": {
+                                    "column": 18,
+                                    "line": 19
+                                  }
+                                }
+                              },
+                              "range": [
+                                1219,
+                                1245
+                              ],
+                              "loc": {
+                                "end": {
+                                  "column": 30,
+                                  "line": 19
+                                },
+                                "start": {
+                                  "column": 4,
+                                  "line": 19
+                                }
+                              }
+                            },
+                            "optional": false,
+                            "typeArguments": {
+                              "type": "TSTypeParameterInstantiation",
+                              "range": [
+                                1245,
+                                1263
+                              ],
+                              "params": [
+                                {
+                                  "type": "TSTypeReference",
+                                  "typeName": {
+                                    "type": "Identifier",
+                                    "decorators": [],
+                                    "name": "YogaDriverConfig",
+                                    "optional": false,
+                                    "range": [
+                                      1246,
+                                      1262
+                                    ],
+                                    "loc": {
+                                      "end": {
+                                        "column": 47,
+                                        "line": 19
+                                      },
+                                      "start": {
+                                        "column": 31,
+                                        "line": 19
+                                      }
+                                    }
+                                  },
+                                  "range": [
+                                    1246,
+                                    1262
+                                  ],
+                                  "loc": {
+                                    "end": {
+                                      "column": 47,
+                                      "line": 19
+                                    },
+                                    "start": {
+                                      "column": 31,
+                                      "line": 19
+                                    }
+                                  }
+                                }
+                              ],
+                              "loc": {
+                                "end": {
+                                  "column": 48,
+                                  "line": 19
+                                },
+                                "start": {
+                                  "column": 30,
+                                  "line": 19
+                                }
+                              }
+                            },
+                            "range": [
+                              1219,
+                              1565
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 6,
+                                "line": 29
+                              },
+                              "start": {
+                                "column": 4,
+                                "line": 19
+                              }
+                            }
+                          },
+                          {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "MetadataEngineModule",
+                            "optional": false,
+                            "range": [
+                              1572,
+                              1592
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 24,
+                                "line": 30
+                              },
+                              "start": {
+                                "column": 4,
+                                "line": 30
+                              }
+                            }
+                          },
+                          {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "WorkspaceMigrationRunnerModule",
+                            "optional": false,
+                            "range": [
+                              1599,
+                              1629
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 34,
+                                "line": 31
+                              },
+                              "start": {
+                                "column": 4,
+                                "line": 31
+                              }
+                            }
+                          },
+                          {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "WorkspaceMigrationModule",
+                            "optional": false,
+                            "range": [
+                              1636,
+                              1660
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 28,
+                                "line": 32
+                              },
+                              "start": {
+                                "column": 4,
+                                "line": 32
+                              }
+                            }
+                          }
+                        ],
+                        "range": [
+                          1212,
+                          1666
+                        ],
+                        "loc": {
+                          "end": {
+                            "column": 3,
+                            "line": 33
+                          },
+                          "start": {
+                            "column": 11,
+                            "line": 18
+                          }
+                        }
+                      },
+                      "range": [
+                        1203,
+                        1666
+                      ],
+                      "loc": {
+                        "end": {
+                          "column": 3,
+                          "line": 33
+                        },
+                        "start": {
+                          "column": 2,
+                          "line": 18
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    1198,
+                    1670
+                  ],
+                  "loc": {
+                    "end": {
+                      "column": 1,
+                      "line": 34
+                    },
+                    "start": {
+                      "column": 8,
+                      "line": 17
+                    }
+                  }
+                }
+              ],
+              "callee": {
+                "type": "Identifier",
+                "decorators": [],
+                "name": "Module",
+                "optional": false,
+                "range": [
+                  1191,
+                  1197
+                ],
+                "loc": {
+                  "end": {
+                    "column": 7,
+                    "line": 17
+                  },
+                  "start": {
+                    "column": 1,
+                    "line": 17
+                  }
+                }
+              },
+              "optional": false,
+              "range": [
+                1191,
+                1671
+              ],
+              "loc": {
+                "end": {
+                  "column": 2,
+                  "line": 34
+                },
+                "start": {
+                  "column": 1,
+                  "line": 17
+                }
+              }
+            },
+            "range": [
+              1190,
+              1671
+            ],
+            "loc": {
+              "end": {
+                "column": 2,
+                "line": 34
+              },
+              "start": {
+                "column": 0,
+                "line": 17
+              }
+            }
+          }
+        ],
+        "id": {
+          "type": "Identifier",
+          "decorators": [],
+          "name": "MetadataGraphQLApiModule",
+          "optional": false,
+          "range": [
+            1686,
+            1710
+          ],
+          "loc": {
+            "end": {
+              "column": 37,
+              "line": 35
+            },
+            "start": {
+              "column": 13,
+              "line": 35
+            }
+          }
+        },
+        "implements": [],
+        "superClass": null,
+        "range": [
+          1680,
+          1713
+        ],
+        "loc": {
+          "end": {
+            "column": 40,
+            "line": 35
+          },
+          "start": {
+            "column": 7,
+            "line": 35
+          }
+        }
+      },
+      "exportKind": "value",
+      "source": null,
+      "specifiers": [],
+      "loc": {
+        "end": {
+          "column": 40,
+          "line": 35
+        },
+        "start": {
+          "column": 0,
+          "line": 35
+        }
+      }
+    }
+  ],
+  "comments": [],
+  "sourceType": "module",
+  "tokens": [
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 1
+        },
+        "start": {
+          "column": 0,
+          "line": 1
+        }
+      },
+      "range": [
+        0,
+        6
+      ],
+      "value": "import"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 1
+        },
+        "start": {
+          "column": 7,
+          "line": 1
+        }
+      },
+      "range": [
+        7,
+        8
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 15,
+          "line": 1
+        },
+        "start": {
+          "column": 9,
+          "line": 1
+        }
+      },
+      "range": [
+        9,
+        15
+      ],
+      "value": "Module"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 17,
+          "line": 1
+        },
+        "start": {
+          "column": 16,
+          "line": 1
+        }
+      },
+      "range": [
+        16,
+        17
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 22,
+          "line": 1
+        },
+        "start": {
+          "column": 18,
+          "line": 1
+        }
+      },
+      "range": [
+        18,
+        22
+      ],
+      "value": "from"
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 39,
+          "line": 1
+        },
+        "start": {
+          "column": 23,
+          "line": 1
+        }
+      },
+      "range": [
+        23,
+        39
+      ],
+      "value": "'@nestjs/common'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 40,
+          "line": 1
+        },
+        "start": {
+          "column": 39,
+          "line": 1
+        }
+      },
+      "range": [
+        39,
+        40
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 2
+        },
+        "start": {
+          "column": 0,
+          "line": 2
+        }
+      },
+      "range": [
+        42,
+        48
+      ],
+      "value": "import"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 2
+        },
+        "start": {
+          "column": 7,
+          "line": 2
+        }
+      },
+      "range": [
+        49,
+        50
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 22,
+          "line": 2
+        },
+        "start": {
+          "column": 9,
+          "line": 2
+        }
+      },
+      "range": [
+        51,
+        64
+      ],
+      "value": "GraphQLModule"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 24,
+          "line": 2
+        },
+        "start": {
+          "column": 23,
+          "line": 2
+        }
+      },
+      "range": [
+        65,
+        66
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 29,
+          "line": 2
+        },
+        "start": {
+          "column": 25,
+          "line": 2
+        }
+      },
+      "range": [
+        67,
+        71
+      ],
+      "value": "from"
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 47,
+          "line": 2
+        },
+        "start": {
+          "column": 30,
+          "line": 2
+        }
+      },
+      "range": [
+        72,
+        89
+      ],
+      "value": "'@nestjs/graphql'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 48,
+          "line": 2
+        },
+        "start": {
+          "column": 47,
+          "line": 2
+        }
+      },
+      "range": [
+        89,
+        90
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 4
+        },
+        "start": {
+          "column": 0,
+          "line": 4
+        }
+      },
+      "range": [
+        94,
+        100
+      ],
+      "value": "import"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 4
+        },
+        "start": {
+          "column": 7,
+          "line": 4
+        }
+      },
+      "range": [
+        101,
+        102
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 19,
+          "line": 4
+        },
+        "start": {
+          "column": 9,
+          "line": 4
+        }
+      },
+      "range": [
+        103,
+        113
+      ],
+      "value": "YogaDriver"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 20,
+          "line": 4
+        },
+        "start": {
+          "column": 19,
+          "line": 4
+        }
+      },
+      "range": [
+        113,
+        114
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 37,
+          "line": 4
+        },
+        "start": {
+          "column": 21,
+          "line": 4
+        }
+      },
+      "range": [
+        115,
+        131
+      ],
+      "value": "YogaDriverConfig"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 39,
+          "line": 4
+        },
+        "start": {
+          "column": 38,
+          "line": 4
+        }
+      },
+      "range": [
+        132,
+        133
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 44,
+          "line": 4
+        },
+        "start": {
+          "column": 40,
+          "line": 4
+        }
+      },
+      "range": [
+        134,
+        138
+      ],
+      "value": "from"
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 67,
+          "line": 4
+        },
+        "start": {
+          "column": 45,
+          "line": 4
+        }
+      },
+      "range": [
+        139,
+        161
+      ],
+      "value": "'@graphql-yoga/nestjs'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 68,
+          "line": 4
+        },
+        "start": {
+          "column": 67,
+          "line": 4
+        }
+      },
+      "range": [
+        161,
+        162
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 6
+        },
+        "start": {
+          "column": 0,
+          "line": 6
+        }
+      },
+      "range": [
+        166,
+        172
+      ],
+      "value": "import"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 6
+        },
+        "start": {
+          "column": 7,
+          "line": 6
+        }
+      },
+      "range": [
+        173,
+        174
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 28,
+          "line": 6
+        },
+        "start": {
+          "column": 9,
+          "line": 6
+        }
+      },
+      "range": [
+        175,
+        194
+      ],
+      "value": "GraphQLConfigModule"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 30,
+          "line": 6
+        },
+        "start": {
+          "column": 29,
+          "line": 6
+        }
+      },
+      "range": [
+        195,
+        196
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 35,
+          "line": 6
+        },
+        "start": {
+          "column": 31,
+          "line": 6
+        }
+      },
+      "range": [
+        197,
+        201
+      ],
+      "value": "from"
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 97,
+          "line": 6
+        },
+        "start": {
+          "column": 36,
+          "line": 6
+        }
+      },
+      "range": [
+        202,
+        263
+      ],
+      "value": "'src/engine/api/graphql/graphql-config/graphql-config.module'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 98,
+          "line": 6
+        },
+        "start": {
+          "column": 97,
+          "line": 6
+        }
+      },
+      "range": [
+        263,
+        264
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 7
+        },
+        "start": {
+          "column": 0,
+          "line": 7
+        }
+      },
+      "range": [
+        266,
+        272
+      ],
+      "value": "import"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 7
+        },
+        "start": {
+          "column": 7,
+          "line": 7
+        }
+      },
+      "range": [
+        273,
+        274
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 30,
+          "line": 7
+        },
+        "start": {
+          "column": 9,
+          "line": 7
+        }
+      },
+      "range": [
+        275,
+        296
+      ],
+      "value": "metadataModuleFactory"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 32,
+          "line": 7
+        },
+        "start": {
+          "column": 31,
+          "line": 7
+        }
+      },
+      "range": [
+        297,
+        298
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 37,
+          "line": 7
+        },
+        "start": {
+          "column": 33,
+          "line": 7
+        }
+      },
+      "range": [
+        299,
+        303
+      ],
+      "value": "from"
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 86,
+          "line": 7
+        },
+        "start": {
+          "column": 38,
+          "line": 7
+        }
+      },
+      "range": [
+        304,
+        352
+      ],
+      "value": "'src/engine/api/graphql/metadata.module-factory'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 87,
+          "line": 7
+        },
+        "start": {
+          "column": 86,
+          "line": 7
+        }
+      },
+      "range": [
+        352,
+        353
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 8
+        },
+        "start": {
+          "column": 0,
+          "line": 8
+        }
+      },
+      "range": [
+        355,
+        361
+      ],
+      "value": "import"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 8
+        },
+        "start": {
+          "column": 7,
+          "line": 8
+        }
+      },
+      "range": [
+        362,
+        363
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 25,
+          "line": 8
+        },
+        "start": {
+          "column": 9,
+          "line": 8
+        }
+      },
+      "range": [
+        364,
+        380
+      ],
+      "value": "DataloaderModule"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 27,
+          "line": 8
+        },
+        "start": {
+          "column": 26,
+          "line": 8
+        }
+      },
+      "range": [
+        381,
+        382
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 32,
+          "line": 8
+        },
+        "start": {
+          "column": 28,
+          "line": 8
+        }
+      },
+      "range": [
+        383,
+        387
+      ],
+      "value": "from"
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 75,
+          "line": 8
+        },
+        "start": {
+          "column": 33,
+          "line": 8
+        }
+      },
+      "range": [
+        388,
+        430
+      ],
+      "value": "'src/engine/dataloaders/dataloader.module'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 76,
+          "line": 8
+        },
+        "start": {
+          "column": 75,
+          "line": 8
+        }
+      },
+      "range": [
+        430,
+        431
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 9
+        },
+        "start": {
+          "column": 0,
+          "line": 9
+        }
+      },
+      "range": [
+        433,
+        439
+      ],
+      "value": "import"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 9
+        },
+        "start": {
+          "column": 7,
+          "line": 9
+        }
+      },
+      "range": [
+        440,
+        441
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 26,
+          "line": 9
+        },
+        "start": {
+          "column": 9,
+          "line": 9
+        }
+      },
+      "range": [
+        442,
+        459
+      ],
+      "value": "DataloaderService"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 28,
+          "line": 9
+        },
+        "start": {
+          "column": 27,
+          "line": 9
+        }
+      },
+      "range": [
+        460,
+        461
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 33,
+          "line": 9
+        },
+        "start": {
+          "column": 29,
+          "line": 9
+        }
+      },
+      "range": [
+        462,
+        466
+      ],
+      "value": "from"
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 77,
+          "line": 9
+        },
+        "start": {
+          "column": 34,
+          "line": 9
+        }
+      },
+      "range": [
+        467,
+        510
+      ],
+      "value": "'src/engine/dataloaders/dataloader.service'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 78,
+          "line": 9
+        },
+        "start": {
+          "column": 77,
+          "line": 9
+        }
+      },
+      "range": [
+        510,
+        511
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 10
+        },
+        "start": {
+          "column": 0,
+          "line": 10
+        }
+      },
+      "range": [
+        513,
+        519
+      ],
+      "value": "import"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 10
+        },
+        "start": {
+          "column": 7,
+          "line": 10
+        }
+      },
+      "range": [
+        520,
+        521
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 30,
+          "line": 10
+        },
+        "start": {
+          "column": 9,
+          "line": 10
+        }
+      },
+      "range": [
+        522,
+        543
+      ],
+      "value": "CacheStorageNamespace"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 32,
+          "line": 10
+        },
+        "start": {
+          "column": 31,
+          "line": 10
+        }
+      },
+      "range": [
+        544,
+        545
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 37,
+          "line": 10
+        },
+        "start": {
+          "column": 33,
+          "line": 10
+        }
+      },
+      "range": [
+        546,
+        550
+      ],
+      "value": "from"
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 112,
+          "line": 10
+        },
+        "start": {
+          "column": 38,
+          "line": 10
+        }
+      },
+      "range": [
+        551,
+        625
+      ],
+      "value": "'src/engine/core-modules/cache-storage/types/cache-storage-namespace.enum'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 113,
+          "line": 10
+        },
+        "start": {
+          "column": 112,
+          "line": 10
+        }
+      },
+      "range": [
+        625,
+        626
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 11
+        },
+        "start": {
+          "column": 0,
+          "line": 11
+        }
+      },
+      "range": [
+        628,
+        634
+      ],
+      "value": "import"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 11
+        },
+        "start": {
+          "column": 7,
+          "line": 11
+        }
+      },
+      "range": [
+        635,
+        636
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 27,
+          "line": 11
+        },
+        "start": {
+          "column": 9,
+          "line": 11
+        }
+      },
+      "range": [
+        637,
+        655
+      ],
+      "value": "EnvironmentService"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 29,
+          "line": 11
+        },
+        "start": {
+          "column": 28,
+          "line": 11
+        }
+      },
+      "range": [
+        656,
+        657
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 34,
+          "line": 11
+        },
+        "start": {
+          "column": 30,
+          "line": 11
+        }
+      },
+      "range": [
+        658,
+        662
+      ],
+      "value": "from"
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 92,
+          "line": 11
+        },
+        "start": {
+          "column": 35,
+          "line": 11
+        }
+      },
+      "range": [
+        663,
+        720
+      ],
+      "value": "'src/engine/core-modules/environment/environment.service'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 93,
+          "line": 11
+        },
+        "start": {
+          "column": 92,
+          "line": 11
+        }
+      },
+      "range": [
+        720,
+        721
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 12
+        },
+        "start": {
+          "column": 0,
+          "line": 12
+        }
+      },
+      "range": [
+        723,
+        729
+      ],
+      "value": "import"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 12
+        },
+        "start": {
+          "column": 7,
+          "line": 12
+        }
+      },
+      "range": [
+        730,
+        731
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 32,
+          "line": 12
+        },
+        "start": {
+          "column": 9,
+          "line": 12
+        }
+      },
+      "range": [
+        732,
+        755
+      ],
+      "value": "ExceptionHandlerService"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 34,
+          "line": 12
+        },
+        "start": {
+          "column": 33,
+          "line": 12
+        }
+      },
+      "range": [
+        756,
+        757
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 39,
+          "line": 12
+        },
+        "start": {
+          "column": 35,
+          "line": 12
+        }
+      },
+      "range": [
+        758,
+        762
+      ],
+      "value": "from"
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 109,
+          "line": 12
+        },
+        "start": {
+          "column": 40,
+          "line": 12
+        }
+      },
+      "range": [
+        763,
+        832
+      ],
+      "value": "'src/engine/core-modules/exception-handler/exception-handler.service'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 110,
+          "line": 12
+        },
+        "start": {
+          "column": 109,
+          "line": 12
+        }
+      },
+      "range": [
+        832,
+        833
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 13
+        },
+        "start": {
+          "column": 0,
+          "line": 13
+        }
+      },
+      "range": [
+        835,
+        841
+      ],
+      "value": "import"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 13
+        },
+        "start": {
+          "column": 7,
+          "line": 13
+        }
+      },
+      "range": [
+        842,
+        843
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 29,
+          "line": 13
+        },
+        "start": {
+          "column": 9,
+          "line": 13
+        }
+      },
+      "range": [
+        844,
+        864
+      ],
+      "value": "MetadataEngineModule"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 31,
+          "line": 13
+        },
+        "start": {
+          "column": 30,
+          "line": 13
+        }
+      },
+      "range": [
+        865,
+        866
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 36,
+          "line": 13
+        },
+        "start": {
+          "column": 32,
+          "line": 13
+        }
+      },
+      "range": [
+        867,
+        871
+      ],
+      "value": "from"
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 89,
+          "line": 13
+        },
+        "start": {
+          "column": 37,
+          "line": 13
+        }
+      },
+      "range": [
+        872,
+        924
+      ],
+      "value": "'src/engine/metadata-modules/metadata-engine.module'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 90,
+          "line": 13
+        },
+        "start": {
+          "column": 89,
+          "line": 13
+        }
+      },
+      "range": [
+        924,
+        925
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 14
+        },
+        "start": {
+          "column": 0,
+          "line": 14
+        }
+      },
+      "range": [
+        927,
+        933
+      ],
+      "value": "import"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 14
+        },
+        "start": {
+          "column": 7,
+          "line": 14
+        }
+      },
+      "range": [
+        934,
+        935
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 33,
+          "line": 14
+        },
+        "start": {
+          "column": 9,
+          "line": 14
+        }
+      },
+      "range": [
+        936,
+        960
+      ],
+      "value": "WorkspaceMigrationModule"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 35,
+          "line": 14
+        },
+        "start": {
+          "column": 34,
+          "line": 14
+        }
+      },
+      "range": [
+        961,
+        962
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 40,
+          "line": 14
+        },
+        "start": {
+          "column": 36,
+          "line": 14
+        }
+      },
+      "range": [
+        963,
+        967
+      ],
+      "value": "from"
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 117,
+          "line": 14
+        },
+        "start": {
+          "column": 41,
+          "line": 14
+        }
+      },
+      "range": [
+        968,
+        1044
+      ],
+      "value": "'src/engine/metadata-modules/workspace-migration/workspace-migration.module'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 118,
+          "line": 14
+        },
+        "start": {
+          "column": 117,
+          "line": 14
+        }
+      },
+      "range": [
+        1044,
+        1045
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 15
+        },
+        "start": {
+          "column": 0,
+          "line": 15
+        }
+      },
+      "range": [
+        1047,
+        1053
+      ],
+      "value": "import"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 15
+        },
+        "start": {
+          "column": 7,
+          "line": 15
+        }
+      },
+      "range": [
+        1054,
+        1055
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 39,
+          "line": 15
+        },
+        "start": {
+          "column": 9,
+          "line": 15
+        }
+      },
+      "range": [
+        1056,
+        1086
+      ],
+      "value": "WorkspaceMigrationRunnerModule"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 41,
+          "line": 15
+        },
+        "start": {
+          "column": 40,
+          "line": 15
+        }
+      },
+      "range": [
+        1087,
+        1088
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 46,
+          "line": 15
+        },
+        "start": {
+          "column": 42,
+          "line": 15
+        }
+      },
+      "range": [
+        1089,
+        1093
+      ],
+      "value": "from"
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 138,
+          "line": 15
+        },
+        "start": {
+          "column": 47,
+          "line": 15
+        }
+      },
+      "range": [
+        1094,
+        1185
+      ],
+      "value": "'src/engine/workspace-manager/workspace-migration-runner/workspace-migration-runner.module'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 139,
+          "line": 15
+        },
+        "start": {
+          "column": 138,
+          "line": 15
+        }
+      },
+      "range": [
+        1185,
+        1186
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 1,
+          "line": 17
+        },
+        "start": {
+          "column": 0,
+          "line": 17
+        }
+      },
+      "range": [
+        1190,
+        1191
+      ],
+      "value": "@"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 7,
+          "line": 17
+        },
+        "start": {
+          "column": 1,
+          "line": 17
+        }
+      },
+      "range": [
+        1191,
+        1197
+      ],
+      "value": "Module"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 17
+        },
+        "start": {
+          "column": 7,
+          "line": 17
+        }
+      },
+      "range": [
+        1197,
+        1198
+      ],
+      "value": "("
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 9,
+          "line": 17
+        },
+        "start": {
+          "column": 8,
+          "line": 17
+        }
+      },
+      "range": [
+        1198,
+        1199
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 9,
+          "line": 18
+        },
+        "start": {
+          "column": 2,
+          "line": 18
+        }
+      },
+      "range": [
+        1203,
+        1210
+      ],
+      "value": "imports"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 10,
+          "line": 18
+        },
+        "start": {
+          "column": 9,
+          "line": 18
+        }
+      },
+      "range": [
+        1210,
+        1211
+      ],
+      "value": ":"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 12,
+          "line": 18
+        },
+        "start": {
+          "column": 11,
+          "line": 18
+        }
+      },
+      "range": [
+        1212,
+        1213
+      ],
+      "value": "["
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 17,
+          "line": 19
+        },
+        "start": {
+          "column": 4,
+          "line": 19
+        }
+      },
+      "range": [
+        1219,
+        1232
+      ],
+      "value": "GraphQLModule"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 18,
+          "line": 19
+        },
+        "start": {
+          "column": 17,
+          "line": 19
+        }
+      },
+      "range": [
+        1232,
+        1233
+      ],
+      "value": "."
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 30,
+          "line": 19
+        },
+        "start": {
+          "column": 18,
+          "line": 19
+        }
+      },
+      "range": [
+        1233,
+        1245
+      ],
+      "value": "forRootAsync"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 31,
+          "line": 19
+        },
+        "start": {
+          "column": 30,
+          "line": 19
+        }
+      },
+      "range": [
+        1245,
+        1246
+      ],
+      "value": "<"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 47,
+          "line": 19
+        },
+        "start": {
+          "column": 31,
+          "line": 19
+        }
+      },
+      "range": [
+        1246,
+        1262
+      ],
+      "value": "YogaDriverConfig"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 48,
+          "line": 19
+        },
+        "start": {
+          "column": 47,
+          "line": 19
+        }
+      },
+      "range": [
+        1262,
+        1263
+      ],
+      "value": ">"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 49,
+          "line": 19
+        },
+        "start": {
+          "column": 48,
+          "line": 19
+        }
+      },
+      "range": [
+        1263,
+        1264
+      ],
+      "value": "("
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 50,
+          "line": 19
+        },
+        "start": {
+          "column": 49,
+          "line": 19
+        }
+      },
+      "range": [
+        1264,
+        1265
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 12,
+          "line": 20
+        },
+        "start": {
+          "column": 6,
+          "line": 20
+        }
+      },
+      "range": [
+        1273,
+        1279
+      ],
+      "value": "driver"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 13,
+          "line": 20
+        },
+        "start": {
+          "column": 12,
+          "line": 20
+        }
+      },
+      "range": [
+        1279,
+        1280
+      ],
+      "value": ":"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 24,
+          "line": 20
+        },
+        "start": {
+          "column": 14,
+          "line": 20
+        }
+      },
+      "range": [
+        1281,
+        1291
+      ],
+      "value": "YogaDriver"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 25,
+          "line": 20
+        },
+        "start": {
+          "column": 24,
+          "line": 20
+        }
+      },
+      "range": [
+        1291,
+        1292
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 16,
+          "line": 21
+        },
+        "start": {
+          "column": 6,
+          "line": 21
+        }
+      },
+      "range": [
+        1300,
+        1310
+      ],
+      "value": "useFactory"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 17,
+          "line": 21
+        },
+        "start": {
+          "column": 16,
+          "line": 21
+        }
+      },
+      "range": [
+        1310,
+        1311
+      ],
+      "value": ":"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 39,
+          "line": 21
+        },
+        "start": {
+          "column": 18,
+          "line": 21
+        }
+      },
+      "range": [
+        1312,
+        1333
+      ],
+      "value": "metadataModuleFactory"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 40,
+          "line": 21
+        },
+        "start": {
+          "column": 39,
+          "line": 21
+        }
+      },
+      "range": [
+        1333,
+        1334
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 13,
+          "line": 22
+        },
+        "start": {
+          "column": 6,
+          "line": 22
+        }
+      },
+      "range": [
+        1342,
+        1349
+      ],
+      "value": "imports"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 14,
+          "line": 22
+        },
+        "start": {
+          "column": 13,
+          "line": 22
+        }
+      },
+      "range": [
+        1349,
+        1350
+      ],
+      "value": ":"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 16,
+          "line": 22
+        },
+        "start": {
+          "column": 15,
+          "line": 22
+        }
+      },
+      "range": [
+        1351,
+        1352
+      ],
+      "value": "["
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 35,
+          "line": 22
+        },
+        "start": {
+          "column": 16,
+          "line": 22
+        }
+      },
+      "range": [
+        1352,
+        1371
+      ],
+      "value": "GraphQLConfigModule"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 36,
+          "line": 22
+        },
+        "start": {
+          "column": 35,
+          "line": 22
+        }
+      },
+      "range": [
+        1371,
+        1372
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 53,
+          "line": 22
+        },
+        "start": {
+          "column": 37,
+          "line": 22
+        }
+      },
+      "range": [
+        1373,
+        1389
+      ],
+      "value": "DataloaderModule"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 54,
+          "line": 22
+        },
+        "start": {
+          "column": 53,
+          "line": 22
+        }
+      },
+      "range": [
+        1389,
+        1390
+      ],
+      "value": "]"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 55,
+          "line": 22
+        },
+        "start": {
+          "column": 54,
+          "line": 22
+        }
+      },
+      "range": [
+        1390,
+        1391
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 12,
+          "line": 23
+        },
+        "start": {
+          "column": 6,
+          "line": 23
+        }
+      },
+      "range": [
+        1399,
+        1405
+      ],
+      "value": "inject"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 13,
+          "line": 23
+        },
+        "start": {
+          "column": 12,
+          "line": 23
+        }
+      },
+      "range": [
+        1405,
+        1406
+      ],
+      "value": ":"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 15,
+          "line": 23
+        },
+        "start": {
+          "column": 14,
+          "line": 23
+        }
+      },
+      "range": [
+        1407,
+        1408
+      ],
+      "value": "["
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 26,
+          "line": 24
+        },
+        "start": {
+          "column": 8,
+          "line": 24
+        }
+      },
+      "range": [
+        1418,
+        1436
+      ],
+      "value": "EnvironmentService"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 27,
+          "line": 24
+        },
+        "start": {
+          "column": 26,
+          "line": 24
+        }
+      },
+      "range": [
+        1436,
+        1437
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 31,
+          "line": 25
+        },
+        "start": {
+          "column": 8,
+          "line": 25
+        }
+      },
+      "range": [
+        1447,
+        1470
+      ],
+      "value": "ExceptionHandlerService"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 32,
+          "line": 25
+        },
+        "start": {
+          "column": 31,
+          "line": 25
+        }
+      },
+      "range": [
+        1470,
+        1471
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 25,
+          "line": 26
+        },
+        "start": {
+          "column": 8,
+          "line": 26
+        }
+      },
+      "range": [
+        1481,
+        1498
+      ],
+      "value": "DataloaderService"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 26,
+          "line": 26
+        },
+        "start": {
+          "column": 25,
+          "line": 26
+        }
+      },
+      "range": [
+        1498,
+        1499
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 29,
+          "line": 27
+        },
+        "start": {
+          "column": 8,
+          "line": 27
+        }
+      },
+      "range": [
+        1509,
+        1530
+      ],
+      "value": "CacheStorageNamespace"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 30,
+          "line": 27
+        },
+        "start": {
+          "column": 29,
+          "line": 27
+        }
+      },
+      "range": [
+        1530,
+        1531
+      ],
+      "value": "."
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 45,
+          "line": 27
+        },
+        "start": {
+          "column": 30,
+          "line": 27
+        }
+      },
+      "range": [
+        1531,
+        1546
+      ],
+      "value": "EngineWorkspace"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 46,
+          "line": 27
+        },
+        "start": {
+          "column": 45,
+          "line": 27
+        }
+      },
+      "range": [
+        1546,
+        1547
+      ],
+      "value": ","
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 7,
+          "line": 28
+        },
+        "start": {
+          "column": 6,
+          "line": 28
+        }
+      },
+      "range": [
+        1555,
+        1556
+      ],
+      "value": "]"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 28
+        },
+        "start": {
+          "column": 7,
+          "line": 28
+        }
+      },
+      "range": [
+        1556,
+        1557
+      ],
+      "value": ","
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 5,
+          "line": 29
+        },
+        "start": {
+          "column": 4,
+          "line": 29
+        }
+      },
+      "range": [
+        1563,
+        1564
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 29
+        },
+        "start": {
+          "column": 5,
+          "line": 29
+        }
+      },
+      "range": [
+        1564,
+        1565
+      ],
+      "value": ")"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 7,
+          "line": 29
+        },
+        "start": {
+          "column": 6,
+          "line": 29
+        }
+      },
+      "range": [
+        1565,
+        1566
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 24,
+          "line": 30
+        },
+        "start": {
+          "column": 4,
+          "line": 30
+        }
+      },
+      "range": [
+        1572,
+        1592
+      ],
+      "value": "MetadataEngineModule"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 25,
+          "line": 30
+        },
+        "start": {
+          "column": 24,
+          "line": 30
+        }
+      },
+      "range": [
+        1592,
+        1593
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 34,
+          "line": 31
+        },
+        "start": {
+          "column": 4,
+          "line": 31
+        }
+      },
+      "range": [
+        1599,
+        1629
+      ],
+      "value": "WorkspaceMigrationRunnerModule"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 35,
+          "line": 31
+        },
+        "start": {
+          "column": 34,
+          "line": 31
+        }
+      },
+      "range": [
+        1629,
+        1630
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 28,
+          "line": 32
+        },
+        "start": {
+          "column": 4,
+          "line": 32
+        }
+      },
+      "range": [
+        1636,
+        1660
+      ],
+      "value": "WorkspaceMigrationModule"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 29,
+          "line": 32
+        },
+        "start": {
+          "column": 28,
+          "line": 32
+        }
+      },
+      "range": [
+        1660,
+        1661
+      ],
+      "value": ","
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 3,
+          "line": 33
+        },
+        "start": {
+          "column": 2,
+          "line": 33
+        }
+      },
+      "range": [
+        1665,
+        1666
+      ],
+      "value": "]"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 4,
+          "line": 33
+        },
+        "start": {
+          "column": 3,
+          "line": 33
+        }
+      },
+      "range": [
+        1666,
+        1667
+      ],
+      "value": ","
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 1,
+          "line": 34
+        },
+        "start": {
+          "column": 0,
+          "line": 34
+        }
+      },
+      "range": [
+        1669,
+        1670
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 2,
+          "line": 34
+        },
+        "start": {
+          "column": 1,
+          "line": 34
+        }
+      },
+      "range": [
+        1670,
+        1671
+      ],
+      "value": ")"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 35
+        },
+        "start": {
+          "column": 0,
+          "line": 35
+        }
+      },
+      "range": [
+        1673,
+        1679
+      ],
+      "value": "export"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 12,
+          "line": 35
+        },
+        "start": {
+          "column": 7,
+          "line": 35
+        }
+      },
+      "range": [
+        1680,
+        1685
+      ],
+      "value": "class"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 37,
+          "line": 35
+        },
+        "start": {
+          "column": 13,
+          "line": 35
+        }
+      },
+      "range": [
+        1686,
+        1710
+      ],
+      "value": "MetadataGraphQLApiModule"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 39,
+          "line": 35
+        },
+        "start": {
+          "column": 38,
+          "line": 35
+        }
+      },
+      "range": [
+        1711,
+        1712
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 40,
+          "line": 35
+        },
+        "start": {
+          "column": 39,
+          "line": 35
+        }
+      },
+      "range": [
+        1712,
+        1713
+      ],
+      "value": "}"
+    }
+  ],
+  "loc": {
+    "end": {
+      "column": 0,
+      "line": 36
+    },
+    "start": {
+      "column": 0,
+      "line": 1
+    }
+  }
+}

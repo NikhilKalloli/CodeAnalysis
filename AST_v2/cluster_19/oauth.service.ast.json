@@ -1,0 +1,2848 @@
+{
+  "type": "Program",
+  "range": [
+    5351,
+    5351
+  ],
+  "body": [],
+  "comments": [
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 47,
+          "line": 1
+        },
+        "start": {
+          "column": 0,
+          "line": 1
+        }
+      },
+      "range": [
+        0,
+        47
+      ],
+      "value": " import { Injectable } from '@nestjs/common';"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 54,
+          "line": 2
+        },
+        "start": {
+          "column": 0,
+          "line": 2
+        }
+      },
+      "range": [
+        49,
+        103
+      ],
+      "value": " import { InjectRepository } from '@nestjs/typeorm';"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 2,
+          "line": 3
+        },
+        "start": {
+          "column": 0,
+          "line": 3
+        }
+      },
+      "range": [
+        105,
+        107
+      ],
+      "value": ""
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 31,
+          "line": 4
+        },
+        "start": {
+          "column": 0,
+          "line": 4
+        }
+      },
+      "range": [
+        109,
+        140
+      ],
+      "value": " import crypto from 'crypto';"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 2,
+          "line": 5
+        },
+        "start": {
+          "column": 0,
+          "line": 5
+        }
+      },
+      "range": [
+        142,
+        144
+      ],
+      "value": ""
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 40,
+          "line": 6
+        },
+        "start": {
+          "column": 0,
+          "line": 6
+        }
+      },
+      "range": [
+        146,
+        186
+      ],
+      "value": " import { Repository } from 'typeorm';"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 2,
+          "line": 7
+        },
+        "start": {
+          "column": 0,
+          "line": 7
+        }
+      },
+      "range": [
+        188,
+        190
+      ],
+      "value": ""
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 81,
+          "line": 8
+        },
+        "start": {
+          "column": 0,
+          "line": 8
+        }
+      },
+      "range": [
+        192,
+        273
+      ],
+      "value": " import { AppToken } from 'src/engine/core-modules/app-token/app-token.entity';"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 11,
+          "line": 9
+        },
+        "start": {
+          "column": 0,
+          "line": 9
+        }
+      },
+      "range": [
+        275,
+        286
+      ],
+      "value": " import {"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 19,
+          "line": 10
+        },
+        "start": {
+          "column": 0,
+          "line": 10
+        }
+      },
+      "range": [
+        288,
+        307
+      ],
+      "value": "   AuthException,"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 23,
+          "line": 11
+        },
+        "start": {
+          "column": 0,
+          "line": 11
+        }
+      },
+      "range": [
+        309,
+        332
+      ],
+      "value": "   AuthExceptionCode,"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 56,
+          "line": 12
+        },
+        "start": {
+          "column": 0,
+          "line": 12
+        }
+      },
+      "range": [
+        334,
+        390
+      ],
+      "value": " } from 'src/engine/core-modules/auth/auth.exception';"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 97,
+          "line": 13
+        },
+        "start": {
+          "column": 0,
+          "line": 13
+        }
+      },
+      "range": [
+        392,
+        489
+      ],
+      "value": " import { ExchangeAuthCode } from 'src/engine/core-modules/auth/dto/exchange-auth-code.entity';"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 101,
+          "line": 14
+        },
+        "start": {
+          "column": 0,
+          "line": 14
+        }
+      },
+      "range": [
+        491,
+        592
+      ],
+      "value": " import { ExchangeAuthCodeInput } from 'src/engine/core-modules/auth/dto/exchange-auth-code.input';"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 105,
+          "line": 15
+        },
+        "start": {
+          "column": 0,
+          "line": 15
+        }
+      },
+      "range": [
+        594,
+        699
+      ],
+      "value": " import { AccessTokenService } from 'src/engine/core-modules/auth/token/services/access-token.service';"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 103,
+          "line": 16
+        },
+        "start": {
+          "column": 0,
+          "line": 16
+        }
+      },
+      "range": [
+        701,
+        804
+      ],
+      "value": " import { LoginTokenService } from 'src/engine/core-modules/auth/token/services/login-token.service';"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 107,
+          "line": 17
+        },
+        "start": {
+          "column": 0,
+          "line": 17
+        }
+      },
+      "range": [
+        806,
+        913
+      ],
+      "value": " import { RefreshTokenService } from 'src/engine/core-modules/auth/token/services/refresh-token.service';"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 67,
+          "line": 18
+        },
+        "start": {
+          "column": 0,
+          "line": 18
+        }
+      },
+      "range": [
+        915,
+        982
+      ],
+      "value": " import { User } from 'src/engine/core-modules/user/user.entity';"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 78,
+          "line": 19
+        },
+        "start": {
+          "column": 0,
+          "line": 19
+        }
+      },
+      "range": [
+        984,
+        1062
+      ],
+      "value": " import { userValidator } from 'src/engine/core-modules/user/user.validate';"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 2,
+          "line": 20
+        },
+        "start": {
+          "column": 0,
+          "line": 20
+        }
+      },
+      "range": [
+        1064,
+        1066
+      ],
+      "value": ""
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 16,
+          "line": 21
+        },
+        "start": {
+          "column": 0,
+          "line": 21
+        }
+      },
+      "range": [
+        1068,
+        1084
+      ],
+      "value": " @Injectable()"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 30,
+          "line": 22
+        },
+        "start": {
+          "column": 0,
+          "line": 22
+        }
+      },
+      "range": [
+        1086,
+        1116
+      ],
+      "value": " export class OAuthService {"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 17,
+          "line": 23
+        },
+        "start": {
+          "column": 0,
+          "line": 23
+        }
+      },
+      "range": [
+        1118,
+        1135
+      ],
+      "value": "   constructor("
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 38,
+          "line": 24
+        },
+        "start": {
+          "column": 0,
+          "line": 24
+        }
+      },
+      "range": [
+        1137,
+        1175
+      ],
+      "value": "     @InjectRepository(User, 'core')"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 57,
+          "line": 25
+        },
+        "start": {
+          "column": 0,
+          "line": 25
+        }
+      },
+      "range": [
+        1177,
+        1234
+      ],
+      "value": "     private readonly userRepository: Repository<User>,"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 42,
+          "line": 26
+        },
+        "start": {
+          "column": 0,
+          "line": 26
+        }
+      },
+      "range": [
+        1236,
+        1278
+      ],
+      "value": "     @InjectRepository(AppToken, 'core')"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 65,
+          "line": 27
+        },
+        "start": {
+          "column": 0,
+          "line": 27
+        }
+      },
+      "range": [
+        1280,
+        1345
+      ],
+      "value": "     private readonly appTokenRepository: Repository<AppToken>,"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 63,
+          "line": 28
+        },
+        "start": {
+          "column": 0,
+          "line": 28
+        }
+      },
+      "range": [
+        1347,
+        1410
+      ],
+      "value": "     private readonly accessTokenService: AccessTokenService,"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 65,
+          "line": 29
+        },
+        "start": {
+          "column": 0,
+          "line": 29
+        }
+      },
+      "range": [
+        1412,
+        1477
+      ],
+      "value": "     private readonly refreshTokenService: RefreshTokenService,"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 61,
+          "line": 30
+        },
+        "start": {
+          "column": 0,
+          "line": 30
+        }
+      },
+      "range": [
+        1479,
+        1540
+      ],
+      "value": "     private readonly loginTokenService: LoginTokenService,"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 9,
+          "line": 31
+        },
+        "start": {
+          "column": 0,
+          "line": 31
+        }
+      },
+      "range": [
+        1542,
+        1551
+      ],
+      "value": "   ) {}"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 2,
+          "line": 32
+        },
+        "start": {
+          "column": 0,
+          "line": 32
+        }
+      },
+      "range": [
+        1553,
+        1555
+      ],
+      "value": ""
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 35,
+          "line": 33
+        },
+        "start": {
+          "column": 0,
+          "line": 33
+        }
+      },
+      "range": [
+        1557,
+        1592
+      ],
+      "value": "   async verifyAuthorizationCode("
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 52,
+          "line": 34
+        },
+        "start": {
+          "column": 0,
+          "line": 34
+        }
+      },
+      "range": [
+        1594,
+        1646
+      ],
+      "value": "     exchangeAuthCodeInput: ExchangeAuthCodeInput,"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 35,
+          "line": 35
+        },
+        "start": {
+          "column": 0,
+          "line": 35
+        }
+      },
+      "range": [
+        1648,
+        1683
+      ],
+      "value": "   ): Promise<ExchangeAuthCode> {"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 73,
+          "line": 36
+        },
+        "start": {
+          "column": 0,
+          "line": 36
+        }
+      },
+      "range": [
+        1685,
+        1758
+      ],
+      "value": "     const { authorizationCode, codeVerifier } = exchangeAuthCodeInput;"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 2,
+          "line": 37
+        },
+        "start": {
+          "column": 0,
+          "line": 37
+        }
+      },
+      "range": [
+        1760,
+        1762
+      ],
+      "value": ""
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 32,
+          "line": 38
+        },
+        "start": {
+          "column": 0,
+          "line": 38
+        }
+      },
+      "range": [
+        1764,
+        1796
+      ],
+      "value": "     if (!authorizationCode) {"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 33,
+          "line": 39
+        },
+        "start": {
+          "column": 0,
+          "line": 39
+        }
+      },
+      "range": [
+        1798,
+        1831
+      ],
+      "value": "       throw new AuthException("
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 42,
+          "line": 40
+        },
+        "start": {
+          "column": 0,
+          "line": 40
+        }
+      },
+      "range": [
+        1833,
+        1875
+      ],
+      "value": "         'Authorization code not found',"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 43,
+          "line": 41
+        },
+        "start": {
+          "column": 0,
+          "line": 41
+        }
+      },
+      "range": [
+        1877,
+        1920
+      ],
+      "value": "         AuthExceptionCode.INVALID_INPUT,"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 11,
+          "line": 42
+        },
+        "start": {
+          "column": 0,
+          "line": 42
+        }
+      },
+      "range": [
+        1922,
+        1933
+      ],
+      "value": "       );"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 43
+        },
+        "start": {
+          "column": 0,
+          "line": 43
+        }
+      },
+      "range": [
+        1935,
+        1943
+      ],
+      "value": "     }"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 2,
+          "line": 44
+        },
+        "start": {
+          "column": 0,
+          "line": 44
+        }
+      },
+      "range": [
+        1945,
+        1947
+      ],
+      "value": ""
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 23,
+          "line": 45
+        },
+        "start": {
+          "column": 0,
+          "line": 45
+        }
+      },
+      "range": [
+        1949,
+        1972
+      ],
+      "value": "     let userId = '';"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 2,
+          "line": 46
+        },
+        "start": {
+          "column": 0,
+          "line": 46
+        }
+      },
+      "range": [
+        1974,
+        1976
+      ],
+      "value": ""
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 26,
+          "line": 47
+        },
+        "start": {
+          "column": 0,
+          "line": 47
+        }
+      },
+      "range": [
+        1978,
+        2004
+      ],
+      "value": "     if (codeVerifier) {"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 82,
+          "line": 48
+        },
+        "start": {
+          "column": 0,
+          "line": 48
+        }
+      },
+      "range": [
+        2006,
+        2088
+      ],
+      "value": "       const authorizationCodeAppToken = await this.appTokenRepository.findOne({"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 19,
+          "line": 49
+        },
+        "start": {
+          "column": 0,
+          "line": 49
+        }
+      },
+      "range": [
+        2090,
+        2109
+      ],
+      "value": "         where: {"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 38,
+          "line": 50
+        },
+        "start": {
+          "column": 0,
+          "line": 50
+        }
+      },
+      "range": [
+        2111,
+        2149
+      ],
+      "value": "           value: authorizationCode,"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 13,
+          "line": 51
+        },
+        "start": {
+          "column": 0,
+          "line": 51
+        }
+      },
+      "range": [
+        2151,
+        2164
+      ],
+      "value": "         },"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 12,
+          "line": 52
+        },
+        "start": {
+          "column": 0,
+          "line": 52
+        }
+      },
+      "range": [
+        2166,
+        2178
+      ],
+      "value": "       });"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 2,
+          "line": 53
+        },
+        "start": {
+          "column": 0,
+          "line": 53
+        }
+      },
+      "range": [
+        2180,
+        2182
+      ],
+      "value": ""
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 42,
+          "line": 54
+        },
+        "start": {
+          "column": 0,
+          "line": 54
+        }
+      },
+      "range": [
+        2184,
+        2226
+      ],
+      "value": "       if (!authorizationCodeAppToken) {"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 35,
+          "line": 55
+        },
+        "start": {
+          "column": 0,
+          "line": 55
+        }
+      },
+      "range": [
+        2228,
+        2263
+      ],
+      "value": "         throw new AuthException("
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 49,
+          "line": 56
+        },
+        "start": {
+          "column": 0,
+          "line": 56
+        }
+      },
+      "range": [
+        2265,
+        2314
+      ],
+      "value": "           'Authorization code does not exist',"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 45,
+          "line": 57
+        },
+        "start": {
+          "column": 0,
+          "line": 57
+        }
+      },
+      "range": [
+        2316,
+        2361
+      ],
+      "value": "           AuthExceptionCode.INVALID_INPUT,"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 13,
+          "line": 58
+        },
+        "start": {
+          "column": 0,
+          "line": 58
+        }
+      },
+      "range": [
+        2363,
+        2376
+      ],
+      "value": "         );"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 10,
+          "line": 59
+        },
+        "start": {
+          "column": 0,
+          "line": 59
+        }
+      },
+      "range": [
+        2378,
+        2388
+      ],
+      "value": "       }"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 2,
+          "line": 60
+        },
+        "start": {
+          "column": 0,
+          "line": 60
+        }
+      },
+      "range": [
+        2390,
+        2392
+      ],
+      "value": ""
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 78,
+          "line": 61
+        },
+        "start": {
+          "column": 0,
+          "line": 61
+        }
+      },
+      "range": [
+        2394,
+        2472
+      ],
+      "value": "       if (!(authorizationCodeAppToken.expiresAt.getTime() >= Date.now())) {"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 35,
+          "line": 62
+        },
+        "start": {
+          "column": 0,
+          "line": 62
+        }
+      },
+      "range": [
+        2474,
+        2509
+      ],
+      "value": "         throw new AuthException("
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 43,
+          "line": 63
+        },
+        "start": {
+          "column": 0,
+          "line": 63
+        }
+      },
+      "range": [
+        2511,
+        2554
+      ],
+      "value": "           'Authorization code expired.',"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 51,
+          "line": 64
+        },
+        "start": {
+          "column": 0,
+          "line": 64
+        }
+      },
+      "range": [
+        2556,
+        2607
+      ],
+      "value": "           AuthExceptionCode.FORBIDDEN_EXCEPTION,"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 13,
+          "line": 65
+        },
+        "start": {
+          "column": 0,
+          "line": 65
+        }
+      },
+      "range": [
+        2609,
+        2622
+      ],
+      "value": "         );"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 10,
+          "line": 66
+        },
+        "start": {
+          "column": 0,
+          "line": 66
+        }
+      },
+      "range": [
+        2624,
+        2634
+      ],
+      "value": "       }"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 2,
+          "line": 67
+        },
+        "start": {
+          "column": 0,
+          "line": 67
+        }
+      },
+      "range": [
+        2636,
+        2638
+      ],
+      "value": ""
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 37,
+          "line": 68
+        },
+        "start": {
+          "column": 0,
+          "line": 68
+        }
+      },
+      "range": [
+        2640,
+        2677
+      ],
+      "value": "       const codeChallenge = crypto"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 32,
+          "line": 69
+        },
+        "start": {
+          "column": 0,
+          "line": 69
+        }
+      },
+      "range": [
+        2679,
+        2711
+      ],
+      "value": "         .createHash('sha256')"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 32,
+          "line": 70
+        },
+        "start": {
+          "column": 0,
+          "line": 70
+        }
+      },
+      "range": [
+        2713,
+        2745
+      ],
+      "value": "         .update(codeVerifier)"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 20,
+          "line": 71
+        },
+        "start": {
+          "column": 0,
+          "line": 71
+        }
+      },
+      "range": [
+        2747,
+        2767
+      ],
+      "value": "         .digest()"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 30,
+          "line": 72
+        },
+        "start": {
+          "column": 0,
+          "line": 72
+        }
+      },
+      "range": [
+        2769,
+        2799
+      ],
+      "value": "         .toString('base64')"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 31,
+          "line": 73
+        },
+        "start": {
+          "column": 0,
+          "line": 73
+        }
+      },
+      "range": [
+        2801,
+        2832
+      ],
+      "value": "         .replace(/\\+/g, '-')"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 31,
+          "line": 74
+        },
+        "start": {
+          "column": 0,
+          "line": 74
+        }
+      },
+      "range": [
+        2834,
+        2865
+      ],
+      "value": "         .replace(/\\//g, '_')"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 30,
+          "line": 75
+        },
+        "start": {
+          "column": 0,
+          "line": 75
+        }
+      },
+      "range": [
+        2867,
+        2897
+      ],
+      "value": "         .replace(/=/g, '');"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 2,
+          "line": 76
+        },
+        "start": {
+          "column": 0,
+          "line": 76
+        }
+      },
+      "range": [
+        2899,
+        2901
+      ],
+      "value": ""
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 78,
+          "line": 77
+        },
+        "start": {
+          "column": 0,
+          "line": 77
+        }
+      },
+      "range": [
+        2903,
+        2981
+      ],
+      "value": "       const codeChallengeAppToken = await this.appTokenRepository.findOne({"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 19,
+          "line": 78
+        },
+        "start": {
+          "column": 0,
+          "line": 78
+        }
+      },
+      "range": [
+        2983,
+        3002
+      ],
+      "value": "         where: {"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 34,
+          "line": 79
+        },
+        "start": {
+          "column": 0,
+          "line": 79
+        }
+      },
+      "range": [
+        3004,
+        3038
+      ],
+      "value": "           value: codeChallenge,"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 13,
+          "line": 80
+        },
+        "start": {
+          "column": 0,
+          "line": 80
+        }
+      },
+      "range": [
+        3040,
+        3053
+      ],
+      "value": "         },"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 12,
+          "line": 81
+        },
+        "start": {
+          "column": 0,
+          "line": 81
+        }
+      },
+      "range": [
+        3055,
+        3067
+      ],
+      "value": "       });"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 2,
+          "line": 82
+        },
+        "start": {
+          "column": 0,
+          "line": 82
+        }
+      },
+      "range": [
+        3069,
+        3071
+      ],
+      "value": ""
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 71,
+          "line": 83
+        },
+        "start": {
+          "column": 0,
+          "line": 83
+        }
+      },
+      "range": [
+        3073,
+        3144
+      ],
+      "value": "       if (!codeChallengeAppToken || !codeChallengeAppToken.userId) {"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 35,
+          "line": 84
+        },
+        "start": {
+          "column": 0,
+          "line": 84
+        }
+      },
+      "range": [
+        3146,
+        3181
+      ],
+      "value": "         throw new AuthException("
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 56,
+          "line": 85
+        },
+        "start": {
+          "column": 0,
+          "line": 85
+        }
+      },
+      "range": [
+        3183,
+        3239
+      ],
+      "value": "           'code verifier doesnt match the challenge',"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 51,
+          "line": 86
+        },
+        "start": {
+          "column": 0,
+          "line": 86
+        }
+      },
+      "range": [
+        3241,
+        3292
+      ],
+      "value": "           AuthExceptionCode.FORBIDDEN_EXCEPTION,"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 13,
+          "line": 87
+        },
+        "start": {
+          "column": 0,
+          "line": 87
+        }
+      },
+      "range": [
+        3294,
+        3307
+      ],
+      "value": "         );"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 10,
+          "line": 88
+        },
+        "start": {
+          "column": 0,
+          "line": 88
+        }
+      },
+      "range": [
+        3309,
+        3319
+      ],
+      "value": "       }"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 2,
+          "line": 89
+        },
+        "start": {
+          "column": 0,
+          "line": 89
+        }
+      },
+      "range": [
+        3321,
+        3323
+      ],
+      "value": ""
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 74,
+          "line": 90
+        },
+        "start": {
+          "column": 0,
+          "line": 90
+        }
+      },
+      "range": [
+        3325,
+        3399
+      ],
+      "value": "       if (!(codeChallengeAppToken.expiresAt.getTime() >= Date.now())) {"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 35,
+          "line": 91
+        },
+        "start": {
+          "column": 0,
+          "line": 91
+        }
+      },
+      "range": [
+        3401,
+        3436
+      ],
+      "value": "         throw new AuthException("
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 39,
+          "line": 92
+        },
+        "start": {
+          "column": 0,
+          "line": 92
+        }
+      },
+      "range": [
+        3438,
+        3477
+      ],
+      "value": "           'code challenge expired.',"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 51,
+          "line": 93
+        },
+        "start": {
+          "column": 0,
+          "line": 93
+        }
+      },
+      "range": [
+        3479,
+        3530
+      ],
+      "value": "           AuthExceptionCode.FORBIDDEN_EXCEPTION,"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 13,
+          "line": 94
+        },
+        "start": {
+          "column": 0,
+          "line": 94
+        }
+      },
+      "range": [
+        3532,
+        3545
+      ],
+      "value": "         );"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 10,
+          "line": 95
+        },
+        "start": {
+          "column": 0,
+          "line": 95
+        }
+      },
+      "range": [
+        3547,
+        3557
+      ],
+      "value": "       }"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 2,
+          "line": 96
+        },
+        "start": {
+          "column": 0,
+          "line": 96
+        }
+      },
+      "range": [
+        3559,
+        3561
+      ],
+      "value": ""
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 81,
+          "line": 97
+        },
+        "start": {
+          "column": 0,
+          "line": 97
+        }
+      },
+      "range": [
+        3563,
+        3644
+      ],
+      "value": "       if (codeChallengeAppToken.userId !== authorizationCodeAppToken.userId) {"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 35,
+          "line": 98
+        },
+        "start": {
+          "column": 0,
+          "line": 98
+        }
+      },
+      "range": [
+        3646,
+        3681
+      ],
+      "value": "         throw new AuthException("
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 81,
+          "line": 99
+        },
+        "start": {
+          "column": 0,
+          "line": 99
+        }
+      },
+      "range": [
+        3683,
+        3764
+      ],
+      "value": "           'authorization code / code verifier was not created by same client',"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 51,
+          "line": 100
+        },
+        "start": {
+          "column": 0,
+          "line": 100
+        }
+      },
+      "range": [
+        3766,
+        3817
+      ],
+      "value": "           AuthExceptionCode.FORBIDDEN_EXCEPTION,"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 13,
+          "line": 101
+        },
+        "start": {
+          "column": 0,
+          "line": 101
+        }
+      },
+      "range": [
+        3819,
+        3832
+      ],
+      "value": "         );"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 10,
+          "line": 102
+        },
+        "start": {
+          "column": 0,
+          "line": 102
+        }
+      },
+      "range": [
+        3834,
+        3844
+      ],
+      "value": "       }"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 2,
+          "line": 103
+        },
+        "start": {
+          "column": 0,
+          "line": 103
+        }
+      },
+      "range": [
+        3846,
+        3848
+      ],
+      "value": ""
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 47,
+          "line": 104
+        },
+        "start": {
+          "column": 0,
+          "line": 104
+        }
+      },
+      "range": [
+        3850,
+        3897
+      ],
+      "value": "       if (codeChallengeAppToken.revokedAt) {"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 35,
+          "line": 105
+        },
+        "start": {
+          "column": 0,
+          "line": 105
+        }
+      },
+      "range": [
+        3899,
+        3934
+      ],
+      "value": "         throw new AuthException("
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 39,
+          "line": 106
+        },
+        "start": {
+          "column": 0,
+          "line": 106
+        }
+      },
+      "range": [
+        3936,
+        3975
+      ],
+      "value": "           'Token has been revoked.',"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 51,
+          "line": 107
+        },
+        "start": {
+          "column": 0,
+          "line": 107
+        }
+      },
+      "range": [
+        3977,
+        4028
+      ],
+      "value": "           AuthExceptionCode.FORBIDDEN_EXCEPTION,"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 13,
+          "line": 108
+        },
+        "start": {
+          "column": 0,
+          "line": 108
+        }
+      },
+      "range": [
+        4030,
+        4043
+      ],
+      "value": "         );"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 10,
+          "line": 109
+        },
+        "start": {
+          "column": 0,
+          "line": 109
+        }
+      },
+      "range": [
+        4045,
+        4055
+      ],
+      "value": "       }"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 2,
+          "line": 110
+        },
+        "start": {
+          "column": 0,
+          "line": 110
+        }
+      },
+      "range": [
+        4057,
+        4059
+      ],
+      "value": ""
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 45,
+          "line": 111
+        },
+        "start": {
+          "column": 0,
+          "line": 111
+        }
+      },
+      "range": [
+        4061,
+        4106
+      ],
+      "value": "       await this.appTokenRepository.save({"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 40,
+          "line": 112
+        },
+        "start": {
+          "column": 0,
+          "line": 112
+        }
+      },
+      "range": [
+        4108,
+        4148
+      ],
+      "value": "         id: codeChallengeAppToken.id,"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 33,
+          "line": 113
+        },
+        "start": {
+          "column": 0,
+          "line": 113
+        }
+      },
+      "range": [
+        4150,
+        4183
+      ],
+      "value": "         revokedAt: new Date(),"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 12,
+          "line": 114
+        },
+        "start": {
+          "column": 0,
+          "line": 114
+        }
+      },
+      "range": [
+        4185,
+        4197
+      ],
+      "value": "       });"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 2,
+          "line": 115
+        },
+        "start": {
+          "column": 0,
+          "line": 115
+        }
+      },
+      "range": [
+        4199,
+        4201
+      ],
+      "value": ""
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 47,
+          "line": 116
+        },
+        "start": {
+          "column": 0,
+          "line": 116
+        }
+      },
+      "range": [
+        4203,
+        4250
+      ],
+      "value": "       userId = codeChallengeAppToken.userId;"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 117
+        },
+        "start": {
+          "column": 0,
+          "line": 117
+        }
+      },
+      "range": [
+        4252,
+        4260
+      ],
+      "value": "     }"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 2,
+          "line": 118
+        },
+        "start": {
+          "column": 0,
+          "line": 118
+        }
+      },
+      "range": [
+        4262,
+        4264
+      ],
+      "value": ""
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 55,
+          "line": 119
+        },
+        "start": {
+          "column": 0,
+          "line": 119
+        }
+      },
+      "range": [
+        4266,
+        4321
+      ],
+      "value": "     const user = await this.userRepository.findOne({"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 31,
+          "line": 120
+        },
+        "start": {
+          "column": 0,
+          "line": 120
+        }
+      },
+      "range": [
+        4323,
+        4354
+      ],
+      "value": "       where: { id: userId },"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 41,
+          "line": 121
+        },
+        "start": {
+          "column": 0,
+          "line": 121
+        }
+      },
+      "range": [
+        4356,
+        4397
+      ],
+      "value": "       relations: ['defaultWorkspace'],"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 10,
+          "line": 122
+        },
+        "start": {
+          "column": 0,
+          "line": 122
+        }
+      },
+      "range": [
+        4399,
+        4409
+      ],
+      "value": "     });"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 2,
+          "line": 123
+        },
+        "start": {
+          "column": 0,
+          "line": 123
+        }
+      },
+      "range": [
+        4411,
+        4413
+      ],
+      "value": ""
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 44,
+          "line": 124
+        },
+        "start": {
+          "column": 0,
+          "line": 124
+        }
+      },
+      "range": [
+        4415,
+        4459
+      ],
+      "value": "     userValidator.assertIsDefinedOrThrow("
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 14,
+          "line": 125
+        },
+        "start": {
+          "column": 0,
+          "line": 125
+        }
+      },
+      "range": [
+        4461,
+        4475
+      ],
+      "value": "       user,"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 27,
+          "line": 126
+        },
+        "start": {
+          "column": 0,
+          "line": 126
+        }
+      },
+      "range": [
+        4477,
+        4504
+      ],
+      "value": "       new AuthException("
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 57,
+          "line": 127
+        },
+        "start": {
+          "column": 0,
+          "line": 127
+        }
+      },
+      "range": [
+        4506,
+        4563
+      ],
+      "value": "         'User who generated the token does not exist',"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 43,
+          "line": 128
+        },
+        "start": {
+          "column": 0,
+          "line": 128
+        }
+      },
+      "range": [
+        4565,
+        4608
+      ],
+      "value": "         AuthExceptionCode.INVALID_INPUT,"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 11,
+          "line": 129
+        },
+        "start": {
+          "column": 0,
+          "line": 129
+        }
+      },
+      "range": [
+        4610,
+        4621
+      ],
+      "value": "       ),"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 9,
+          "line": 130
+        },
+        "start": {
+          "column": 0,
+          "line": 130
+        }
+      },
+      "range": [
+        4623,
+        4632
+      ],
+      "value": "     );"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 2,
+          "line": 131
+        },
+        "start": {
+          "column": 0,
+          "line": 131
+        }
+      },
+      "range": [
+        4634,
+        4636
+      ],
+      "value": ""
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 36,
+          "line": 132
+        },
+        "start": {
+          "column": 0,
+          "line": 132
+        }
+      },
+      "range": [
+        4638,
+        4674
+      ],
+      "value": "     if (!user.defaultWorkspace) {"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 33,
+          "line": 133
+        },
+        "start": {
+          "column": 0,
+          "line": 133
+        }
+      },
+      "range": [
+        4676,
+        4709
+      ],
+      "value": "       throw new AuthException("
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 52,
+          "line": 134
+        },
+        "start": {
+          "column": 0,
+          "line": 134
+        }
+      },
+      "range": [
+        4711,
+        4763
+      ],
+      "value": "         'User does not have a default workspace',"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 42,
+          "line": 135
+        },
+        "start": {
+          "column": 0,
+          "line": 135
+        }
+      },
+      "range": [
+        4765,
+        4807
+      ],
+      "value": "         AuthExceptionCode.INVALID_DATA,"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 11,
+          "line": 136
+        },
+        "start": {
+          "column": 0,
+          "line": 136
+        }
+      },
+      "range": [
+        4809,
+        4820
+      ],
+      "value": "       );"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 137
+        },
+        "start": {
+          "column": 0,
+          "line": 137
+        }
+      },
+      "range": [
+        4822,
+        4830
+      ],
+      "value": "     }"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 2,
+          "line": 138
+        },
+        "start": {
+          "column": 0,
+          "line": 138
+        }
+      },
+      "range": [
+        4832,
+        4834
+      ],
+      "value": ""
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 77,
+          "line": 139
+        },
+        "start": {
+          "column": 0,
+          "line": 139
+        }
+      },
+      "range": [
+        4836,
+        4913
+      ],
+      "value": "     const accessToken = await this.accessTokenService.generateAccessToken("
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 17,
+          "line": 140
+        },
+        "start": {
+          "column": 0,
+          "line": 140
+        }
+      },
+      "range": [
+        4915,
+        4932
+      ],
+      "value": "       user.id,"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 33,
+          "line": 141
+        },
+        "start": {
+          "column": 0,
+          "line": 141
+        }
+      },
+      "range": [
+        4934,
+        4967
+      ],
+      "value": "       user.defaultWorkspaceId,"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 9,
+          "line": 142
+        },
+        "start": {
+          "column": 0,
+          "line": 142
+        }
+      },
+      "range": [
+        4969,
+        4978
+      ],
+      "value": "     );"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 80,
+          "line": 143
+        },
+        "start": {
+          "column": 0,
+          "line": 143
+        }
+      },
+      "range": [
+        4980,
+        5060
+      ],
+      "value": "     const refreshToken = await this.refreshTokenService.generateRefreshToken("
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 17,
+          "line": 144
+        },
+        "start": {
+          "column": 0,
+          "line": 144
+        }
+      },
+      "range": [
+        5062,
+        5079
+      ],
+      "value": "       user.id,"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 33,
+          "line": 145
+        },
+        "start": {
+          "column": 0,
+          "line": 145
+        }
+      },
+      "range": [
+        5081,
+        5114
+      ],
+      "value": "       user.defaultWorkspaceId,"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 9,
+          "line": 146
+        },
+        "start": {
+          "column": 0,
+          "line": 146
+        }
+      },
+      "range": [
+        5116,
+        5125
+      ],
+      "value": "     );"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 74,
+          "line": 147
+        },
+        "start": {
+          "column": 0,
+          "line": 147
+        }
+      },
+      "range": [
+        5127,
+        5201
+      ],
+      "value": "     const loginToken = await this.loginTokenService.generateLoginToken("
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 20,
+          "line": 148
+        },
+        "start": {
+          "column": 0,
+          "line": 148
+        }
+      },
+      "range": [
+        5203,
+        5223
+      ],
+      "value": "       user.email,"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 9,
+          "line": 149
+        },
+        "start": {
+          "column": 0,
+          "line": 149
+        }
+      },
+      "range": [
+        5225,
+        5234
+      ],
+      "value": "     );"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 2,
+          "line": 150
+        },
+        "start": {
+          "column": 0,
+          "line": 150
+        }
+      },
+      "range": [
+        5236,
+        5238
+      ],
+      "value": ""
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 15,
+          "line": 151
+        },
+        "start": {
+          "column": 0,
+          "line": 151
+        }
+      },
+      "range": [
+        5240,
+        5255
+      ],
+      "value": "     return {"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 21,
+          "line": 152
+        },
+        "start": {
+          "column": 0,
+          "line": 152
+        }
+      },
+      "range": [
+        5257,
+        5278
+      ],
+      "value": "       accessToken,"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 22,
+          "line": 153
+        },
+        "start": {
+          "column": 0,
+          "line": 153
+        }
+      },
+      "range": [
+        5280,
+        5302
+      ],
+      "value": "       refreshToken,"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 20,
+          "line": 154
+        },
+        "start": {
+          "column": 0,
+          "line": 154
+        }
+      },
+      "range": [
+        5304,
+        5324
+      ],
+      "value": "       loginToken,"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 9,
+          "line": 155
+        },
+        "start": {
+          "column": 0,
+          "line": 155
+        }
+      },
+      "range": [
+        5326,
+        5335
+      ],
+      "value": "     };"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 156
+        },
+        "start": {
+          "column": 0,
+          "line": 156
+        }
+      },
+      "range": [
+        5337,
+        5343
+      ],
+      "value": "   }"
+    },
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 4,
+          "line": 157
+        },
+        "start": {
+          "column": 0,
+          "line": 157
+        }
+      },
+      "range": [
+        5345,
+        5349
+      ],
+      "value": " }"
+    }
+  ],
+  "sourceType": "script",
+  "tokens": [],
+  "loc": {
+    "end": {
+      "column": 0,
+      "line": 158
+    },
+    "start": {
+      "column": 0,
+      "line": 158
+    }
+  }
+}

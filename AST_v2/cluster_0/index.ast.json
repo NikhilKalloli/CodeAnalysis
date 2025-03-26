@@ -1,0 +1,5160 @@
+{
+  "type": "Program",
+  "range": [
+    0,
+    1300
+  ],
+  "body": [
+    {
+      "type": "ImportDeclaration",
+      "attributes": [],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "raw": "'typeorm'",
+        "value": "typeorm",
+        "range": [
+          27,
+          36
+        ],
+        "loc": {
+          "end": {
+            "column": 36,
+            "line": 1
+          },
+          "start": {
+            "column": 27,
+            "line": 1
+          }
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "DataSource",
+            "optional": false,
+            "range": [
+              9,
+              19
+            ],
+            "loc": {
+              "end": {
+                "column": 19,
+                "line": 1
+              },
+              "start": {
+                "column": 9,
+                "line": 1
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "DataSource",
+            "optional": false,
+            "range": [
+              9,
+              19
+            ],
+            "loc": {
+              "end": {
+                "column": 19,
+                "line": 1
+              },
+              "start": {
+                "column": 9,
+                "line": 1
+              }
+            }
+          },
+          "range": [
+            9,
+            19
+          ],
+          "loc": {
+            "end": {
+              "column": 19,
+              "line": 1
+            },
+            "start": {
+              "column": 9,
+              "line": 1
+            }
+          }
+        }
+      ],
+      "range": [
+        0,
+        37
+      ],
+      "loc": {
+        "end": {
+          "column": 37,
+          "line": 1
+        },
+        "start": {
+          "column": 0,
+          "line": 1
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "attributes": [],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "raw": "'src/database/typeorm-seeds/core/demo/users'",
+        "value": "src/database/typeorm-seeds/core/demo/users",
+        "range": [
+          99,
+          143
+        ],
+        "loc": {
+          "end": {
+            "column": 51,
+            "line": 6
+          },
+          "start": {
+            "column": 7,
+            "line": 6
+          }
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "seedUsers",
+            "optional": false,
+            "range": [
+              53,
+              62
+            ],
+            "loc": {
+              "end": {
+                "column": 11,
+                "line": 4
+              },
+              "start": {
+                "column": 2,
+                "line": 4
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "seedUsers",
+            "optional": false,
+            "range": [
+              53,
+              62
+            ],
+            "loc": {
+              "end": {
+                "column": 11,
+                "line": 4
+              },
+              "start": {
+                "column": 2,
+                "line": 4
+              }
+            }
+          },
+          "range": [
+            53,
+            62
+          ],
+          "loc": {
+            "end": {
+              "column": 11,
+              "line": 4
+            },
+            "start": {
+              "column": 2,
+              "line": 4
+            }
+          }
+        },
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "deleteUsersByWorkspace",
+            "optional": false,
+            "range": [
+              67,
+              89
+            ],
+            "loc": {
+              "end": {
+                "column": 24,
+                "line": 5
+              },
+              "start": {
+                "column": 2,
+                "line": 5
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "deleteUsersByWorkspace",
+            "optional": false,
+            "range": [
+              67,
+              89
+            ],
+            "loc": {
+              "end": {
+                "column": 24,
+                "line": 5
+              },
+              "start": {
+                "column": 2,
+                "line": 5
+              }
+            }
+          },
+          "range": [
+            67,
+            89
+          ],
+          "loc": {
+            "end": {
+              "column": 24,
+              "line": 5
+            },
+            "start": {
+              "column": 2,
+              "line": 5
+            }
+          }
+        }
+      ],
+      "range": [
+        41,
+        144
+      ],
+      "loc": {
+        "end": {
+          "column": 52,
+          "line": 6
+        },
+        "start": {
+          "column": 0,
+          "line": 3
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "attributes": [],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "raw": "'src/database/typeorm-seeds/core/demo/workspaces'",
+        "value": "src/database/typeorm-seeds/core/demo/workspaces",
+        "range": [
+          203,
+          252
+        ],
+        "loc": {
+          "end": {
+            "column": 56,
+            "line": 10
+          },
+          "start": {
+            "column": 7,
+            "line": 10
+          }
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "seedWorkspaces",
+            "optional": false,
+            "range": [
+              158,
+              172
+            ],
+            "loc": {
+              "end": {
+                "column": 16,
+                "line": 8
+              },
+              "start": {
+                "column": 2,
+                "line": 8
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "seedWorkspaces",
+            "optional": false,
+            "range": [
+              158,
+              172
+            ],
+            "loc": {
+              "end": {
+                "column": 16,
+                "line": 8
+              },
+              "start": {
+                "column": 2,
+                "line": 8
+              }
+            }
+          },
+          "range": [
+            158,
+            172
+          ],
+          "loc": {
+            "end": {
+              "column": 16,
+              "line": 8
+            },
+            "start": {
+              "column": 2,
+              "line": 8
+            }
+          }
+        },
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "deleteWorkspaces",
+            "optional": false,
+            "range": [
+              177,
+              193
+            ],
+            "loc": {
+              "end": {
+                "column": 18,
+                "line": 9
+              },
+              "start": {
+                "column": 2,
+                "line": 9
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "deleteWorkspaces",
+            "optional": false,
+            "range": [
+              177,
+              193
+            ],
+            "loc": {
+              "end": {
+                "column": 18,
+                "line": 9
+              },
+              "start": {
+                "column": 2,
+                "line": 9
+              }
+            }
+          },
+          "range": [
+            177,
+            193
+          ],
+          "loc": {
+            "end": {
+              "column": 18,
+              "line": 9
+            },
+            "start": {
+              "column": 2,
+              "line": 9
+            }
+          }
+        }
+      ],
+      "range": [
+        146,
+        253
+      ],
+      "loc": {
+        "end": {
+          "column": 57,
+          "line": 10
+        },
+        "start": {
+          "column": 0,
+          "line": 7
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "attributes": [],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "raw": "'src/database/typeorm-seeds/core/demo/feature-flags'",
+        "value": "src/database/typeorm-seeds/core/demo/feature-flags",
+        "range": [
+          290,
+          342
+        ],
+        "loc": {
+          "end": {
+            "column": 87,
+            "line": 11
+          },
+          "start": {
+            "column": 35,
+            "line": 11
+          }
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "deleteFeatureFlags",
+            "optional": false,
+            "range": [
+              264,
+              282
+            ],
+            "loc": {
+              "end": {
+                "column": 27,
+                "line": 11
+              },
+              "start": {
+                "column": 9,
+                "line": 11
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "deleteFeatureFlags",
+            "optional": false,
+            "range": [
+              264,
+              282
+            ],
+            "loc": {
+              "end": {
+                "column": 27,
+                "line": 11
+              },
+              "start": {
+                "column": 9,
+                "line": 11
+              }
+            }
+          },
+          "range": [
+            264,
+            282
+          ],
+          "loc": {
+            "end": {
+              "column": 27,
+              "line": 11
+            },
+            "start": {
+              "column": 9,
+              "line": 11
+            }
+          }
+        }
+      ],
+      "range": [
+        255,
+        343
+      ],
+      "loc": {
+        "end": {
+          "column": 88,
+          "line": 11
+        },
+        "start": {
+          "column": 0,
+          "line": 11
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "attributes": [],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "raw": "'src/database/typeorm-seeds/core/demo/user-workspaces'",
+        "value": "src/database/typeorm-seeds/core/demo/user-workspaces",
+        "range": [
+          410,
+          464
+        ],
+        "loc": {
+          "end": {
+            "column": 61,
+            "line": 15
+          },
+          "start": {
+            "column": 7,
+            "line": 15
+          }
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "deleteUserWorkspaces",
+            "optional": false,
+            "range": [
+              357,
+              377
+            ],
+            "loc": {
+              "end": {
+                "column": 22,
+                "line": 13
+              },
+              "start": {
+                "column": 2,
+                "line": 13
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "deleteUserWorkspaces",
+            "optional": false,
+            "range": [
+              357,
+              377
+            ],
+            "loc": {
+              "end": {
+                "column": 22,
+                "line": 13
+              },
+              "start": {
+                "column": 2,
+                "line": 13
+              }
+            }
+          },
+          "range": [
+            357,
+            377
+          ],
+          "loc": {
+            "end": {
+              "column": 22,
+              "line": 13
+            },
+            "start": {
+              "column": 2,
+              "line": 13
+            }
+          }
+        },
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "seedUserWorkspaces",
+            "optional": false,
+            "range": [
+              382,
+              400
+            ],
+            "loc": {
+              "end": {
+                "column": 20,
+                "line": 14
+              },
+              "start": {
+                "column": 2,
+                "line": 14
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "seedUserWorkspaces",
+            "optional": false,
+            "range": [
+              382,
+              400
+            ],
+            "loc": {
+              "end": {
+                "column": 20,
+                "line": 14
+              },
+              "start": {
+                "column": 2,
+                "line": 14
+              }
+            }
+          },
+          "range": [
+            382,
+            400
+          ],
+          "loc": {
+            "end": {
+              "column": 20,
+              "line": 14
+            },
+            "start": {
+              "column": 2,
+              "line": 14
+            }
+          }
+        }
+      ],
+      "range": [
+        345,
+        465
+      ],
+      "loc": {
+        "end": {
+          "column": 62,
+          "line": 15
+        },
+        "start": {
+          "column": 0,
+          "line": 12
+        }
+      }
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "range": [
+        469,
+        809
+      ],
+      "attributes": [],
+      "declaration": {
+        "type": "VariableDeclaration",
+        "declarations": [
+          {
+            "type": "VariableDeclarator",
+            "definite": false,
+            "id": {
+              "type": "Identifier",
+              "decorators": [],
+              "name": "seedCoreSchema",
+              "optional": false,
+              "range": [
+                482,
+                496
+              ],
+              "loc": {
+                "end": {
+                  "column": 27,
+                  "line": 17
+                },
+                "start": {
+                  "column": 13,
+                  "line": 17
+                }
+              }
+            },
+            "init": {
+              "type": "ArrowFunctionExpression",
+              "async": true,
+              "body": {
+                "type": "BlockStatement",
+                "body": [
+                  {
+                    "type": "VariableDeclaration",
+                    "declarations": [
+                      {
+                        "type": "VariableDeclarator",
+                        "definite": false,
+                        "id": {
+                          "type": "Identifier",
+                          "decorators": [],
+                          "name": "schemaName",
+                          "optional": false,
+                          "range": [
+                            584,
+                            594
+                          ],
+                          "loc": {
+                            "end": {
+                              "column": 18,
+                              "line": 21
+                            },
+                            "start": {
+                              "column": 8,
+                              "line": 21
+                            }
+                          }
+                        },
+                        "init": {
+                          "type": "Literal",
+                          "raw": "'core'",
+                          "value": "core",
+                          "range": [
+                            597,
+                            603
+                          ],
+                          "loc": {
+                            "end": {
+                              "column": 27,
+                              "line": 21
+                            },
+                            "start": {
+                              "column": 21,
+                              "line": 21
+                            }
+                          }
+                        },
+                        "range": [
+                          584,
+                          603
+                        ],
+                        "loc": {
+                          "end": {
+                            "column": 27,
+                            "line": 21
+                          },
+                          "start": {
+                            "column": 8,
+                            "line": 21
+                          }
+                        }
+                      }
+                    ],
+                    "declare": false,
+                    "kind": "const",
+                    "range": [
+                      578,
+                      604
+                    ],
+                    "loc": {
+                      "end": {
+                        "column": 28,
+                        "line": 21
+                      },
+                      "start": {
+                        "column": 2,
+                        "line": 21
+                      }
+                    }
+                  },
+                  {
+                    "type": "ExpressionStatement",
+                    "expression": {
+                      "type": "AwaitExpression",
+                      "argument": {
+                        "type": "CallExpression",
+                        "arguments": [
+                          {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "workspaceDataSource",
+                            "optional": false,
+                            "range": [
+                              631,
+                              650
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 42,
+                                "line": 23
+                              },
+                              "start": {
+                                "column": 23,
+                                "line": 23
+                              }
+                            }
+                          },
+                          {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "schemaName",
+                            "optional": false,
+                            "range": [
+                              652,
+                              662
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 54,
+                                "line": 23
+                              },
+                              "start": {
+                                "column": 44,
+                                "line": 23
+                              }
+                            }
+                          },
+                          {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "workspaceId",
+                            "optional": false,
+                            "range": [
+                              664,
+                              675
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 67,
+                                "line": 23
+                              },
+                              "start": {
+                                "column": 56,
+                                "line": 23
+                              }
+                            }
+                          }
+                        ],
+                        "callee": {
+                          "type": "Identifier",
+                          "decorators": [],
+                          "name": "seedWorkspaces",
+                          "optional": false,
+                          "range": [
+                            616,
+                            630
+                          ],
+                          "loc": {
+                            "end": {
+                              "column": 22,
+                              "line": 23
+                            },
+                            "start": {
+                              "column": 8,
+                              "line": 23
+                            }
+                          }
+                        },
+                        "optional": false,
+                        "range": [
+                          616,
+                          676
+                        ],
+                        "loc": {
+                          "end": {
+                            "column": 68,
+                            "line": 23
+                          },
+                          "start": {
+                            "column": 8,
+                            "line": 23
+                          }
+                        }
+                      },
+                      "range": [
+                        610,
+                        676
+                      ],
+                      "loc": {
+                        "end": {
+                          "column": 68,
+                          "line": 23
+                        },
+                        "start": {
+                          "column": 2,
+                          "line": 23
+                        }
+                      }
+                    },
+                    "range": [
+                      610,
+                      677
+                    ],
+                    "loc": {
+                      "end": {
+                        "column": 69,
+                        "line": 23
+                      },
+                      "start": {
+                        "column": 2,
+                        "line": 23
+                      }
+                    }
+                  },
+                  {
+                    "type": "ExpressionStatement",
+                    "expression": {
+                      "type": "AwaitExpression",
+                      "argument": {
+                        "type": "CallExpression",
+                        "arguments": [
+                          {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "workspaceDataSource",
+                            "optional": false,
+                            "range": [
+                              697,
+                              716
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 37,
+                                "line": 24
+                              },
+                              "start": {
+                                "column": 18,
+                                "line": 24
+                              }
+                            }
+                          },
+                          {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "schemaName",
+                            "optional": false,
+                            "range": [
+                              718,
+                              728
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 49,
+                                "line": 24
+                              },
+                              "start": {
+                                "column": 39,
+                                "line": 24
+                              }
+                            }
+                          }
+                        ],
+                        "callee": {
+                          "type": "Identifier",
+                          "decorators": [],
+                          "name": "seedUsers",
+                          "optional": false,
+                          "range": [
+                            687,
+                            696
+                          ],
+                          "loc": {
+                            "end": {
+                              "column": 17,
+                              "line": 24
+                            },
+                            "start": {
+                              "column": 8,
+                              "line": 24
+                            }
+                          }
+                        },
+                        "optional": false,
+                        "range": [
+                          687,
+                          729
+                        ],
+                        "loc": {
+                          "end": {
+                            "column": 50,
+                            "line": 24
+                          },
+                          "start": {
+                            "column": 8,
+                            "line": 24
+                          }
+                        }
+                      },
+                      "range": [
+                        681,
+                        729
+                      ],
+                      "loc": {
+                        "end": {
+                          "column": 50,
+                          "line": 24
+                        },
+                        "start": {
+                          "column": 2,
+                          "line": 24
+                        }
+                      }
+                    },
+                    "range": [
+                      681,
+                      730
+                    ],
+                    "loc": {
+                      "end": {
+                        "column": 51,
+                        "line": 24
+                      },
+                      "start": {
+                        "column": 2,
+                        "line": 24
+                      }
+                    }
+                  },
+                  {
+                    "type": "ExpressionStatement",
+                    "expression": {
+                      "type": "AwaitExpression",
+                      "argument": {
+                        "type": "CallExpression",
+                        "arguments": [
+                          {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "workspaceDataSource",
+                            "optional": false,
+                            "range": [
+                              759,
+                              778
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 46,
+                                "line": 25
+                              },
+                              "start": {
+                                "column": 27,
+                                "line": 25
+                              }
+                            }
+                          },
+                          {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "schemaName",
+                            "optional": false,
+                            "range": [
+                              780,
+                              790
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 58,
+                                "line": 25
+                              },
+                              "start": {
+                                "column": 48,
+                                "line": 25
+                              }
+                            }
+                          },
+                          {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "workspaceId",
+                            "optional": false,
+                            "range": [
+                              792,
+                              803
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 71,
+                                "line": 25
+                              },
+                              "start": {
+                                "column": 60,
+                                "line": 25
+                              }
+                            }
+                          }
+                        ],
+                        "callee": {
+                          "type": "Identifier",
+                          "decorators": [],
+                          "name": "seedUserWorkspaces",
+                          "optional": false,
+                          "range": [
+                            740,
+                            758
+                          ],
+                          "loc": {
+                            "end": {
+                              "column": 26,
+                              "line": 25
+                            },
+                            "start": {
+                              "column": 8,
+                              "line": 25
+                            }
+                          }
+                        },
+                        "optional": false,
+                        "range": [
+                          740,
+                          804
+                        ],
+                        "loc": {
+                          "end": {
+                            "column": 72,
+                            "line": 25
+                          },
+                          "start": {
+                            "column": 8,
+                            "line": 25
+                          }
+                        }
+                      },
+                      "range": [
+                        734,
+                        804
+                      ],
+                      "loc": {
+                        "end": {
+                          "column": 72,
+                          "line": 25
+                        },
+                        "start": {
+                          "column": 2,
+                          "line": 25
+                        }
+                      }
+                    },
+                    "range": [
+                      734,
+                      805
+                    ],
+                    "loc": {
+                      "end": {
+                        "column": 73,
+                        "line": 25
+                      },
+                      "start": {
+                        "column": 2,
+                        "line": 25
+                      }
+                    }
+                  }
+                ],
+                "range": [
+                  573,
+                  808
+                ],
+                "loc": {
+                  "end": {
+                    "column": 1,
+                    "line": 26
+                  },
+                  "start": {
+                    "column": 5,
+                    "line": 20
+                  }
+                }
+              },
+              "expression": false,
+              "generator": false,
+              "id": null,
+              "params": [
+                {
+                  "type": "Identifier",
+                  "decorators": [],
+                  "name": "workspaceDataSource",
+                  "optional": false,
+                  "typeAnnotation": {
+                    "type": "TSTypeAnnotation",
+                    "loc": {
+                      "end": {
+                        "column": 33,
+                        "line": 18
+                      },
+                      "start": {
+                        "column": 21,
+                        "line": 18
+                      }
+                    },
+                    "range": [
+                      529,
+                      541
+                    ],
+                    "typeAnnotation": {
+                      "type": "TSTypeReference",
+                      "typeName": {
+                        "type": "Identifier",
+                        "decorators": [],
+                        "name": "DataSource",
+                        "optional": false,
+                        "range": [
+                          531,
+                          541
+                        ],
+                        "loc": {
+                          "end": {
+                            "column": 33,
+                            "line": 18
+                          },
+                          "start": {
+                            "column": 23,
+                            "line": 18
+                          }
+                        }
+                      },
+                      "range": [
+                        531,
+                        541
+                      ],
+                      "loc": {
+                        "end": {
+                          "column": 33,
+                          "line": 18
+                        },
+                        "start": {
+                          "column": 23,
+                          "line": 18
+                        }
+                      }
+                    }
+                  },
+                  "range": [
+                    510,
+                    541
+                  ],
+                  "loc": {
+                    "end": {
+                      "column": 33,
+                      "line": 18
+                    },
+                    "start": {
+                      "column": 2,
+                      "line": 18
+                    }
+                  }
+                },
+                {
+                  "type": "Identifier",
+                  "decorators": [],
+                  "name": "workspaceId",
+                  "optional": false,
+                  "typeAnnotation": {
+                    "type": "TSTypeAnnotation",
+                    "loc": {
+                      "end": {
+                        "column": 21,
+                        "line": 19
+                      },
+                      "start": {
+                        "column": 13,
+                        "line": 19
+                      }
+                    },
+                    "range": [
+                      557,
+                      565
+                    ],
+                    "typeAnnotation": {
+                      "type": "TSStringKeyword",
+                      "range": [
+                        559,
+                        565
+                      ],
+                      "loc": {
+                        "end": {
+                          "column": 21,
+                          "line": 19
+                        },
+                        "start": {
+                          "column": 15,
+                          "line": 19
+                        }
+                      }
+                    }
+                  },
+                  "range": [
+                    546,
+                    565
+                  ],
+                  "loc": {
+                    "end": {
+                      "column": 21,
+                      "line": 19
+                    },
+                    "start": {
+                      "column": 2,
+                      "line": 19
+                    }
+                  }
+                }
+              ],
+              "range": [
+                499,
+                808
+              ],
+              "loc": {
+                "end": {
+                  "column": 1,
+                  "line": 26
+                },
+                "start": {
+                  "column": 30,
+                  "line": 17
+                }
+              }
+            },
+            "range": [
+              482,
+              808
+            ],
+            "loc": {
+              "end": {
+                "column": 1,
+                "line": 26
+              },
+              "start": {
+                "column": 13,
+                "line": 17
+              }
+            }
+          }
+        ],
+        "declare": false,
+        "kind": "const",
+        "range": [
+          476,
+          809
+        ],
+        "loc": {
+          "end": {
+            "column": 2,
+            "line": 26
+          },
+          "start": {
+            "column": 7,
+            "line": 17
+          }
+        }
+      },
+      "exportKind": "value",
+      "source": null,
+      "specifiers": [],
+      "loc": {
+        "end": {
+          "column": 2,
+          "line": 26
+        },
+        "start": {
+          "column": 0,
+          "line": 17
+        }
+      }
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "range": [
+        813,
+        1298
+      ],
+      "attributes": [],
+      "declaration": {
+        "type": "VariableDeclaration",
+        "declarations": [
+          {
+            "type": "VariableDeclarator",
+            "definite": false,
+            "id": {
+              "type": "Identifier",
+              "decorators": [],
+              "name": "deleteCoreSchema",
+              "optional": false,
+              "range": [
+                826,
+                842
+              ],
+              "loc": {
+                "end": {
+                  "column": 29,
+                  "line": 28
+                },
+                "start": {
+                  "column": 13,
+                  "line": 28
+                }
+              }
+            },
+            "init": {
+              "type": "ArrowFunctionExpression",
+              "async": true,
+              "body": {
+                "type": "BlockStatement",
+                "body": [
+                  {
+                    "type": "VariableDeclaration",
+                    "declarations": [
+                      {
+                        "type": "VariableDeclarator",
+                        "definite": false,
+                        "id": {
+                          "type": "Identifier",
+                          "decorators": [],
+                          "name": "schemaName",
+                          "optional": false,
+                          "range": [
+                            930,
+                            940
+                          ],
+                          "loc": {
+                            "end": {
+                              "column": 18,
+                              "line": 32
+                            },
+                            "start": {
+                              "column": 8,
+                              "line": 32
+                            }
+                          }
+                        },
+                        "init": {
+                          "type": "Literal",
+                          "raw": "'core'",
+                          "value": "core",
+                          "range": [
+                            943,
+                            949
+                          ],
+                          "loc": {
+                            "end": {
+                              "column": 27,
+                              "line": 32
+                            },
+                            "start": {
+                              "column": 21,
+                              "line": 32
+                            }
+                          }
+                        },
+                        "range": [
+                          930,
+                          949
+                        ],
+                        "loc": {
+                          "end": {
+                            "column": 27,
+                            "line": 32
+                          },
+                          "start": {
+                            "column": 8,
+                            "line": 32
+                          }
+                        }
+                      }
+                    ],
+                    "declare": false,
+                    "kind": "const",
+                    "range": [
+                      924,
+                      950
+                    ],
+                    "loc": {
+                      "end": {
+                        "column": 28,
+                        "line": 32
+                      },
+                      "start": {
+                        "column": 2,
+                        "line": 32
+                      }
+                    }
+                  },
+                  {
+                    "type": "ExpressionStatement",
+                    "expression": {
+                      "type": "AwaitExpression",
+                      "argument": {
+                        "type": "CallExpression",
+                        "arguments": [
+                          {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "workspaceDataSource",
+                            "optional": false,
+                            "range": [
+                              983,
+                              1002
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 48,
+                                "line": 34
+                              },
+                              "start": {
+                                "column": 29,
+                                "line": 34
+                              }
+                            }
+                          },
+                          {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "schemaName",
+                            "optional": false,
+                            "range": [
+                              1004,
+                              1014
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 60,
+                                "line": 34
+                              },
+                              "start": {
+                                "column": 50,
+                                "line": 34
+                              }
+                            }
+                          },
+                          {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "workspaceId",
+                            "optional": false,
+                            "range": [
+                              1016,
+                              1027
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 73,
+                                "line": 34
+                              },
+                              "start": {
+                                "column": 62,
+                                "line": 34
+                              }
+                            }
+                          }
+                        ],
+                        "callee": {
+                          "type": "Identifier",
+                          "decorators": [],
+                          "name": "deleteUserWorkspaces",
+                          "optional": false,
+                          "range": [
+                            962,
+                            982
+                          ],
+                          "loc": {
+                            "end": {
+                              "column": 28,
+                              "line": 34
+                            },
+                            "start": {
+                              "column": 8,
+                              "line": 34
+                            }
+                          }
+                        },
+                        "optional": false,
+                        "range": [
+                          962,
+                          1028
+                        ],
+                        "loc": {
+                          "end": {
+                            "column": 74,
+                            "line": 34
+                          },
+                          "start": {
+                            "column": 8,
+                            "line": 34
+                          }
+                        }
+                      },
+                      "range": [
+                        956,
+                        1028
+                      ],
+                      "loc": {
+                        "end": {
+                          "column": 74,
+                          "line": 34
+                        },
+                        "start": {
+                          "column": 2,
+                          "line": 34
+                        }
+                      }
+                    },
+                    "range": [
+                      956,
+                      1029
+                    ],
+                    "loc": {
+                      "end": {
+                        "column": 75,
+                        "line": 34
+                      },
+                      "start": {
+                        "column": 2,
+                        "line": 34
+                      }
+                    }
+                  },
+                  {
+                    "type": "ExpressionStatement",
+                    "expression": {
+                      "type": "AwaitExpression",
+                      "argument": {
+                        "type": "CallExpression",
+                        "arguments": [
+                          {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "workspaceDataSource",
+                            "optional": false,
+                            "range": [
+                              1062,
+                              1081
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 50,
+                                "line": 35
+                              },
+                              "start": {
+                                "column": 31,
+                                "line": 35
+                              }
+                            }
+                          },
+                          {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "schemaName",
+                            "optional": false,
+                            "range": [
+                              1083,
+                              1093
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 62,
+                                "line": 35
+                              },
+                              "start": {
+                                "column": 52,
+                                "line": 35
+                              }
+                            }
+                          },
+                          {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "workspaceId",
+                            "optional": false,
+                            "range": [
+                              1095,
+                              1106
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 75,
+                                "line": 35
+                              },
+                              "start": {
+                                "column": 64,
+                                "line": 35
+                              }
+                            }
+                          }
+                        ],
+                        "callee": {
+                          "type": "Identifier",
+                          "decorators": [],
+                          "name": "deleteUsersByWorkspace",
+                          "optional": false,
+                          "range": [
+                            1039,
+                            1061
+                          ],
+                          "loc": {
+                            "end": {
+                              "column": 30,
+                              "line": 35
+                            },
+                            "start": {
+                              "column": 8,
+                              "line": 35
+                            }
+                          }
+                        },
+                        "optional": false,
+                        "range": [
+                          1039,
+                          1107
+                        ],
+                        "loc": {
+                          "end": {
+                            "column": 76,
+                            "line": 35
+                          },
+                          "start": {
+                            "column": 8,
+                            "line": 35
+                          }
+                        }
+                      },
+                      "range": [
+                        1033,
+                        1107
+                      ],
+                      "loc": {
+                        "end": {
+                          "column": 76,
+                          "line": 35
+                        },
+                        "start": {
+                          "column": 2,
+                          "line": 35
+                        }
+                      }
+                    },
+                    "range": [
+                      1033,
+                      1108
+                    ],
+                    "loc": {
+                      "end": {
+                        "column": 77,
+                        "line": 35
+                      },
+                      "start": {
+                        "column": 2,
+                        "line": 35
+                      }
+                    }
+                  },
+                  {
+                    "type": "ExpressionStatement",
+                    "expression": {
+                      "type": "AwaitExpression",
+                      "argument": {
+                        "type": "CallExpression",
+                        "arguments": [
+                          {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "workspaceDataSource",
+                            "optional": false,
+                            "range": [
+                              1137,
+                              1156
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 46,
+                                "line": 36
+                              },
+                              "start": {
+                                "column": 27,
+                                "line": 36
+                              }
+                            }
+                          },
+                          {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "schemaName",
+                            "optional": false,
+                            "range": [
+                              1158,
+                              1168
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 58,
+                                "line": 36
+                              },
+                              "start": {
+                                "column": 48,
+                                "line": 36
+                              }
+                            }
+                          },
+                          {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "workspaceId",
+                            "optional": false,
+                            "range": [
+                              1170,
+                              1181
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 71,
+                                "line": 36
+                              },
+                              "start": {
+                                "column": 60,
+                                "line": 36
+                              }
+                            }
+                          }
+                        ],
+                        "callee": {
+                          "type": "Identifier",
+                          "decorators": [],
+                          "name": "deleteFeatureFlags",
+                          "optional": false,
+                          "range": [
+                            1118,
+                            1136
+                          ],
+                          "loc": {
+                            "end": {
+                              "column": 26,
+                              "line": 36
+                            },
+                            "start": {
+                              "column": 8,
+                              "line": 36
+                            }
+                          }
+                        },
+                        "optional": false,
+                        "range": [
+                          1118,
+                          1182
+                        ],
+                        "loc": {
+                          "end": {
+                            "column": 72,
+                            "line": 36
+                          },
+                          "start": {
+                            "column": 8,
+                            "line": 36
+                          }
+                        }
+                      },
+                      "range": [
+                        1112,
+                        1182
+                      ],
+                      "loc": {
+                        "end": {
+                          "column": 72,
+                          "line": 36
+                        },
+                        "start": {
+                          "column": 2,
+                          "line": 36
+                        }
+                      }
+                    },
+                    "range": [
+                      1112,
+                      1183
+                    ],
+                    "loc": {
+                      "end": {
+                        "column": 73,
+                        "line": 36
+                      },
+                      "start": {
+                        "column": 2,
+                        "line": 36
+                      }
+                    }
+                  },
+                  {
+                    "type": "ExpressionStatement",
+                    "expression": {
+                      "type": "AwaitExpression",
+                      "argument": {
+                        "type": "CallExpression",
+                        "arguments": [
+                          {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "workspaceDataSource",
+                            "optional": false,
+                            "range": [
+                              1248,
+                              1267
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 44,
+                                "line": 38
+                              },
+                              "start": {
+                                "column": 25,
+                                "line": 38
+                              }
+                            }
+                          },
+                          {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "schemaName",
+                            "optional": false,
+                            "range": [
+                              1269,
+                              1279
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 56,
+                                "line": 38
+                              },
+                              "start": {
+                                "column": 46,
+                                "line": 38
+                              }
+                            }
+                          },
+                          {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "workspaceId",
+                            "optional": false,
+                            "range": [
+                              1281,
+                              1292
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 69,
+                                "line": 38
+                              },
+                              "start": {
+                                "column": 58,
+                                "line": 38
+                              }
+                            }
+                          }
+                        ],
+                        "callee": {
+                          "type": "Identifier",
+                          "decorators": [],
+                          "name": "deleteWorkspaces",
+                          "optional": false,
+                          "range": [
+                            1231,
+                            1247
+                          ],
+                          "loc": {
+                            "end": {
+                              "column": 24,
+                              "line": 38
+                            },
+                            "start": {
+                              "column": 8,
+                              "line": 38
+                            }
+                          }
+                        },
+                        "optional": false,
+                        "range": [
+                          1231,
+                          1293
+                        ],
+                        "loc": {
+                          "end": {
+                            "column": 70,
+                            "line": 38
+                          },
+                          "start": {
+                            "column": 8,
+                            "line": 38
+                          }
+                        }
+                      },
+                      "range": [
+                        1225,
+                        1293
+                      ],
+                      "loc": {
+                        "end": {
+                          "column": 70,
+                          "line": 38
+                        },
+                        "start": {
+                          "column": 2,
+                          "line": 38
+                        }
+                      }
+                    },
+                    "range": [
+                      1225,
+                      1294
+                    ],
+                    "loc": {
+                      "end": {
+                        "column": 71,
+                        "line": 38
+                      },
+                      "start": {
+                        "column": 2,
+                        "line": 38
+                      }
+                    }
+                  }
+                ],
+                "range": [
+                  919,
+                  1297
+                ],
+                "loc": {
+                  "end": {
+                    "column": 1,
+                    "line": 39
+                  },
+                  "start": {
+                    "column": 5,
+                    "line": 31
+                  }
+                }
+              },
+              "expression": false,
+              "generator": false,
+              "id": null,
+              "params": [
+                {
+                  "type": "Identifier",
+                  "decorators": [],
+                  "name": "workspaceDataSource",
+                  "optional": false,
+                  "typeAnnotation": {
+                    "type": "TSTypeAnnotation",
+                    "loc": {
+                      "end": {
+                        "column": 33,
+                        "line": 29
+                      },
+                      "start": {
+                        "column": 21,
+                        "line": 29
+                      }
+                    },
+                    "range": [
+                      875,
+                      887
+                    ],
+                    "typeAnnotation": {
+                      "type": "TSTypeReference",
+                      "typeName": {
+                        "type": "Identifier",
+                        "decorators": [],
+                        "name": "DataSource",
+                        "optional": false,
+                        "range": [
+                          877,
+                          887
+                        ],
+                        "loc": {
+                          "end": {
+                            "column": 33,
+                            "line": 29
+                          },
+                          "start": {
+                            "column": 23,
+                            "line": 29
+                          }
+                        }
+                      },
+                      "range": [
+                        877,
+                        887
+                      ],
+                      "loc": {
+                        "end": {
+                          "column": 33,
+                          "line": 29
+                        },
+                        "start": {
+                          "column": 23,
+                          "line": 29
+                        }
+                      }
+                    }
+                  },
+                  "range": [
+                    856,
+                    887
+                  ],
+                  "loc": {
+                    "end": {
+                      "column": 33,
+                      "line": 29
+                    },
+                    "start": {
+                      "column": 2,
+                      "line": 29
+                    }
+                  }
+                },
+                {
+                  "type": "Identifier",
+                  "decorators": [],
+                  "name": "workspaceId",
+                  "optional": false,
+                  "typeAnnotation": {
+                    "type": "TSTypeAnnotation",
+                    "loc": {
+                      "end": {
+                        "column": 21,
+                        "line": 30
+                      },
+                      "start": {
+                        "column": 13,
+                        "line": 30
+                      }
+                    },
+                    "range": [
+                      903,
+                      911
+                    ],
+                    "typeAnnotation": {
+                      "type": "TSStringKeyword",
+                      "range": [
+                        905,
+                        911
+                      ],
+                      "loc": {
+                        "end": {
+                          "column": 21,
+                          "line": 30
+                        },
+                        "start": {
+                          "column": 15,
+                          "line": 30
+                        }
+                      }
+                    }
+                  },
+                  "range": [
+                    892,
+                    911
+                  ],
+                  "loc": {
+                    "end": {
+                      "column": 21,
+                      "line": 30
+                    },
+                    "start": {
+                      "column": 2,
+                      "line": 30
+                    }
+                  }
+                }
+              ],
+              "range": [
+                845,
+                1297
+              ],
+              "loc": {
+                "end": {
+                  "column": 1,
+                  "line": 39
+                },
+                "start": {
+                  "column": 32,
+                  "line": 28
+                }
+              }
+            },
+            "range": [
+              826,
+              1297
+            ],
+            "loc": {
+              "end": {
+                "column": 1,
+                "line": 39
+              },
+              "start": {
+                "column": 13,
+                "line": 28
+              }
+            }
+          }
+        ],
+        "declare": false,
+        "kind": "const",
+        "range": [
+          820,
+          1298
+        ],
+        "loc": {
+          "end": {
+            "column": 2,
+            "line": 39
+          },
+          "start": {
+            "column": 7,
+            "line": 28
+          }
+        }
+      },
+      "exportKind": "value",
+      "source": null,
+      "specifiers": [],
+      "loc": {
+        "end": {
+          "column": 2,
+          "line": 39
+        },
+        "start": {
+          "column": 0,
+          "line": 28
+        }
+      }
+    }
+  ],
+  "comments": [
+    {
+      "type": "Line",
+      "loc": {
+        "end": {
+          "column": 36,
+          "line": 37
+        },
+        "start": {
+          "column": 2,
+          "line": 37
+        }
+      },
+      "range": [
+        1187,
+        1221
+      ],
+      "value": " deleteWorkspaces should be last"
+    }
+  ],
+  "sourceType": "module",
+  "tokens": [
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 1
+        },
+        "start": {
+          "column": 0,
+          "line": 1
+        }
+      },
+      "range": [
+        0,
+        6
+      ],
+      "value": "import"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 1
+        },
+        "start": {
+          "column": 7,
+          "line": 1
+        }
+      },
+      "range": [
+        7,
+        8
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 19,
+          "line": 1
+        },
+        "start": {
+          "column": 9,
+          "line": 1
+        }
+      },
+      "range": [
+        9,
+        19
+      ],
+      "value": "DataSource"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 21,
+          "line": 1
+        },
+        "start": {
+          "column": 20,
+          "line": 1
+        }
+      },
+      "range": [
+        20,
+        21
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 26,
+          "line": 1
+        },
+        "start": {
+          "column": 22,
+          "line": 1
+        }
+      },
+      "range": [
+        22,
+        26
+      ],
+      "value": "from"
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 36,
+          "line": 1
+        },
+        "start": {
+          "column": 27,
+          "line": 1
+        }
+      },
+      "range": [
+        27,
+        36
+      ],
+      "value": "'typeorm'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 37,
+          "line": 1
+        },
+        "start": {
+          "column": 36,
+          "line": 1
+        }
+      },
+      "range": [
+        36,
+        37
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 3
+        },
+        "start": {
+          "column": 0,
+          "line": 3
+        }
+      },
+      "range": [
+        41,
+        47
+      ],
+      "value": "import"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 3
+        },
+        "start": {
+          "column": 7,
+          "line": 3
+        }
+      },
+      "range": [
+        48,
+        49
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 11,
+          "line": 4
+        },
+        "start": {
+          "column": 2,
+          "line": 4
+        }
+      },
+      "range": [
+        53,
+        62
+      ],
+      "value": "seedUsers"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 12,
+          "line": 4
+        },
+        "start": {
+          "column": 11,
+          "line": 4
+        }
+      },
+      "range": [
+        62,
+        63
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 24,
+          "line": 5
+        },
+        "start": {
+          "column": 2,
+          "line": 5
+        }
+      },
+      "range": [
+        67,
+        89
+      ],
+      "value": "deleteUsersByWorkspace"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 25,
+          "line": 5
+        },
+        "start": {
+          "column": 24,
+          "line": 5
+        }
+      },
+      "range": [
+        89,
+        90
+      ],
+      "value": ","
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 1,
+          "line": 6
+        },
+        "start": {
+          "column": 0,
+          "line": 6
+        }
+      },
+      "range": [
+        92,
+        93
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 6
+        },
+        "start": {
+          "column": 2,
+          "line": 6
+        }
+      },
+      "range": [
+        94,
+        98
+      ],
+      "value": "from"
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 51,
+          "line": 6
+        },
+        "start": {
+          "column": 7,
+          "line": 6
+        }
+      },
+      "range": [
+        99,
+        143
+      ],
+      "value": "'src/database/typeorm-seeds/core/demo/users'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 52,
+          "line": 6
+        },
+        "start": {
+          "column": 51,
+          "line": 6
+        }
+      },
+      "range": [
+        143,
+        144
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 7
+        },
+        "start": {
+          "column": 0,
+          "line": 7
+        }
+      },
+      "range": [
+        146,
+        152
+      ],
+      "value": "import"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 7
+        },
+        "start": {
+          "column": 7,
+          "line": 7
+        }
+      },
+      "range": [
+        153,
+        154
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 16,
+          "line": 8
+        },
+        "start": {
+          "column": 2,
+          "line": 8
+        }
+      },
+      "range": [
+        158,
+        172
+      ],
+      "value": "seedWorkspaces"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 17,
+          "line": 8
+        },
+        "start": {
+          "column": 16,
+          "line": 8
+        }
+      },
+      "range": [
+        172,
+        173
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 18,
+          "line": 9
+        },
+        "start": {
+          "column": 2,
+          "line": 9
+        }
+      },
+      "range": [
+        177,
+        193
+      ],
+      "value": "deleteWorkspaces"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 19,
+          "line": 9
+        },
+        "start": {
+          "column": 18,
+          "line": 9
+        }
+      },
+      "range": [
+        193,
+        194
+      ],
+      "value": ","
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 1,
+          "line": 10
+        },
+        "start": {
+          "column": 0,
+          "line": 10
+        }
+      },
+      "range": [
+        196,
+        197
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 10
+        },
+        "start": {
+          "column": 2,
+          "line": 10
+        }
+      },
+      "range": [
+        198,
+        202
+      ],
+      "value": "from"
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 56,
+          "line": 10
+        },
+        "start": {
+          "column": 7,
+          "line": 10
+        }
+      },
+      "range": [
+        203,
+        252
+      ],
+      "value": "'src/database/typeorm-seeds/core/demo/workspaces'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 57,
+          "line": 10
+        },
+        "start": {
+          "column": 56,
+          "line": 10
+        }
+      },
+      "range": [
+        252,
+        253
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 11
+        },
+        "start": {
+          "column": 0,
+          "line": 11
+        }
+      },
+      "range": [
+        255,
+        261
+      ],
+      "value": "import"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 11
+        },
+        "start": {
+          "column": 7,
+          "line": 11
+        }
+      },
+      "range": [
+        262,
+        263
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 27,
+          "line": 11
+        },
+        "start": {
+          "column": 9,
+          "line": 11
+        }
+      },
+      "range": [
+        264,
+        282
+      ],
+      "value": "deleteFeatureFlags"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 29,
+          "line": 11
+        },
+        "start": {
+          "column": 28,
+          "line": 11
+        }
+      },
+      "range": [
+        283,
+        284
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 34,
+          "line": 11
+        },
+        "start": {
+          "column": 30,
+          "line": 11
+        }
+      },
+      "range": [
+        285,
+        289
+      ],
+      "value": "from"
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 87,
+          "line": 11
+        },
+        "start": {
+          "column": 35,
+          "line": 11
+        }
+      },
+      "range": [
+        290,
+        342
+      ],
+      "value": "'src/database/typeorm-seeds/core/demo/feature-flags'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 88,
+          "line": 11
+        },
+        "start": {
+          "column": 87,
+          "line": 11
+        }
+      },
+      "range": [
+        342,
+        343
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 12
+        },
+        "start": {
+          "column": 0,
+          "line": 12
+        }
+      },
+      "range": [
+        345,
+        351
+      ],
+      "value": "import"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 12
+        },
+        "start": {
+          "column": 7,
+          "line": 12
+        }
+      },
+      "range": [
+        352,
+        353
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 22,
+          "line": 13
+        },
+        "start": {
+          "column": 2,
+          "line": 13
+        }
+      },
+      "range": [
+        357,
+        377
+      ],
+      "value": "deleteUserWorkspaces"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 23,
+          "line": 13
+        },
+        "start": {
+          "column": 22,
+          "line": 13
+        }
+      },
+      "range": [
+        377,
+        378
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 20,
+          "line": 14
+        },
+        "start": {
+          "column": 2,
+          "line": 14
+        }
+      },
+      "range": [
+        382,
+        400
+      ],
+      "value": "seedUserWorkspaces"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 21,
+          "line": 14
+        },
+        "start": {
+          "column": 20,
+          "line": 14
+        }
+      },
+      "range": [
+        400,
+        401
+      ],
+      "value": ","
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 1,
+          "line": 15
+        },
+        "start": {
+          "column": 0,
+          "line": 15
+        }
+      },
+      "range": [
+        403,
+        404
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 15
+        },
+        "start": {
+          "column": 2,
+          "line": 15
+        }
+      },
+      "range": [
+        405,
+        409
+      ],
+      "value": "from"
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 61,
+          "line": 15
+        },
+        "start": {
+          "column": 7,
+          "line": 15
+        }
+      },
+      "range": [
+        410,
+        464
+      ],
+      "value": "'src/database/typeorm-seeds/core/demo/user-workspaces'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 62,
+          "line": 15
+        },
+        "start": {
+          "column": 61,
+          "line": 15
+        }
+      },
+      "range": [
+        464,
+        465
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 17
+        },
+        "start": {
+          "column": 0,
+          "line": 17
+        }
+      },
+      "range": [
+        469,
+        475
+      ],
+      "value": "export"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 12,
+          "line": 17
+        },
+        "start": {
+          "column": 7,
+          "line": 17
+        }
+      },
+      "range": [
+        476,
+        481
+      ],
+      "value": "const"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 27,
+          "line": 17
+        },
+        "start": {
+          "column": 13,
+          "line": 17
+        }
+      },
+      "range": [
+        482,
+        496
+      ],
+      "value": "seedCoreSchema"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 29,
+          "line": 17
+        },
+        "start": {
+          "column": 28,
+          "line": 17
+        }
+      },
+      "range": [
+        497,
+        498
+      ],
+      "value": "="
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 35,
+          "line": 17
+        },
+        "start": {
+          "column": 30,
+          "line": 17
+        }
+      },
+      "range": [
+        499,
+        504
+      ],
+      "value": "async"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 37,
+          "line": 17
+        },
+        "start": {
+          "column": 36,
+          "line": 17
+        }
+      },
+      "range": [
+        505,
+        506
+      ],
+      "value": "("
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 21,
+          "line": 18
+        },
+        "start": {
+          "column": 2,
+          "line": 18
+        }
+      },
+      "range": [
+        510,
+        529
+      ],
+      "value": "workspaceDataSource"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 22,
+          "line": 18
+        },
+        "start": {
+          "column": 21,
+          "line": 18
+        }
+      },
+      "range": [
+        529,
+        530
+      ],
+      "value": ":"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 33,
+          "line": 18
+        },
+        "start": {
+          "column": 23,
+          "line": 18
+        }
+      },
+      "range": [
+        531,
+        541
+      ],
+      "value": "DataSource"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 34,
+          "line": 18
+        },
+        "start": {
+          "column": 33,
+          "line": 18
+        }
+      },
+      "range": [
+        541,
+        542
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 13,
+          "line": 19
+        },
+        "start": {
+          "column": 2,
+          "line": 19
+        }
+      },
+      "range": [
+        546,
+        557
+      ],
+      "value": "workspaceId"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 14,
+          "line": 19
+        },
+        "start": {
+          "column": 13,
+          "line": 19
+        }
+      },
+      "range": [
+        557,
+        558
+      ],
+      "value": ":"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 21,
+          "line": 19
+        },
+        "start": {
+          "column": 15,
+          "line": 19
+        }
+      },
+      "range": [
+        559,
+        565
+      ],
+      "value": "string"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 22,
+          "line": 19
+        },
+        "start": {
+          "column": 21,
+          "line": 19
+        }
+      },
+      "range": [
+        565,
+        566
+      ],
+      "value": ","
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 1,
+          "line": 20
+        },
+        "start": {
+          "column": 0,
+          "line": 20
+        }
+      },
+      "range": [
+        568,
+        569
+      ],
+      "value": ")"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 4,
+          "line": 20
+        },
+        "start": {
+          "column": 2,
+          "line": 20
+        }
+      },
+      "range": [
+        570,
+        572
+      ],
+      "value": "=>"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 20
+        },
+        "start": {
+          "column": 5,
+          "line": 20
+        }
+      },
+      "range": [
+        573,
+        574
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 7,
+          "line": 21
+        },
+        "start": {
+          "column": 2,
+          "line": 21
+        }
+      },
+      "range": [
+        578,
+        583
+      ],
+      "value": "const"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 18,
+          "line": 21
+        },
+        "start": {
+          "column": 8,
+          "line": 21
+        }
+      },
+      "range": [
+        584,
+        594
+      ],
+      "value": "schemaName"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 20,
+          "line": 21
+        },
+        "start": {
+          "column": 19,
+          "line": 21
+        }
+      },
+      "range": [
+        595,
+        596
+      ],
+      "value": "="
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 27,
+          "line": 21
+        },
+        "start": {
+          "column": 21,
+          "line": 21
+        }
+      },
+      "range": [
+        597,
+        603
+      ],
+      "value": "'core'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 28,
+          "line": 21
+        },
+        "start": {
+          "column": 27,
+          "line": 21
+        }
+      },
+      "range": [
+        603,
+        604
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 7,
+          "line": 23
+        },
+        "start": {
+          "column": 2,
+          "line": 23
+        }
+      },
+      "range": [
+        610,
+        615
+      ],
+      "value": "await"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 22,
+          "line": 23
+        },
+        "start": {
+          "column": 8,
+          "line": 23
+        }
+      },
+      "range": [
+        616,
+        630
+      ],
+      "value": "seedWorkspaces"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 23,
+          "line": 23
+        },
+        "start": {
+          "column": 22,
+          "line": 23
+        }
+      },
+      "range": [
+        630,
+        631
+      ],
+      "value": "("
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 42,
+          "line": 23
+        },
+        "start": {
+          "column": 23,
+          "line": 23
+        }
+      },
+      "range": [
+        631,
+        650
+      ],
+      "value": "workspaceDataSource"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 43,
+          "line": 23
+        },
+        "start": {
+          "column": 42,
+          "line": 23
+        }
+      },
+      "range": [
+        650,
+        651
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 54,
+          "line": 23
+        },
+        "start": {
+          "column": 44,
+          "line": 23
+        }
+      },
+      "range": [
+        652,
+        662
+      ],
+      "value": "schemaName"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 55,
+          "line": 23
+        },
+        "start": {
+          "column": 54,
+          "line": 23
+        }
+      },
+      "range": [
+        662,
+        663
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 67,
+          "line": 23
+        },
+        "start": {
+          "column": 56,
+          "line": 23
+        }
+      },
+      "range": [
+        664,
+        675
+      ],
+      "value": "workspaceId"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 68,
+          "line": 23
+        },
+        "start": {
+          "column": 67,
+          "line": 23
+        }
+      },
+      "range": [
+        675,
+        676
+      ],
+      "value": ")"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 69,
+          "line": 23
+        },
+        "start": {
+          "column": 68,
+          "line": 23
+        }
+      },
+      "range": [
+        676,
+        677
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 7,
+          "line": 24
+        },
+        "start": {
+          "column": 2,
+          "line": 24
+        }
+      },
+      "range": [
+        681,
+        686
+      ],
+      "value": "await"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 17,
+          "line": 24
+        },
+        "start": {
+          "column": 8,
+          "line": 24
+        }
+      },
+      "range": [
+        687,
+        696
+      ],
+      "value": "seedUsers"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 18,
+          "line": 24
+        },
+        "start": {
+          "column": 17,
+          "line": 24
+        }
+      },
+      "range": [
+        696,
+        697
+      ],
+      "value": "("
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 37,
+          "line": 24
+        },
+        "start": {
+          "column": 18,
+          "line": 24
+        }
+      },
+      "range": [
+        697,
+        716
+      ],
+      "value": "workspaceDataSource"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 38,
+          "line": 24
+        },
+        "start": {
+          "column": 37,
+          "line": 24
+        }
+      },
+      "range": [
+        716,
+        717
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 49,
+          "line": 24
+        },
+        "start": {
+          "column": 39,
+          "line": 24
+        }
+      },
+      "range": [
+        718,
+        728
+      ],
+      "value": "schemaName"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 50,
+          "line": 24
+        },
+        "start": {
+          "column": 49,
+          "line": 24
+        }
+      },
+      "range": [
+        728,
+        729
+      ],
+      "value": ")"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 51,
+          "line": 24
+        },
+        "start": {
+          "column": 50,
+          "line": 24
+        }
+      },
+      "range": [
+        729,
+        730
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 7,
+          "line": 25
+        },
+        "start": {
+          "column": 2,
+          "line": 25
+        }
+      },
+      "range": [
+        734,
+        739
+      ],
+      "value": "await"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 26,
+          "line": 25
+        },
+        "start": {
+          "column": 8,
+          "line": 25
+        }
+      },
+      "range": [
+        740,
+        758
+      ],
+      "value": "seedUserWorkspaces"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 27,
+          "line": 25
+        },
+        "start": {
+          "column": 26,
+          "line": 25
+        }
+      },
+      "range": [
+        758,
+        759
+      ],
+      "value": "("
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 46,
+          "line": 25
+        },
+        "start": {
+          "column": 27,
+          "line": 25
+        }
+      },
+      "range": [
+        759,
+        778
+      ],
+      "value": "workspaceDataSource"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 47,
+          "line": 25
+        },
+        "start": {
+          "column": 46,
+          "line": 25
+        }
+      },
+      "range": [
+        778,
+        779
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 58,
+          "line": 25
+        },
+        "start": {
+          "column": 48,
+          "line": 25
+        }
+      },
+      "range": [
+        780,
+        790
+      ],
+      "value": "schemaName"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 59,
+          "line": 25
+        },
+        "start": {
+          "column": 58,
+          "line": 25
+        }
+      },
+      "range": [
+        790,
+        791
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 71,
+          "line": 25
+        },
+        "start": {
+          "column": 60,
+          "line": 25
+        }
+      },
+      "range": [
+        792,
+        803
+      ],
+      "value": "workspaceId"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 72,
+          "line": 25
+        },
+        "start": {
+          "column": 71,
+          "line": 25
+        }
+      },
+      "range": [
+        803,
+        804
+      ],
+      "value": ")"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 73,
+          "line": 25
+        },
+        "start": {
+          "column": 72,
+          "line": 25
+        }
+      },
+      "range": [
+        804,
+        805
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 1,
+          "line": 26
+        },
+        "start": {
+          "column": 0,
+          "line": 26
+        }
+      },
+      "range": [
+        807,
+        808
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 2,
+          "line": 26
+        },
+        "start": {
+          "column": 1,
+          "line": 26
+        }
+      },
+      "range": [
+        808,
+        809
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 28
+        },
+        "start": {
+          "column": 0,
+          "line": 28
+        }
+      },
+      "range": [
+        813,
+        819
+      ],
+      "value": "export"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 12,
+          "line": 28
+        },
+        "start": {
+          "column": 7,
+          "line": 28
+        }
+      },
+      "range": [
+        820,
+        825
+      ],
+      "value": "const"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 29,
+          "line": 28
+        },
+        "start": {
+          "column": 13,
+          "line": 28
+        }
+      },
+      "range": [
+        826,
+        842
+      ],
+      "value": "deleteCoreSchema"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 31,
+          "line": 28
+        },
+        "start": {
+          "column": 30,
+          "line": 28
+        }
+      },
+      "range": [
+        843,
+        844
+      ],
+      "value": "="
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 37,
+          "line": 28
+        },
+        "start": {
+          "column": 32,
+          "line": 28
+        }
+      },
+      "range": [
+        845,
+        850
+      ],
+      "value": "async"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 39,
+          "line": 28
+        },
+        "start": {
+          "column": 38,
+          "line": 28
+        }
+      },
+      "range": [
+        851,
+        852
+      ],
+      "value": "("
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 21,
+          "line": 29
+        },
+        "start": {
+          "column": 2,
+          "line": 29
+        }
+      },
+      "range": [
+        856,
+        875
+      ],
+      "value": "workspaceDataSource"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 22,
+          "line": 29
+        },
+        "start": {
+          "column": 21,
+          "line": 29
+        }
+      },
+      "range": [
+        875,
+        876
+      ],
+      "value": ":"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 33,
+          "line": 29
+        },
+        "start": {
+          "column": 23,
+          "line": 29
+        }
+      },
+      "range": [
+        877,
+        887
+      ],
+      "value": "DataSource"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 34,
+          "line": 29
+        },
+        "start": {
+          "column": 33,
+          "line": 29
+        }
+      },
+      "range": [
+        887,
+        888
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 13,
+          "line": 30
+        },
+        "start": {
+          "column": 2,
+          "line": 30
+        }
+      },
+      "range": [
+        892,
+        903
+      ],
+      "value": "workspaceId"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 14,
+          "line": 30
+        },
+        "start": {
+          "column": 13,
+          "line": 30
+        }
+      },
+      "range": [
+        903,
+        904
+      ],
+      "value": ":"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 21,
+          "line": 30
+        },
+        "start": {
+          "column": 15,
+          "line": 30
+        }
+      },
+      "range": [
+        905,
+        911
+      ],
+      "value": "string"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 22,
+          "line": 30
+        },
+        "start": {
+          "column": 21,
+          "line": 30
+        }
+      },
+      "range": [
+        911,
+        912
+      ],
+      "value": ","
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 1,
+          "line": 31
+        },
+        "start": {
+          "column": 0,
+          "line": 31
+        }
+      },
+      "range": [
+        914,
+        915
+      ],
+      "value": ")"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 4,
+          "line": 31
+        },
+        "start": {
+          "column": 2,
+          "line": 31
+        }
+      },
+      "range": [
+        916,
+        918
+      ],
+      "value": "=>"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 31
+        },
+        "start": {
+          "column": 5,
+          "line": 31
+        }
+      },
+      "range": [
+        919,
+        920
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 7,
+          "line": 32
+        },
+        "start": {
+          "column": 2,
+          "line": 32
+        }
+      },
+      "range": [
+        924,
+        929
+      ],
+      "value": "const"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 18,
+          "line": 32
+        },
+        "start": {
+          "column": 8,
+          "line": 32
+        }
+      },
+      "range": [
+        930,
+        940
+      ],
+      "value": "schemaName"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 20,
+          "line": 32
+        },
+        "start": {
+          "column": 19,
+          "line": 32
+        }
+      },
+      "range": [
+        941,
+        942
+      ],
+      "value": "="
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 27,
+          "line": 32
+        },
+        "start": {
+          "column": 21,
+          "line": 32
+        }
+      },
+      "range": [
+        943,
+        949
+      ],
+      "value": "'core'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 28,
+          "line": 32
+        },
+        "start": {
+          "column": 27,
+          "line": 32
+        }
+      },
+      "range": [
+        949,
+        950
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 7,
+          "line": 34
+        },
+        "start": {
+          "column": 2,
+          "line": 34
+        }
+      },
+      "range": [
+        956,
+        961
+      ],
+      "value": "await"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 28,
+          "line": 34
+        },
+        "start": {
+          "column": 8,
+          "line": 34
+        }
+      },
+      "range": [
+        962,
+        982
+      ],
+      "value": "deleteUserWorkspaces"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 29,
+          "line": 34
+        },
+        "start": {
+          "column": 28,
+          "line": 34
+        }
+      },
+      "range": [
+        982,
+        983
+      ],
+      "value": "("
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 48,
+          "line": 34
+        },
+        "start": {
+          "column": 29,
+          "line": 34
+        }
+      },
+      "range": [
+        983,
+        1002
+      ],
+      "value": "workspaceDataSource"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 49,
+          "line": 34
+        },
+        "start": {
+          "column": 48,
+          "line": 34
+        }
+      },
+      "range": [
+        1002,
+        1003
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 60,
+          "line": 34
+        },
+        "start": {
+          "column": 50,
+          "line": 34
+        }
+      },
+      "range": [
+        1004,
+        1014
+      ],
+      "value": "schemaName"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 61,
+          "line": 34
+        },
+        "start": {
+          "column": 60,
+          "line": 34
+        }
+      },
+      "range": [
+        1014,
+        1015
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 73,
+          "line": 34
+        },
+        "start": {
+          "column": 62,
+          "line": 34
+        }
+      },
+      "range": [
+        1016,
+        1027
+      ],
+      "value": "workspaceId"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 74,
+          "line": 34
+        },
+        "start": {
+          "column": 73,
+          "line": 34
+        }
+      },
+      "range": [
+        1027,
+        1028
+      ],
+      "value": ")"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 75,
+          "line": 34
+        },
+        "start": {
+          "column": 74,
+          "line": 34
+        }
+      },
+      "range": [
+        1028,
+        1029
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 7,
+          "line": 35
+        },
+        "start": {
+          "column": 2,
+          "line": 35
+        }
+      },
+      "range": [
+        1033,
+        1038
+      ],
+      "value": "await"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 30,
+          "line": 35
+        },
+        "start": {
+          "column": 8,
+          "line": 35
+        }
+      },
+      "range": [
+        1039,
+        1061
+      ],
+      "value": "deleteUsersByWorkspace"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 31,
+          "line": 35
+        },
+        "start": {
+          "column": 30,
+          "line": 35
+        }
+      },
+      "range": [
+        1061,
+        1062
+      ],
+      "value": "("
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 50,
+          "line": 35
+        },
+        "start": {
+          "column": 31,
+          "line": 35
+        }
+      },
+      "range": [
+        1062,
+        1081
+      ],
+      "value": "workspaceDataSource"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 51,
+          "line": 35
+        },
+        "start": {
+          "column": 50,
+          "line": 35
+        }
+      },
+      "range": [
+        1081,
+        1082
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 62,
+          "line": 35
+        },
+        "start": {
+          "column": 52,
+          "line": 35
+        }
+      },
+      "range": [
+        1083,
+        1093
+      ],
+      "value": "schemaName"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 63,
+          "line": 35
+        },
+        "start": {
+          "column": 62,
+          "line": 35
+        }
+      },
+      "range": [
+        1093,
+        1094
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 75,
+          "line": 35
+        },
+        "start": {
+          "column": 64,
+          "line": 35
+        }
+      },
+      "range": [
+        1095,
+        1106
+      ],
+      "value": "workspaceId"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 76,
+          "line": 35
+        },
+        "start": {
+          "column": 75,
+          "line": 35
+        }
+      },
+      "range": [
+        1106,
+        1107
+      ],
+      "value": ")"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 77,
+          "line": 35
+        },
+        "start": {
+          "column": 76,
+          "line": 35
+        }
+      },
+      "range": [
+        1107,
+        1108
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 7,
+          "line": 36
+        },
+        "start": {
+          "column": 2,
+          "line": 36
+        }
+      },
+      "range": [
+        1112,
+        1117
+      ],
+      "value": "await"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 26,
+          "line": 36
+        },
+        "start": {
+          "column": 8,
+          "line": 36
+        }
+      },
+      "range": [
+        1118,
+        1136
+      ],
+      "value": "deleteFeatureFlags"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 27,
+          "line": 36
+        },
+        "start": {
+          "column": 26,
+          "line": 36
+        }
+      },
+      "range": [
+        1136,
+        1137
+      ],
+      "value": "("
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 46,
+          "line": 36
+        },
+        "start": {
+          "column": 27,
+          "line": 36
+        }
+      },
+      "range": [
+        1137,
+        1156
+      ],
+      "value": "workspaceDataSource"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 47,
+          "line": 36
+        },
+        "start": {
+          "column": 46,
+          "line": 36
+        }
+      },
+      "range": [
+        1156,
+        1157
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 58,
+          "line": 36
+        },
+        "start": {
+          "column": 48,
+          "line": 36
+        }
+      },
+      "range": [
+        1158,
+        1168
+      ],
+      "value": "schemaName"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 59,
+          "line": 36
+        },
+        "start": {
+          "column": 58,
+          "line": 36
+        }
+      },
+      "range": [
+        1168,
+        1169
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 71,
+          "line": 36
+        },
+        "start": {
+          "column": 60,
+          "line": 36
+        }
+      },
+      "range": [
+        1170,
+        1181
+      ],
+      "value": "workspaceId"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 72,
+          "line": 36
+        },
+        "start": {
+          "column": 71,
+          "line": 36
+        }
+      },
+      "range": [
+        1181,
+        1182
+      ],
+      "value": ")"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 73,
+          "line": 36
+        },
+        "start": {
+          "column": 72,
+          "line": 36
+        }
+      },
+      "range": [
+        1182,
+        1183
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 7,
+          "line": 38
+        },
+        "start": {
+          "column": 2,
+          "line": 38
+        }
+      },
+      "range": [
+        1225,
+        1230
+      ],
+      "value": "await"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 24,
+          "line": 38
+        },
+        "start": {
+          "column": 8,
+          "line": 38
+        }
+      },
+      "range": [
+        1231,
+        1247
+      ],
+      "value": "deleteWorkspaces"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 25,
+          "line": 38
+        },
+        "start": {
+          "column": 24,
+          "line": 38
+        }
+      },
+      "range": [
+        1247,
+        1248
+      ],
+      "value": "("
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 44,
+          "line": 38
+        },
+        "start": {
+          "column": 25,
+          "line": 38
+        }
+      },
+      "range": [
+        1248,
+        1267
+      ],
+      "value": "workspaceDataSource"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 45,
+          "line": 38
+        },
+        "start": {
+          "column": 44,
+          "line": 38
+        }
+      },
+      "range": [
+        1267,
+        1268
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 56,
+          "line": 38
+        },
+        "start": {
+          "column": 46,
+          "line": 38
+        }
+      },
+      "range": [
+        1269,
+        1279
+      ],
+      "value": "schemaName"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 57,
+          "line": 38
+        },
+        "start": {
+          "column": 56,
+          "line": 38
+        }
+      },
+      "range": [
+        1279,
+        1280
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 69,
+          "line": 38
+        },
+        "start": {
+          "column": 58,
+          "line": 38
+        }
+      },
+      "range": [
+        1281,
+        1292
+      ],
+      "value": "workspaceId"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 70,
+          "line": 38
+        },
+        "start": {
+          "column": 69,
+          "line": 38
+        }
+      },
+      "range": [
+        1292,
+        1293
+      ],
+      "value": ")"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 71,
+          "line": 38
+        },
+        "start": {
+          "column": 70,
+          "line": 38
+        }
+      },
+      "range": [
+        1293,
+        1294
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 1,
+          "line": 39
+        },
+        "start": {
+          "column": 0,
+          "line": 39
+        }
+      },
+      "range": [
+        1296,
+        1297
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 2,
+          "line": 39
+        },
+        "start": {
+          "column": 1,
+          "line": 39
+        }
+      },
+      "range": [
+        1297,
+        1298
+      ],
+      "value": ";"
+    }
+  ],
+  "loc": {
+    "end": {
+      "column": 0,
+      "line": 40
+    },
+    "start": {
+      "column": 0,
+      "line": 1
+    }
+  }
+}

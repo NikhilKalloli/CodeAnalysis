@@ -1,0 +1,7430 @@
+{
+  "type": "Program",
+  "range": [
+    29,
+    2080
+  ],
+  "body": [
+    {
+      "type": "ImportDeclaration",
+      "attributes": [],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "raw": "'@nestjs/common'",
+        "value": "@nestjs/common",
+        "range": [
+          64,
+          80
+        ],
+        "loc": {
+          "end": {
+            "column": 51,
+            "line": 3
+          },
+          "start": {
+            "column": 35,
+            "line": 3
+          }
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "Injectable",
+            "optional": false,
+            "range": [
+              38,
+              48
+            ],
+            "loc": {
+              "end": {
+                "column": 19,
+                "line": 3
+              },
+              "start": {
+                "column": 9,
+                "line": 3
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "Injectable",
+            "optional": false,
+            "range": [
+              38,
+              48
+            ],
+            "loc": {
+              "end": {
+                "column": 19,
+                "line": 3
+              },
+              "start": {
+                "column": 9,
+                "line": 3
+              }
+            }
+          },
+          "range": [
+            38,
+            48
+          ],
+          "loc": {
+            "end": {
+              "column": 19,
+              "line": 3
+            },
+            "start": {
+              "column": 9,
+              "line": 3
+            }
+          }
+        },
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "Logger",
+            "optional": false,
+            "range": [
+              50,
+              56
+            ],
+            "loc": {
+              "end": {
+                "column": 27,
+                "line": 3
+              },
+              "start": {
+                "column": 21,
+                "line": 3
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "Logger",
+            "optional": false,
+            "range": [
+              50,
+              56
+            ],
+            "loc": {
+              "end": {
+                "column": 27,
+                "line": 3
+              },
+              "start": {
+                "column": 21,
+                "line": 3
+              }
+            }
+          },
+          "range": [
+            50,
+            56
+          ],
+          "loc": {
+            "end": {
+              "column": 27,
+              "line": 3
+            },
+            "start": {
+              "column": 21,
+              "line": 3
+            }
+          }
+        }
+      ],
+      "range": [
+        29,
+        81
+      ],
+      "loc": {
+        "end": {
+          "column": 52,
+          "line": 3
+        },
+        "start": {
+          "column": 0,
+          "line": 3
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "attributes": [],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "raw": "'@nestjs/typeorm'",
+        "value": "@nestjs/typeorm",
+        "range": [
+          116,
+          133
+        ],
+        "loc": {
+          "end": {
+            "column": 50,
+            "line": 4
+          },
+          "start": {
+            "column": 33,
+            "line": 4
+          }
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "InjectRepository",
+            "optional": false,
+            "range": [
+              92,
+              108
+            ],
+            "loc": {
+              "end": {
+                "column": 25,
+                "line": 4
+              },
+              "start": {
+                "column": 9,
+                "line": 4
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "InjectRepository",
+            "optional": false,
+            "range": [
+              92,
+              108
+            ],
+            "loc": {
+              "end": {
+                "column": 25,
+                "line": 4
+              },
+              "start": {
+                "column": 9,
+                "line": 4
+              }
+            }
+          },
+          "range": [
+            92,
+            108
+          ],
+          "loc": {
+            "end": {
+              "column": 25,
+              "line": 4
+            },
+            "start": {
+              "column": 9,
+              "line": 4
+            }
+          }
+        }
+      ],
+      "range": [
+        83,
+        134
+      ],
+      "loc": {
+        "end": {
+          "column": 51,
+          "line": 4
+        },
+        "start": {
+          "column": 0,
+          "line": 4
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "attributes": [],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "raw": "'stripe'",
+        "value": "stripe",
+        "range": [
+          157,
+          165
+        ],
+        "loc": {
+          "end": {
+            "column": 27,
+            "line": 6
+          },
+          "start": {
+            "column": 19,
+            "line": 6
+          }
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "range": [
+            145,
+            151
+          ],
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "Stripe",
+            "optional": false,
+            "range": [
+              145,
+              151
+            ],
+            "loc": {
+              "end": {
+                "column": 13,
+                "line": 6
+              },
+              "start": {
+                "column": 7,
+                "line": 6
+              }
+            }
+          },
+          "loc": {
+            "end": {
+              "column": 13,
+              "line": 6
+            },
+            "start": {
+              "column": 7,
+              "line": 6
+            }
+          }
+        }
+      ],
+      "range": [
+        138,
+        166
+      ],
+      "loc": {
+        "end": {
+          "column": 28,
+          "line": 6
+        },
+        "start": {
+          "column": 0,
+          "line": 6
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "attributes": [],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "raw": "'typeorm'",
+        "value": "typeorm",
+        "range": [
+          195,
+          204
+        ],
+        "loc": {
+          "end": {
+            "column": 36,
+            "line": 7
+          },
+          "start": {
+            "column": 27,
+            "line": 7
+          }
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "Repository",
+            "optional": false,
+            "range": [
+              177,
+              187
+            ],
+            "loc": {
+              "end": {
+                "column": 19,
+                "line": 7
+              },
+              "start": {
+                "column": 9,
+                "line": 7
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "Repository",
+            "optional": false,
+            "range": [
+              177,
+              187
+            ],
+            "loc": {
+              "end": {
+                "column": 19,
+                "line": 7
+              },
+              "start": {
+                "column": 9,
+                "line": 7
+              }
+            }
+          },
+          "range": [
+            177,
+            187
+          ],
+          "loc": {
+            "end": {
+              "column": 19,
+              "line": 7
+            },
+            "start": {
+              "column": 9,
+              "line": 7
+            }
+          }
+        }
+      ],
+      "range": [
+        168,
+        205
+      ],
+      "loc": {
+        "end": {
+          "column": 37,
+          "line": 7
+        },
+        "start": {
+          "column": 0,
+          "line": 7
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "attributes": [],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "raw": "'src/engine/core-modules/billing/billing.exception'",
+        "value": "src/engine/core-modules/billing/billing.exception",
+        "range": [
+          272,
+          323
+        ],
+        "loc": {
+          "end": {
+            "column": 58,
+            "line": 12
+          },
+          "start": {
+            "column": 7,
+            "line": 12
+          }
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "BillingException",
+            "optional": false,
+            "range": [
+              221,
+              237
+            ],
+            "loc": {
+              "end": {
+                "column": 18,
+                "line": 10
+              },
+              "start": {
+                "column": 2,
+                "line": 10
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "BillingException",
+            "optional": false,
+            "range": [
+              221,
+              237
+            ],
+            "loc": {
+              "end": {
+                "column": 18,
+                "line": 10
+              },
+              "start": {
+                "column": 2,
+                "line": 10
+              }
+            }
+          },
+          "range": [
+            221,
+            237
+          ],
+          "loc": {
+            "end": {
+              "column": 18,
+              "line": 10
+            },
+            "start": {
+              "column": 2,
+              "line": 10
+            }
+          }
+        },
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "BillingExceptionCode",
+            "optional": false,
+            "range": [
+              242,
+              262
+            ],
+            "loc": {
+              "end": {
+                "column": 22,
+                "line": 11
+              },
+              "start": {
+                "column": 2,
+                "line": 11
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "BillingExceptionCode",
+            "optional": false,
+            "range": [
+              242,
+              262
+            ],
+            "loc": {
+              "end": {
+                "column": 22,
+                "line": 11
+              },
+              "start": {
+                "column": 2,
+                "line": 11
+              }
+            }
+          },
+          "range": [
+            242,
+            262
+          ],
+          "loc": {
+            "end": {
+              "column": 22,
+              "line": 11
+            },
+            "start": {
+              "column": 2,
+              "line": 11
+            }
+          }
+        }
+      ],
+      "range": [
+        209,
+        324
+      ],
+      "loc": {
+        "end": {
+          "column": 59,
+          "line": 12
+        },
+        "start": {
+          "column": 0,
+          "line": 9
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "attributes": [],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "raw": "'src/engine/core-modules/billing/entities/billing-entitlement.entity'",
+        "value": "src/engine/core-modules/billing/entities/billing-entitlement.entity",
+        "range": [
+          361,
+          430
+        ],
+        "loc": {
+          "end": {
+            "column": 104,
+            "line": 13
+          },
+          "start": {
+            "column": 35,
+            "line": 13
+          }
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "BillingEntitlement",
+            "optional": false,
+            "range": [
+              335,
+              353
+            ],
+            "loc": {
+              "end": {
+                "column": 27,
+                "line": 13
+              },
+              "start": {
+                "column": 9,
+                "line": 13
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "BillingEntitlement",
+            "optional": false,
+            "range": [
+              335,
+              353
+            ],
+            "loc": {
+              "end": {
+                "column": 27,
+                "line": 13
+              },
+              "start": {
+                "column": 9,
+                "line": 13
+              }
+            }
+          },
+          "range": [
+            335,
+            353
+          ],
+          "loc": {
+            "end": {
+              "column": 27,
+              "line": 13
+            },
+            "start": {
+              "column": 9,
+              "line": 13
+            }
+          }
+        }
+      ],
+      "range": [
+        326,
+        431
+      ],
+      "loc": {
+        "end": {
+          "column": 105,
+          "line": 13
+        },
+        "start": {
+          "column": 0,
+          "line": 13
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "attributes": [],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "raw": "'src/engine/core-modules/billing/entities/billing-subscription.entity'",
+        "value": "src/engine/core-modules/billing/entities/billing-subscription.entity",
+        "range": [
+          469,
+          539
+        ],
+        "loc": {
+          "end": {
+            "column": 106,
+            "line": 14
+          },
+          "start": {
+            "column": 36,
+            "line": 14
+          }
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "BillingSubscription",
+            "optional": false,
+            "range": [
+              442,
+              461
+            ],
+            "loc": {
+              "end": {
+                "column": 28,
+                "line": 14
+              },
+              "start": {
+                "column": 9,
+                "line": 14
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "BillingSubscription",
+            "optional": false,
+            "range": [
+              442,
+              461
+            ],
+            "loc": {
+              "end": {
+                "column": 28,
+                "line": 14
+              },
+              "start": {
+                "column": 9,
+                "line": 14
+              }
+            }
+          },
+          "range": [
+            442,
+            461
+          ],
+          "loc": {
+            "end": {
+              "column": 28,
+              "line": 14
+            },
+            "start": {
+              "column": 9,
+              "line": 14
+            }
+          }
+        }
+      ],
+      "range": [
+        433,
+        540
+      ],
+      "loc": {
+        "end": {
+          "column": 107,
+          "line": 14
+        },
+        "start": {
+          "column": 0,
+          "line": 14
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "attributes": [],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "raw": "'src/engine/core-modules/billing/webhooks/utils/transform-stripe-entitlement-updated-event-to-database-entitlement.util'",
+        "value": "src/engine/core-modules/billing/webhooks/utils/transform-stripe-entitlement-updated-event-to-database-entitlement.util",
+        "range": [
+          618,
+          738
+        ],
+        "loc": {
+          "end": {
+            "column": 196,
+            "line": 15
+          },
+          "start": {
+            "column": 76,
+            "line": 15
+          }
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "imported": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "transformStripeEntitlementUpdatedEventToDatabaseEntitlement",
+            "optional": false,
+            "range": [
+              551,
+              610
+            ],
+            "loc": {
+              "end": {
+                "column": 68,
+                "line": 15
+              },
+              "start": {
+                "column": 9,
+                "line": 15
+              }
+            }
+          },
+          "importKind": "value",
+          "local": {
+            "type": "Identifier",
+            "decorators": [],
+            "name": "transformStripeEntitlementUpdatedEventToDatabaseEntitlement",
+            "optional": false,
+            "range": [
+              551,
+              610
+            ],
+            "loc": {
+              "end": {
+                "column": 68,
+                "line": 15
+              },
+              "start": {
+                "column": 9,
+                "line": 15
+              }
+            }
+          },
+          "range": [
+            551,
+            610
+          ],
+          "loc": {
+            "end": {
+              "column": 68,
+              "line": 15
+            },
+            "start": {
+              "column": 9,
+              "line": 15
+            }
+          }
+        }
+      ],
+      "range": [
+        542,
+        739
+      ],
+      "loc": {
+        "end": {
+          "column": 197,
+          "line": 15
+        },
+        "start": {
+          "column": 0,
+          "line": 15
+        }
+      }
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "range": [
+        756,
+        2078
+      ],
+      "attributes": [],
+      "declaration": {
+        "type": "ClassDeclaration",
+        "abstract": false,
+        "body": {
+          "type": "ClassBody",
+          "range": [
+            802,
+            2078
+          ],
+          "body": [
+            {
+              "type": "PropertyDefinition",
+              "accessibility": "protected",
+              "computed": false,
+              "declare": false,
+              "decorators": [],
+              "definite": false,
+              "key": {
+                "type": "Identifier",
+                "decorators": [],
+                "name": "logger",
+                "optional": false,
+                "range": [
+                  826,
+                  832
+                ],
+                "loc": {
+                  "end": {
+                    "column": 27,
+                    "line": 18
+                  },
+                  "start": {
+                    "column": 21,
+                    "line": 18
+                  }
+                }
+              },
+              "optional": false,
+              "override": false,
+              "readonly": true,
+              "static": false,
+              "value": {
+                "type": "NewExpression",
+                "arguments": [
+                  {
+                    "type": "MemberExpression",
+                    "computed": false,
+                    "object": {
+                      "type": "Identifier",
+                      "decorators": [],
+                      "name": "BillingWebhookEntitlementService",
+                      "optional": false,
+                      "range": [
+                        846,
+                        878
+                      ],
+                      "loc": {
+                        "end": {
+                          "column": 73,
+                          "line": 18
+                        },
+                        "start": {
+                          "column": 41,
+                          "line": 18
+                        }
+                      }
+                    },
+                    "optional": false,
+                    "property": {
+                      "type": "Identifier",
+                      "decorators": [],
+                      "name": "name",
+                      "optional": false,
+                      "range": [
+                        879,
+                        883
+                      ],
+                      "loc": {
+                        "end": {
+                          "column": 78,
+                          "line": 18
+                        },
+                        "start": {
+                          "column": 74,
+                          "line": 18
+                        }
+                      }
+                    },
+                    "range": [
+                      846,
+                      883
+                    ],
+                    "loc": {
+                      "end": {
+                        "column": 78,
+                        "line": 18
+                      },
+                      "start": {
+                        "column": 41,
+                        "line": 18
+                      }
+                    }
+                  }
+                ],
+                "callee": {
+                  "type": "Identifier",
+                  "decorators": [],
+                  "name": "Logger",
+                  "optional": false,
+                  "range": [
+                    839,
+                    845
+                  ],
+                  "loc": {
+                    "end": {
+                      "column": 40,
+                      "line": 18
+                    },
+                    "start": {
+                      "column": 34,
+                      "line": 18
+                    }
+                  }
+                },
+                "range": [
+                  835,
+                  884
+                ],
+                "loc": {
+                  "end": {
+                    "column": 79,
+                    "line": 18
+                  },
+                  "start": {
+                    "column": 30,
+                    "line": 18
+                  }
+                }
+              },
+              "range": [
+                807,
+                885
+              ],
+              "loc": {
+                "end": {
+                  "column": 80,
+                  "line": 18
+                },
+                "start": {
+                  "column": 2,
+                  "line": 18
+                }
+              }
+            },
+            {
+              "type": "MethodDefinition",
+              "computed": false,
+              "decorators": [],
+              "key": {
+                "type": "Identifier",
+                "range": [
+                  889,
+                  900
+                ],
+                "decorators": [],
+                "name": "constructor",
+                "optional": false,
+                "loc": {
+                  "end": {
+                    "column": 13,
+                    "line": 19
+                  },
+                  "start": {
+                    "column": 2,
+                    "line": 19
+                  }
+                }
+              },
+              "kind": "constructor",
+              "optional": false,
+              "override": false,
+              "static": false,
+              "value": {
+                "type": "FunctionExpression",
+                "range": [
+                  900,
+                  1182
+                ],
+                "async": false,
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [],
+                  "range": [
+                    1180,
+                    1182
+                  ],
+                  "loc": {
+                    "end": {
+                      "column": 6,
+                      "line": 24
+                    },
+                    "start": {
+                      "column": 4,
+                      "line": 24
+                    }
+                  }
+                },
+                "declare": false,
+                "expression": false,
+                "generator": false,
+                "id": null,
+                "params": [
+                  {
+                    "type": "TSParameterProperty",
+                    "accessibility": "private",
+                    "decorators": [
+                      {
+                        "type": "Decorator",
+                        "expression": {
+                          "type": "CallExpression",
+                          "arguments": [
+                            {
+                              "type": "Identifier",
+                              "decorators": [],
+                              "name": "BillingSubscription",
+                              "optional": false,
+                              "range": [
+                                925,
+                                944
+                              ],
+                              "loc": {
+                                "end": {
+                                  "column": 41,
+                                  "line": 20
+                                },
+                                "start": {
+                                  "column": 22,
+                                  "line": 20
+                                }
+                              }
+                            },
+                            {
+                              "type": "Literal",
+                              "raw": "'core'",
+                              "value": "core",
+                              "range": [
+                                946,
+                                952
+                              ],
+                              "loc": {
+                                "end": {
+                                  "column": 49,
+                                  "line": 20
+                                },
+                                "start": {
+                                  "column": 43,
+                                  "line": 20
+                                }
+                              }
+                            }
+                          ],
+                          "callee": {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "InjectRepository",
+                            "optional": false,
+                            "range": [
+                              908,
+                              924
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 21,
+                                "line": 20
+                              },
+                              "start": {
+                                "column": 5,
+                                "line": 20
+                              }
+                            }
+                          },
+                          "optional": false,
+                          "range": [
+                            908,
+                            953
+                          ],
+                          "loc": {
+                            "end": {
+                              "column": 50,
+                              "line": 20
+                            },
+                            "start": {
+                              "column": 5,
+                              "line": 20
+                            }
+                          }
+                        },
+                        "range": [
+                          907,
+                          953
+                        ],
+                        "loc": {
+                          "end": {
+                            "column": 50,
+                            "line": 20
+                          },
+                          "start": {
+                            "column": 4,
+                            "line": 20
+                          }
+                        }
+                      }
+                    ],
+                    "override": false,
+                    "parameter": {
+                      "type": "Identifier",
+                      "decorators": [],
+                      "name": "billingSubscriptionRepository",
+                      "optional": false,
+                      "typeAnnotation": {
+                        "type": "TSTypeAnnotation",
+                        "loc": {
+                          "end": {
+                            "column": 83,
+                            "line": 21
+                          },
+                          "start": {
+                            "column": 50,
+                            "line": 21
+                          }
+                        },
+                        "range": [
+                          1005,
+                          1038
+                        ],
+                        "typeAnnotation": {
+                          "type": "TSTypeReference",
+                          "typeArguments": {
+                            "type": "TSTypeParameterInstantiation",
+                            "range": [
+                              1017,
+                              1038
+                            ],
+                            "params": [
+                              {
+                                "type": "TSTypeReference",
+                                "typeName": {
+                                  "type": "Identifier",
+                                  "decorators": [],
+                                  "name": "BillingSubscription",
+                                  "optional": false,
+                                  "range": [
+                                    1018,
+                                    1037
+                                  ],
+                                  "loc": {
+                                    "end": {
+                                      "column": 82,
+                                      "line": 21
+                                    },
+                                    "start": {
+                                      "column": 63,
+                                      "line": 21
+                                    }
+                                  }
+                                },
+                                "range": [
+                                  1018,
+                                  1037
+                                ],
+                                "loc": {
+                                  "end": {
+                                    "column": 82,
+                                    "line": 21
+                                  },
+                                  "start": {
+                                    "column": 63,
+                                    "line": 21
+                                  }
+                                }
+                              }
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 83,
+                                "line": 21
+                              },
+                              "start": {
+                                "column": 62,
+                                "line": 21
+                              }
+                            }
+                          },
+                          "typeName": {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "Repository",
+                            "optional": false,
+                            "range": [
+                              1007,
+                              1017
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 62,
+                                "line": 21
+                              },
+                              "start": {
+                                "column": 52,
+                                "line": 21
+                              }
+                            }
+                          },
+                          "range": [
+                            1007,
+                            1038
+                          ],
+                          "loc": {
+                            "end": {
+                              "column": 83,
+                              "line": 21
+                            },
+                            "start": {
+                              "column": 52,
+                              "line": 21
+                            }
+                          }
+                        }
+                      },
+                      "range": [
+                        976,
+                        1038
+                      ],
+                      "loc": {
+                        "end": {
+                          "column": 83,
+                          "line": 21
+                        },
+                        "start": {
+                          "column": 21,
+                          "line": 21
+                        }
+                      }
+                    },
+                    "readonly": true,
+                    "static": false,
+                    "range": [
+                      907,
+                      1038
+                    ],
+                    "loc": {
+                      "end": {
+                        "column": 83,
+                        "line": 21
+                      },
+                      "start": {
+                        "column": 4,
+                        "line": 20
+                      }
+                    }
+                  },
+                  {
+                    "type": "TSParameterProperty",
+                    "accessibility": "private",
+                    "decorators": [
+                      {
+                        "type": "Decorator",
+                        "expression": {
+                          "type": "CallExpression",
+                          "arguments": [
+                            {
+                              "type": "Identifier",
+                              "decorators": [],
+                              "name": "BillingEntitlement",
+                              "optional": false,
+                              "range": [
+                                1063,
+                                1081
+                              ],
+                              "loc": {
+                                "end": {
+                                  "column": 40,
+                                  "line": 22
+                                },
+                                "start": {
+                                  "column": 22,
+                                  "line": 22
+                                }
+                              }
+                            },
+                            {
+                              "type": "Literal",
+                              "raw": "'core'",
+                              "value": "core",
+                              "range": [
+                                1083,
+                                1089
+                              ],
+                              "loc": {
+                                "end": {
+                                  "column": 48,
+                                  "line": 22
+                                },
+                                "start": {
+                                  "column": 42,
+                                  "line": 22
+                                }
+                              }
+                            }
+                          ],
+                          "callee": {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "InjectRepository",
+                            "optional": false,
+                            "range": [
+                              1046,
+                              1062
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 21,
+                                "line": 22
+                              },
+                              "start": {
+                                "column": 5,
+                                "line": 22
+                              }
+                            }
+                          },
+                          "optional": false,
+                          "range": [
+                            1046,
+                            1090
+                          ],
+                          "loc": {
+                            "end": {
+                              "column": 49,
+                              "line": 22
+                            },
+                            "start": {
+                              "column": 5,
+                              "line": 22
+                            }
+                          }
+                        },
+                        "range": [
+                          1045,
+                          1090
+                        ],
+                        "loc": {
+                          "end": {
+                            "column": 49,
+                            "line": 22
+                          },
+                          "start": {
+                            "column": 4,
+                            "line": 22
+                          }
+                        }
+                      }
+                    ],
+                    "override": false,
+                    "parameter": {
+                      "type": "Identifier",
+                      "decorators": [],
+                      "name": "billingEntitlementRepository",
+                      "optional": false,
+                      "typeAnnotation": {
+                        "type": "TSTypeAnnotation",
+                        "loc": {
+                          "end": {
+                            "column": 81,
+                            "line": 23
+                          },
+                          "start": {
+                            "column": 49,
+                            "line": 23
+                          }
+                        },
+                        "range": [
+                          1141,
+                          1173
+                        ],
+                        "typeAnnotation": {
+                          "type": "TSTypeReference",
+                          "typeArguments": {
+                            "type": "TSTypeParameterInstantiation",
+                            "range": [
+                              1153,
+                              1173
+                            ],
+                            "params": [
+                              {
+                                "type": "TSTypeReference",
+                                "typeName": {
+                                  "type": "Identifier",
+                                  "decorators": [],
+                                  "name": "BillingEntitlement",
+                                  "optional": false,
+                                  "range": [
+                                    1154,
+                                    1172
+                                  ],
+                                  "loc": {
+                                    "end": {
+                                      "column": 80,
+                                      "line": 23
+                                    },
+                                    "start": {
+                                      "column": 62,
+                                      "line": 23
+                                    }
+                                  }
+                                },
+                                "range": [
+                                  1154,
+                                  1172
+                                ],
+                                "loc": {
+                                  "end": {
+                                    "column": 80,
+                                    "line": 23
+                                  },
+                                  "start": {
+                                    "column": 62,
+                                    "line": 23
+                                  }
+                                }
+                              }
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 81,
+                                "line": 23
+                              },
+                              "start": {
+                                "column": 61,
+                                "line": 23
+                              }
+                            }
+                          },
+                          "typeName": {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "Repository",
+                            "optional": false,
+                            "range": [
+                              1143,
+                              1153
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 61,
+                                "line": 23
+                              },
+                              "start": {
+                                "column": 51,
+                                "line": 23
+                              }
+                            }
+                          },
+                          "range": [
+                            1143,
+                            1173
+                          ],
+                          "loc": {
+                            "end": {
+                              "column": 81,
+                              "line": 23
+                            },
+                            "start": {
+                              "column": 51,
+                              "line": 23
+                            }
+                          }
+                        }
+                      },
+                      "range": [
+                        1113,
+                        1173
+                      ],
+                      "loc": {
+                        "end": {
+                          "column": 81,
+                          "line": 23
+                        },
+                        "start": {
+                          "column": 21,
+                          "line": 23
+                        }
+                      }
+                    },
+                    "readonly": true,
+                    "static": false,
+                    "range": [
+                      1045,
+                      1173
+                    ],
+                    "loc": {
+                      "end": {
+                        "column": 81,
+                        "line": 23
+                      },
+                      "start": {
+                        "column": 4,
+                        "line": 22
+                      }
+                    }
+                  }
+                ],
+                "loc": {
+                  "end": {
+                    "column": 6,
+                    "line": 24
+                  },
+                  "start": {
+                    "column": 13,
+                    "line": 19
+                  }
+                }
+              },
+              "range": [
+                889,
+                1182
+              ],
+              "loc": {
+                "end": {
+                  "column": 6,
+                  "line": 24
+                },
+                "start": {
+                  "column": 2,
+                  "line": 19
+                }
+              }
+            },
+            {
+              "type": "MethodDefinition",
+              "computed": false,
+              "decorators": [],
+              "key": {
+                "type": "Identifier",
+                "decorators": [],
+                "name": "processStripeEvent",
+                "optional": false,
+                "range": [
+                  1194,
+                  1212
+                ],
+                "loc": {
+                  "end": {
+                    "column": 26,
+                    "line": 26
+                  },
+                  "start": {
+                    "column": 8,
+                    "line": 26
+                  }
+                }
+              },
+              "kind": "method",
+              "optional": false,
+              "override": false,
+              "static": false,
+              "value": {
+                "type": "FunctionExpression",
+                "range": [
+                  1212,
+                  2075
+                ],
+                "async": true,
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "VariableDeclaration",
+                      "declarations": [
+                        {
+                          "type": "VariableDeclarator",
+                          "definite": false,
+                          "id": {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "billingSubscription",
+                            "optional": false,
+                            "range": [
+                              1305,
+                              1324
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 29,
+                                "line": 29
+                              },
+                              "start": {
+                                "column": 10,
+                                "line": 29
+                              }
+                            }
+                          },
+                          "init": {
+                            "type": "AwaitExpression",
+                            "argument": {
+                              "type": "CallExpression",
+                              "arguments": [
+                                {
+                                  "type": "ObjectExpression",
+                                  "properties": [
+                                    {
+                                      "type": "Property",
+                                      "computed": false,
+                                      "key": {
+                                        "type": "Identifier",
+                                        "decorators": [],
+                                        "name": "where",
+                                        "optional": false,
+                                        "range": [
+                                          1394,
+                                          1399
+                                        ],
+                                        "loc": {
+                                          "end": {
+                                            "column": 13,
+                                            "line": 31
+                                          },
+                                          "start": {
+                                            "column": 8,
+                                            "line": 31
+                                          }
+                                        }
+                                      },
+                                      "kind": "init",
+                                      "method": false,
+                                      "optional": false,
+                                      "shorthand": false,
+                                      "value": {
+                                        "type": "ObjectExpression",
+                                        "properties": [
+                                          {
+                                            "type": "Property",
+                                            "computed": false,
+                                            "key": {
+                                              "type": "Identifier",
+                                              "decorators": [],
+                                              "name": "stripeCustomerId",
+                                              "optional": false,
+                                              "range": [
+                                                1403,
+                                                1419
+                                              ],
+                                              "loc": {
+                                                "end": {
+                                                  "column": 33,
+                                                  "line": 31
+                                                },
+                                                "start": {
+                                                  "column": 17,
+                                                  "line": 31
+                                                }
+                                              }
+                                            },
+                                            "kind": "init",
+                                            "method": false,
+                                            "optional": false,
+                                            "shorthand": false,
+                                            "value": {
+                                              "type": "MemberExpression",
+                                              "computed": false,
+                                              "object": {
+                                                "type": "MemberExpression",
+                                                "computed": false,
+                                                "object": {
+                                                  "type": "Identifier",
+                                                  "decorators": [],
+                                                  "name": "data",
+                                                  "optional": false,
+                                                  "range": [
+                                                    1421,
+                                                    1425
+                                                  ],
+                                                  "loc": {
+                                                    "end": {
+                                                      "column": 39,
+                                                      "line": 31
+                                                    },
+                                                    "start": {
+                                                      "column": 35,
+                                                      "line": 31
+                                                    }
+                                                  }
+                                                },
+                                                "optional": false,
+                                                "property": {
+                                                  "type": "Identifier",
+                                                  "decorators": [],
+                                                  "name": "object",
+                                                  "optional": false,
+                                                  "range": [
+                                                    1426,
+                                                    1432
+                                                  ],
+                                                  "loc": {
+                                                    "end": {
+                                                      "column": 46,
+                                                      "line": 31
+                                                    },
+                                                    "start": {
+                                                      "column": 40,
+                                                      "line": 31
+                                                    }
+                                                  }
+                                                },
+                                                "range": [
+                                                  1421,
+                                                  1432
+                                                ],
+                                                "loc": {
+                                                  "end": {
+                                                    "column": 46,
+                                                    "line": 31
+                                                  },
+                                                  "start": {
+                                                    "column": 35,
+                                                    "line": 31
+                                                  }
+                                                }
+                                              },
+                                              "optional": false,
+                                              "property": {
+                                                "type": "Identifier",
+                                                "decorators": [],
+                                                "name": "customer",
+                                                "optional": false,
+                                                "range": [
+                                                  1433,
+                                                  1441
+                                                ],
+                                                "loc": {
+                                                  "end": {
+                                                    "column": 55,
+                                                    "line": 31
+                                                  },
+                                                  "start": {
+                                                    "column": 47,
+                                                    "line": 31
+                                                  }
+                                                }
+                                              },
+                                              "range": [
+                                                1421,
+                                                1441
+                                              ],
+                                              "loc": {
+                                                "end": {
+                                                  "column": 55,
+                                                  "line": 31
+                                                },
+                                                "start": {
+                                                  "column": 35,
+                                                  "line": 31
+                                                }
+                                              }
+                                            },
+                                            "range": [
+                                              1403,
+                                              1441
+                                            ],
+                                            "loc": {
+                                              "end": {
+                                                "column": 55,
+                                                "line": 31
+                                              },
+                                              "start": {
+                                                "column": 17,
+                                                "line": 31
+                                              }
+                                            }
+                                          }
+                                        ],
+                                        "range": [
+                                          1401,
+                                          1443
+                                        ],
+                                        "loc": {
+                                          "end": {
+                                            "column": 57,
+                                            "line": 31
+                                          },
+                                          "start": {
+                                            "column": 15,
+                                            "line": 31
+                                          }
+                                        }
+                                      },
+                                      "range": [
+                                        1394,
+                                        1443
+                                      ],
+                                      "loc": {
+                                        "end": {
+                                          "column": 57,
+                                          "line": 31
+                                        },
+                                        "start": {
+                                          "column": 8,
+                                          "line": 31
+                                        }
+                                      }
+                                    }
+                                  ],
+                                  "range": [
+                                    1383,
+                                    1453
+                                  ],
+                                  "loc": {
+                                    "end": {
+                                      "column": 7,
+                                      "line": 32
+                                    },
+                                    "start": {
+                                      "column": 55,
+                                      "line": 30
+                                    }
+                                  }
+                                }
+                              ],
+                              "callee": {
+                                "type": "MemberExpression",
+                                "computed": false,
+                                "object": {
+                                  "type": "MemberExpression",
+                                  "computed": false,
+                                  "object": {
+                                    "type": "ThisExpression",
+                                    "range": [
+                                      1340,
+                                      1344
+                                    ],
+                                    "loc": {
+                                      "end": {
+                                        "column": 16,
+                                        "line": 30
+                                      },
+                                      "start": {
+                                        "column": 12,
+                                        "line": 30
+                                      }
+                                    }
+                                  },
+                                  "optional": false,
+                                  "property": {
+                                    "type": "Identifier",
+                                    "decorators": [],
+                                    "name": "billingSubscriptionRepository",
+                                    "optional": false,
+                                    "range": [
+                                      1345,
+                                      1374
+                                    ],
+                                    "loc": {
+                                      "end": {
+                                        "column": 46,
+                                        "line": 30
+                                      },
+                                      "start": {
+                                        "column": 17,
+                                        "line": 30
+                                      }
+                                    }
+                                  },
+                                  "range": [
+                                    1340,
+                                    1374
+                                  ],
+                                  "loc": {
+                                    "end": {
+                                      "column": 46,
+                                      "line": 30
+                                    },
+                                    "start": {
+                                      "column": 12,
+                                      "line": 30
+                                    }
+                                  }
+                                },
+                                "optional": false,
+                                "property": {
+                                  "type": "Identifier",
+                                  "decorators": [],
+                                  "name": "findOne",
+                                  "optional": false,
+                                  "range": [
+                                    1375,
+                                    1382
+                                  ],
+                                  "loc": {
+                                    "end": {
+                                      "column": 54,
+                                      "line": 30
+                                    },
+                                    "start": {
+                                      "column": 47,
+                                      "line": 30
+                                    }
+                                  }
+                                },
+                                "range": [
+                                  1340,
+                                  1382
+                                ],
+                                "loc": {
+                                  "end": {
+                                    "column": 54,
+                                    "line": 30
+                                  },
+                                  "start": {
+                                    "column": 12,
+                                    "line": 30
+                                  }
+                                }
+                              },
+                              "optional": false,
+                              "range": [
+                                1340,
+                                1454
+                              ],
+                              "loc": {
+                                "end": {
+                                  "column": 8,
+                                  "line": 32
+                                },
+                                "start": {
+                                  "column": 12,
+                                  "line": 30
+                                }
+                              }
+                            },
+                            "range": [
+                              1334,
+                              1454
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 8,
+                                "line": 32
+                              },
+                              "start": {
+                                "column": 6,
+                                "line": 30
+                              }
+                            }
+                          },
+                          "range": [
+                            1305,
+                            1454
+                          ],
+                          "loc": {
+                            "end": {
+                              "column": 8,
+                              "line": 32
+                            },
+                            "start": {
+                              "column": 10,
+                              "line": 29
+                            }
+                          }
+                        }
+                      ],
+                      "declare": false,
+                      "kind": "const",
+                      "range": [
+                        1299,
+                        1455
+                      ],
+                      "loc": {
+                        "end": {
+                          "column": 9,
+                          "line": 32
+                        },
+                        "start": {
+                          "column": 4,
+                          "line": 29
+                        }
+                      }
+                    },
+                    {
+                      "type": "IfStatement",
+                      "alternate": null,
+                      "consequent": {
+                        "type": "BlockStatement",
+                        "body": [
+                          {
+                            "type": "ThrowStatement",
+                            "argument": {
+                              "type": "NewExpression",
+                              "arguments": [
+                                {
+                                  "type": "Literal",
+                                  "raw": "'Billing customer not found'",
+                                  "value": "Billing customer not found",
+                                  "range": [
+                                    1535,
+                                    1563
+                                  ],
+                                  "loc": {
+                                    "end": {
+                                      "column": 36,
+                                      "line": 36
+                                    },
+                                    "start": {
+                                      "column": 8,
+                                      "line": 36
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "MemberExpression",
+                                  "computed": false,
+                                  "object": {
+                                    "type": "Identifier",
+                                    "decorators": [],
+                                    "name": "BillingExceptionCode",
+                                    "optional": false,
+                                    "range": [
+                                      1574,
+                                      1594
+                                    ],
+                                    "loc": {
+                                      "end": {
+                                        "column": 28,
+                                        "line": 37
+                                      },
+                                      "start": {
+                                        "column": 8,
+                                        "line": 37
+                                      }
+                                    }
+                                  },
+                                  "optional": false,
+                                  "property": {
+                                    "type": "Identifier",
+                                    "decorators": [],
+                                    "name": "BILLING_CUSTOMER_NOT_FOUND",
+                                    "optional": false,
+                                    "range": [
+                                      1595,
+                                      1621
+                                    ],
+                                    "loc": {
+                                      "end": {
+                                        "column": 55,
+                                        "line": 37
+                                      },
+                                      "start": {
+                                        "column": 29,
+                                        "line": 37
+                                      }
+                                    }
+                                  },
+                                  "range": [
+                                    1574,
+                                    1621
+                                  ],
+                                  "loc": {
+                                    "end": {
+                                      "column": 55,
+                                      "line": 37
+                                    },
+                                    "start": {
+                                      "column": 8,
+                                      "line": 37
+                                    }
+                                  }
+                                }
+                              ],
+                              "callee": {
+                                "type": "Identifier",
+                                "decorators": [],
+                                "name": "BillingException",
+                                "optional": false,
+                                "range": [
+                                  1508,
+                                  1524
+                                ],
+                                "loc": {
+                                  "end": {
+                                    "column": 32,
+                                    "line": 35
+                                  },
+                                  "start": {
+                                    "column": 16,
+                                    "line": 35
+                                  }
+                                }
+                              },
+                              "range": [
+                                1504,
+                                1631
+                              ],
+                              "loc": {
+                                "end": {
+                                  "column": 7,
+                                  "line": 38
+                                },
+                                "start": {
+                                  "column": 12,
+                                  "line": 35
+                                }
+                              }
+                            },
+                            "range": [
+                              1498,
+                              1632
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 8,
+                                "line": 38
+                              },
+                              "start": {
+                                "column": 6,
+                                "line": 35
+                              }
+                            }
+                          }
+                        ],
+                        "range": [
+                          1489,
+                          1639
+                        ],
+                        "loc": {
+                          "end": {
+                            "column": 5,
+                            "line": 39
+                          },
+                          "start": {
+                            "column": 30,
+                            "line": 34
+                          }
+                        }
+                      },
+                      "test": {
+                        "type": "UnaryExpression",
+                        "argument": {
+                          "type": "Identifier",
+                          "decorators": [],
+                          "name": "billingSubscription",
+                          "optional": false,
+                          "range": [
+                            1468,
+                            1487
+                          ],
+                          "loc": {
+                            "end": {
+                              "column": 28,
+                              "line": 34
+                            },
+                            "start": {
+                              "column": 9,
+                              "line": 34
+                            }
+                          }
+                        },
+                        "operator": "!",
+                        "prefix": true,
+                        "range": [
+                          1467,
+                          1487
+                        ],
+                        "loc": {
+                          "end": {
+                            "column": 28,
+                            "line": 34
+                          },
+                          "start": {
+                            "column": 8,
+                            "line": 34
+                          }
+                        }
+                      },
+                      "range": [
+                        1463,
+                        1639
+                      ],
+                      "loc": {
+                        "end": {
+                          "column": 5,
+                          "line": 39
+                        },
+                        "start": {
+                          "column": 4,
+                          "line": 34
+                        }
+                      }
+                    },
+                    {
+                      "type": "VariableDeclaration",
+                      "declarations": [
+                        {
+                          "type": "VariableDeclarator",
+                          "definite": false,
+                          "id": {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "workspaceId",
+                            "optional": false,
+                            "range": [
+                              1653,
+                              1664
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 21,
+                                "line": 41
+                              },
+                              "start": {
+                                "column": 10,
+                                "line": 41
+                              }
+                            }
+                          },
+                          "init": {
+                            "type": "MemberExpression",
+                            "computed": false,
+                            "object": {
+                              "type": "Identifier",
+                              "decorators": [],
+                              "name": "billingSubscription",
+                              "optional": false,
+                              "range": [
+                                1667,
+                                1686
+                              ],
+                              "loc": {
+                                "end": {
+                                  "column": 43,
+                                  "line": 41
+                                },
+                                "start": {
+                                  "column": 24,
+                                  "line": 41
+                                }
+                              }
+                            },
+                            "optional": false,
+                            "property": {
+                              "type": "Identifier",
+                              "decorators": [],
+                              "name": "workspaceId",
+                              "optional": false,
+                              "range": [
+                                1687,
+                                1698
+                              ],
+                              "loc": {
+                                "end": {
+                                  "column": 55,
+                                  "line": 41
+                                },
+                                "start": {
+                                  "column": 44,
+                                  "line": 41
+                                }
+                              }
+                            },
+                            "range": [
+                              1667,
+                              1698
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 55,
+                                "line": 41
+                              },
+                              "start": {
+                                "column": 24,
+                                "line": 41
+                              }
+                            }
+                          },
+                          "range": [
+                            1653,
+                            1698
+                          ],
+                          "loc": {
+                            "end": {
+                              "column": 55,
+                              "line": 41
+                            },
+                            "start": {
+                              "column": 10,
+                              "line": 41
+                            }
+                          }
+                        }
+                      ],
+                      "declare": false,
+                      "kind": "const",
+                      "range": [
+                        1647,
+                        1699
+                      ],
+                      "loc": {
+                        "end": {
+                          "column": 56,
+                          "line": 41
+                        },
+                        "start": {
+                          "column": 4,
+                          "line": 41
+                        }
+                      }
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "AwaitExpression",
+                        "argument": {
+                          "type": "CallExpression",
+                          "arguments": [
+                            {
+                              "type": "CallExpression",
+                              "arguments": [
+                                {
+                                  "type": "Identifier",
+                                  "decorators": [],
+                                  "name": "workspaceId",
+                                  "optional": false,
+                                  "range": [
+                                    1832,
+                                    1843
+                                  ],
+                                  "loc": {
+                                    "end": {
+                                      "column": 19,
+                                      "line": 45
+                                    },
+                                    "start": {
+                                      "column": 8,
+                                      "line": 45
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Identifier",
+                                  "decorators": [],
+                                  "name": "data",
+                                  "optional": false,
+                                  "range": [
+                                    1854,
+                                    1858
+                                  ],
+                                  "loc": {
+                                    "end": {
+                                      "column": 12,
+                                      "line": 46
+                                    },
+                                    "start": {
+                                      "column": 8,
+                                      "line": 46
+                                    }
+                                  }
+                                }
+                              ],
+                              "callee": {
+                                "type": "Identifier",
+                                "decorators": [],
+                                "name": "transformStripeEntitlementUpdatedEventToDatabaseEntitlement",
+                                "optional": false,
+                                "range": [
+                                  1762,
+                                  1821
+                                ],
+                                "loc": {
+                                  "end": {
+                                    "column": 65,
+                                    "line": 44
+                                  },
+                                  "start": {
+                                    "column": 6,
+                                    "line": 44
+                                  }
+                                }
+                              },
+                              "optional": false,
+                              "range": [
+                                1762,
+                                1868
+                              ],
+                              "loc": {
+                                "end": {
+                                  "column": 7,
+                                  "line": 47
+                                },
+                                "start": {
+                                  "column": 6,
+                                  "line": 44
+                                }
+                              }
+                            },
+                            {
+                              "type": "ObjectExpression",
+                              "properties": [
+                                {
+                                  "type": "Property",
+                                  "computed": false,
+                                  "key": {
+                                    "type": "Identifier",
+                                    "decorators": [],
+                                    "name": "conflictPaths",
+                                    "optional": false,
+                                    "range": [
+                                      1888,
+                                      1901
+                                    ],
+                                    "loc": {
+                                      "end": {
+                                        "column": 21,
+                                        "line": 49
+                                      },
+                                      "start": {
+                                        "column": 8,
+                                        "line": 49
+                                      }
+                                    }
+                                  },
+                                  "kind": "init",
+                                  "method": false,
+                                  "optional": false,
+                                  "shorthand": false,
+                                  "value": {
+                                    "type": "ArrayExpression",
+                                    "elements": [
+                                      {
+                                        "type": "Literal",
+                                        "raw": "'workspaceId'",
+                                        "value": "workspaceId",
+                                        "range": [
+                                          1904,
+                                          1917
+                                        ],
+                                        "loc": {
+                                          "end": {
+                                            "column": 37,
+                                            "line": 49
+                                          },
+                                          "start": {
+                                            "column": 24,
+                                            "line": 49
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "type": "Literal",
+                                        "raw": "'key'",
+                                        "value": "key",
+                                        "range": [
+                                          1919,
+                                          1924
+                                        ],
+                                        "loc": {
+                                          "end": {
+                                            "column": 44,
+                                            "line": 49
+                                          },
+                                          "start": {
+                                            "column": 39,
+                                            "line": 49
+                                          }
+                                        }
+                                      }
+                                    ],
+                                    "range": [
+                                      1903,
+                                      1925
+                                    ],
+                                    "loc": {
+                                      "end": {
+                                        "column": 45,
+                                        "line": 49
+                                      },
+                                      "start": {
+                                        "column": 23,
+                                        "line": 49
+                                      }
+                                    }
+                                  },
+                                  "range": [
+                                    1888,
+                                    1925
+                                  ],
+                                  "loc": {
+                                    "end": {
+                                      "column": 45,
+                                      "line": 49
+                                    },
+                                    "start": {
+                                      "column": 8,
+                                      "line": 49
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Property",
+                                  "computed": false,
+                                  "key": {
+                                    "type": "Identifier",
+                                    "decorators": [],
+                                    "name": "skipUpdateIfNoValuesChanged",
+                                    "optional": false,
+                                    "range": [
+                                      1936,
+                                      1963
+                                    ],
+                                    "loc": {
+                                      "end": {
+                                        "column": 35,
+                                        "line": 50
+                                      },
+                                      "start": {
+                                        "column": 8,
+                                        "line": 50
+                                      }
+                                    }
+                                  },
+                                  "kind": "init",
+                                  "method": false,
+                                  "optional": false,
+                                  "shorthand": false,
+                                  "value": {
+                                    "type": "Literal",
+                                    "raw": "true",
+                                    "value": true,
+                                    "range": [
+                                      1965,
+                                      1969
+                                    ],
+                                    "loc": {
+                                      "end": {
+                                        "column": 41,
+                                        "line": 50
+                                      },
+                                      "start": {
+                                        "column": 37,
+                                        "line": 50
+                                      }
+                                    }
+                                  },
+                                  "range": [
+                                    1936,
+                                    1969
+                                  ],
+                                  "loc": {
+                                    "end": {
+                                      "column": 41,
+                                      "line": 50
+                                    },
+                                    "start": {
+                                      "column": 8,
+                                      "line": 50
+                                    }
+                                  }
+                                }
+                              ],
+                              "range": [
+                                1877,
+                                1979
+                              ],
+                              "loc": {
+                                "end": {
+                                  "column": 7,
+                                  "line": 51
+                                },
+                                "start": {
+                                  "column": 6,
+                                  "line": 48
+                                }
+                              }
+                            }
+                          ],
+                          "callee": {
+                            "type": "MemberExpression",
+                            "computed": false,
+                            "object": {
+                              "type": "MemberExpression",
+                              "computed": false,
+                              "object": {
+                                "type": "ThisExpression",
+                                "range": [
+                                  1713,
+                                  1717
+                                ],
+                                "loc": {
+                                  "end": {
+                                    "column": 14,
+                                    "line": 43
+                                  },
+                                  "start": {
+                                    "column": 10,
+                                    "line": 43
+                                  }
+                                }
+                              },
+                              "optional": false,
+                              "property": {
+                                "type": "Identifier",
+                                "decorators": [],
+                                "name": "billingEntitlementRepository",
+                                "optional": false,
+                                "range": [
+                                  1718,
+                                  1746
+                                ],
+                                "loc": {
+                                  "end": {
+                                    "column": 43,
+                                    "line": 43
+                                  },
+                                  "start": {
+                                    "column": 15,
+                                    "line": 43
+                                  }
+                                }
+                              },
+                              "range": [
+                                1713,
+                                1746
+                              ],
+                              "loc": {
+                                "end": {
+                                  "column": 43,
+                                  "line": 43
+                                },
+                                "start": {
+                                  "column": 10,
+                                  "line": 43
+                                }
+                              }
+                            },
+                            "optional": false,
+                            "property": {
+                              "type": "Identifier",
+                              "decorators": [],
+                              "name": "upsert",
+                              "optional": false,
+                              "range": [
+                                1747,
+                                1753
+                              ],
+                              "loc": {
+                                "end": {
+                                  "column": 50,
+                                  "line": 43
+                                },
+                                "start": {
+                                  "column": 44,
+                                  "line": 43
+                                }
+                              }
+                            },
+                            "range": [
+                              1713,
+                              1753
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 50,
+                                "line": 43
+                              },
+                              "start": {
+                                "column": 10,
+                                "line": 43
+                              }
+                            }
+                          },
+                          "optional": false,
+                          "range": [
+                            1713,
+                            1987
+                          ],
+                          "loc": {
+                            "end": {
+                              "column": 5,
+                              "line": 52
+                            },
+                            "start": {
+                              "column": 10,
+                              "line": 43
+                            }
+                          }
+                        },
+                        "range": [
+                          1707,
+                          1987
+                        ],
+                        "loc": {
+                          "end": {
+                            "column": 5,
+                            "line": 52
+                          },
+                          "start": {
+                            "column": 4,
+                            "line": 43
+                          }
+                        }
+                      },
+                      "range": [
+                        1707,
+                        1988
+                      ],
+                      "loc": {
+                        "end": {
+                          "column": 6,
+                          "line": 52
+                        },
+                        "start": {
+                          "column": 4,
+                          "line": 43
+                        }
+                      }
+                    },
+                    {
+                      "type": "ReturnStatement",
+                      "argument": {
+                        "type": "ObjectExpression",
+                        "properties": [
+                          {
+                            "type": "Property",
+                            "computed": false,
+                            "key": {
+                              "type": "Identifier",
+                              "decorators": [],
+                              "name": "stripeEntitlementCustomerId",
+                              "optional": false,
+                              "range": [
+                                2012,
+                                2039
+                              ],
+                              "loc": {
+                                "end": {
+                                  "column": 33,
+                                  "line": 55
+                                },
+                                "start": {
+                                  "column": 6,
+                                  "line": 55
+                                }
+                              }
+                            },
+                            "kind": "init",
+                            "method": false,
+                            "optional": false,
+                            "shorthand": false,
+                            "value": {
+                              "type": "MemberExpression",
+                              "computed": false,
+                              "object": {
+                                "type": "MemberExpression",
+                                "computed": false,
+                                "object": {
+                                  "type": "Identifier",
+                                  "decorators": [],
+                                  "name": "data",
+                                  "optional": false,
+                                  "range": [
+                                    2041,
+                                    2045
+                                  ],
+                                  "loc": {
+                                    "end": {
+                                      "column": 39,
+                                      "line": 55
+                                    },
+                                    "start": {
+                                      "column": 35,
+                                      "line": 55
+                                    }
+                                  }
+                                },
+                                "optional": false,
+                                "property": {
+                                  "type": "Identifier",
+                                  "decorators": [],
+                                  "name": "object",
+                                  "optional": false,
+                                  "range": [
+                                    2046,
+                                    2052
+                                  ],
+                                  "loc": {
+                                    "end": {
+                                      "column": 46,
+                                      "line": 55
+                                    },
+                                    "start": {
+                                      "column": 40,
+                                      "line": 55
+                                    }
+                                  }
+                                },
+                                "range": [
+                                  2041,
+                                  2052
+                                ],
+                                "loc": {
+                                  "end": {
+                                    "column": 46,
+                                    "line": 55
+                                  },
+                                  "start": {
+                                    "column": 35,
+                                    "line": 55
+                                  }
+                                }
+                              },
+                              "optional": false,
+                              "property": {
+                                "type": "Identifier",
+                                "decorators": [],
+                                "name": "customer",
+                                "optional": false,
+                                "range": [
+                                  2053,
+                                  2061
+                                ],
+                                "loc": {
+                                  "end": {
+                                    "column": 55,
+                                    "line": 55
+                                  },
+                                  "start": {
+                                    "column": 47,
+                                    "line": 55
+                                  }
+                                }
+                              },
+                              "range": [
+                                2041,
+                                2061
+                              ],
+                              "loc": {
+                                "end": {
+                                  "column": 55,
+                                  "line": 55
+                                },
+                                "start": {
+                                  "column": 35,
+                                  "line": 55
+                                }
+                              }
+                            },
+                            "range": [
+                              2012,
+                              2061
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 55,
+                                "line": 55
+                              },
+                              "start": {
+                                "column": 6,
+                                "line": 55
+                              }
+                            }
+                          }
+                        ],
+                        "range": [
+                          2003,
+                          2069
+                        ],
+                        "loc": {
+                          "end": {
+                            "column": 5,
+                            "line": 56
+                          },
+                          "start": {
+                            "column": 11,
+                            "line": 54
+                          }
+                        }
+                      },
+                      "range": [
+                        1996,
+                        2070
+                      ],
+                      "loc": {
+                        "end": {
+                          "column": 6,
+                          "line": 56
+                        },
+                        "start": {
+                          "column": 4,
+                          "line": 54
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    1292,
+                    2075
+                  ],
+                  "loc": {
+                    "end": {
+                      "column": 3,
+                      "line": 57
+                    },
+                    "start": {
+                      "column": 4,
+                      "line": 28
+                    }
+                  }
+                },
+                "declare": false,
+                "expression": false,
+                "generator": false,
+                "id": null,
+                "params": [
+                  {
+                    "type": "Identifier",
+                    "decorators": [],
+                    "name": "data",
+                    "optional": false,
+                    "typeAnnotation": {
+                      "type": "TSTypeAnnotation",
+                      "loc": {
+                        "end": {
+                          "column": 70,
+                          "line": 27
+                        },
+                        "start": {
+                          "column": 8,
+                          "line": 27
+                        }
+                      },
+                      "range": [
+                        1223,
+                        1285
+                      ],
+                      "typeAnnotation": {
+                        "type": "TSTypeReference",
+                        "typeName": {
+                          "type": "TSQualifiedName",
+                          "left": {
+                            "type": "TSQualifiedName",
+                            "left": {
+                              "type": "Identifier",
+                              "decorators": [],
+                              "name": "Stripe",
+                              "optional": false,
+                              "range": [
+                                1225,
+                                1231
+                              ],
+                              "loc": {
+                                "end": {
+                                  "column": 16,
+                                  "line": 27
+                                },
+                                "start": {
+                                  "column": 10,
+                                  "line": 27
+                                }
+                              }
+                            },
+                            "right": {
+                              "type": "Identifier",
+                              "decorators": [],
+                              "name": "EntitlementsActiveEntitlementSummaryUpdatedEvent",
+                              "optional": false,
+                              "range": [
+                                1232,
+                                1280
+                              ],
+                              "loc": {
+                                "end": {
+                                  "column": 65,
+                                  "line": 27
+                                },
+                                "start": {
+                                  "column": 17,
+                                  "line": 27
+                                }
+                              }
+                            },
+                            "range": [
+                              1225,
+                              1280
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 65,
+                                "line": 27
+                              },
+                              "start": {
+                                "column": 10,
+                                "line": 27
+                              }
+                            }
+                          },
+                          "right": {
+                            "type": "Identifier",
+                            "decorators": [],
+                            "name": "Data",
+                            "optional": false,
+                            "range": [
+                              1281,
+                              1285
+                            ],
+                            "loc": {
+                              "end": {
+                                "column": 70,
+                                "line": 27
+                              },
+                              "start": {
+                                "column": 66,
+                                "line": 27
+                              }
+                            }
+                          },
+                          "range": [
+                            1225,
+                            1285
+                          ],
+                          "loc": {
+                            "end": {
+                              "column": 70,
+                              "line": 27
+                            },
+                            "start": {
+                              "column": 10,
+                              "line": 27
+                            }
+                          }
+                        },
+                        "range": [
+                          1225,
+                          1285
+                        ],
+                        "loc": {
+                          "end": {
+                            "column": 70,
+                            "line": 27
+                          },
+                          "start": {
+                            "column": 10,
+                            "line": 27
+                          }
+                        }
+                      }
+                    },
+                    "range": [
+                      1219,
+                      1285
+                    ],
+                    "loc": {
+                      "end": {
+                        "column": 70,
+                        "line": 27
+                      },
+                      "start": {
+                        "column": 4,
+                        "line": 27
+                      }
+                    }
+                  }
+                ],
+                "loc": {
+                  "end": {
+                    "column": 3,
+                    "line": 57
+                  },
+                  "start": {
+                    "column": 26,
+                    "line": 26
+                  }
+                }
+              },
+              "range": [
+                1188,
+                2075
+              ],
+              "loc": {
+                "end": {
+                  "column": 3,
+                  "line": 57
+                },
+                "start": {
+                  "column": 2,
+                  "line": 26
+                }
+              }
+            }
+          ],
+          "loc": {
+            "end": {
+              "column": 1,
+              "line": 58
+            },
+            "start": {
+              "column": 46,
+              "line": 17
+            }
+          }
+        },
+        "declare": false,
+        "decorators": [
+          {
+            "type": "Decorator",
+            "expression": {
+              "type": "CallExpression",
+              "arguments": [],
+              "callee": {
+                "type": "Identifier",
+                "decorators": [],
+                "name": "Injectable",
+                "optional": false,
+                "range": [
+                  742,
+                  752
+                ],
+                "loc": {
+                  "end": {
+                    "column": 11,
+                    "line": 16
+                  },
+                  "start": {
+                    "column": 1,
+                    "line": 16
+                  }
+                }
+              },
+              "optional": false,
+              "range": [
+                742,
+                754
+              ],
+              "loc": {
+                "end": {
+                  "column": 13,
+                  "line": 16
+                },
+                "start": {
+                  "column": 1,
+                  "line": 16
+                }
+              }
+            },
+            "range": [
+              741,
+              754
+            ],
+            "loc": {
+              "end": {
+                "column": 13,
+                "line": 16
+              },
+              "start": {
+                "column": 0,
+                "line": 16
+              }
+            }
+          }
+        ],
+        "id": {
+          "type": "Identifier",
+          "decorators": [],
+          "name": "BillingWebhookEntitlementService",
+          "optional": false,
+          "range": [
+            769,
+            801
+          ],
+          "loc": {
+            "end": {
+              "column": 45,
+              "line": 17
+            },
+            "start": {
+              "column": 13,
+              "line": 17
+            }
+          }
+        },
+        "implements": [],
+        "superClass": null,
+        "range": [
+          763,
+          2078
+        ],
+        "loc": {
+          "end": {
+            "column": 1,
+            "line": 58
+          },
+          "start": {
+            "column": 7,
+            "line": 17
+          }
+        }
+      },
+      "exportKind": "value",
+      "source": null,
+      "specifiers": [],
+      "loc": {
+        "end": {
+          "column": 1,
+          "line": 58
+        },
+        "start": {
+          "column": 0,
+          "line": 17
+        }
+      }
+    }
+  ],
+  "comments": [
+    {
+      "type": "Block",
+      "loc": {
+        "end": {
+          "column": 25,
+          "line": 1
+        },
+        "start": {
+          "column": 0,
+          "line": 1
+        }
+      },
+      "range": [
+        0,
+        25
+      ],
+      "value": " @license Enterprise "
+    }
+  ],
+  "sourceType": "module",
+  "tokens": [
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 3
+        },
+        "start": {
+          "column": 0,
+          "line": 3
+        }
+      },
+      "range": [
+        29,
+        35
+      ],
+      "value": "import"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 3
+        },
+        "start": {
+          "column": 7,
+          "line": 3
+        }
+      },
+      "range": [
+        36,
+        37
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 19,
+          "line": 3
+        },
+        "start": {
+          "column": 9,
+          "line": 3
+        }
+      },
+      "range": [
+        38,
+        48
+      ],
+      "value": "Injectable"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 20,
+          "line": 3
+        },
+        "start": {
+          "column": 19,
+          "line": 3
+        }
+      },
+      "range": [
+        48,
+        49
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 27,
+          "line": 3
+        },
+        "start": {
+          "column": 21,
+          "line": 3
+        }
+      },
+      "range": [
+        50,
+        56
+      ],
+      "value": "Logger"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 29,
+          "line": 3
+        },
+        "start": {
+          "column": 28,
+          "line": 3
+        }
+      },
+      "range": [
+        57,
+        58
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 34,
+          "line": 3
+        },
+        "start": {
+          "column": 30,
+          "line": 3
+        }
+      },
+      "range": [
+        59,
+        63
+      ],
+      "value": "from"
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 51,
+          "line": 3
+        },
+        "start": {
+          "column": 35,
+          "line": 3
+        }
+      },
+      "range": [
+        64,
+        80
+      ],
+      "value": "'@nestjs/common'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 52,
+          "line": 3
+        },
+        "start": {
+          "column": 51,
+          "line": 3
+        }
+      },
+      "range": [
+        80,
+        81
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 4
+        },
+        "start": {
+          "column": 0,
+          "line": 4
+        }
+      },
+      "range": [
+        83,
+        89
+      ],
+      "value": "import"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 4
+        },
+        "start": {
+          "column": 7,
+          "line": 4
+        }
+      },
+      "range": [
+        90,
+        91
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 25,
+          "line": 4
+        },
+        "start": {
+          "column": 9,
+          "line": 4
+        }
+      },
+      "range": [
+        92,
+        108
+      ],
+      "value": "InjectRepository"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 27,
+          "line": 4
+        },
+        "start": {
+          "column": 26,
+          "line": 4
+        }
+      },
+      "range": [
+        109,
+        110
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 32,
+          "line": 4
+        },
+        "start": {
+          "column": 28,
+          "line": 4
+        }
+      },
+      "range": [
+        111,
+        115
+      ],
+      "value": "from"
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 50,
+          "line": 4
+        },
+        "start": {
+          "column": 33,
+          "line": 4
+        }
+      },
+      "range": [
+        116,
+        133
+      ],
+      "value": "'@nestjs/typeorm'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 51,
+          "line": 4
+        },
+        "start": {
+          "column": 50,
+          "line": 4
+        }
+      },
+      "range": [
+        133,
+        134
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 6
+        },
+        "start": {
+          "column": 0,
+          "line": 6
+        }
+      },
+      "range": [
+        138,
+        144
+      ],
+      "value": "import"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 13,
+          "line": 6
+        },
+        "start": {
+          "column": 7,
+          "line": 6
+        }
+      },
+      "range": [
+        145,
+        151
+      ],
+      "value": "Stripe"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 18,
+          "line": 6
+        },
+        "start": {
+          "column": 14,
+          "line": 6
+        }
+      },
+      "range": [
+        152,
+        156
+      ],
+      "value": "from"
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 27,
+          "line": 6
+        },
+        "start": {
+          "column": 19,
+          "line": 6
+        }
+      },
+      "range": [
+        157,
+        165
+      ],
+      "value": "'stripe'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 28,
+          "line": 6
+        },
+        "start": {
+          "column": 27,
+          "line": 6
+        }
+      },
+      "range": [
+        165,
+        166
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 7
+        },
+        "start": {
+          "column": 0,
+          "line": 7
+        }
+      },
+      "range": [
+        168,
+        174
+      ],
+      "value": "import"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 7
+        },
+        "start": {
+          "column": 7,
+          "line": 7
+        }
+      },
+      "range": [
+        175,
+        176
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 19,
+          "line": 7
+        },
+        "start": {
+          "column": 9,
+          "line": 7
+        }
+      },
+      "range": [
+        177,
+        187
+      ],
+      "value": "Repository"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 21,
+          "line": 7
+        },
+        "start": {
+          "column": 20,
+          "line": 7
+        }
+      },
+      "range": [
+        188,
+        189
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 26,
+          "line": 7
+        },
+        "start": {
+          "column": 22,
+          "line": 7
+        }
+      },
+      "range": [
+        190,
+        194
+      ],
+      "value": "from"
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 36,
+          "line": 7
+        },
+        "start": {
+          "column": 27,
+          "line": 7
+        }
+      },
+      "range": [
+        195,
+        204
+      ],
+      "value": "'typeorm'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 37,
+          "line": 7
+        },
+        "start": {
+          "column": 36,
+          "line": 7
+        }
+      },
+      "range": [
+        204,
+        205
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 9
+        },
+        "start": {
+          "column": 0,
+          "line": 9
+        }
+      },
+      "range": [
+        209,
+        215
+      ],
+      "value": "import"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 9
+        },
+        "start": {
+          "column": 7,
+          "line": 9
+        }
+      },
+      "range": [
+        216,
+        217
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 18,
+          "line": 10
+        },
+        "start": {
+          "column": 2,
+          "line": 10
+        }
+      },
+      "range": [
+        221,
+        237
+      ],
+      "value": "BillingException"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 19,
+          "line": 10
+        },
+        "start": {
+          "column": 18,
+          "line": 10
+        }
+      },
+      "range": [
+        237,
+        238
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 22,
+          "line": 11
+        },
+        "start": {
+          "column": 2,
+          "line": 11
+        }
+      },
+      "range": [
+        242,
+        262
+      ],
+      "value": "BillingExceptionCode"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 23,
+          "line": 11
+        },
+        "start": {
+          "column": 22,
+          "line": 11
+        }
+      },
+      "range": [
+        262,
+        263
+      ],
+      "value": ","
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 1,
+          "line": 12
+        },
+        "start": {
+          "column": 0,
+          "line": 12
+        }
+      },
+      "range": [
+        265,
+        266
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 12
+        },
+        "start": {
+          "column": 2,
+          "line": 12
+        }
+      },
+      "range": [
+        267,
+        271
+      ],
+      "value": "from"
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 58,
+          "line": 12
+        },
+        "start": {
+          "column": 7,
+          "line": 12
+        }
+      },
+      "range": [
+        272,
+        323
+      ],
+      "value": "'src/engine/core-modules/billing/billing.exception'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 59,
+          "line": 12
+        },
+        "start": {
+          "column": 58,
+          "line": 12
+        }
+      },
+      "range": [
+        323,
+        324
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 13
+        },
+        "start": {
+          "column": 0,
+          "line": 13
+        }
+      },
+      "range": [
+        326,
+        332
+      ],
+      "value": "import"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 13
+        },
+        "start": {
+          "column": 7,
+          "line": 13
+        }
+      },
+      "range": [
+        333,
+        334
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 27,
+          "line": 13
+        },
+        "start": {
+          "column": 9,
+          "line": 13
+        }
+      },
+      "range": [
+        335,
+        353
+      ],
+      "value": "BillingEntitlement"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 29,
+          "line": 13
+        },
+        "start": {
+          "column": 28,
+          "line": 13
+        }
+      },
+      "range": [
+        354,
+        355
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 34,
+          "line": 13
+        },
+        "start": {
+          "column": 30,
+          "line": 13
+        }
+      },
+      "range": [
+        356,
+        360
+      ],
+      "value": "from"
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 104,
+          "line": 13
+        },
+        "start": {
+          "column": 35,
+          "line": 13
+        }
+      },
+      "range": [
+        361,
+        430
+      ],
+      "value": "'src/engine/core-modules/billing/entities/billing-entitlement.entity'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 105,
+          "line": 13
+        },
+        "start": {
+          "column": 104,
+          "line": 13
+        }
+      },
+      "range": [
+        430,
+        431
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 14
+        },
+        "start": {
+          "column": 0,
+          "line": 14
+        }
+      },
+      "range": [
+        433,
+        439
+      ],
+      "value": "import"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 14
+        },
+        "start": {
+          "column": 7,
+          "line": 14
+        }
+      },
+      "range": [
+        440,
+        441
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 28,
+          "line": 14
+        },
+        "start": {
+          "column": 9,
+          "line": 14
+        }
+      },
+      "range": [
+        442,
+        461
+      ],
+      "value": "BillingSubscription"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 30,
+          "line": 14
+        },
+        "start": {
+          "column": 29,
+          "line": 14
+        }
+      },
+      "range": [
+        462,
+        463
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 35,
+          "line": 14
+        },
+        "start": {
+          "column": 31,
+          "line": 14
+        }
+      },
+      "range": [
+        464,
+        468
+      ],
+      "value": "from"
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 106,
+          "line": 14
+        },
+        "start": {
+          "column": 36,
+          "line": 14
+        }
+      },
+      "range": [
+        469,
+        539
+      ],
+      "value": "'src/engine/core-modules/billing/entities/billing-subscription.entity'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 107,
+          "line": 14
+        },
+        "start": {
+          "column": 106,
+          "line": 14
+        }
+      },
+      "range": [
+        539,
+        540
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 15
+        },
+        "start": {
+          "column": 0,
+          "line": 15
+        }
+      },
+      "range": [
+        542,
+        548
+      ],
+      "value": "import"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 15
+        },
+        "start": {
+          "column": 7,
+          "line": 15
+        }
+      },
+      "range": [
+        549,
+        550
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 68,
+          "line": 15
+        },
+        "start": {
+          "column": 9,
+          "line": 15
+        }
+      },
+      "range": [
+        551,
+        610
+      ],
+      "value": "transformStripeEntitlementUpdatedEventToDatabaseEntitlement"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 70,
+          "line": 15
+        },
+        "start": {
+          "column": 69,
+          "line": 15
+        }
+      },
+      "range": [
+        611,
+        612
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 75,
+          "line": 15
+        },
+        "start": {
+          "column": 71,
+          "line": 15
+        }
+      },
+      "range": [
+        613,
+        617
+      ],
+      "value": "from"
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 196,
+          "line": 15
+        },
+        "start": {
+          "column": 76,
+          "line": 15
+        }
+      },
+      "range": [
+        618,
+        738
+      ],
+      "value": "'src/engine/core-modules/billing/webhooks/utils/transform-stripe-entitlement-updated-event-to-database-entitlement.util'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 197,
+          "line": 15
+        },
+        "start": {
+          "column": 196,
+          "line": 15
+        }
+      },
+      "range": [
+        738,
+        739
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 1,
+          "line": 16
+        },
+        "start": {
+          "column": 0,
+          "line": 16
+        }
+      },
+      "range": [
+        741,
+        742
+      ],
+      "value": "@"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 11,
+          "line": 16
+        },
+        "start": {
+          "column": 1,
+          "line": 16
+        }
+      },
+      "range": [
+        742,
+        752
+      ],
+      "value": "Injectable"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 12,
+          "line": 16
+        },
+        "start": {
+          "column": 11,
+          "line": 16
+        }
+      },
+      "range": [
+        752,
+        753
+      ],
+      "value": "("
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 13,
+          "line": 16
+        },
+        "start": {
+          "column": 12,
+          "line": 16
+        }
+      },
+      "range": [
+        753,
+        754
+      ],
+      "value": ")"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 17
+        },
+        "start": {
+          "column": 0,
+          "line": 17
+        }
+      },
+      "range": [
+        756,
+        762
+      ],
+      "value": "export"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 12,
+          "line": 17
+        },
+        "start": {
+          "column": 7,
+          "line": 17
+        }
+      },
+      "range": [
+        763,
+        768
+      ],
+      "value": "class"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 45,
+          "line": 17
+        },
+        "start": {
+          "column": 13,
+          "line": 17
+        }
+      },
+      "range": [
+        769,
+        801
+      ],
+      "value": "BillingWebhookEntitlementService"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 47,
+          "line": 17
+        },
+        "start": {
+          "column": 46,
+          "line": 17
+        }
+      },
+      "range": [
+        802,
+        803
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 11,
+          "line": 18
+        },
+        "start": {
+          "column": 2,
+          "line": 18
+        }
+      },
+      "range": [
+        807,
+        816
+      ],
+      "value": "protected"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 20,
+          "line": 18
+        },
+        "start": {
+          "column": 12,
+          "line": 18
+        }
+      },
+      "range": [
+        817,
+        825
+      ],
+      "value": "readonly"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 27,
+          "line": 18
+        },
+        "start": {
+          "column": 21,
+          "line": 18
+        }
+      },
+      "range": [
+        826,
+        832
+      ],
+      "value": "logger"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 29,
+          "line": 18
+        },
+        "start": {
+          "column": 28,
+          "line": 18
+        }
+      },
+      "range": [
+        833,
+        834
+      ],
+      "value": "="
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 33,
+          "line": 18
+        },
+        "start": {
+          "column": 30,
+          "line": 18
+        }
+      },
+      "range": [
+        835,
+        838
+      ],
+      "value": "new"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 40,
+          "line": 18
+        },
+        "start": {
+          "column": 34,
+          "line": 18
+        }
+      },
+      "range": [
+        839,
+        845
+      ],
+      "value": "Logger"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 41,
+          "line": 18
+        },
+        "start": {
+          "column": 40,
+          "line": 18
+        }
+      },
+      "range": [
+        845,
+        846
+      ],
+      "value": "("
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 73,
+          "line": 18
+        },
+        "start": {
+          "column": 41,
+          "line": 18
+        }
+      },
+      "range": [
+        846,
+        878
+      ],
+      "value": "BillingWebhookEntitlementService"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 74,
+          "line": 18
+        },
+        "start": {
+          "column": 73,
+          "line": 18
+        }
+      },
+      "range": [
+        878,
+        879
+      ],
+      "value": "."
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 78,
+          "line": 18
+        },
+        "start": {
+          "column": 74,
+          "line": 18
+        }
+      },
+      "range": [
+        879,
+        883
+      ],
+      "value": "name"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 79,
+          "line": 18
+        },
+        "start": {
+          "column": 78,
+          "line": 18
+        }
+      },
+      "range": [
+        883,
+        884
+      ],
+      "value": ")"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 80,
+          "line": 18
+        },
+        "start": {
+          "column": 79,
+          "line": 18
+        }
+      },
+      "range": [
+        884,
+        885
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 13,
+          "line": 19
+        },
+        "start": {
+          "column": 2,
+          "line": 19
+        }
+      },
+      "range": [
+        889,
+        900
+      ],
+      "value": "constructor"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 14,
+          "line": 19
+        },
+        "start": {
+          "column": 13,
+          "line": 19
+        }
+      },
+      "range": [
+        900,
+        901
+      ],
+      "value": "("
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 5,
+          "line": 20
+        },
+        "start": {
+          "column": 4,
+          "line": 20
+        }
+      },
+      "range": [
+        907,
+        908
+      ],
+      "value": "@"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 21,
+          "line": 20
+        },
+        "start": {
+          "column": 5,
+          "line": 20
+        }
+      },
+      "range": [
+        908,
+        924
+      ],
+      "value": "InjectRepository"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 22,
+          "line": 20
+        },
+        "start": {
+          "column": 21,
+          "line": 20
+        }
+      },
+      "range": [
+        924,
+        925
+      ],
+      "value": "("
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 41,
+          "line": 20
+        },
+        "start": {
+          "column": 22,
+          "line": 20
+        }
+      },
+      "range": [
+        925,
+        944
+      ],
+      "value": "BillingSubscription"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 42,
+          "line": 20
+        },
+        "start": {
+          "column": 41,
+          "line": 20
+        }
+      },
+      "range": [
+        944,
+        945
+      ],
+      "value": ","
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 49,
+          "line": 20
+        },
+        "start": {
+          "column": 43,
+          "line": 20
+        }
+      },
+      "range": [
+        946,
+        952
+      ],
+      "value": "'core'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 50,
+          "line": 20
+        },
+        "start": {
+          "column": 49,
+          "line": 20
+        }
+      },
+      "range": [
+        952,
+        953
+      ],
+      "value": ")"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 11,
+          "line": 21
+        },
+        "start": {
+          "column": 4,
+          "line": 21
+        }
+      },
+      "range": [
+        959,
+        966
+      ],
+      "value": "private"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 20,
+          "line": 21
+        },
+        "start": {
+          "column": 12,
+          "line": 21
+        }
+      },
+      "range": [
+        967,
+        975
+      ],
+      "value": "readonly"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 50,
+          "line": 21
+        },
+        "start": {
+          "column": 21,
+          "line": 21
+        }
+      },
+      "range": [
+        976,
+        1005
+      ],
+      "value": "billingSubscriptionRepository"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 51,
+          "line": 21
+        },
+        "start": {
+          "column": 50,
+          "line": 21
+        }
+      },
+      "range": [
+        1005,
+        1006
+      ],
+      "value": ":"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 62,
+          "line": 21
+        },
+        "start": {
+          "column": 52,
+          "line": 21
+        }
+      },
+      "range": [
+        1007,
+        1017
+      ],
+      "value": "Repository"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 63,
+          "line": 21
+        },
+        "start": {
+          "column": 62,
+          "line": 21
+        }
+      },
+      "range": [
+        1017,
+        1018
+      ],
+      "value": "<"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 82,
+          "line": 21
+        },
+        "start": {
+          "column": 63,
+          "line": 21
+        }
+      },
+      "range": [
+        1018,
+        1037
+      ],
+      "value": "BillingSubscription"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 83,
+          "line": 21
+        },
+        "start": {
+          "column": 82,
+          "line": 21
+        }
+      },
+      "range": [
+        1037,
+        1038
+      ],
+      "value": ">"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 84,
+          "line": 21
+        },
+        "start": {
+          "column": 83,
+          "line": 21
+        }
+      },
+      "range": [
+        1038,
+        1039
+      ],
+      "value": ","
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 5,
+          "line": 22
+        },
+        "start": {
+          "column": 4,
+          "line": 22
+        }
+      },
+      "range": [
+        1045,
+        1046
+      ],
+      "value": "@"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 21,
+          "line": 22
+        },
+        "start": {
+          "column": 5,
+          "line": 22
+        }
+      },
+      "range": [
+        1046,
+        1062
+      ],
+      "value": "InjectRepository"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 22,
+          "line": 22
+        },
+        "start": {
+          "column": 21,
+          "line": 22
+        }
+      },
+      "range": [
+        1062,
+        1063
+      ],
+      "value": "("
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 40,
+          "line": 22
+        },
+        "start": {
+          "column": 22,
+          "line": 22
+        }
+      },
+      "range": [
+        1063,
+        1081
+      ],
+      "value": "BillingEntitlement"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 41,
+          "line": 22
+        },
+        "start": {
+          "column": 40,
+          "line": 22
+        }
+      },
+      "range": [
+        1081,
+        1082
+      ],
+      "value": ","
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 48,
+          "line": 22
+        },
+        "start": {
+          "column": 42,
+          "line": 22
+        }
+      },
+      "range": [
+        1083,
+        1089
+      ],
+      "value": "'core'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 49,
+          "line": 22
+        },
+        "start": {
+          "column": 48,
+          "line": 22
+        }
+      },
+      "range": [
+        1089,
+        1090
+      ],
+      "value": ")"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 11,
+          "line": 23
+        },
+        "start": {
+          "column": 4,
+          "line": 23
+        }
+      },
+      "range": [
+        1096,
+        1103
+      ],
+      "value": "private"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 20,
+          "line": 23
+        },
+        "start": {
+          "column": 12,
+          "line": 23
+        }
+      },
+      "range": [
+        1104,
+        1112
+      ],
+      "value": "readonly"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 49,
+          "line": 23
+        },
+        "start": {
+          "column": 21,
+          "line": 23
+        }
+      },
+      "range": [
+        1113,
+        1141
+      ],
+      "value": "billingEntitlementRepository"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 50,
+          "line": 23
+        },
+        "start": {
+          "column": 49,
+          "line": 23
+        }
+      },
+      "range": [
+        1141,
+        1142
+      ],
+      "value": ":"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 61,
+          "line": 23
+        },
+        "start": {
+          "column": 51,
+          "line": 23
+        }
+      },
+      "range": [
+        1143,
+        1153
+      ],
+      "value": "Repository"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 62,
+          "line": 23
+        },
+        "start": {
+          "column": 61,
+          "line": 23
+        }
+      },
+      "range": [
+        1153,
+        1154
+      ],
+      "value": "<"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 80,
+          "line": 23
+        },
+        "start": {
+          "column": 62,
+          "line": 23
+        }
+      },
+      "range": [
+        1154,
+        1172
+      ],
+      "value": "BillingEntitlement"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 81,
+          "line": 23
+        },
+        "start": {
+          "column": 80,
+          "line": 23
+        }
+      },
+      "range": [
+        1172,
+        1173
+      ],
+      "value": ">"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 82,
+          "line": 23
+        },
+        "start": {
+          "column": 81,
+          "line": 23
+        }
+      },
+      "range": [
+        1173,
+        1174
+      ],
+      "value": ","
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 3,
+          "line": 24
+        },
+        "start": {
+          "column": 2,
+          "line": 24
+        }
+      },
+      "range": [
+        1178,
+        1179
+      ],
+      "value": ")"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 5,
+          "line": 24
+        },
+        "start": {
+          "column": 4,
+          "line": 24
+        }
+      },
+      "range": [
+        1180,
+        1181
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 24
+        },
+        "start": {
+          "column": 5,
+          "line": 24
+        }
+      },
+      "range": [
+        1181,
+        1182
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 7,
+          "line": 26
+        },
+        "start": {
+          "column": 2,
+          "line": 26
+        }
+      },
+      "range": [
+        1188,
+        1193
+      ],
+      "value": "async"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 26,
+          "line": 26
+        },
+        "start": {
+          "column": 8,
+          "line": 26
+        }
+      },
+      "range": [
+        1194,
+        1212
+      ],
+      "value": "processStripeEvent"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 27,
+          "line": 26
+        },
+        "start": {
+          "column": 26,
+          "line": 26
+        }
+      },
+      "range": [
+        1212,
+        1213
+      ],
+      "value": "("
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 27
+        },
+        "start": {
+          "column": 4,
+          "line": 27
+        }
+      },
+      "range": [
+        1219,
+        1223
+      ],
+      "value": "data"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 9,
+          "line": 27
+        },
+        "start": {
+          "column": 8,
+          "line": 27
+        }
+      },
+      "range": [
+        1223,
+        1224
+      ],
+      "value": ":"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 16,
+          "line": 27
+        },
+        "start": {
+          "column": 10,
+          "line": 27
+        }
+      },
+      "range": [
+        1225,
+        1231
+      ],
+      "value": "Stripe"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 17,
+          "line": 27
+        },
+        "start": {
+          "column": 16,
+          "line": 27
+        }
+      },
+      "range": [
+        1231,
+        1232
+      ],
+      "value": "."
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 65,
+          "line": 27
+        },
+        "start": {
+          "column": 17,
+          "line": 27
+        }
+      },
+      "range": [
+        1232,
+        1280
+      ],
+      "value": "EntitlementsActiveEntitlementSummaryUpdatedEvent"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 66,
+          "line": 27
+        },
+        "start": {
+          "column": 65,
+          "line": 27
+        }
+      },
+      "range": [
+        1280,
+        1281
+      ],
+      "value": "."
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 70,
+          "line": 27
+        },
+        "start": {
+          "column": 66,
+          "line": 27
+        }
+      },
+      "range": [
+        1281,
+        1285
+      ],
+      "value": "Data"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 71,
+          "line": 27
+        },
+        "start": {
+          "column": 70,
+          "line": 27
+        }
+      },
+      "range": [
+        1285,
+        1286
+      ],
+      "value": ","
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 3,
+          "line": 28
+        },
+        "start": {
+          "column": 2,
+          "line": 28
+        }
+      },
+      "range": [
+        1290,
+        1291
+      ],
+      "value": ")"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 5,
+          "line": 28
+        },
+        "start": {
+          "column": 4,
+          "line": 28
+        }
+      },
+      "range": [
+        1292,
+        1293
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 9,
+          "line": 29
+        },
+        "start": {
+          "column": 4,
+          "line": 29
+        }
+      },
+      "range": [
+        1299,
+        1304
+      ],
+      "value": "const"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 29,
+          "line": 29
+        },
+        "start": {
+          "column": 10,
+          "line": 29
+        }
+      },
+      "range": [
+        1305,
+        1324
+      ],
+      "value": "billingSubscription"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 31,
+          "line": 29
+        },
+        "start": {
+          "column": 30,
+          "line": 29
+        }
+      },
+      "range": [
+        1325,
+        1326
+      ],
+      "value": "="
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 11,
+          "line": 30
+        },
+        "start": {
+          "column": 6,
+          "line": 30
+        }
+      },
+      "range": [
+        1334,
+        1339
+      ],
+      "value": "await"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 16,
+          "line": 30
+        },
+        "start": {
+          "column": 12,
+          "line": 30
+        }
+      },
+      "range": [
+        1340,
+        1344
+      ],
+      "value": "this"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 17,
+          "line": 30
+        },
+        "start": {
+          "column": 16,
+          "line": 30
+        }
+      },
+      "range": [
+        1344,
+        1345
+      ],
+      "value": "."
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 46,
+          "line": 30
+        },
+        "start": {
+          "column": 17,
+          "line": 30
+        }
+      },
+      "range": [
+        1345,
+        1374
+      ],
+      "value": "billingSubscriptionRepository"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 47,
+          "line": 30
+        },
+        "start": {
+          "column": 46,
+          "line": 30
+        }
+      },
+      "range": [
+        1374,
+        1375
+      ],
+      "value": "."
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 54,
+          "line": 30
+        },
+        "start": {
+          "column": 47,
+          "line": 30
+        }
+      },
+      "range": [
+        1375,
+        1382
+      ],
+      "value": "findOne"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 55,
+          "line": 30
+        },
+        "start": {
+          "column": 54,
+          "line": 30
+        }
+      },
+      "range": [
+        1382,
+        1383
+      ],
+      "value": "("
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 56,
+          "line": 30
+        },
+        "start": {
+          "column": 55,
+          "line": 30
+        }
+      },
+      "range": [
+        1383,
+        1384
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 13,
+          "line": 31
+        },
+        "start": {
+          "column": 8,
+          "line": 31
+        }
+      },
+      "range": [
+        1394,
+        1399
+      ],
+      "value": "where"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 14,
+          "line": 31
+        },
+        "start": {
+          "column": 13,
+          "line": 31
+        }
+      },
+      "range": [
+        1399,
+        1400
+      ],
+      "value": ":"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 16,
+          "line": 31
+        },
+        "start": {
+          "column": 15,
+          "line": 31
+        }
+      },
+      "range": [
+        1401,
+        1402
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 33,
+          "line": 31
+        },
+        "start": {
+          "column": 17,
+          "line": 31
+        }
+      },
+      "range": [
+        1403,
+        1419
+      ],
+      "value": "stripeCustomerId"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 34,
+          "line": 31
+        },
+        "start": {
+          "column": 33,
+          "line": 31
+        }
+      },
+      "range": [
+        1419,
+        1420
+      ],
+      "value": ":"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 39,
+          "line": 31
+        },
+        "start": {
+          "column": 35,
+          "line": 31
+        }
+      },
+      "range": [
+        1421,
+        1425
+      ],
+      "value": "data"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 40,
+          "line": 31
+        },
+        "start": {
+          "column": 39,
+          "line": 31
+        }
+      },
+      "range": [
+        1425,
+        1426
+      ],
+      "value": "."
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 46,
+          "line": 31
+        },
+        "start": {
+          "column": 40,
+          "line": 31
+        }
+      },
+      "range": [
+        1426,
+        1432
+      ],
+      "value": "object"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 47,
+          "line": 31
+        },
+        "start": {
+          "column": 46,
+          "line": 31
+        }
+      },
+      "range": [
+        1432,
+        1433
+      ],
+      "value": "."
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 55,
+          "line": 31
+        },
+        "start": {
+          "column": 47,
+          "line": 31
+        }
+      },
+      "range": [
+        1433,
+        1441
+      ],
+      "value": "customer"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 57,
+          "line": 31
+        },
+        "start": {
+          "column": 56,
+          "line": 31
+        }
+      },
+      "range": [
+        1442,
+        1443
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 58,
+          "line": 31
+        },
+        "start": {
+          "column": 57,
+          "line": 31
+        }
+      },
+      "range": [
+        1443,
+        1444
+      ],
+      "value": ","
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 7,
+          "line": 32
+        },
+        "start": {
+          "column": 6,
+          "line": 32
+        }
+      },
+      "range": [
+        1452,
+        1453
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 32
+        },
+        "start": {
+          "column": 7,
+          "line": 32
+        }
+      },
+      "range": [
+        1453,
+        1454
+      ],
+      "value": ")"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 9,
+          "line": 32
+        },
+        "start": {
+          "column": 8,
+          "line": 32
+        }
+      },
+      "range": [
+        1454,
+        1455
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 34
+        },
+        "start": {
+          "column": 4,
+          "line": 34
+        }
+      },
+      "range": [
+        1463,
+        1465
+      ],
+      "value": "if"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 34
+        },
+        "start": {
+          "column": 7,
+          "line": 34
+        }
+      },
+      "range": [
+        1466,
+        1467
+      ],
+      "value": "("
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 9,
+          "line": 34
+        },
+        "start": {
+          "column": 8,
+          "line": 34
+        }
+      },
+      "range": [
+        1467,
+        1468
+      ],
+      "value": "!"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 28,
+          "line": 34
+        },
+        "start": {
+          "column": 9,
+          "line": 34
+        }
+      },
+      "range": [
+        1468,
+        1487
+      ],
+      "value": "billingSubscription"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 29,
+          "line": 34
+        },
+        "start": {
+          "column": 28,
+          "line": 34
+        }
+      },
+      "range": [
+        1487,
+        1488
+      ],
+      "value": ")"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 31,
+          "line": 34
+        },
+        "start": {
+          "column": 30,
+          "line": 34
+        }
+      },
+      "range": [
+        1489,
+        1490
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 11,
+          "line": 35
+        },
+        "start": {
+          "column": 6,
+          "line": 35
+        }
+      },
+      "range": [
+        1498,
+        1503
+      ],
+      "value": "throw"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 15,
+          "line": 35
+        },
+        "start": {
+          "column": 12,
+          "line": 35
+        }
+      },
+      "range": [
+        1504,
+        1507
+      ],
+      "value": "new"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 32,
+          "line": 35
+        },
+        "start": {
+          "column": 16,
+          "line": 35
+        }
+      },
+      "range": [
+        1508,
+        1524
+      ],
+      "value": "BillingException"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 33,
+          "line": 35
+        },
+        "start": {
+          "column": 32,
+          "line": 35
+        }
+      },
+      "range": [
+        1524,
+        1525
+      ],
+      "value": "("
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 36,
+          "line": 36
+        },
+        "start": {
+          "column": 8,
+          "line": 36
+        }
+      },
+      "range": [
+        1535,
+        1563
+      ],
+      "value": "'Billing customer not found'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 37,
+          "line": 36
+        },
+        "start": {
+          "column": 36,
+          "line": 36
+        }
+      },
+      "range": [
+        1563,
+        1564
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 28,
+          "line": 37
+        },
+        "start": {
+          "column": 8,
+          "line": 37
+        }
+      },
+      "range": [
+        1574,
+        1594
+      ],
+      "value": "BillingExceptionCode"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 29,
+          "line": 37
+        },
+        "start": {
+          "column": 28,
+          "line": 37
+        }
+      },
+      "range": [
+        1594,
+        1595
+      ],
+      "value": "."
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 55,
+          "line": 37
+        },
+        "start": {
+          "column": 29,
+          "line": 37
+        }
+      },
+      "range": [
+        1595,
+        1621
+      ],
+      "value": "BILLING_CUSTOMER_NOT_FOUND"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 56,
+          "line": 37
+        },
+        "start": {
+          "column": 55,
+          "line": 37
+        }
+      },
+      "range": [
+        1621,
+        1622
+      ],
+      "value": ","
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 7,
+          "line": 38
+        },
+        "start": {
+          "column": 6,
+          "line": 38
+        }
+      },
+      "range": [
+        1630,
+        1631
+      ],
+      "value": ")"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 38
+        },
+        "start": {
+          "column": 7,
+          "line": 38
+        }
+      },
+      "range": [
+        1631,
+        1632
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 5,
+          "line": 39
+        },
+        "start": {
+          "column": 4,
+          "line": 39
+        }
+      },
+      "range": [
+        1638,
+        1639
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 9,
+          "line": 41
+        },
+        "start": {
+          "column": 4,
+          "line": 41
+        }
+      },
+      "range": [
+        1647,
+        1652
+      ],
+      "value": "const"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 21,
+          "line": 41
+        },
+        "start": {
+          "column": 10,
+          "line": 41
+        }
+      },
+      "range": [
+        1653,
+        1664
+      ],
+      "value": "workspaceId"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 23,
+          "line": 41
+        },
+        "start": {
+          "column": 22,
+          "line": 41
+        }
+      },
+      "range": [
+        1665,
+        1666
+      ],
+      "value": "="
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 43,
+          "line": 41
+        },
+        "start": {
+          "column": 24,
+          "line": 41
+        }
+      },
+      "range": [
+        1667,
+        1686
+      ],
+      "value": "billingSubscription"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 44,
+          "line": 41
+        },
+        "start": {
+          "column": 43,
+          "line": 41
+        }
+      },
+      "range": [
+        1686,
+        1687
+      ],
+      "value": "."
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 55,
+          "line": 41
+        },
+        "start": {
+          "column": 44,
+          "line": 41
+        }
+      },
+      "range": [
+        1687,
+        1698
+      ],
+      "value": "workspaceId"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 56,
+          "line": 41
+        },
+        "start": {
+          "column": 55,
+          "line": 41
+        }
+      },
+      "range": [
+        1698,
+        1699
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 9,
+          "line": 43
+        },
+        "start": {
+          "column": 4,
+          "line": 43
+        }
+      },
+      "range": [
+        1707,
+        1712
+      ],
+      "value": "await"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 14,
+          "line": 43
+        },
+        "start": {
+          "column": 10,
+          "line": 43
+        }
+      },
+      "range": [
+        1713,
+        1717
+      ],
+      "value": "this"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 15,
+          "line": 43
+        },
+        "start": {
+          "column": 14,
+          "line": 43
+        }
+      },
+      "range": [
+        1717,
+        1718
+      ],
+      "value": "."
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 43,
+          "line": 43
+        },
+        "start": {
+          "column": 15,
+          "line": 43
+        }
+      },
+      "range": [
+        1718,
+        1746
+      ],
+      "value": "billingEntitlementRepository"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 44,
+          "line": 43
+        },
+        "start": {
+          "column": 43,
+          "line": 43
+        }
+      },
+      "range": [
+        1746,
+        1747
+      ],
+      "value": "."
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 50,
+          "line": 43
+        },
+        "start": {
+          "column": 44,
+          "line": 43
+        }
+      },
+      "range": [
+        1747,
+        1753
+      ],
+      "value": "upsert"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 51,
+          "line": 43
+        },
+        "start": {
+          "column": 50,
+          "line": 43
+        }
+      },
+      "range": [
+        1753,
+        1754
+      ],
+      "value": "("
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 65,
+          "line": 44
+        },
+        "start": {
+          "column": 6,
+          "line": 44
+        }
+      },
+      "range": [
+        1762,
+        1821
+      ],
+      "value": "transformStripeEntitlementUpdatedEventToDatabaseEntitlement"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 66,
+          "line": 44
+        },
+        "start": {
+          "column": 65,
+          "line": 44
+        }
+      },
+      "range": [
+        1821,
+        1822
+      ],
+      "value": "("
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 19,
+          "line": 45
+        },
+        "start": {
+          "column": 8,
+          "line": 45
+        }
+      },
+      "range": [
+        1832,
+        1843
+      ],
+      "value": "workspaceId"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 20,
+          "line": 45
+        },
+        "start": {
+          "column": 19,
+          "line": 45
+        }
+      },
+      "range": [
+        1843,
+        1844
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 12,
+          "line": 46
+        },
+        "start": {
+          "column": 8,
+          "line": 46
+        }
+      },
+      "range": [
+        1854,
+        1858
+      ],
+      "value": "data"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 13,
+          "line": 46
+        },
+        "start": {
+          "column": 12,
+          "line": 46
+        }
+      },
+      "range": [
+        1858,
+        1859
+      ],
+      "value": ","
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 7,
+          "line": 47
+        },
+        "start": {
+          "column": 6,
+          "line": 47
+        }
+      },
+      "range": [
+        1867,
+        1868
+      ],
+      "value": ")"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 47
+        },
+        "start": {
+          "column": 7,
+          "line": 47
+        }
+      },
+      "range": [
+        1868,
+        1869
+      ],
+      "value": ","
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 7,
+          "line": 48
+        },
+        "start": {
+          "column": 6,
+          "line": 48
+        }
+      },
+      "range": [
+        1877,
+        1878
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 21,
+          "line": 49
+        },
+        "start": {
+          "column": 8,
+          "line": 49
+        }
+      },
+      "range": [
+        1888,
+        1901
+      ],
+      "value": "conflictPaths"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 22,
+          "line": 49
+        },
+        "start": {
+          "column": 21,
+          "line": 49
+        }
+      },
+      "range": [
+        1901,
+        1902
+      ],
+      "value": ":"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 24,
+          "line": 49
+        },
+        "start": {
+          "column": 23,
+          "line": 49
+        }
+      },
+      "range": [
+        1903,
+        1904
+      ],
+      "value": "["
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 37,
+          "line": 49
+        },
+        "start": {
+          "column": 24,
+          "line": 49
+        }
+      },
+      "range": [
+        1904,
+        1917
+      ],
+      "value": "'workspaceId'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 38,
+          "line": 49
+        },
+        "start": {
+          "column": 37,
+          "line": 49
+        }
+      },
+      "range": [
+        1917,
+        1918
+      ],
+      "value": ","
+    },
+    {
+      "type": "String",
+      "loc": {
+        "end": {
+          "column": 44,
+          "line": 49
+        },
+        "start": {
+          "column": 39,
+          "line": 49
+        }
+      },
+      "range": [
+        1919,
+        1924
+      ],
+      "value": "'key'"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 45,
+          "line": 49
+        },
+        "start": {
+          "column": 44,
+          "line": 49
+        }
+      },
+      "range": [
+        1924,
+        1925
+      ],
+      "value": "]"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 46,
+          "line": 49
+        },
+        "start": {
+          "column": 45,
+          "line": 49
+        }
+      },
+      "range": [
+        1925,
+        1926
+      ],
+      "value": ","
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 35,
+          "line": 50
+        },
+        "start": {
+          "column": 8,
+          "line": 50
+        }
+      },
+      "range": [
+        1936,
+        1963
+      ],
+      "value": "skipUpdateIfNoValuesChanged"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 36,
+          "line": 50
+        },
+        "start": {
+          "column": 35,
+          "line": 50
+        }
+      },
+      "range": [
+        1963,
+        1964
+      ],
+      "value": ":"
+    },
+    {
+      "type": "Boolean",
+      "loc": {
+        "end": {
+          "column": 41,
+          "line": 50
+        },
+        "start": {
+          "column": 37,
+          "line": 50
+        }
+      },
+      "range": [
+        1965,
+        1969
+      ],
+      "value": "true"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 42,
+          "line": 50
+        },
+        "start": {
+          "column": 41,
+          "line": 50
+        }
+      },
+      "range": [
+        1969,
+        1970
+      ],
+      "value": ","
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 7,
+          "line": 51
+        },
+        "start": {
+          "column": 6,
+          "line": 51
+        }
+      },
+      "range": [
+        1978,
+        1979
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 8,
+          "line": 51
+        },
+        "start": {
+          "column": 7,
+          "line": 51
+        }
+      },
+      "range": [
+        1979,
+        1980
+      ],
+      "value": ","
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 5,
+          "line": 52
+        },
+        "start": {
+          "column": 4,
+          "line": 52
+        }
+      },
+      "range": [
+        1986,
+        1987
+      ],
+      "value": ")"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 52
+        },
+        "start": {
+          "column": 5,
+          "line": 52
+        }
+      },
+      "range": [
+        1987,
+        1988
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Keyword",
+      "loc": {
+        "end": {
+          "column": 10,
+          "line": 54
+        },
+        "start": {
+          "column": 4,
+          "line": 54
+        }
+      },
+      "range": [
+        1996,
+        2002
+      ],
+      "value": "return"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 12,
+          "line": 54
+        },
+        "start": {
+          "column": 11,
+          "line": 54
+        }
+      },
+      "range": [
+        2003,
+        2004
+      ],
+      "value": "{"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 33,
+          "line": 55
+        },
+        "start": {
+          "column": 6,
+          "line": 55
+        }
+      },
+      "range": [
+        2012,
+        2039
+      ],
+      "value": "stripeEntitlementCustomerId"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 34,
+          "line": 55
+        },
+        "start": {
+          "column": 33,
+          "line": 55
+        }
+      },
+      "range": [
+        2039,
+        2040
+      ],
+      "value": ":"
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 39,
+          "line": 55
+        },
+        "start": {
+          "column": 35,
+          "line": 55
+        }
+      },
+      "range": [
+        2041,
+        2045
+      ],
+      "value": "data"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 40,
+          "line": 55
+        },
+        "start": {
+          "column": 39,
+          "line": 55
+        }
+      },
+      "range": [
+        2045,
+        2046
+      ],
+      "value": "."
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 46,
+          "line": 55
+        },
+        "start": {
+          "column": 40,
+          "line": 55
+        }
+      },
+      "range": [
+        2046,
+        2052
+      ],
+      "value": "object"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 47,
+          "line": 55
+        },
+        "start": {
+          "column": 46,
+          "line": 55
+        }
+      },
+      "range": [
+        2052,
+        2053
+      ],
+      "value": "."
+    },
+    {
+      "type": "Identifier",
+      "loc": {
+        "end": {
+          "column": 55,
+          "line": 55
+        },
+        "start": {
+          "column": 47,
+          "line": 55
+        }
+      },
+      "range": [
+        2053,
+        2061
+      ],
+      "value": "customer"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 56,
+          "line": 55
+        },
+        "start": {
+          "column": 55,
+          "line": 55
+        }
+      },
+      "range": [
+        2061,
+        2062
+      ],
+      "value": ","
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 5,
+          "line": 56
+        },
+        "start": {
+          "column": 4,
+          "line": 56
+        }
+      },
+      "range": [
+        2068,
+        2069
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 56
+        },
+        "start": {
+          "column": 5,
+          "line": 56
+        }
+      },
+      "range": [
+        2069,
+        2070
+      ],
+      "value": ";"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 3,
+          "line": 57
+        },
+        "start": {
+          "column": 2,
+          "line": 57
+        }
+      },
+      "range": [
+        2074,
+        2075
+      ],
+      "value": "}"
+    },
+    {
+      "type": "Punctuator",
+      "loc": {
+        "end": {
+          "column": 1,
+          "line": 58
+        },
+        "start": {
+          "column": 0,
+          "line": 58
+        }
+      },
+      "range": [
+        2077,
+        2078
+      ],
+      "value": "}"
+    }
+  ],
+  "loc": {
+    "end": {
+      "column": 0,
+      "line": 59
+    },
+    "start": {
+      "column": 0,
+      "line": 3
+    }
+  }
+}
