@@ -2,7 +2,7 @@ import os
 import json
 import requests
 import time
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Set, Tuple
 import argparse
 
 class ASTClusterAnalyzer:
@@ -197,6 +197,190 @@ class ASTClusterAnalyzer:
         
         return patterns
     
+    def extract_service_relationships(self, ast_files: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """
+        Extract relationships between services based on imports, method calls, and dependencies.
+        
+        Args:
+            ast_files: List of AST objects
+            
+        Returns:
+            Dictionary with service relationship data for flow chart generation
+        """
+        # Extract service names from filenames
+        service_names = []
+        for file_data in ast_files:
+            filename = file_data['filename']
+            # Extract service name from filename (remove .ast.json extension)
+            service_name = filename.replace('.ast.json', '')
+            service_names.append(service_name)
+        
+        # Track dependencies between services
+        dependencies = []
+        service_methods = {}
+        service_imports = {}
+        
+        # First pass: collect all exported methods and classes
+        for file_data in ast_files:
+            filename = file_data['filename']
+            service_name = filename.replace('.ast.json', '')
+            ast = file_data['ast']
+            
+            exported_items = set()
+            
+            # Process the Program body to find exports
+            if ast.get('type') == 'Program' and 'body' in ast:
+                for node in ast['body']:
+                    # Check for export declarations
+                    if node.get('type') in ['ExportNamedDeclaration', 'ExportDefaultDeclaration']:
+                        if node.get('declaration') and node['declaration'].get('id'):
+                            exported_name = node['declaration']['id'].get('name', '')
+                            if exported_name:
+                                exported_items.add(exported_name)
+            
+            service_methods[service_name] = exported_items
+        
+        # Second pass: find dependencies between services
+        for file_data in ast_files:
+            filename = file_data['filename']
+            service_name = filename.replace('.ast.json', '')
+            ast = file_data['ast']
+            
+            imports = []
+            
+            # Process the Program body to find imports
+            if ast.get('type') == 'Program' and 'body' in ast:
+                for node in ast['body']:
+                    # Check for import declarations
+                    if node.get('type') == 'ImportDeclaration' and node.get('source'):
+                        import_path = node['source'].get('value', '')
+                        if import_path:
+                            # Extract the service name from the import path
+                            imported_service = self._extract_service_from_import(import_path)
+                            if imported_service and imported_service in service_names and imported_service != service_name:
+                                imports.append(imported_service)
+                                dependencies.append((service_name, imported_service))
+            
+            service_imports[service_name] = imports
+        
+        # Find method calls between services (this is a simplified approximation)
+        method_calls = []
+        for file_data in ast_files:
+            filename = file_data['filename']
+            service_name = filename.replace('.ast.json', '')
+            ast = file_data['ast']
+            
+            # Recursively search for method calls
+            self._find_method_calls(ast, service_name, service_methods, method_calls)
+        
+        # Combine dependencies and method calls
+        all_relationships = list(set(dependencies + method_calls))
+        
+        return {
+            'services': service_names,
+            'relationships': all_relationships,
+            'service_methods': service_methods,
+            'service_imports': service_imports
+        }
+    
+    def _extract_service_from_import(self, import_path: str) -> str:
+        """
+        Extract service name from an import path.
+        
+        Args:
+            import_path: Import path string
+            
+        Returns:
+            Extracted service name or empty string
+        """
+        # This is a simplified implementation - customize based on your project structure
+        parts = import_path.split('/')
+        
+        # Look for common service naming patterns
+        for part in parts:
+            if part.endswith('.service') or part.endswith('.controller') or part.endswith('.repository'):
+                return part
+            if 'service' in part or 'controller' in part or 'repository' in part:
+                return part
+        
+        # If no service-like name found, return the last part without extension
+        if parts:
+            last_part = parts[-1].split('.')[0]
+            return last_part
+        
+        return ''
+    
+    def _find_method_calls(self, node: Any, service_name: str, service_methods: Dict[str, Set[str]], 
+                          method_calls: List[Tuple[str, str]]) -> None:
+        """
+        Recursively search for method calls in an AST node.
+        
+        Args:
+            node: AST node to search
+            service_name: Name of the current service
+            service_methods: Dictionary mapping services to their exported methods
+            method_calls: List to collect method call relationships
+        """
+        if node is None or not isinstance(node, dict):
+            return
+        
+        # Check for method calls (CallExpression)
+        if node.get('type') == 'CallExpression' and node.get('callee'):
+            callee = node['callee']
+            
+            # Check for member expressions (e.g., serviceObj.method())
+            if callee.get('type') == 'MemberExpression' and callee.get('object') and callee.get('property'):
+                obj_name = callee['object'].get('name', '')
+                method_name = callee['property'].get('name', '')
+                
+                # Check if this might be a call to another service
+                for other_service, methods in service_methods.items():
+                    if other_service != service_name and (obj_name == other_service or method_name in methods):
+                        method_calls.append((service_name, other_service))
+        
+        # Recursively search in all properties that might contain AST nodes
+        for key, value in node.items():
+            if isinstance(value, dict):
+                self._find_method_calls(value, service_name, service_methods, method_calls)
+            elif isinstance(value, list):
+                for item in value:
+                    if isinstance(item, dict):
+                        self._find_method_calls(item, service_name, service_methods, method_calls)
+    
+    def generate_flow_chart(self, relationships_data: Dict[str, Any]) -> str:
+        """
+        Generate a Mermaid flow chart based on service relationships.
+        
+        Args:
+            relationships_data: Dictionary with service relationship data
+            
+        Returns:
+            Mermaid flow chart code as a string
+        """
+        services = relationships_data['services']
+        relationships = relationships_data['relationships']
+        
+        # Start the Mermaid graph
+        mermaid_code = "```mermaid\ngraph TD\n"
+        
+        # Add nodes for each service
+        for service in services:
+            # Clean service name for Mermaid compatibility
+            node_id = service.replace('.', '_').replace('-', '_')
+            display_name = service
+            mermaid_code += f"    {node_id}[\"<b>{display_name}</b>\"]\n"
+        
+        # Add edges for relationships
+        for source, target in relationships:
+            source_id = source.replace('.', '_').replace('-', '_')
+            target_id = target.replace('.', '_').replace('-', '_')
+            mermaid_code += f"    {source_id} --> {target_id}\n"
+        
+        # Close the Mermaid code block
+        mermaid_code += "```\n"
+        
+        return mermaid_code
+    
     def categorize_cluster(self, ast_files: List[Dict[str, Any]], patterns: List[Dict[str, Any]]) -> str:
         """
         Categorize the cluster based on AST patterns.
@@ -256,7 +440,7 @@ class ASTClusterAnalyzer:
         return "Unspecified Components"
     
     def generate_analysis_prompt(self, ast_files: List[Dict[str, Any]], patterns: List[Dict[str, Any]], 
-                                category: str, cluster_id: str) -> str:
+                                category: str, cluster_id: str, flow_chart: str) -> str:
         """
         Generate a prompt for the Fireworks.ai API to analyze ASTs.
         
@@ -265,6 +449,7 @@ class ASTClusterAnalyzer:
             patterns: List of patterns extracted from ASTs
             category: Category of the cluster
             cluster_id: ID of the cluster
+            flow_chart: Mermaid flow chart of service relationships
             
         Returns:
             Prompt string
@@ -306,6 +491,9 @@ Files in this cluster:
 AST Patterns detected:
 {patterns_text}
 
+Service Relationship Flow Chart:
+{flow_chart}
+
 Sample simplified ASTs:
 {json.dumps(ast_samples, indent=2)}
 
@@ -317,6 +505,7 @@ Based on this information, please provide:
 4. What types of data are likely being stored or processed?
 5. What are the main data flow patterns you can identify?
 6. How do the components in this cluster interact with external systems?
+7. Analyze the service relationships shown in the flow chart and explain the likely responsibilities of each service.
 
 Provide specific technical details where possible, focusing on identifying the main data sinks and the patterns of data flow within this cluster.
 """
@@ -354,11 +543,17 @@ Provide specific technical details where possible, focusing on identifying the m
         # Extract patterns
         patterns = self.extract_ast_patterns(ast_files)
         
+        # Extract service relationships
+        relationships_data = self.extract_service_relationships(ast_files)
+        
+        # Generate flow chart
+        flow_chart = self.generate_flow_chart(relationships_data)
+        
         # Categorize cluster
         category = self.categorize_cluster(ast_files, patterns)
         
         # Generate prompt
-        prompt = self.generate_analysis_prompt(ast_files, patterns, category, cluster_id)
+        prompt = self.generate_analysis_prompt(ast_files, patterns, category, cluster_id, flow_chart)
         
         # Call the API
         try:
@@ -389,6 +584,8 @@ Provide specific technical details where possible, focusing on identifying the m
             "analysis": analysis,
             "file_count": len(ast_files),
             "patterns": patterns,
+            "flow_chart": flow_chart,
+            "relationships": relationships_data,
             "file_sample": [file_data['filename'] for file_data in ast_files[:5]]  # First 5 files as sample
         }
     
@@ -457,6 +654,7 @@ Provide specific technical details where possible, focusing on identifying the m
                 file_count = result.get('file_count', 0)
                 file_sample = result.get('file_sample', [])
                 analysis = result.get('analysis', '')
+                flow_chart = result.get('flow_chart', '')
                 
                 f.write(f"### Cluster {cluster_id} ({category})\n\n")
                 f.write(f"Files: {file_count}\n\n")
@@ -466,6 +664,11 @@ Provide specific technical details where possible, focusing on identifying the m
                     for file in file_sample:
                         f.write(f"- {file}\n")
                     f.write("\n")
+                
+                # Include the flow chart
+                if flow_chart:
+                    f.write("#### Service Relationship Diagram\n\n")
+                    f.write(f"{flow_chart}\n")
                 
                 f.write("#### Analysis\n\n")
                 f.write(f"{analysis}\n\n")
