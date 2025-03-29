@@ -1,0 +1,472 @@
+[
+  {
+    "nodeType": "import_statement",
+    "captureType": "import",
+    "text": "import chalk from 'chalk';"
+  },
+  {
+    "nodeType": "string",
+    "captureType": "import_source",
+    "text": "'chalk'"
+  },
+  {
+    "nodeType": "import_statement",
+    "captureType": "import",
+    "text": "import { Option } from 'nest-commander';"
+  },
+  {
+    "nodeType": "string",
+    "captureType": "import_source",
+    "text": "'nest-commander'"
+  },
+  {
+    "nodeType": "import_statement",
+    "captureType": "import",
+    "text": "import { WorkspaceActivationStatus } fro..."
+  },
+  {
+    "nodeType": "string",
+    "captureType": "import_source",
+    "text": "'twenty-shared'"
+  },
+  {
+    "nodeType": "import_statement",
+    "captureType": "import",
+    "text": "import { In, MoreThanOrEqual, Repository..."
+  },
+  {
+    "nodeType": "string",
+    "captureType": "import_source",
+    "text": "'typeorm'"
+  },
+  {
+    "nodeType": "import_statement",
+    "captureType": "import",
+    "text": "import { MigrationCommandRunner } from '..."
+  },
+  {
+    "nodeType": "string",
+    "captureType": "import_source",
+    "text": "'src/database/commands/command-runners/m..."
+  },
+  {
+    "nodeType": "import_statement",
+    "captureType": "import",
+    "text": "import { Workspace } from 'src/engine/co..."
+  },
+  {
+    "nodeType": "string",
+    "captureType": "import_source",
+    "text": "'src/engine/core-modules/workspace/works..."
+  },
+  {
+    "nodeType": "import_statement",
+    "captureType": "import",
+    "text": "import { WorkspaceDataSource } from 'src..."
+  },
+  {
+    "nodeType": "string",
+    "captureType": "import_source",
+    "text": "'src/engine/twenty-orm/datasource/worksp..."
+  },
+  {
+    "nodeType": "import_statement",
+    "captureType": "import",
+    "text": "import { TwentyORMGlobalManager } from '..."
+  },
+  {
+    "nodeType": "string",
+    "captureType": "import_source",
+    "text": "'src/engine/twenty-orm/twenty-orm-global..."
+  },
+  {
+    "nodeType": "call_expression",
+    "captureType": "call",
+    "text": "Option({\r\n    flags: '--start-from-works..."
+  },
+  {
+    "nodeType": "identifier",
+    "captureType": "call_name",
+    "text": "Option"
+  },
+  {
+    "nodeType": "arguments",
+    "captureType": "call_args",
+    "text": "({\r\n    flags: '--start-from-workspace-i..."
+  },
+  {
+    "nodeType": "call_expression",
+    "captureType": "call",
+    "text": "Option({\r\n    flags: '--workspace-count-..."
+  },
+  {
+    "nodeType": "identifier",
+    "captureType": "call_name",
+    "text": "Option"
+  },
+  {
+    "nodeType": "arguments",
+    "captureType": "call_args",
+    "text": "({\r\n    flags: '--workspace-count-limit ..."
+  },
+  {
+    "nodeType": "call_expression",
+    "captureType": "call",
+    "text": "parseInt(val)"
+  },
+  {
+    "nodeType": "identifier",
+    "captureType": "call_name",
+    "text": "parseInt"
+  },
+  {
+    "nodeType": "arguments",
+    "captureType": "call_args",
+    "text": "(val)"
+  },
+  {
+    "nodeType": "call_expression",
+    "captureType": "call",
+    "text": "isNaN(this.workspaceCountLimit)"
+  },
+  {
+    "nodeType": "identifier",
+    "captureType": "call_name",
+    "text": "isNaN"
+  },
+  {
+    "nodeType": "arguments",
+    "captureType": "call_args",
+    "text": "(this.workspaceCountLimit)"
+  },
+  {
+    "nodeType": "call_expression",
+    "captureType": "call",
+    "text": "Option({\r\n    flags: '-w, --workspace-id..."
+  },
+  {
+    "nodeType": "identifier",
+    "captureType": "call_name",
+    "text": "Option"
+  },
+  {
+    "nodeType": "arguments",
+    "captureType": "call_args",
+    "text": "({\r\n    flags: '-w, --workspace-id [work..."
+  },
+  {
+    "nodeType": "call_expression",
+    "captureType": "call",
+    "text": "this.workspaceIds.push(val)"
+  },
+  {
+    "nodeType": "property_identifier",
+    "captureType": "call_method",
+    "text": "push"
+  },
+  {
+    "nodeType": "arguments",
+    "captureType": "call_args",
+    "text": "(val)"
+  },
+  {
+    "nodeType": "lexical_declaration",
+    "captureType": "variable",
+    "text": "const activeWorkspaces = await this.work..."
+  },
+  {
+    "nodeType": "identifier",
+    "captureType": "variable_name",
+    "text": "activeWorkspaces"
+  },
+  {
+    "nodeType": "call_expression",
+    "captureType": "call",
+    "text": "this.workspaceRepository.find({\r\n      s..."
+  },
+  {
+    "nodeType": "property_identifier",
+    "captureType": "call_method",
+    "text": "find"
+  },
+  {
+    "nodeType": "arguments",
+    "captureType": "call_args",
+    "text": "({\r\n      select: ['id'],\r\n      where: ..."
+  },
+  {
+    "nodeType": "call_expression",
+    "captureType": "call",
+    "text": "In([\r\n          WorkspaceActivationStatu..."
+  },
+  {
+    "nodeType": "identifier",
+    "captureType": "call_name",
+    "text": "In"
+  },
+  {
+    "nodeType": "arguments",
+    "captureType": "call_args",
+    "text": "([\r\n          WorkspaceActivationStatus...."
+  },
+  {
+    "nodeType": "call_expression",
+    "captureType": "call",
+    "text": "MoreThanOrEqual(this.startFromWorkspaceI..."
+  },
+  {
+    "nodeType": "identifier",
+    "captureType": "call_name",
+    "text": "MoreThanOrEqual"
+  },
+  {
+    "nodeType": "arguments",
+    "captureType": "call_args",
+    "text": "(this.startFromWorkspaceId)"
+  },
+  {
+    "nodeType": "call_expression",
+    "captureType": "call",
+    "text": "activeWorkspaces.map((workspace) => work..."
+  },
+  {
+    "nodeType": "property_identifier",
+    "captureType": "call_method",
+    "text": "map"
+  },
+  {
+    "nodeType": "arguments",
+    "captureType": "call_args",
+    "text": "((workspace) => workspace.id)"
+  },
+  {
+    "nodeType": "lexical_declaration",
+    "captureType": "variable",
+    "text": "const activeWorkspaceIds =\r\n      this.w..."
+  },
+  {
+    "nodeType": "identifier",
+    "captureType": "variable_name",
+    "text": "activeWorkspaceIds"
+  },
+  {
+    "nodeType": "call_expression",
+    "captureType": "call",
+    "text": "this.fetchActiveWorkspaceIds()"
+  },
+  {
+    "nodeType": "property_identifier",
+    "captureType": "call_method",
+    "text": "fetchActiveWorkspaceIds"
+  },
+  {
+    "nodeType": "arguments",
+    "captureType": "call_args",
+    "text": "()"
+  },
+  {
+    "nodeType": "call_expression",
+    "captureType": "call",
+    "text": "this.logger.log(chalk.yellow('Dry run mo..."
+  },
+  {
+    "nodeType": "property_identifier",
+    "captureType": "call_method",
+    "text": "log"
+  },
+  {
+    "nodeType": "arguments",
+    "captureType": "call_args",
+    "text": "(chalk.yellow('Dry run mode: No changes ..."
+  },
+  {
+    "nodeType": "call_expression",
+    "captureType": "call",
+    "text": "chalk.yellow('Dry run mode: No changes w..."
+  },
+  {
+    "nodeType": "property_identifier",
+    "captureType": "call_method",
+    "text": "yellow"
+  },
+  {
+    "nodeType": "arguments",
+    "captureType": "call_args",
+    "text": "('Dry run mode: No changes will be appli..."
+  },
+  {
+    "nodeType": "try_statement",
+    "captureType": "try",
+    "text": "try {\r\n      for (const [index, workspac..."
+  },
+  {
+    "nodeType": "statement_block",
+    "captureType": "try_body",
+    "text": "{\r\n      for (const [index, workspaceId]..."
+  },
+  {
+    "nodeType": "statement_block",
+    "captureType": "try_body",
+    "text": "{\r\n      for (const [index, workspaceId]..."
+  },
+  {
+    "nodeType": "call_expression",
+    "captureType": "call",
+    "text": "activeWorkspaceIds.entries()"
+  },
+  {
+    "nodeType": "property_identifier",
+    "captureType": "call_method",
+    "text": "entries"
+  },
+  {
+    "nodeType": "arguments",
+    "captureType": "call_args",
+    "text": "()"
+  },
+  {
+    "nodeType": "call_expression",
+    "captureType": "call",
+    "text": "this.logger.log(\r\n          `Running com..."
+  },
+  {
+    "nodeType": "property_identifier",
+    "captureType": "call_method",
+    "text": "log"
+  },
+  {
+    "nodeType": "arguments",
+    "captureType": "call_args",
+    "text": "(\r\n          `Running command on workspa..."
+  },
+  {
+    "nodeType": "template_string",
+    "captureType": "template_string",
+    "text": "`Running command on workspace ${workspac..."
+  },
+  {
+    "nodeType": "try_statement",
+    "captureType": "try",
+    "text": "try {\r\n          const dataSource =\r\n   ..."
+  },
+  {
+    "nodeType": "statement_block",
+    "captureType": "try_body",
+    "text": "{\r\n          const dataSource =\r\n       ..."
+  },
+  {
+    "nodeType": "lexical_declaration",
+    "captureType": "variable",
+    "text": "const dataSource =\r\n            await th..."
+  },
+  {
+    "nodeType": "identifier",
+    "captureType": "variable_name",
+    "text": "dataSource"
+  },
+  {
+    "nodeType": "call_expression",
+    "captureType": "call",
+    "text": "this.twentyORMGlobalManager.getDataSourc..."
+  },
+  {
+    "nodeType": "property_identifier",
+    "captureType": "call_method",
+    "text": "getDataSourceForWorkspace"
+  },
+  {
+    "nodeType": "arguments",
+    "captureType": "call_args",
+    "text": "(\r\n              workspaceId,\r\n         ..."
+  },
+  {
+    "nodeType": "call_expression",
+    "captureType": "call",
+    "text": "this.runOnWorkspace({\r\n            optio..."
+  },
+  {
+    "nodeType": "property_identifier",
+    "captureType": "call_method",
+    "text": "runOnWorkspace"
+  },
+  {
+    "nodeType": "arguments",
+    "captureType": "call_args",
+    "text": "({\r\n            options,\r\n            wo..."
+  },
+  {
+    "nodeType": "statement_block",
+    "captureType": "catch_body",
+    "text": "{\r\n          this.logger.warn(\r\n        ..."
+  },
+  {
+    "nodeType": "call_expression",
+    "captureType": "call",
+    "text": "this.logger.warn(\r\n            chalk.red..."
+  },
+  {
+    "nodeType": "property_identifier",
+    "captureType": "call_method",
+    "text": "warn"
+  },
+  {
+    "nodeType": "arguments",
+    "captureType": "call_args",
+    "text": "(\r\n            chalk.red(`Error in works..."
+  },
+  {
+    "nodeType": "call_expression",
+    "captureType": "call",
+    "text": "chalk.red(`Error in workspace ${workspac..."
+  },
+  {
+    "nodeType": "property_identifier",
+    "captureType": "call_method",
+    "text": "red"
+  },
+  {
+    "nodeType": "arguments",
+    "captureType": "call_args",
+    "text": "(`Error in workspace ${workspaceId}: ${e..."
+  },
+  {
+    "nodeType": "template_string",
+    "captureType": "template_string",
+    "text": "`Error in workspace ${workspaceId}: ${er..."
+  },
+  {
+    "nodeType": "call_expression",
+    "captureType": "call",
+    "text": "this.twentyORMGlobalManager.destroyDataS..."
+  },
+  {
+    "nodeType": "property_identifier",
+    "captureType": "call_method",
+    "text": "destroyDataSourceForWorkspace"
+  },
+  {
+    "nodeType": "arguments",
+    "captureType": "call_args",
+    "text": "(\r\n          workspaceId,\r\n        )"
+  },
+  {
+    "nodeType": "statement_block",
+    "captureType": "catch_body",
+    "text": "{\r\n      this.logger.error(error);\r\n    ..."
+  },
+  {
+    "nodeType": "call_expression",
+    "captureType": "call",
+    "text": "this.logger.error(error)"
+  },
+  {
+    "nodeType": "property_identifier",
+    "captureType": "call_method",
+    "text": "error"
+  },
+  {
+    "nodeType": "arguments",
+    "captureType": "call_args",
+    "text": "(error)"
+  }
+]

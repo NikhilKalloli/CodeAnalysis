@@ -1,0 +1,62 @@
+; Types
+
+(type_identifier) @type
+(predefined_type) @type.builtin
+
+((identifier) @type
+ (#match? @type "^[A-Z]"))
+
+(type_arguments
+  "<" @punctuation.bracket
+  ">" @punctuation.bracket)
+
+; Variables
+
+(required_parameter (identifier) @variable.parameter)
+(optional_parameter (identifier) @variable.parameter)
+
+; Keywords
+
+[ "abstract"
+  "declare"
+  "enum"
+  "export"
+  "implements"
+  "interface"
+  "keyof"
+  "namespace"
+  "private"
+  "protected"
+  "public"
+  "type"
+  "readonly"
+  "override"
+  "satisfies"
+] @keyword
+
+(required_parameter (identifier) @local.definition)
+(optional_parameter (identifier) @local.definition)
+
+(function_signature
+  name: (identifier) @name) @definition.function
+
+(method_signature
+  name: (property_identifier) @name) @definition.method
+
+(abstract_method_signature
+  name: (property_identifier) @name) @definition.method
+
+(abstract_class_declaration
+  name: (type_identifier) @name) @definition.class
+
+(module
+  name: (identifier) @name) @definition.module
+
+(interface_declaration
+  name: (type_identifier) @name) @definition.interface
+
+(type_annotation
+  (type_identifier) @name) @reference.type
+
+(new_expression
+  constructor: (identifier) @name) @reference.class

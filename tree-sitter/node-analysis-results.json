@@ -1,0 +1,64 @@
+{
+  "uniqueNodeTypes": [
+    "arguments",
+    "call_expression",
+    "identifier",
+    "import_statement",
+    "lexical_declaration",
+    "property_identifier",
+    "statement_block",
+    "string",
+    "template_string",
+    "try_statement"
+  ],
+  "uniqueCaptureTypes": [
+    "call",
+    "call_args",
+    "call_method",
+    "call_name",
+    "catch_body",
+    "import",
+    "import_source",
+    "template_string",
+    "try",
+    "try_body",
+    "variable",
+    "variable_name"
+  ],
+  "nodeTypesCount": 10,
+  "captureTypesCount": 12,
+  "nodeToCaptures": {
+    "import_statement": [
+      "import"
+    ],
+    "string": [
+      "import_source"
+    ],
+    "call_expression": [
+      "call"
+    ],
+    "identifier": [
+      "call_name",
+      "variable_name"
+    ],
+    "arguments": [
+      "call_args"
+    ],
+    "property_identifier": [
+      "call_method"
+    ],
+    "lexical_declaration": [
+      "variable"
+    ],
+    "try_statement": [
+      "try"
+    ],
+    "statement_block": [
+      "catch_body",
+      "try_body"
+    ],
+    "template_string": [
+      "template_string"
+    ]
+  }
+}
