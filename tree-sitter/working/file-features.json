@@ -1,0 +1,1590 @@
+{
+  "filePath": "../../twenty/packages/twenty-server/src/database/commands/command-runners/active-or-suspended-workspaces-migration.command-runner.ts",
+  "featureSets": {
+    "functionNames": [],
+    "classNames": [],
+    "methodNames": [
+      "constructor",
+      "parseStartFromWorkspaceId",
+      "parseWorkspaceCountLimit",
+      "parseWorkspaceId",
+      "fetchActiveWorkspaceIds",
+      "runMigrationCommand"
+    ],
+    "classPropNames": [
+      "workspaceIds",
+      "startFromWorkspaceId",
+      "workspaceCountLimit"
+    ],
+    "interfaceNames": [],
+    "typeAliasNames": [
+      "ActiveOrSuspendedWorkspacesMigrationCommandOptions",
+      "RunOnWorkspaceArgs"
+    ],
+    "enumNames": [],
+    "variableNames": [
+      "activeWorkspaces",
+      "activeWorkspaceIds",
+      "dataSource"
+    ],
+    "assignTargets": [
+      "this.startFromWorkspaceId",
+      "this.workspaceCountLimit"
+    ],
+    "callFuncNames": [
+      "Option",
+      "parseInt",
+      "isNaN",
+      "In",
+      "MoreThanOrEqual"
+    ],
+    "callMethodNames": [
+      "push",
+      "find",
+      "map",
+      "fetchActiveWorkspaceIds",
+      "log",
+      "yellow",
+      "entries",
+      "getDataSourceForWorkspace",
+      "runOnWorkspace",
+      "warn",
+      "red",
+      "destroyDataSourceForWorkspace",
+      "error"
+    ],
+    "callObjectTargets": [
+      "this.workspaceIds",
+      "this.workspaceRepository",
+      "activeWorkspaces",
+      "this",
+      "this.logger",
+      "chalk",
+      "activeWorkspaceIds",
+      "this.twentyORMGlobalManager"
+    ],
+    "importSources": [
+      "'chalk'",
+      "'nest-commander'",
+      "'twenty-shared'",
+      "'typeorm'",
+      "'src/database/commands/command-runners/migration.command-runner'",
+      "'src/engine/core-modules/workspace/workspace.entity'",
+      "'src/engine/twenty-orm/datasource/workspace.datasource'",
+      "'src/engine/twenty-orm/twenty-orm-global.manager'"
+    ],
+    "stringLiterals": [
+      "'chalk'",
+      "'nest-commander'",
+      "'twenty-shared'",
+      "'typeorm'",
+      "'src/database/commands/command-runners/migration.command-runner'",
+      "'src/engine/core-modules/workspace/workspace.entity'",
+      "'src/engine/twenty-orm/datasource/workspace.datasource'",
+      "'src/engine/twenty-orm/twenty-orm-global.manager'",
+      "'--start-from-workspace-id [workspace_id]'",
+      "'Start from a specific workspace id. Workspaces are processed in ascending order of id.'",
+      "'--workspace-count-limit [count]'",
+      "'Limit the number of workspaces to process. Workspaces are processed in ascending order of id.'",
+      "'Workspace count limit must be a number'",
+      "'Workspace count limit must be greater than 0'",
+      "'-w, --workspace-id [workspace_id]'",
+      "'workspace id. Command runs on all active workspaces if not provided.'",
+      "'id'",
+      "'ASC'",
+      "'Dry run mode: No changes will be applied'"
+    ]
+  },
+  "nodeCounts": {
+    "import_statement": 8,
+    "capture_import_statement": 8,
+    "string": 27,
+    "capture_import_source": 8,
+    "capture_string_literal": 19,
+    "export_statement": 3,
+    "capture_export_statement": 3,
+    "type_alias_declaration": 2,
+    "capture_type_alias_definition": 2,
+    "type_identifier": 2,
+    "capture_type_alias_name": 2,
+    "type_annotation": 27,
+    "capture_type_annotation": 27,
+    "public_field_definition": 3,
+    "capture_class_property": 3,
+    "property_identifier": 23,
+    "capture_class_prop_name": 3,
+    "method_definition": 6,
+    "capture_method_definition": 6,
+    "capture_method_name": 6,
+    "formal_parameters": 6,
+    "capture_method_params": 6,
+    "statement_block": 6,
+    "capture_method_body": 6,
+    "call_expression": 22,
+    "capture_call_expression_direct": 7,
+    "identifier": 15,
+    "capture_call_func_name": 7,
+    "false": 4,
+    "capture_boolean_literal_false": 4,
+    "assignment_expression": 2,
+    "capture_assignment": 2,
+    "member_expression": 10,
+    "capture_assign_target": 2,
+    "capture_assign_value": 2,
+    "if_statement": 3,
+    "capture_if_statement": 3,
+    "parenthesized_expression": 3,
+    "capture_if_condition": 3,
+    "number": 3,
+    "capture_number_literal": 3,
+    "capture_call_expression_member": 14,
+    "capture_call_object": 14,
+    "capture_call_method_name": 14,
+    "lexical_declaration": 3,
+    "capture_variable_declaration": 3,
+    "capture_variable_name": 3,
+    "this": 2
+  },
+  "detailedCaptures": [
+    {
+      "captureType": "import_statement",
+      "nodeType": "import_statement",
+      "fullText": "import chalk from 'chalk';",
+      "startLine": 1,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "import_source",
+      "nodeType": "string",
+      "fullText": "'chalk'",
+      "startLine": 1,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "string_literal",
+      "nodeType": "string",
+      "fullText": "'chalk'",
+      "startLine": 1,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "import_statement",
+      "nodeType": "import_statement",
+      "fullText": "import { Option } from 'nest-commander';",
+      "startLine": 2,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "import_source",
+      "nodeType": "string",
+      "fullText": "'nest-commander'",
+      "startLine": 2,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "string_literal",
+      "nodeType": "string",
+      "fullText": "'nest-commander'",
+      "startLine": 2,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "import_statement",
+      "nodeType": "import_statement",
+      "fullText": "import { WorkspaceActivationStatus } from 'twenty-shared';",
+      "startLine": 3,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "import_source",
+      "nodeType": "string",
+      "fullText": "'twenty-shared'",
+      "startLine": 3,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "string_literal",
+      "nodeType": "string",
+      "fullText": "'twenty-shared'",
+      "startLine": 3,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "import_statement",
+      "nodeType": "import_statement",
+      "fullText": "import { In, MoreThanOrEqual, Repository } from 'typeorm';",
+      "startLine": 4,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "import_source",
+      "nodeType": "string",
+      "fullText": "'typeorm'",
+      "startLine": 4,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "string_literal",
+      "nodeType": "string",
+      "fullText": "'typeorm'",
+      "startLine": 4,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "import_statement",
+      "nodeType": "import_statement",
+      "fullText": "import { MigrationCommandRunner } from 'src/database/commands/command-runners/migration.command-runner';",
+      "startLine": 6,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "import_source",
+      "nodeType": "string",
+      "fullText": "'src/database/commands/command-runners/migration.command-runner'",
+      "startLine": 6,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "string_literal",
+      "nodeType": "string",
+      "fullText": "'src/database/commands/command-runners/migration.command-runner'",
+      "startLine": 6,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "import_statement",
+      "nodeType": "import_statement",
+      "fullText": "import { Workspace } from 'src/engine/core-modules/workspace/workspace.entity';",
+      "startLine": 7,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "import_source",
+      "nodeType": "string",
+      "fullText": "'src/engine/core-modules/workspace/workspace.entity'",
+      "startLine": 7,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "string_literal",
+      "nodeType": "string",
+      "fullText": "'src/engine/core-modules/workspace/workspace.entity'",
+      "startLine": 7,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "import_statement",
+      "nodeType": "import_statement",
+      "fullText": "import { WorkspaceDataSource } from 'src/engine/twenty-orm/datasource/workspace.datasource';",
+      "startLine": 8,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "import_source",
+      "nodeType": "string",
+      "fullText": "'src/engine/twenty-orm/datasource/workspace.datasource'",
+      "startLine": 8,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "string_literal",
+      "nodeType": "string",
+      "fullText": "'src/engine/twenty-orm/datasource/workspace.datasource'",
+      "startLine": 8,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "import_statement",
+      "nodeType": "import_statement",
+      "fullText": "import { TwentyORMGlobalManager } from 'src/engine/twenty-orm/twenty-orm-global.manager';",
+      "startLine": 9,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "import_source",
+      "nodeType": "string",
+      "fullText": "'src/engine/twenty-orm/twenty-orm-global.manager'",
+      "startLine": 9,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "string_literal",
+      "nodeType": "string",
+      "fullText": "'src/engine/twenty-orm/twenty-orm-global.manager'",
+      "startLine": 9,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "export_statement",
+      "nodeType": "export_statement",
+      "fullText": "export type ActiveOrSuspendedWorkspacesMigrationCommandOptions = {\r\n  workspaceIds: string[];\r\n  startFromWorkspaceId?: string;\r\n  workspaceCountLimit?: number;\r\n  dryRun?: boolean;\r\n  verbose?: boolean;\r\n};",
+      "startLine": 11,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_alias_definition",
+      "nodeType": "type_alias_declaration",
+      "fullText": "type ActiveOrSuspendedWorkspacesMigrationCommandOptions = {\r\n  workspaceIds: string[];\r\n  startFromWorkspaceId?: string;\r\n  workspaceCountLimit?: number;\r\n  dryRun?: boolean;\r\n  verbose?: boolean;\r\n};",
+      "startLine": 11,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_alias_name",
+      "nodeType": "type_identifier",
+      "fullText": "ActiveOrSuspendedWorkspacesMigrationCommandOptions",
+      "startLine": 11,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_annotation",
+      "nodeType": "type_annotation",
+      "fullText": ": string[]",
+      "startLine": 12,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_annotation",
+      "nodeType": "type_annotation",
+      "fullText": ": string",
+      "startLine": 13,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_annotation",
+      "nodeType": "type_annotation",
+      "fullText": ": number",
+      "startLine": 14,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_annotation",
+      "nodeType": "type_annotation",
+      "fullText": ": boolean",
+      "startLine": 15,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_annotation",
+      "nodeType": "type_annotation",
+      "fullText": ": boolean",
+      "startLine": 16,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "export_statement",
+      "nodeType": "export_statement",
+      "fullText": "export type RunOnWorkspaceArgs = {\r\n  options: ActiveOrSuspendedWorkspacesMigrationCommandOptions;\r\n  workspaceId: string;\r\n  dataSource: WorkspaceDataSource;\r\n  index: number;\r\n  total: number;\r\n};",
+      "startLine": 19,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_alias_definition",
+      "nodeType": "type_alias_declaration",
+      "fullText": "type RunOnWorkspaceArgs = {\r\n  options: ActiveOrSuspendedWorkspacesMigrationCommandOptions;\r\n  workspaceId: string;\r\n  dataSource: WorkspaceDataSource;\r\n  index: number;\r\n  total: number;\r\n};",
+      "startLine": 19,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_alias_name",
+      "nodeType": "type_identifier",
+      "fullText": "RunOnWorkspaceArgs",
+      "startLine": 19,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_annotation",
+      "nodeType": "type_annotation",
+      "fullText": ": ActiveOrSuspendedWorkspacesMigrationCommandOptions",
+      "startLine": 20,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_annotation",
+      "nodeType": "type_annotation",
+      "fullText": ": string",
+      "startLine": 21,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_annotation",
+      "nodeType": "type_annotation",
+      "fullText": ": WorkspaceDataSource",
+      "startLine": 22,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_annotation",
+      "nodeType": "type_annotation",
+      "fullText": ": number",
+      "startLine": 23,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_annotation",
+      "nodeType": "type_annotation",
+      "fullText": ": number",
+      "startLine": 24,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "export_statement",
+      "nodeType": "export_statement",
+      "fullText": "export abstract class ActiveOrSuspendedWorkspacesMigrationCommandRunner<\r\n  Options extends\r\n    ActiveOrSuspendedWorkspacesMigrationCommandOptions = ActiveOrSuspendedWorkspacesMigrationCommandOptions,\r\n> extends MigrationCommandRunner {\r\n  private workspaceIds: string[] = [];\r\n  private startFromWorkspaceId: string | undefined;\r\n  private workspaceCountLimit: number | undefined;\r\n\r\n  constructor(\r\n    protected readonly workspaceRepository: Repository<Workspace>,\r\n    protected readonly twentyORMGlobalManager: TwentyORMGlobalManager,\r\n  ) {\r\n    super();\r\n  }\r\n\r\n  @Option({\r\n    flags: '--start-from-workspace-id [workspace_id]',\r\n    description:\r\n      'Start from a specific workspace id. Workspaces are processed in ascending order of id.',\r\n    required: false,\r\n  })\r\n  parseStartFromWorkspaceId(val: string): string {\r\n    this.startFromWorkspaceId = val;\r\n\r\n    return val;\r\n  }\r\n\r\n  @Option({\r\n    flags: '--workspace-count-limit [count]',\r\n    description:\r\n      'Limit the number of workspaces to process. Workspaces are processed in ascending order of id.',\r\n    required: false,\r\n  })\r\n  parseWorkspaceCountLimit(val: string): number {\r\n    this.workspaceCountLimit = parseInt(val);\r\n\r\n    if (isNaN(this.workspaceCountLimit)) {\r\n      throw new Error('Workspace count limit must be a number');\r\n    }\r\n\r\n    if (this.workspaceCountLimit <= 0) {\r\n      throw new Error('Workspace count limit must be greater than 0');\r\n    }\r\n\r\n    return this.workspaceCountLimit;\r\n  }\r\n\r\n  @Option({\r\n    flags: '-w, --workspace-id [workspace_id]',\r\n    description:\r\n      'workspace id. Command runs on all active workspaces if not provided.',\r\n    required: false,\r\n  })\r\n  parseWorkspaceId(val: string): string[] {\r\n    this.workspaceIds.push(val);\r\n\r\n    return this.workspaceIds;\r\n  }\r\n\r\n  protected async fetchActiveWorkspaceIds(): Promise<string[]> {\r\n    const activeWorkspaces = await this.workspaceRepository.find({\r\n      select: ['id'],\r\n      where: {\r\n        activationStatus: In([\r\n          WorkspaceActivationStatus.ACTIVE,\r\n          WorkspaceActivationStatus.SUSPENDED,\r\n        ]),\r\n        ...(this.startFromWorkspaceId\r\n          ? { id: MoreThanOrEqual(this.startFromWorkspaceId) }\r\n          : {}),\r\n      },\r\n      order: {\r\n        id: 'ASC',\r\n      },\r\n      take: this.workspaceCountLimit,\r\n    });\r\n\r\n    return activeWorkspaces.map((workspace) => workspace.id);\r\n  }\r\n\r\n  override async runMigrationCommand(\r\n    _passedParams: string[],\r\n    options: Options,\r\n  ): Promise<void> {\r\n    const activeWorkspaceIds =\r\n      this.workspaceIds.length > 0\r\n        ? this.workspaceIds\r\n        : await this.fetchActiveWorkspaceIds();\r\n\r\n    if (options.dryRun) {\r\n      this.logger.log(chalk.yellow('Dry run mode: No changes will be applied'));\r\n    }\r\n\r\n    try {\r\n      for (const [index, workspaceId] of activeWorkspaceIds.entries()) {\r\n        this.logger.log(\r\n          `Running command on workspace ${workspaceId} ${index + 1}/${activeWorkspaceIds.length}`,\r\n        );\r\n\r\n        try {\r\n          const dataSource =\r\n            await this.twentyORMGlobalManager.getDataSourceForWorkspace(\r\n              workspaceId,\r\n              false,\r\n            );\r\n\r\n          await this.runOnWorkspace({\r\n            options,\r\n            workspaceId,\r\n            dataSource,\r\n            index: index,\r\n            total: activeWorkspaceIds.length,\r\n          });\r\n        } catch (error) {\r\n          this.logger.warn(\r\n            chalk.red(`Error in workspace ${workspaceId}: ${error.message}`),\r\n          );\r\n        }\r\n\r\n        await this.twentyORMGlobalManager.destroyDataSourceForWorkspace(\r\n          workspaceId,\r\n        );\r\n      }\r\n    } catch (error) {\r\n      this.logger.error(error);\r\n    }\r\n  }\r\n\r\n  protected abstract runOnWorkspace(args: RunOnWorkspaceArgs): Promise<void>;\r\n}",
+      "startLine": 27,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "class_property",
+      "nodeType": "public_field_definition",
+      "fullText": "private workspaceIds: string[] = []",
+      "startLine": 31,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "class_prop_name",
+      "nodeType": "property_identifier",
+      "fullText": "workspaceIds",
+      "startLine": 31,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_annotation",
+      "nodeType": "type_annotation",
+      "fullText": ": string[]",
+      "startLine": 31,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "class_property",
+      "nodeType": "public_field_definition",
+      "fullText": "private startFromWorkspaceId: string | undefined",
+      "startLine": 32,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "class_prop_name",
+      "nodeType": "property_identifier",
+      "fullText": "startFromWorkspaceId",
+      "startLine": 32,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_annotation",
+      "nodeType": "type_annotation",
+      "fullText": ": string | undefined",
+      "startLine": 32,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "class_property",
+      "nodeType": "public_field_definition",
+      "fullText": "private workspaceCountLimit: number | undefined",
+      "startLine": 33,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "class_prop_name",
+      "nodeType": "property_identifier",
+      "fullText": "workspaceCountLimit",
+      "startLine": 33,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_annotation",
+      "nodeType": "type_annotation",
+      "fullText": ": number | undefined",
+      "startLine": 33,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "method_definition",
+      "nodeType": "method_definition",
+      "fullText": "constructor(\r\n    protected readonly workspaceRepository: Repository<Workspace>,\r\n    protected readonly twentyORMGlobalManager: TwentyORMGlobalManager,\r\n  ) {\r\n    super();\r\n  }",
+      "startLine": 35,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "method_name",
+      "nodeType": "property_identifier",
+      "fullText": "constructor",
+      "startLine": 35,
+      "enclosingFunction": "constructor",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "method_params",
+      "nodeType": "formal_parameters",
+      "fullText": "(\r\n    protected readonly workspaceRepository: Repository<Workspace>,\r\n    protected readonly twentyORMGlobalManager: TwentyORMGlobalManager,\r\n  )",
+      "startLine": 35,
+      "enclosingFunction": "constructor",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_annotation",
+      "nodeType": "type_annotation",
+      "fullText": ": Repository<Workspace>",
+      "startLine": 36,
+      "enclosingFunction": "constructor",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_annotation",
+      "nodeType": "type_annotation",
+      "fullText": ": TwentyORMGlobalManager",
+      "startLine": 37,
+      "enclosingFunction": "constructor",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "method_body",
+      "nodeType": "statement_block",
+      "fullText": "{\r\n    super();\r\n  }",
+      "startLine": 38,
+      "enclosingFunction": "constructor",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_expression_direct",
+      "nodeType": "call_expression",
+      "fullText": "Option({\r\n    flags: '--start-from-workspace-id [workspace_id]',\r\n    description:\r\n      'Start from a specific workspace id. Workspaces are processed in ascending order of id.',\r\n    required: false,\r\n  })",
+      "startLine": 42,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_func_name",
+      "nodeType": "identifier",
+      "fullText": "Option",
+      "startLine": 42,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "string_literal",
+      "nodeType": "string",
+      "fullText": "'--start-from-workspace-id [workspace_id]'",
+      "startLine": 43,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "string_literal",
+      "nodeType": "string",
+      "fullText": "'Start from a specific workspace id. Workspaces are processed in ascending order of id.'",
+      "startLine": 45,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "boolean_literal_false",
+      "nodeType": "false",
+      "fullText": "false",
+      "startLine": 46,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "method_definition",
+      "nodeType": "method_definition",
+      "fullText": "parseStartFromWorkspaceId(val: string): string {\r\n    this.startFromWorkspaceId = val;\r\n\r\n    return val;\r\n  }",
+      "startLine": 48,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "method_name",
+      "nodeType": "property_identifier",
+      "fullText": "parseStartFromWorkspaceId",
+      "startLine": 48,
+      "enclosingFunction": "parseStartFromWorkspaceId",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "method_params",
+      "nodeType": "formal_parameters",
+      "fullText": "(val: string)",
+      "startLine": 48,
+      "enclosingFunction": "parseStartFromWorkspaceId",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_annotation",
+      "nodeType": "type_annotation",
+      "fullText": ": string",
+      "startLine": 48,
+      "enclosingFunction": "parseStartFromWorkspaceId",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_annotation",
+      "nodeType": "type_annotation",
+      "fullText": ": string",
+      "startLine": 48,
+      "enclosingFunction": "parseStartFromWorkspaceId",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "method_body",
+      "nodeType": "statement_block",
+      "fullText": "{\r\n    this.startFromWorkspaceId = val;\r\n\r\n    return val;\r\n  }",
+      "startLine": 48,
+      "enclosingFunction": "parseStartFromWorkspaceId",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "assignment",
+      "nodeType": "assignment_expression",
+      "fullText": "this.startFromWorkspaceId = val",
+      "startLine": 49,
+      "enclosingFunction": "parseStartFromWorkspaceId",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "assign_target",
+      "nodeType": "member_expression",
+      "fullText": "this.startFromWorkspaceId",
+      "startLine": 49,
+      "enclosingFunction": "parseStartFromWorkspaceId",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "assign_value",
+      "nodeType": "identifier",
+      "fullText": "val",
+      "startLine": 49,
+      "enclosingFunction": "parseStartFromWorkspaceId",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_expression_direct",
+      "nodeType": "call_expression",
+      "fullText": "Option({\r\n    flags: '--workspace-count-limit [count]',\r\n    description:\r\n      'Limit the number of workspaces to process. Workspaces are processed in ascending order of id.',\r\n    required: false,\r\n  })",
+      "startLine": 54,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_func_name",
+      "nodeType": "identifier",
+      "fullText": "Option",
+      "startLine": 54,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "string_literal",
+      "nodeType": "string",
+      "fullText": "'--workspace-count-limit [count]'",
+      "startLine": 55,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "string_literal",
+      "nodeType": "string",
+      "fullText": "'Limit the number of workspaces to process. Workspaces are processed in ascending order of id.'",
+      "startLine": 57,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "boolean_literal_false",
+      "nodeType": "false",
+      "fullText": "false",
+      "startLine": 58,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "method_definition",
+      "nodeType": "method_definition",
+      "fullText": "parseWorkspaceCountLimit(val: string): number {\r\n    this.workspaceCountLimit = parseInt(val);\r\n\r\n    if (isNaN(this.workspaceCountLimit)) {\r\n      throw new Error('Workspace count limit must be a number');\r\n    }\r\n\r\n    if (this.workspaceCountLimit <= 0) {\r\n      throw new Error('Workspace count limit must be greater than 0');\r\n    }\r\n\r\n    return this.workspaceCountLimit;\r\n  }",
+      "startLine": 60,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "method_name",
+      "nodeType": "property_identifier",
+      "fullText": "parseWorkspaceCountLimit",
+      "startLine": 60,
+      "enclosingFunction": "parseWorkspaceCountLimit",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "method_params",
+      "nodeType": "formal_parameters",
+      "fullText": "(val: string)",
+      "startLine": 60,
+      "enclosingFunction": "parseWorkspaceCountLimit",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_annotation",
+      "nodeType": "type_annotation",
+      "fullText": ": string",
+      "startLine": 60,
+      "enclosingFunction": "parseWorkspaceCountLimit",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_annotation",
+      "nodeType": "type_annotation",
+      "fullText": ": number",
+      "startLine": 60,
+      "enclosingFunction": "parseWorkspaceCountLimit",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "method_body",
+      "nodeType": "statement_block",
+      "fullText": "{\r\n    this.workspaceCountLimit = parseInt(val);\r\n\r\n    if (isNaN(this.workspaceCountLimit)) {\r\n      throw new Error('Workspace count limit must be a number');\r\n    }\r\n\r\n    if (this.workspaceCountLimit <= 0) {\r\n      throw new Error('Workspace count limit must be greater than 0');\r\n    }\r\n\r\n    return this.workspaceCountLimit;\r\n  }",
+      "startLine": 60,
+      "enclosingFunction": "parseWorkspaceCountLimit",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "assignment",
+      "nodeType": "assignment_expression",
+      "fullText": "this.workspaceCountLimit = parseInt(val)",
+      "startLine": 61,
+      "enclosingFunction": "parseWorkspaceCountLimit",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "assign_target",
+      "nodeType": "member_expression",
+      "fullText": "this.workspaceCountLimit",
+      "startLine": 61,
+      "enclosingFunction": "parseWorkspaceCountLimit",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "assign_value",
+      "nodeType": "call_expression",
+      "fullText": "parseInt(val)",
+      "startLine": 61,
+      "enclosingFunction": "parseWorkspaceCountLimit",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_expression_direct",
+      "nodeType": "call_expression",
+      "fullText": "parseInt(val)",
+      "startLine": 61,
+      "enclosingFunction": "parseWorkspaceCountLimit",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_func_name",
+      "nodeType": "identifier",
+      "fullText": "parseInt",
+      "startLine": 61,
+      "enclosingFunction": "parseWorkspaceCountLimit",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "if_statement",
+      "nodeType": "if_statement",
+      "fullText": "if (isNaN(this.workspaceCountLimit)) {\r\n      throw new Error('Workspace count limit must be a number');\r\n    }",
+      "startLine": 63,
+      "enclosingFunction": "parseWorkspaceCountLimit",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "if_condition",
+      "nodeType": "parenthesized_expression",
+      "fullText": "(isNaN(this.workspaceCountLimit))",
+      "startLine": 63,
+      "enclosingFunction": "parseWorkspaceCountLimit",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_expression_direct",
+      "nodeType": "call_expression",
+      "fullText": "isNaN(this.workspaceCountLimit)",
+      "startLine": 63,
+      "enclosingFunction": "parseWorkspaceCountLimit",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_func_name",
+      "nodeType": "identifier",
+      "fullText": "isNaN",
+      "startLine": 63,
+      "enclosingFunction": "parseWorkspaceCountLimit",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "string_literal",
+      "nodeType": "string",
+      "fullText": "'Workspace count limit must be a number'",
+      "startLine": 64,
+      "enclosingFunction": "parseWorkspaceCountLimit",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "if_statement",
+      "nodeType": "if_statement",
+      "fullText": "if (this.workspaceCountLimit <= 0) {\r\n      throw new Error('Workspace count limit must be greater than 0');\r\n    }",
+      "startLine": 67,
+      "enclosingFunction": "parseWorkspaceCountLimit",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "if_condition",
+      "nodeType": "parenthesized_expression",
+      "fullText": "(this.workspaceCountLimit <= 0)",
+      "startLine": 67,
+      "enclosingFunction": "parseWorkspaceCountLimit",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "number_literal",
+      "nodeType": "number",
+      "fullText": "0",
+      "startLine": 67,
+      "enclosingFunction": "parseWorkspaceCountLimit",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "string_literal",
+      "nodeType": "string",
+      "fullText": "'Workspace count limit must be greater than 0'",
+      "startLine": 68,
+      "enclosingFunction": "parseWorkspaceCountLimit",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_expression_direct",
+      "nodeType": "call_expression",
+      "fullText": "Option({\r\n    flags: '-w, --workspace-id [workspace_id]',\r\n    description:\r\n      'workspace id. Command runs on all active workspaces if not provided.',\r\n    required: false,\r\n  })",
+      "startLine": 74,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_func_name",
+      "nodeType": "identifier",
+      "fullText": "Option",
+      "startLine": 74,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "string_literal",
+      "nodeType": "string",
+      "fullText": "'-w, --workspace-id [workspace_id]'",
+      "startLine": 75,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "string_literal",
+      "nodeType": "string",
+      "fullText": "'workspace id. Command runs on all active workspaces if not provided.'",
+      "startLine": 77,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "boolean_literal_false",
+      "nodeType": "false",
+      "fullText": "false",
+      "startLine": 78,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "method_definition",
+      "nodeType": "method_definition",
+      "fullText": "parseWorkspaceId(val: string): string[] {\r\n    this.workspaceIds.push(val);\r\n\r\n    return this.workspaceIds;\r\n  }",
+      "startLine": 80,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "method_name",
+      "nodeType": "property_identifier",
+      "fullText": "parseWorkspaceId",
+      "startLine": 80,
+      "enclosingFunction": "parseWorkspaceId",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "method_params",
+      "nodeType": "formal_parameters",
+      "fullText": "(val: string)",
+      "startLine": 80,
+      "enclosingFunction": "parseWorkspaceId",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_annotation",
+      "nodeType": "type_annotation",
+      "fullText": ": string",
+      "startLine": 80,
+      "enclosingFunction": "parseWorkspaceId",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_annotation",
+      "nodeType": "type_annotation",
+      "fullText": ": string[]",
+      "startLine": 80,
+      "enclosingFunction": "parseWorkspaceId",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "method_body",
+      "nodeType": "statement_block",
+      "fullText": "{\r\n    this.workspaceIds.push(val);\r\n\r\n    return this.workspaceIds;\r\n  }",
+      "startLine": 80,
+      "enclosingFunction": "parseWorkspaceId",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_expression_member",
+      "nodeType": "call_expression",
+      "fullText": "this.workspaceIds.push(val)",
+      "startLine": 81,
+      "enclosingFunction": "parseWorkspaceId",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_object",
+      "nodeType": "member_expression",
+      "fullText": "this.workspaceIds",
+      "startLine": 81,
+      "enclosingFunction": "parseWorkspaceId",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_method_name",
+      "nodeType": "property_identifier",
+      "fullText": "push",
+      "startLine": 81,
+      "enclosingFunction": "parseWorkspaceId",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "method_definition",
+      "nodeType": "method_definition",
+      "fullText": "protected async fetchActiveWorkspaceIds(): Promise<string[]> {\r\n    const activeWorkspaces = await this.workspaceRepository.find({\r\n      select: ['id'],\r\n      where: {\r\n        activationStatus: In([\r\n          WorkspaceActivationStatus.ACTIVE,\r\n          WorkspaceActivationStatus.SUSPENDED,\r\n        ]),\r\n        ...(this.startFromWorkspaceId\r\n          ? { id: MoreThanOrEqual(this.startFromWorkspaceId) }\r\n          : {}),\r\n      },\r\n      order: {\r\n        id: 'ASC',\r\n      },\r\n      take: this.workspaceCountLimit,\r\n    });\r\n\r\n    return activeWorkspaces.map((workspace) => workspace.id);\r\n  }",
+      "startLine": 86,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "method_name",
+      "nodeType": "property_identifier",
+      "fullText": "fetchActiveWorkspaceIds",
+      "startLine": 86,
+      "enclosingFunction": "fetchActiveWorkspaceIds",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "method_params",
+      "nodeType": "formal_parameters",
+      "fullText": "()",
+      "startLine": 86,
+      "enclosingFunction": "fetchActiveWorkspaceIds",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_annotation",
+      "nodeType": "type_annotation",
+      "fullText": ": Promise<string[]>",
+      "startLine": 86,
+      "enclosingFunction": "fetchActiveWorkspaceIds",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "method_body",
+      "nodeType": "statement_block",
+      "fullText": "{\r\n    const activeWorkspaces = await this.workspaceRepository.find({\r\n      select: ['id'],\r\n      where: {\r\n        activationStatus: In([\r\n          WorkspaceActivationStatus.ACTIVE,\r\n          WorkspaceActivationStatus.SUSPENDED,\r\n        ]),\r\n        ...(this.startFromWorkspaceId\r\n          ? { id: MoreThanOrEqual(this.startFromWorkspaceId) }\r\n          : {}),\r\n      },\r\n      order: {\r\n        id: 'ASC',\r\n      },\r\n      take: this.workspaceCountLimit,\r\n    });\r\n\r\n    return activeWorkspaces.map((workspace) => workspace.id);\r\n  }",
+      "startLine": 86,
+      "enclosingFunction": "fetchActiveWorkspaceIds",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "variable_declaration",
+      "nodeType": "lexical_declaration",
+      "fullText": "const activeWorkspaces = await this.workspaceRepository.find({\r\n      select: ['id'],\r\n      where: {\r\n        activationStatus: In([\r\n          WorkspaceActivationStatus.ACTIVE,\r\n          WorkspaceActivationStatus.SUSPENDED,\r\n        ]),\r\n        ...(this.startFromWorkspaceId\r\n          ? { id: MoreThanOrEqual(this.startFromWorkspaceId) }\r\n          : {}),\r\n      },\r\n      order: {\r\n        id: 'ASC',\r\n      },\r\n      take: this.workspaceCountLimit,\r\n    });",
+      "startLine": 87,
+      "enclosingFunction": "fetchActiveWorkspaceIds",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "variable_name",
+      "nodeType": "identifier",
+      "fullText": "activeWorkspaces",
+      "startLine": 87,
+      "enclosingFunction": "fetchActiveWorkspaceIds",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_expression_member",
+      "nodeType": "call_expression",
+      "fullText": "this.workspaceRepository.find({\r\n      select: ['id'],\r\n      where: {\r\n        activationStatus: In([\r\n          WorkspaceActivationStatus.ACTIVE,\r\n          WorkspaceActivationStatus.SUSPENDED,\r\n        ]),\r\n        ...(this.startFromWorkspaceId\r\n          ? { id: MoreThanOrEqual(this.startFromWorkspaceId) }\r\n          : {}),\r\n      },\r\n      order: {\r\n        id: 'ASC',\r\n      },\r\n      take: this.workspaceCountLimit,\r\n    })",
+      "startLine": 87,
+      "enclosingFunction": "fetchActiveWorkspaceIds",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_object",
+      "nodeType": "member_expression",
+      "fullText": "this.workspaceRepository",
+      "startLine": 87,
+      "enclosingFunction": "fetchActiveWorkspaceIds",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_method_name",
+      "nodeType": "property_identifier",
+      "fullText": "find",
+      "startLine": 87,
+      "enclosingFunction": "fetchActiveWorkspaceIds",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "string_literal",
+      "nodeType": "string",
+      "fullText": "'id'",
+      "startLine": 88,
+      "enclosingFunction": "fetchActiveWorkspaceIds",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_expression_direct",
+      "nodeType": "call_expression",
+      "fullText": "In([\r\n          WorkspaceActivationStatus.ACTIVE,\r\n          WorkspaceActivationStatus.SUSPENDED,\r\n        ])",
+      "startLine": 90,
+      "enclosingFunction": "fetchActiveWorkspaceIds",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_func_name",
+      "nodeType": "identifier",
+      "fullText": "In",
+      "startLine": 90,
+      "enclosingFunction": "fetchActiveWorkspaceIds",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_expression_direct",
+      "nodeType": "call_expression",
+      "fullText": "MoreThanOrEqual(this.startFromWorkspaceId)",
+      "startLine": 95,
+      "enclosingFunction": "fetchActiveWorkspaceIds",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_func_name",
+      "nodeType": "identifier",
+      "fullText": "MoreThanOrEqual",
+      "startLine": 95,
+      "enclosingFunction": "fetchActiveWorkspaceIds",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "string_literal",
+      "nodeType": "string",
+      "fullText": "'ASC'",
+      "startLine": 99,
+      "enclosingFunction": "fetchActiveWorkspaceIds",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_expression_member",
+      "nodeType": "call_expression",
+      "fullText": "activeWorkspaces.map((workspace) => workspace.id)",
+      "startLine": 104,
+      "enclosingFunction": "fetchActiveWorkspaceIds",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_object",
+      "nodeType": "identifier",
+      "fullText": "activeWorkspaces",
+      "startLine": 104,
+      "enclosingFunction": "fetchActiveWorkspaceIds",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_method_name",
+      "nodeType": "property_identifier",
+      "fullText": "map",
+      "startLine": 104,
+      "enclosingFunction": "fetchActiveWorkspaceIds",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "method_definition",
+      "nodeType": "method_definition",
+      "fullText": "override async runMigrationCommand(\r\n    _passedParams: string[],\r\n    options: Options,\r\n  ): Promise<void> {\r\n    const activeWorkspaceIds =\r\n      this.workspaceIds.length > 0\r\n        ? this.workspaceIds\r\n        : await this.fetchActiveWorkspaceIds();\r\n\r\n    if (options.dryRun) {\r\n      this.logger.log(chalk.yellow('Dry run mode: No changes will be applied'));\r\n    }\r\n\r\n    try {\r\n      for (const [index, workspaceId] of activeWorkspaceIds.entries()) {\r\n        this.logger.log(\r\n          `Running command on workspace ${workspaceId} ${index + 1}/${activeWorkspaceIds.length}`,\r\n        );\r\n\r\n        try {\r\n          const dataSource =\r\n            await this.twentyORMGlobalManager.getDataSourceForWorkspace(\r\n              workspaceId,\r\n              false,\r\n            );\r\n\r\n          await this.runOnWorkspace({\r\n            options,\r\n            workspaceId,\r\n            dataSource,\r\n            index: index,\r\n            total: activeWorkspaceIds.length,\r\n          });\r\n        } catch (error) {\r\n          this.logger.warn(\r\n            chalk.red(`Error in workspace ${workspaceId}: ${error.message}`),\r\n          );\r\n        }\r\n\r\n        await this.twentyORMGlobalManager.destroyDataSourceForWorkspace(\r\n          workspaceId,\r\n        );\r\n      }\r\n    } catch (error) {\r\n      this.logger.error(error);\r\n    }\r\n  }",
+      "startLine": 107,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "method_name",
+      "nodeType": "property_identifier",
+      "fullText": "runMigrationCommand",
+      "startLine": 107,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "method_params",
+      "nodeType": "formal_parameters",
+      "fullText": "(\r\n    _passedParams: string[],\r\n    options: Options,\r\n  )",
+      "startLine": 107,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_annotation",
+      "nodeType": "type_annotation",
+      "fullText": ": string[]",
+      "startLine": 108,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_annotation",
+      "nodeType": "type_annotation",
+      "fullText": ": Options",
+      "startLine": 109,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_annotation",
+      "nodeType": "type_annotation",
+      "fullText": ": Promise<void>",
+      "startLine": 110,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "method_body",
+      "nodeType": "statement_block",
+      "fullText": "{\r\n    const activeWorkspaceIds =\r\n      this.workspaceIds.length > 0\r\n        ? this.workspaceIds\r\n        : await this.fetchActiveWorkspaceIds();\r\n\r\n    if (options.dryRun) {\r\n      this.logger.log(chalk.yellow('Dry run mode: No changes will be applied'));\r\n    }\r\n\r\n    try {\r\n      for (const [index, workspaceId] of activeWorkspaceIds.entries()) {\r\n        this.logger.log(\r\n          `Running command on workspace ${workspaceId} ${index + 1}/${activeWorkspaceIds.length}`,\r\n        );\r\n\r\n        try {\r\n          const dataSource =\r\n            await this.twentyORMGlobalManager.getDataSourceForWorkspace(\r\n              workspaceId,\r\n              false,\r\n            );\r\n\r\n          await this.runOnWorkspace({\r\n            options,\r\n            workspaceId,\r\n            dataSource,\r\n            index: index,\r\n            total: activeWorkspaceIds.length,\r\n          });\r\n        } catch (error) {\r\n          this.logger.warn(\r\n            chalk.red(`Error in workspace ${workspaceId}: ${error.message}`),\r\n          );\r\n        }\r\n\r\n        await this.twentyORMGlobalManager.destroyDataSourceForWorkspace(\r\n          workspaceId,\r\n        );\r\n      }\r\n    } catch (error) {\r\n      this.logger.error(error);\r\n    }\r\n  }",
+      "startLine": 110,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "variable_declaration",
+      "nodeType": "lexical_declaration",
+      "fullText": "const activeWorkspaceIds =\r\n      this.workspaceIds.length > 0\r\n        ? this.workspaceIds\r\n        : await this.fetchActiveWorkspaceIds();",
+      "startLine": 111,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "variable_name",
+      "nodeType": "identifier",
+      "fullText": "activeWorkspaceIds",
+      "startLine": 111,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "number_literal",
+      "nodeType": "number",
+      "fullText": "0",
+      "startLine": 112,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_expression_member",
+      "nodeType": "call_expression",
+      "fullText": "this.fetchActiveWorkspaceIds()",
+      "startLine": 114,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_object",
+      "nodeType": "this",
+      "fullText": "this",
+      "startLine": 114,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_method_name",
+      "nodeType": "property_identifier",
+      "fullText": "fetchActiveWorkspaceIds",
+      "startLine": 114,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "if_statement",
+      "nodeType": "if_statement",
+      "fullText": "if (options.dryRun) {\r\n      this.logger.log(chalk.yellow('Dry run mode: No changes will be applied'));\r\n    }",
+      "startLine": 116,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "if_condition",
+      "nodeType": "parenthesized_expression",
+      "fullText": "(options.dryRun)",
+      "startLine": 116,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_expression_member",
+      "nodeType": "call_expression",
+      "fullText": "this.logger.log(chalk.yellow('Dry run mode: No changes will be applied'))",
+      "startLine": 117,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_object",
+      "nodeType": "member_expression",
+      "fullText": "this.logger",
+      "startLine": 117,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_method_name",
+      "nodeType": "property_identifier",
+      "fullText": "log",
+      "startLine": 117,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_expression_member",
+      "nodeType": "call_expression",
+      "fullText": "chalk.yellow('Dry run mode: No changes will be applied')",
+      "startLine": 117,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_object",
+      "nodeType": "identifier",
+      "fullText": "chalk",
+      "startLine": 117,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_method_name",
+      "nodeType": "property_identifier",
+      "fullText": "yellow",
+      "startLine": 117,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "string_literal",
+      "nodeType": "string",
+      "fullText": "'Dry run mode: No changes will be applied'",
+      "startLine": 117,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_expression_member",
+      "nodeType": "call_expression",
+      "fullText": "activeWorkspaceIds.entries()",
+      "startLine": 121,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_object",
+      "nodeType": "identifier",
+      "fullText": "activeWorkspaceIds",
+      "startLine": 121,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_method_name",
+      "nodeType": "property_identifier",
+      "fullText": "entries",
+      "startLine": 121,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_expression_member",
+      "nodeType": "call_expression",
+      "fullText": "this.logger.log(\r\n          `Running command on workspace ${workspaceId} ${index + 1}/${activeWorkspaceIds.length}`,\r\n        )",
+      "startLine": 122,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_object",
+      "nodeType": "member_expression",
+      "fullText": "this.logger",
+      "startLine": 122,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_method_name",
+      "nodeType": "property_identifier",
+      "fullText": "log",
+      "startLine": 122,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "number_literal",
+      "nodeType": "number",
+      "fullText": "1",
+      "startLine": 123,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "variable_declaration",
+      "nodeType": "lexical_declaration",
+      "fullText": "const dataSource =\r\n            await this.twentyORMGlobalManager.getDataSourceForWorkspace(\r\n              workspaceId,\r\n              false,\r\n            );",
+      "startLine": 127,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "variable_name",
+      "nodeType": "identifier",
+      "fullText": "dataSource",
+      "startLine": 127,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_expression_member",
+      "nodeType": "call_expression",
+      "fullText": "this.twentyORMGlobalManager.getDataSourceForWorkspace(\r\n              workspaceId,\r\n              false,\r\n            )",
+      "startLine": 128,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_object",
+      "nodeType": "member_expression",
+      "fullText": "this.twentyORMGlobalManager",
+      "startLine": 128,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_method_name",
+      "nodeType": "property_identifier",
+      "fullText": "getDataSourceForWorkspace",
+      "startLine": 128,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "boolean_literal_false",
+      "nodeType": "false",
+      "fullText": "false",
+      "startLine": 130,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_expression_member",
+      "nodeType": "call_expression",
+      "fullText": "this.runOnWorkspace({\r\n            options,\r\n            workspaceId,\r\n            dataSource,\r\n            index: index,\r\n            total: activeWorkspaceIds.length,\r\n          })",
+      "startLine": 133,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_object",
+      "nodeType": "this",
+      "fullText": "this",
+      "startLine": 133,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_method_name",
+      "nodeType": "property_identifier",
+      "fullText": "runOnWorkspace",
+      "startLine": 133,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_expression_member",
+      "nodeType": "call_expression",
+      "fullText": "this.logger.warn(\r\n            chalk.red(`Error in workspace ${workspaceId}: ${error.message}`),\r\n          )",
+      "startLine": 141,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_object",
+      "nodeType": "member_expression",
+      "fullText": "this.logger",
+      "startLine": 141,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_method_name",
+      "nodeType": "property_identifier",
+      "fullText": "warn",
+      "startLine": 141,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_expression_member",
+      "nodeType": "call_expression",
+      "fullText": "chalk.red(`Error in workspace ${workspaceId}: ${error.message}`)",
+      "startLine": 142,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_object",
+      "nodeType": "identifier",
+      "fullText": "chalk",
+      "startLine": 142,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_method_name",
+      "nodeType": "property_identifier",
+      "fullText": "red",
+      "startLine": 142,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_expression_member",
+      "nodeType": "call_expression",
+      "fullText": "this.twentyORMGlobalManager.destroyDataSourceForWorkspace(\r\n          workspaceId,\r\n        )",
+      "startLine": 146,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_object",
+      "nodeType": "member_expression",
+      "fullText": "this.twentyORMGlobalManager",
+      "startLine": 146,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_method_name",
+      "nodeType": "property_identifier",
+      "fullText": "destroyDataSourceForWorkspace",
+      "startLine": 146,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_expression_member",
+      "nodeType": "call_expression",
+      "fullText": "this.logger.error(error)",
+      "startLine": 151,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_object",
+      "nodeType": "member_expression",
+      "fullText": "this.logger",
+      "startLine": 151,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "call_method_name",
+      "nodeType": "property_identifier",
+      "fullText": "error",
+      "startLine": 151,
+      "enclosingFunction": "runMigrationCommand",
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_annotation",
+      "nodeType": "type_annotation",
+      "fullText": ": RunOnWorkspaceArgs",
+      "startLine": 155,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    },
+    {
+      "captureType": "type_annotation",
+      "nodeType": "type_annotation",
+      "fullText": ": Promise<void>",
+      "startLine": 155,
+      "enclosingFunction": null,
+      "enclosingClass": null
+    }
+  ]
+}
