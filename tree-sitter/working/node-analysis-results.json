@@ -1,0 +1,128 @@
+{
+  "uniqueNodeTypes": [
+    "assignment_expression",
+    "call_expression",
+    "export_statement",
+    "false",
+    "formal_parameters",
+    "identifier",
+    "if_statement",
+    "import_statement",
+    "lexical_declaration",
+    "member_expression",
+    "method_definition",
+    "number",
+    "parenthesized_expression",
+    "property_identifier",
+    "public_field_definition",
+    "statement_block",
+    "string",
+    "this",
+    "type_alias_declaration",
+    "type_annotation",
+    "type_identifier"
+  ],
+  "uniqueCaptureTypes": [
+    "assign_target",
+    "assign_value",
+    "assignment",
+    "boolean_literal_false",
+    "call_expression",
+    "call_func_name",
+    "call_method_name",
+    "call_object",
+    "class_prop_name",
+    "class_property",
+    "export_statement",
+    "if_condition",
+    "if_statement",
+    "import_source",
+    "import_statement",
+    "method_body",
+    "method_definition",
+    "method_name",
+    "method_params",
+    "number_literal",
+    "string_literal",
+    "type_alias_definition",
+    "type_alias_name",
+    "type_annotation",
+    "variable_declaration",
+    "variable_name"
+  ],
+  "nodeTypesCount": 21,
+  "captureTypesCount": 26,
+  "nodeToCaptures": {
+    "import_statement": [
+      "import_statement"
+    ],
+    "string": [
+      "import_source",
+      "string_literal"
+    ],
+    "export_statement": [
+      "export_statement"
+    ],
+    "type_alias_declaration": [
+      "type_alias_definition"
+    ],
+    "type_identifier": [
+      "type_alias_name"
+    ],
+    "type_annotation": [
+      "type_annotation"
+    ],
+    "public_field_definition": [
+      "class_property"
+    ],
+    "property_identifier": [
+      "call_method_name",
+      "class_prop_name",
+      "method_name"
+    ],
+    "method_definition": [
+      "method_definition"
+    ],
+    "formal_parameters": [
+      "method_params"
+    ],
+    "statement_block": [
+      "method_body"
+    ],
+    "call_expression": [
+      "assign_value",
+      "call_expression"
+    ],
+    "identifier": [
+      "assign_value",
+      "call_func_name",
+      "call_object",
+      "variable_name"
+    ],
+    "false": [
+      "boolean_literal_false"
+    ],
+    "assignment_expression": [
+      "assignment"
+    ],
+    "member_expression": [
+      "assign_target",
+      "call_object"
+    ],
+    "if_statement": [
+      "if_statement"
+    ],
+    "parenthesized_expression": [
+      "if_condition"
+    ],
+    "number": [
+      "number_literal"
+    ],
+    "lexical_declaration": [
+      "variable_declaration"
+    ],
+    "this": [
+      "call_object"
+    ]
+  }
+}
